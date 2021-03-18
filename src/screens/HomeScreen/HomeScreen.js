@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Keyboard, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { FlatList, Keyboard, Text, TextInput, TouchableOpacity, View, Button } from 'react-native';
 import styles from './styles';
 import { firebase } from '../../firebase/config';
 
-export default function HomeScreen(props) {
+export default function HomeScreen(props, {navigation}) {
 
     const [entityText, setEntityText] = useState('')
     const [entities, setEntities] = useState([])
@@ -87,7 +87,13 @@ export default function HomeScreen(props) {
                     />
                 </View>
             )}
-
+            <View style={styles.button}>
+            <Button
+                title="Choose Restaurants"
+                onPress={() => navigation.navigate('AllRestaurants')}
+                color='white'
+            />
+            </View>
         </View>
     )
 }
