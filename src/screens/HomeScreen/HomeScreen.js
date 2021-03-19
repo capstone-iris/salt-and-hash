@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Keyboard, Text, TextInput, TouchableOpacity, View, Button } from 'react-native';
+import { FlatList, Keyboard, Text, TextInput, TouchableOpacity, View, Button, SafeAreaView } from 'react-native';
 import styles from './styles';
 import { firebase } from '../../firebase/config';
 
-export default function HomeScreen(props, {navigation}) {
+export default function HomeScreen(props) {
 
     const [entityText, setEntityText] = useState('')
     const [entities, setEntities] = useState([])
 
     const entityRef = firebase.firestore().collection('entities')
     const userID = props.extraData.id
+
+    const navigation = props.navigation
 
     useEffect(() => {
         entityRef
@@ -62,8 +64,8 @@ export default function HomeScreen(props, {navigation}) {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.formContainer}>
+        <SafeAreaView style={styles.container}>
+            {/* <View style={styles.formContainer}>
                 <TextInput
                     style={styles.input}
                     placeholder='Add new entity'
@@ -86,7 +88,7 @@ export default function HomeScreen(props, {navigation}) {
                         removeClippedSubviews={true}
                     />
                 </View>
-            )}
+            )} */}
             <View style={styles.button}>
             <Button
                 title="Choose Restaurants"
@@ -94,6 +96,6 @@ export default function HomeScreen(props, {navigation}) {
                 color='white'
             />
             </View>
-        </View>
+        </SafeAreaView>
     )
 }

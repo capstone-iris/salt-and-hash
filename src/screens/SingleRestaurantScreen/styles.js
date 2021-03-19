@@ -63,8 +63,8 @@ export default StyleSheet.create({
         flexDirection: 'row'
     },
     image: {
-        height: 120,
-        width: 120,
+        height: 300,
+        width: 300,
         borderRadius: 10,
         borderWidth: 3,
         borderColor: 'maroon'
