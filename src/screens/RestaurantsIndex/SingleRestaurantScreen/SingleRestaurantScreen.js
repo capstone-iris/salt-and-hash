@@ -14,7 +14,7 @@ return (
         </Text>
         <SafeAreaView style={styles.restaurant}>
           <View style ={styles.singleBlock} >
-            <Image style={styles.image} source={require ('/home/malika/Capstone/eventplanningapp/assets/placeholder-restaurant.jpg')} />
+            <Image style={styles.image} source={require ('../../../../assets/placeholder-restaurant.jpg')} />
             <Text>
               Address {'\n'}
               Description {'\n'}
