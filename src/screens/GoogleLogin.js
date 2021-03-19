@@ -1,36 +1,86 @@
-// import firebase from 'firebase/app';
-// import 'firebase/auth';
-import { firebase } from '../firebase/config';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+  } from 'react-native-google-signin';
 
-function GoogleLogin() {
-	var provider = new firebase.auth.GoogleAuthProvider();
-	firebase.auth().signInWithRedirect(provider);
+  import React, { useState } from 'react';
 
-	firebase
-		.auth()
-		.getRedirectResult()
-		.then((result) => {
-			if (result.credential) {
-				/** @type {firebase.auth.OAuthCredential} */
-				var credential = result.credential;
+  export default function GoogleLogin(){
+    const [loggedIn, setloggedIn] = useState(false);
+    const [userInfo, setuserInfo] = useState([]);
 
-				// This gives you a Google Access Token. You can use it to access the Google API.
-				var token = credential.accessToken;
-				// ...
-			}
-			// The signed-in user info.
-			var user = result.user;
-		})
-		.catch((error) => {
-			// Handle Errors here.
-			var errorCode = error.code;
-			var errorMessage = error.message;
-			// The email of the user's account used.
-			var email = error.email;
-			// The firebase.auth.AuthCredential type that was used.
-			var credential = error.credential;
-			// ...
-		});
-}
+    _signIn = async () => {
+      try {
+        await GoogleSignin.hasPlayServices();
+        const {accessToken, idToken} = await GoogleSignin.signIn();
+        setloggedIn(true);
+      } catch (error) {
+        if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+          // user cancelled the login flow
+          alert('Cancel');
+        } else if (error.code === statusCodes.IN_PROGRESS) {
+          alert('Signin in progress');
+          // operation (f.e. sign in) is in progress already
+        } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+          alert('PLAY_SERVICES_NOT_AVAILABLE');
+          // play services not available or outdated
+        } else {
+          // some other error happened
+        }
+      }
+    };
 
-export default GoogleLogin;
+    useEffect(() => {
+      GoogleSignin.configure({
+        scopes: ['email'], // what API you want to access on behalf of the user, default is email and profile
+        webClientId:
+          '325804923316-k07cbltqn7lotdkonl8r2io8fjoamhc5.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+        offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+      });
+    }, []);
+
+    signOut = async () => {
+      try {
+        await GoogleSignin.revokeAccess();
+        await GoogleSignin.signOut();
+        setloggedIn(false);
+        setuserInfo([]);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    return (
+      <>
+        <StatusBar barStyle="dark-content" />
+        <SafeAreaView>
+          <ScrollView
+            contentInsetAdjustmentBehavior="automatic"
+            style={styles.scrollView}>
+            <Header />
+
+            <View style={styles.body}>
+              <View style={styles.sectionContainer}>
+                <GoogleSigninButton
+                  style={{width: 192, height: 48}}
+                  size={GoogleSigninButton.Size.Wide}
+                  color={GoogleSigninButton.Color.Dark}
+                  onPress={this._signIn}
+                />
+              </View>
+              <View style={styles.buttonContainer}>
+                {!loggedIn && <Text>You are currently logged out</Text>}
+                {loggedIn && (
+                  <Button
+                    onPress={this.signOut}
+                    title="LogOut"
+                    color="red"></Button>
+                )}
+              </View>
+            </View>
+          </ScrollView>
+        </SafeAreaView>
+      </>
+    );
+  }

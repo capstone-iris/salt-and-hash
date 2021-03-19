@@ -84,7 +84,7 @@ export default function LoginScreen({ navigation }) {
 					</Text>
 				</Text>
 			</View>
-			<Button title="Sign with Google" onPress={GoogleLogin} />
+			<Button title="Log-in with Google" onPress={GoogleLogin} />
 		</KeyboardAwareScrollView>
 	);
 }

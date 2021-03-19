@@ -17,7 +17,14 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.reactnativefirebase",
+      "config":{
+        "googleSingIn":{
+          "reservedClientId": "com.googleusercontent.apps.325804923316-icsvkf4fc3mh166i4t33tkjdepltr67p"
+        }
+      },
+      "googleServicesFile":"./GoogleService-Info.plist"
     },
     "android": {
       "adaptiveIcon": {
