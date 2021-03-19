@@ -4,7 +4,7 @@ import { StatusBar } from 'react-native';
 import { firebase } from './src/firebase/config';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { LoginScreen, HomeScreen, RegistrationScreen } from './src/screens';
+import { LoginScreen, HomeScreen, RegistrationScreen, AllRestaurantsScreen, SingleRestaurantScreen } from './src/screens';
 import {decode, encode} from 'base-64'
 
 if (!global.btoa) {  global.btoa = encode }
@@ -47,6 +47,8 @@ export default function App() {
           </AppBase.Screen>
           <AppBase.Screen name='Login' component={LoginScreen} />
           <AppBase.Screen name='Registration' component={RegistrationScreen} />
+          <AppBase.Screen name='AllRestaurants' component={AllRestaurantsScreen} />
+          <AppBase.Screen name='SingleRestaurant' component={SingleRestaurantScreen} />
       </AppBase.Navigator>
     </NavigationContainer>
   );
