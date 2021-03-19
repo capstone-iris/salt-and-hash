@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
-import GoogleLogin from '../GoogleLogin';
+import GoogleLogin from '../_GoogleLogin';
 
 export default function LoginScreen({ navigation }) {
 	const [email, setEmail] = useState('');

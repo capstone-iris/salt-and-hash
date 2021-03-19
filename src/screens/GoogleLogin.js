@@ -1,36 +1,58 @@
-// import firebase from 'firebase/app';
-// import 'firebase/auth';
-import { firebase } from '../firebase/config';
+import React from 'react';
+import { Text } from 'react-native';
+import * as GoogleSignIn from 'expo-google-sign-in';
 
-function GoogleLogin() {
-	var provider = new firebase.auth.GoogleAuthProvider();
-	firebase.auth().signInWithRedirect(provider);
+export default class AuthScreen extends React.Component {
+	state = { user: null };
 
-	firebase
-		.auth()
-		.getRedirectResult()
-		.then((result) => {
-			if (result.credential) {
-				/** @type {firebase.auth.OAuthCredential} */
-				var credential = result.credential;
+	componentDidMount() {
+		this.initAsync();
+	}
 
-				// This gives you a Google Access Token. You can use it to access the Google API.
-				var token = credential.accessToken;
-				// ...
+	initAsync = async () => {
+		try {
+			await GoogleSignIn.initAsync({
+				// You may ommit the clientId when the firebase `googleServicesFile` is configured
+				clientId:
+					'325804923316-icsvkf4fc3mh166i4t33tkjdepltr67p.apps.googleusercontent.com',
+			});
+		} catch ({ message }) {
+			alert('GoogleSignIn.initAsync(): ' + message);
+		}
+		this._syncUserWithStateAsync();
+	};
+
+	_syncUserWithStateAsync = async () => {
+		const user = await GoogleSignIn.signInSilentlyAsync();
+		this.setState({ user });
+	};
+
+	signOutAsync = async () => {
+		await GoogleSignIn.signOutAsync();
+		this.setState({ user: null });
+	};
+
+	signInAsync = async () => {
+		try {
+			await GoogleSignIn.askForPlayServicesAsync();
+			const { type, user } = await GoogleSignIn.signInAsync();
+			if (type === 'success') {
+				this._syncUserWithStateAsync();
 			}
-			// The signed-in user info.
-			var user = result.user;
-		})
-		.catch((error) => {
-			// Handle Errors here.
-			var errorCode = error.code;
-			var errorMessage = error.message;
-			// The email of the user's account used.
-			var email = error.email;
-			// The firebase.auth.AuthCredential type that was used.
-			var credential = error.credential;
-			// ...
-		});
-}
+		} catch ({ message }) {
+			alert('login: Error:' + message);
+		}
+	};
 
-export default GoogleLogin;
+	onPress = () => {
+		if (this.state.user) {
+			this.signOutAsync();
+		} else {
+			this.signInAsync();
+		}
+	};
+
+	render() {
+		return <Text onPress={this.onPress}>Toggle Auth</Text>;
+	}
+}
