@@ -47,8 +47,6 @@ export default function App() {
           </AppBase.Screen>
           <AppBase.Screen name='Login' component={LoginScreen} />
           <AppBase.Screen name='Registration' component={RegistrationScreen} />
-          <AppBase.Screen name='AllRestaurants' component={AllRestaurantsScreen} />
-          <AppBase.Screen name='SingleRestaurant' component={SingleRestaurantScreen} />
       </AppBase.Navigator>
     </NavigationContainer>
   );
