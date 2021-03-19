@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, SafeAreaView } from 'react-native';
+import { Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import styles from './styles'
 
 export default function ProfileScreen({navigation}){
@@ -11,6 +11,11 @@ return (
         Events Invited To Screen<br />
         Link to My Events Screen | Link to Events Hosted Screen 
         </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Restaurant Swipe')}>
+            <Button>
+              Choose 
+            </Button>
+            </TouchableOpacity>
   </SafeAreaView>
   );
 }
