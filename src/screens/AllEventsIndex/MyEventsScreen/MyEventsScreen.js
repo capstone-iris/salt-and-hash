@@ -8,7 +8,7 @@ return (
     <SafeAreaView style={styles.container}>
         <Text>
         {'\n'}
-        My Events Screen<br />
+        My Events Screen
         Link to Events Hosted Screen | Link to Events Invited To Screen
         </Text>
   </SafeAreaView>
