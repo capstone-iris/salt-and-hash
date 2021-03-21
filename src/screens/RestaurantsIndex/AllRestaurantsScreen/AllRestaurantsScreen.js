@@ -39,9 +39,8 @@ export default class AllRestaurantsScreen extends React.Component {
     //const location = `location=${this.state.latitude},${this.state.longitude}`;
     const radius = '&radius=10000';
     const type = '&type=restaurant';
-    const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs';
+    const key = '&key=<KEY HERE>'; //insert key here
     const restaurantSearchUrl = url + location + radius + type + key;
-    console.log('restaurantSearchUrl-->', restaurantSearchUrl)
     fetch(restaurantSearchUrl, {
       mode: 'no-cors',
       cache: 'no-cache'})
