@@ -18,7 +18,7 @@ export default function ProfileScreen({ navigation }) {
 				<View
 					style={{
 						flexDirection: 'row',
-						marginTop: 50,
+						marginTop: 30,
 						alignItems: 'center',
 					}}
 				>
