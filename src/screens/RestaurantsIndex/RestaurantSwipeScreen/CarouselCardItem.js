@@ -1,6 +1,8 @@
 import React from 'react'
 import { View, Text, StyleSheet, Dimensions, Image } from "react-native"
 
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 export const SLIDER_WIDTH = Dimensions.get('window').width + 80
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
 
@@ -13,11 +15,19 @@ const CarouselCardItem = ({ item, index }) => {
       />
       <Text style={styles.header}>{item.title}</Text>
       <Text style={styles.body}>{item.body}</Text>
+
+      <View style={styles.voteContainer}>
+        <Icon style={styles.leftButton} name="close-circle-outline" size={60} color="#ff5e5e" />
+        <Icon style={styles.rightButton} name="check-circle-outline" size={60} color="#8dc293" />
+      </View>
     </View>
   )
 }
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
     backgroundColor: 'white',
     borderRadius: 8,
     width: ITEM_WIDTH,
@@ -30,6 +40,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
     elevation: 7,
+    // borderColor: 'red',
+    // borderWidth: 2
   },
   image: {
     width: ITEM_WIDTH,
@@ -48,6 +60,21 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingLeft: 20,
     paddingRight: 20
+  },
+  voteContainer:{
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    // borderColor: 'red',
+    // borderWidth: 2,
+    marginTop: 20,
+    marginBottom: -40
+  },
+  leftButton: {
+    // color: 'red'
+  },
+  rightButton:{
+    // color: 'green'
   }
 })
 

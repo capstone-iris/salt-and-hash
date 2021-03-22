@@ -6,7 +6,7 @@ import * as Permissions from 'expo-permissions';
 
 export default class AllRestaurantsScreen extends React.Component {
 
-  state = { 
+  state = {
     hasLocationPermission: false,
     latitude: 0,
     longitude: 0,
@@ -50,11 +50,11 @@ export default class AllRestaurantsScreen extends React.Component {
         return this.setState({restaurantList: result})})
       .catch(e => console.log(e))
     }
-    
-render() {    
+
+render() {
   return (
     <View>
-      <FlatList  
+      <FlatList
         data={this.state.restaurantList.results}
         keyExtractor={(item) => item.place_id}
         renderItem={({item}) => (
