@@ -1,6 +1,7 @@
 import React from 'react';
 import { SafeAreaView, View } from 'react-native';
 import styles from './styles';
+import { firebase } from '../../firebase/config';
 import {
 	Avatar,
 	Title,
@@ -12,6 +13,18 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function ProfileScreen({ navigation }) {
+	const onSignOut = () => {
+		firebase
+			.auth()
+			.signOut()
+			.then(() => {
+				console.log('Signed Out');
+			})
+			.catch((e) => {
+				console.error('Sign Out Error', e);
+			});
+	};
+
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.userInfoSection}>
@@ -93,7 +106,7 @@ export default function ProfileScreen({ navigation }) {
 						<Text style={styles.menuItemText}>Support</Text>
 					</View>
 				</TouchableRipple>
-				<TouchableRipple onPress={() => {}}>
+				<TouchableRipple onPress={onSignOut}>
 					<View style={styles.menuItem}>
 						<Icon name="logout" color="#FF6347" size={25} />
 						<Text style={styles.menuItemText}>Sign out</Text>
