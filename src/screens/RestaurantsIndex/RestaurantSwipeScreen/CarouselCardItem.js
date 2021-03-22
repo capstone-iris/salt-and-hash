@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, Dimensions, Image } from "react-native"
+import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity } from "react-native"
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -17,8 +17,12 @@ const CarouselCardItem = ({ item, index }) => {
       <Text style={styles.body}>{item.body}</Text>
 
       <View style={styles.voteContainer}>
+        <TouchableOpacity onPress={()=> console.log('left button pressed')}>
         <Icon style={styles.leftButton} name="close-circle-outline" size={60} color="#ff5e5e" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=> console.log('right button pressed')}>
         <Icon style={styles.rightButton} name="check-circle-outline" size={60} color="#8dc293" />
+        </TouchableOpacity>
       </View>
     </View>
   )
