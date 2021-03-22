@@ -2,7 +2,7 @@
 
 _Theme to come._
 
-Our event planning app offers a Tinder-inspired voting system for invited guests, created by a team of developers during the [Grace Hopper Program](https://www.gracehopper.com/) at Fullstack Academy.
+This event planning app offers a Tinder-inspired voting system for invited guests, created by a team of developers during the [Grace Hopper Program](https://www.gracehopper.com/) at Fullstack Academy.
 
 ## Tech Stack
 
