@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+// It's picky, but try to stay consistent in terms of single vs. double quotes
+
 export default StyleSheet.create({
     container: {
         flex: 1,

@@ -5,6 +5,8 @@ import styles from './styles';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
+// Hooks vs. Class components?
+
 export default class AllRestaurantsScreen extends React.Component {
 
   state = {

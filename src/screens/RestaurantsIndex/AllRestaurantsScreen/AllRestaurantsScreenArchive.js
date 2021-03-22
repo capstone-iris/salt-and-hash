@@ -4,6 +4,8 @@ import styles from './styles';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
+// git / github works as a good archival tool by itself
+
 export default class AllRestaurantsScreen extends React.Component {
 
   state = { 
