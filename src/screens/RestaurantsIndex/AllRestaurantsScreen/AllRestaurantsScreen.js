@@ -35,11 +35,11 @@ export default class AllRestaurantsScreen extends React.Component {
 
   handleRestaurantSearch = () => {
     const url  = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
-    const location = `location=44.940010,-93.276260`;
+    const location = `location=40.6127044,-74.0344876`;
     //const location = `location=${this.state.latitude},${this.state.longitude}`;
-    const radius = '&radius=10000';
+    const radius = '&radius=1000';
     const type = '&type=restaurant';
-    const key = '&key=<KEY HERE>'; //insert key here
+    const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
     const restaurantSearchUrl = url + location + radius + type + key;
     fetch(restaurantSearchUrl, {
       mode: 'no-cors',
@@ -50,7 +50,7 @@ export default class AllRestaurantsScreen extends React.Component {
         return this.setState({restaurantList: result})})
       .catch(e => console.log(e))
     }
-
+    
 render() {    
   return (
     <View>
