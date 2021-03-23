@@ -5,7 +5,9 @@ import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCardItem'
 import data from '../../../../data'
 
 const CarouselCards = () => {
-    const [index, setIndex] = React.useState(0)
+    const [index, setIndex] = React.useState(0);
+    const [restaurantSelection, setRestaurantSelection] = React.useState([])
+
   const isCarousel = React.useRef(null)
 
 
@@ -16,7 +18,7 @@ const CarouselCards = () => {
       layoutCardOffset={9}
       ref={isCarousel}
       data={data}
-      renderItem={({item}) => <CarouselCardItem item={item} index={index}/>}
+      renderItem={({item}) => <CarouselCardItem item={item} index={index} restaurantSelection={restaurantSelection}/>}
       sliderWidth={SLIDER_WIDTH}
       itemWidth={ITEM_WIDTH}
       onSnapToItem={(index) => setIndex(index)}

@@ -1,16 +1,16 @@
 import React from 'react';
 import { Text, SafeAreaView, StyleSheet, FlatList } from 'react-native';
 // import styles from './styles';
-import restaurantSelection from '../../RestaurantsIndex/RestaurantSwipeScreen/CarouselCardItem'
+import { restaurantSelection, index } from '../../RestaurantsIndex/RestaurantSwipeScreen/CarouselCards'
 
 
 export default function ProfileScreen({ navigation }) {
 	console.log(restaurantSelection)
 	return (
-		<SafeAreaView style={styles.container}>
+		<SafeAreaView >
 			<FlatList
         data={restaurantSelection}
-        keyExtractor={(item) => item.key}
+        keyExtractor={index}
         renderItem={({item}) => (
           <View style={styles.container}>
             <Image source={{uri: item.imgUrl}} />
