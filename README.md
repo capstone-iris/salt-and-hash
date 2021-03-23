@@ -1,4 +1,4 @@
-# Capstone | Event Planning App
+# Capstone | Salt & Hash
 
 _Theme to come._
 
