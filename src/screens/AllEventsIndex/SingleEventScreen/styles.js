@@ -11,12 +11,12 @@ export default StyleSheet.create({
 	},
 	menuItem: {
 		flexDirection: 'row',
-		paddingVertical: 15,
+		paddingVertical: 10,
 		paddingHorizontal: 30,
 	},
 	menuItemText: {
 		color: '#777777',
-		marginLeft: 20,
+		marginLeft: 10,
 		fontWeight: '600',
 		fontSize: 16,
 		lineHeight: 26,
