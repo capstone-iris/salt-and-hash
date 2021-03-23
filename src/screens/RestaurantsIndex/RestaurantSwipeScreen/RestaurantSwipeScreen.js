@@ -1,6 +1,8 @@
 import React from 'react'
 import { SafeAreaView, StyleSheet } from 'react-native'
 import CarouselCards from './CarouselCards'
+
+
 export default function RestaurantSwipeScreen() {
   return (
     <SafeAreaView style={styles.container}>

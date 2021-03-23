@@ -9,7 +9,6 @@ return (
         <Text>
         {'\n'}
         Events Hosted Screen
-        Link to My Events Screen | Link to Events Invited To Screen
         </Text>
   </SafeAreaView>
   );

@@ -40,7 +40,7 @@ export default class AllRestaurantsScreen extends React.Component {
     //const location = `location=${this.state.latitude},${this.state.longitude}`;
     const radius = '&radius=1000';
     const type = '&type=restaurant';
-    const key = '&key=<key>'; //insert key here
+    const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
     const restaurantSearchUrl = url + location + radius + type + key;
     fetch(restaurantSearchUrl, {
       mode: 'no-cors',
@@ -51,10 +51,10 @@ export default class AllRestaurantsScreen extends React.Component {
         return this.setState({restaurantList: result})})
       .catch(e => console.log(e))
     }
-  
+
   fetchImage = (photoRef) => {
     const ref = photoRef[0].photo_reference
-    
+
     const url = 'https://maps.googleapis.com/maps/api/place/photo?';
     const maxWidth = '&maxwidth=300'
     const photoReference = `&photoreference=${ref}`;
@@ -88,7 +88,7 @@ render() {
         )}
       />
       </View>
-     
+
       <StatusBar style="auto" />
     </View>
     </SafeAreaView>
