@@ -57,7 +57,10 @@ export default function SingleEventScreen({ navigation }) {
 
 				<ScrollView>
 					<View style={styles.imageContainer}>
-						<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
+						<TouchableOpacity
+							activeOpacity={0.5}
+							onPress={() => navigation.navigate('Restaurant Swipe')}
+						>
 							<Image
 								style={styles.image}
 								source={{
@@ -65,7 +68,10 @@ export default function SingleEventScreen({ navigation }) {
 								}}
 							/>
 						</TouchableOpacity>
-						<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
+						<TouchableOpacity
+							activeOpacity={0.5}
+							onPress={() => navigation.navigate('Restaurant Swipe')}
+						>
 							<Image
 								style={styles.image}
 								source={{
@@ -73,7 +79,10 @@ export default function SingleEventScreen({ navigation }) {
 								}}
 							/>
 						</TouchableOpacity>
-						<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
+						<TouchableOpacity
+							activeOpacity={0.5}
+							onPress={() => navigation.navigate('Restaurant Swipe')}
+						>
 							<Image
 								style={styles.image}
 								source={{
@@ -81,7 +90,10 @@ export default function SingleEventScreen({ navigation }) {
 								}}
 							/>
 						</TouchableOpacity>
-						<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
+						<TouchableOpacity
+							activeOpacity={0.5}
+							onPress={() => navigation.navigate('Restaurant Swipe')}
+						>
 							<Image
 								style={styles.image}
 								source={{
@@ -89,7 +101,10 @@ export default function SingleEventScreen({ navigation }) {
 								}}
 							/>
 						</TouchableOpacity>
-						<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
+						<TouchableOpacity
+							activeOpacity={0.5}
+							onPress={() => navigation.navigate('Restaurant Swipe')}
+						>
 							<Image
 								style={styles.image}
 								source={{
@@ -97,7 +112,10 @@ export default function SingleEventScreen({ navigation }) {
 								}}
 							/>
 						</TouchableOpacity>
-						<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
+						<TouchableOpacity
+							activeOpacity={0.5}
+							onPress={() => navigation.navigate('Restaurant Swipe')}
+						>
 							<Image
 								style={styles.image}
 								source={{
@@ -105,7 +123,10 @@ export default function SingleEventScreen({ navigation }) {
 								}}
 							/>
 						</TouchableOpacity>
-						<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
+						<TouchableOpacity
+							activeOpacity={0.5}
+							onPress={() => navigation.navigate('Restaurant Swipe')}
+						>
 							<Image
 								style={styles.image}
 								source={{
@@ -113,7 +134,10 @@ export default function SingleEventScreen({ navigation }) {
 								}}
 							/>
 						</TouchableOpacity>
-						<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
+						<TouchableOpacity
+							activeOpacity={0.5}
+							onPress={() => navigation.navigate('Restaurant Swipe')}
+						>
 							<Image
 								style={styles.image}
 								source={{
@@ -121,7 +145,10 @@ export default function SingleEventScreen({ navigation }) {
 								}}
 							/>
 						</TouchableOpacity>
-						<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
+						<TouchableOpacity
+							activeOpacity={0.5}
+							onPress={() => navigation.navigate('Restaurant Swipe')}
+						>
 							<Image
 								style={styles.image}
 								source={{
@@ -129,7 +156,10 @@ export default function SingleEventScreen({ navigation }) {
 								}}
 							/>
 						</TouchableOpacity>
-						<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
+						<TouchableOpacity
+							activeOpacity={0.5}
+							onPress={() => navigation.navigate('Restaurant Swipe')}
+						>
 							<Image
 								style={styles.image}
 								source={{
@@ -137,7 +167,10 @@ export default function SingleEventScreen({ navigation }) {
 								}}
 							/>
 						</TouchableOpacity>
-						<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
+						<TouchableOpacity
+							activeOpacity={0.5}
+							onPress={() => navigation.navigate('Restaurant Swipe')}
+						>
 							<Image
 								style={styles.image}
 								source={{
