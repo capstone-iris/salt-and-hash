@@ -32,7 +32,8 @@
     "reanimated-bottom-sheet": "^1.0.0-alpha.22"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0"
+    "@babel/core": "~7.9.0",
+    "eslint-plugin-react-hooks": "^4.2.0"
   },
   "private": true
 }
