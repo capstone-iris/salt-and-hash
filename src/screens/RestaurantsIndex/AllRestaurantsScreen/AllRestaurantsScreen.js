@@ -21,21 +21,31 @@ export default class AllRestaurantsScreen extends React.Component {
 		latitude: 0,
 		longitude: 0,
 		restaurantList: [],
+<<<<<<< HEAD
 		activeRestaurantDetails: [],
 		activeRestaurantId: null,
 		detailToggleStatus: false
+=======
+>>>>>>> master
 	};
 
-  state = { 
-    hasLocationPermission: false,
-    latitude: 0,
-    longitude: 0,
-    restaurantList: []
-  }
+	componentDidMount = () => {
+		this.getLocationAsync();
+	};
 
-  componentDidMount = () => {
-    this.getLocationAsync();
-  }
+	getLocationAsync = async () => {
+		const { status } = await Permissions.askAsync(Permissions.LOCATION);
+		if (status === 'granted') {
+			let location = await Location.getCurrentPositionAsync({});
+			this.setState({
+				hasLocationPermissions: true,
+				latitude: location.coords.latitude,
+				longitude: location.coords.longitude,
+			});
+		} else {
+			alert('Location permission not granted');
+		}
+	};
 
 	handleRestaurantSearch = () => {
 		const url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
@@ -53,7 +63,7 @@ export default class AllRestaurantsScreen extends React.Component {
 				return response.json();
 			})
 			.then((result) => {
-				this.setState({ restaurantList: result });
+				return this.setState({ restaurantList: result });
 			})
 			.catch((e) => console.log(e));
 	};
