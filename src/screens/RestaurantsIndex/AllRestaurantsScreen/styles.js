@@ -16,7 +16,6 @@ export default StyleSheet.create({
 		marginBottom: 25,
 		backgroundColor: '#fab59e',
 	},
-<<<<<<< HEAD
 	indRestaurantInsideContainer: {
 		margin: 10
 	},
@@ -37,10 +36,9 @@ export default StyleSheet.create({
 	},
 	activeRestaurantDetailsContainer: {
 		marginLeft: 21
-=======
+	},
 	indRestaurantText: {
 		margin: 10,
->>>>>>> master
 	},
 	image: {
 		height: 120,

@@ -24,7 +24,6 @@ export default class AllRestaurantsScreen extends React.Component {
 		activeRestaurantDetails: [],
 		activeRestaurantId: null,
 		detailToggleStatus: false
-
 	};
 
 	componentDidMount = () => {
@@ -66,19 +65,15 @@ export default class AllRestaurantsScreen extends React.Component {
 			.catch((e) => console.log(e));
 	};
 
-
-	// to fix:
-	// fetchImage = (photoRef) => {
-	// const ref = photoRef[0].photo_reference;
-	// 	const url = 'https://maps.googleapis.com/maps/api/place/photo?';
-	// 	const maxWidth = '&maxwidth=300';
-	// 	const photoReference = `&photoreference=${ref}`;
-	// 	const key = '&key=<key>'; //insert key here
-	// 	const fetchImageUrl = url + maxWidth + photoReference + key;
-	// 	return fetchImageUrl;
-	// 	};
-	// --> for below: <Image source={{ uri: this.fetchImage(item.photos) }} />
-
+	fetchImage = (photoRef) => {
+		const ref = photoRef[0].photo_reference;
+		const url = 'https://maps.googleapis.com/maps/api/place/photo?';
+		const maxWidth = '&maxwidth=600';
+		const photoReference = `&photoreference=${ref}`;
+		const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
+		const fetchImageUrl = url + maxWidth + photoReference + key;
+		return fetchImageUrl;
+	};
 
 	// to add:
 	// onPress function for a user to add a restaurant to his/her favorites
@@ -143,6 +138,8 @@ export default class AllRestaurantsScreen extends React.Component {
 								<View style={styles.indRestaurantContainer}>
 									
 									<View style={styles.indRestaurantInsideContainer}>
+										<Image source={{uri: this.fetchImage(item.photos)}} style={{width: 300, height: 150}}/>
+										<Text></Text>
 										<Text style={styles.indRestaurantTextHeader}>{item.name}</Text>
 										<Text style={styles.indRestaurantTextBody}>
 											<Icon name='star' size={16} /> {item.rating} |{' '}
@@ -180,12 +177,9 @@ export default class AllRestaurantsScreen extends React.Component {
 							)}
 						/>
 					</View>
-
-					
 				</View>}
 				<StatusBar style='auto' />
 			</SafeAreaView>
 		);
 	}
-
 }

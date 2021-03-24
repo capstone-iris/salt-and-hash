@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import EventRestaurantsScreen from './EventRestaurantsScreen/EventRestaurantsScreen';
-// import AllRestaurantsScreen from './AllRestaurantsScreen/AllRestaurantsScreen';
+import AllRestaurantsScreen from './AllRestaurantsScreen/AllRestaurantsScreen';
 import SingleRestaurantScreen from './SingleRestaurantScreen/SingleRestaurantScreen';
 // import RestaurantSwipeScreen from './RestaurantSwipeScreen/RestaurantSwipeScreen'
 
