@@ -26,11 +26,10 @@
     "react-native-elements": "^3.3.2",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-keyboard-aware-scroll-view": "^0.9.3",
-<<<<<<< HEAD
-    "react-native-pager-view": "^5.1.2",
-=======
+
+
     "react-native-modal": "^11.7.0",
->>>>>>> 728a8971f3de45573d18128b9599295cf5d14338
+
     "react-native-multiple-select-list": "^1.0.4",
     "react-native-pager-view": "^5.1.2",
     "react-native-paper": "^4.7.2",
