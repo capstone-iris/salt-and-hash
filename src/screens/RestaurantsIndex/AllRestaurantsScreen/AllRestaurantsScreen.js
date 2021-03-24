@@ -21,12 +21,10 @@ export default class AllRestaurantsScreen extends React.Component {
 		latitude: 0,
 		longitude: 0,
 		restaurantList: [],
-<<<<<<< HEAD
 		activeRestaurantDetails: [],
 		activeRestaurantId: null,
 		detailToggleStatus: false
-=======
->>>>>>> master
+
 	};
 
 	componentDidMount = () => {
@@ -68,6 +66,7 @@ export default class AllRestaurantsScreen extends React.Component {
 			.catch((e) => console.log(e));
 	};
 
+
 	// to fix:
 	// fetchImage = (photoRef) => {
 	// const ref = photoRef[0].photo_reference;
@@ -79,6 +78,7 @@ export default class AllRestaurantsScreen extends React.Component {
 	// 	return fetchImageUrl;
 	// 	};
 	// --> for below: <Image source={{ uri: this.fetchImage(item.photos) }} />
+
 
 	// to add:
 	// onPress function for a user to add a restaurant to his/her favorites
@@ -187,4 +187,5 @@ export default class AllRestaurantsScreen extends React.Component {
 			</SafeAreaView>
 		);
 	}
+
 }
