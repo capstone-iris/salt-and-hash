@@ -12,6 +12,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
+    "@react-native-firebase/firestore": "^11.1.2",
     "@react-navigation/bottom-tabs": "^5.11.8",
     "@react-navigation/native": "^5.9.3",
     "@react-navigation/stack": "^5.14.3",
@@ -26,9 +27,11 @@
     "react-native-gesture-handler": "^1.10.3",
     "react-native-keyboard-aware-scroll-view": "^0.9.3",
 
-    "react-native-pager-view": "^5.1.2",
+
+    "react-native-modal": "^11.7.0",
 
     "react-native-multiple-select-list": "^1.0.4",
+    "react-native-pager-view": "^5.1.2",
     "react-native-paper": "^4.7.2",
     "react-native-screens": "^2.18.1",
     "react-native-snap-carousel": "^3.9.1",

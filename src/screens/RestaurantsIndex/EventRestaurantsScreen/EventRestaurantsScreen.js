@@ -15,18 +15,24 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './styles';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
+import { firebase } from '../../../firebase/config';
+
 
 export default class AllRestaurantsScreen extends React.Component {
-	state = {
-		hasLocationPermission: false,
-		latitude: 0,
-		longitude: 0,
-		restaurantList: [],
-		restaurantDetailsList: [],
-		activeRestaurantId: null,
-		detailToggleStatus: false
-	};
-
+	constructor() {
+		super(),
+		this.selectionRef = firebase.firestore().collection('restaurants');
+		this.state = {
+			hasLocationPermission: false,
+			latitude: 0,
+			longitude: 0,
+			restaurantList: [],
+			restaurantDetailsList: [],
+			activeRestaurantId: null,
+			detailToggleStatus: false,
+			isLoading: false
+		}
+	}
 	componentDidMount = () => {
 		this.getLocationAsync();
 	};
@@ -112,7 +118,24 @@ export default class AllRestaurantsScreen extends React.Component {
 		Linking.openURL(placeSite);
 	}
 
+	handleSelection = (item) => {
+		if (item.checked) {
+			this.setState({
+				isLoading: true,
+			  });
+			  this.selectionRef
+				.add({
+				  id: item.place_id,
+				  name: item.name,
+				  rating: item.rating,
+				})
+
+		}
+    
+	}
+
 	render() {	
+
 		return (
 			<SafeAreaView>
 
@@ -150,6 +173,7 @@ export default class AllRestaurantsScreen extends React.Component {
 											const currentItemIndex = items.findIndex(v => v.place_id === item.place_id);
 											items[currentItemIndex].checked = !items[currentItemIndex].checked;
 											this.setState(state => ({ ...state, items }))
+											this.handleSelection(item)
 										}}
 										uncheckedColor='black'
 										checkedTitle='Restaurant selected!'

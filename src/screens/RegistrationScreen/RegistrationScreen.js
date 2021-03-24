@@ -7,6 +7,7 @@ import styles from './styles';
 export default function RegistrationScreen({ navigation }) {
 	const [fullName, setFullName] = useState('');
 	const [email, setEmail] = useState('');
+	const [phoneNumber, setPhoneNumber] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -28,6 +29,7 @@ export default function RegistrationScreen({ navigation }) {
 					id: uid,
 					email,
 					fullName,
+					phoneNumber
 				};
 				const usersRef = firebase.firestore().collection('users');
 				usersRef
@@ -58,6 +60,15 @@ export default function RegistrationScreen({ navigation }) {
 				placeholderTextColor='#aaaaaa'
 				onChangeText={(text) => setFullName(text)}
 				value={fullName}
+				underlineColorAndroid='transparent'
+				autoCapitalize='none'
+			/>
+			<TextInput
+				style={styles.input}
+				placeholder='Phone Number'
+				placeholderTextColor='#aaaaaa'
+				onChangeText={(text) => setPhoneNumber(text)}
+				value={phoneNumber}
 				underlineColorAndroid='transparent'
 				autoCapitalize='none'
 			/>
