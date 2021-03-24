@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import MyEventsScreen from './MyEventsScreen/MyEventsScreen';
 import EventsHostedScreen from './EventsHostedScreen/EventsHostedScreen';
 import EventsInvitedToScreen from './EventsInvitedToScreen/EventsInvitedToScreen';
+import SingleEventScreen from './SingleEventScreen/SingleEventScreen';
 import RestaurantSwipeScreen from '../RestaurantsIndex/RestaurantSwipeScreen/RestaurantSwipeScreen';
 
 const EventsBase = createStackNavigator();
@@ -19,6 +20,7 @@ export default function AllEventsIndex() {
 				name='Events Invited To'
 				component={EventsInvitedToScreen}
 			/>
+			<EventsBase.Screen name='Single Event' component={SingleEventScreen} />
 			<EventsBase.Screen
 				name='Restaurant Swipe'
 				component={RestaurantSwipeScreen}
