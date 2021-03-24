@@ -25,9 +25,7 @@
     "react-native-elements": "^3.3.2",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-keyboard-aware-scroll-view": "^0.9.3",
-
     "react-native-pager-view": "^5.1.2",
-
     "react-native-multiple-select-list": "^1.0.4",
     "react-native-paper": "^4.7.2",
     "react-native-screens": "^2.18.1",

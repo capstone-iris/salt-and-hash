@@ -113,7 +113,9 @@ export default class AllRestaurantsScreen extends React.Component {
 
 	handleWebsiteUrl = (placeSite) => {
 		Linking.openURL(placeSite);
-	}
+  }
+  
+ 
 
 	render() {
 		
