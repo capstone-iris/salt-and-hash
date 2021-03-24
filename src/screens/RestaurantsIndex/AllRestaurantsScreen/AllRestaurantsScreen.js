@@ -16,6 +16,8 @@ import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
 export default class AllRestaurantsScreen extends React.Component {
+
+
 	state = {
 		hasLocationPermission: false,
 		latitude: 0,
