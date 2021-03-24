@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import { View, useWindowDimensions, Text, SafeAreaView  } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
@@ -48,6 +49,7 @@ export default function MyEventsScreen({ navigation }) {
 				/>
 
   );
+
 }
 
 

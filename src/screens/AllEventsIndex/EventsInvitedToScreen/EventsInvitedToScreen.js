@@ -1,5 +1,6 @@
-import React from "react";
+import React from 'react';
 import { Text, SafeAreaView, TouchableOpacity } from 'react-native';
+
 import styles from './styles'
 import RestaurantSwipeScreen from '../../RestaurantsIndex/RestaurantSwipeScreen/RestaurantSwipeScreen'
 import { useNavigation } from '@react-navigation/native';
@@ -18,7 +19,5 @@ return (
 
     </SafeAreaView>
   );
+
 }
-
-
-

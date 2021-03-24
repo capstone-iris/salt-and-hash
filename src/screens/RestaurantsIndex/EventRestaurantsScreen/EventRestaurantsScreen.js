@@ -4,12 +4,13 @@ import {
 	View,
 	Image,
 	SafeAreaView,
-	TouchableOpacity,
 	FlatList,
 	StatusBar,
+    TouchableOpacity,
 	Linking
 } from 'react-native';
 import {TouchableRipple} from 'react-native-paper';
+import { CheckBox } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './styles';
 import * as Location from 'expo-location';
@@ -21,10 +22,9 @@ export default class AllRestaurantsScreen extends React.Component {
 		latitude: 0,
 		longitude: 0,
 		restaurantList: [],
-		activeRestaurantDetails: [],
+		restaurantDetailsList: [],
 		activeRestaurantId: null,
 		detailToggleStatus: false
-
 	};
 
 	componentDidMount = () => {
@@ -53,6 +53,7 @@ export default class AllRestaurantsScreen extends React.Component {
 		const type = '&type=restaurant';
 		const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
 		const restaurantSearchUrl = url + location + radius + type + key;
+		console.log(restaurantSearchUrl)
 		fetch(restaurantSearchUrl, {
 			mode: 'no-cors',
 			cache: 'no-cache',
@@ -61,11 +62,10 @@ export default class AllRestaurantsScreen extends React.Component {
 				return response.json();
 			})
 			.then((result) => {
-				return this.setState({ restaurantList: result });
+				this.setState({ restaurantList: result });
 			})
 			.catch((e) => console.log(e));
 	};
-
 
 	// to fix:
 	// fetchImage = (photoRef) => {
@@ -78,7 +78,6 @@ export default class AllRestaurantsScreen extends React.Component {
 	// 	return fetchImageUrl;
 	// 	};
 	// --> for below: <Image source={{ uri: this.fetchImage(item.photos) }} />
-
 
 	// to add:
 	// onPress function for a user to add a restaurant to his/her favorites
@@ -115,16 +114,20 @@ export default class AllRestaurantsScreen extends React.Component {
 		Linking.openURL(placeSite);
 	}
 
-	render() {
-		
+	render() {	
 		return (
 			<SafeAreaView>
+
+                <View style={styles.restaurantsContainer}>
+                    <Text style={styles.restaurantsTextHeader}>Select Restaurants for Your Event</Text>
+                    <Text style={styles.restaurantsText}>-select between 3-7 restaurants-</Text>
+                </View>
 
 				{this.state.restaurantList.length === 0 ? 
 				<View style={styles.restaurantsContainer}>
 					<TouchableOpacity onPress={() => this.handleRestaurantSearch()}>
 						<Text style={styles.restaurantsTextHeader}>					
-							Explore Restaurants Near You
+							Choose From Restaurants Near You
 						</Text>
 					</TouchableOpacity>
 				</View>
@@ -140,10 +143,23 @@ export default class AllRestaurantsScreen extends React.Component {
 							data={this.state.restaurantList.results}
 							keyExtractor={(item) => item.place_id}
 							renderItem={({ item }) => (
+							
 								<View style={styles.indRestaurantContainer}>
-									
+									<CheckBox
+										checked={!!item.checked}
+										onPress={() => {
+											const items = [...this.state.restaurantList.results];
+											const currentItemIndex = items.findIndex(v => v.place_id === item.place_id);
+											items[currentItemIndex].checked = !items[currentItemIndex].checked;
+											this.setState(state => ({ ...state, items }))
+										}}
+										uncheckedColor='black'
+										checkedTitle='Restaurant selected!'
+									/>
 									<View style={styles.indRestaurantInsideContainer}>
-										<Text style={styles.indRestaurantTextHeader}>{item.name}</Text>
+										<View style={styles.selectionHeader}>
+											<Text style={styles.indRestaurantTextHeader}>{item.name}</Text>
+										</View>
 										<Text style={styles.indRestaurantTextBody}>
 											<Icon name='star' size={16} /> {item.rating} |{' '}
 											{item.user_ratings_total} ratings
@@ -187,5 +203,4 @@ export default class AllRestaurantsScreen extends React.Component {
 			</SafeAreaView>
 		);
 	}
-
 }

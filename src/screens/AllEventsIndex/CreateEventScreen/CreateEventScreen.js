@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   Text,
   SafeAreaView,
@@ -209,3 +210,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
+
