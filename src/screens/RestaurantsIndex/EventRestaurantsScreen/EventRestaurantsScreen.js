@@ -7,7 +7,9 @@ import {
 	FlatList,
 	StatusBar,
     TouchableOpacity,
-	Linking
+	Linking,
+	TextInput,
+	Alert
 } from 'react-native';
 import {TouchableRipple} from 'react-native-paper';
 import { CheckBox } from 'react-native-elements';
@@ -18,6 +20,7 @@ import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import { firebase } from '../../../firebase/config';
 
+const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
 export default class AllRestaurantsScreen extends React.Component {
 	constructor() {
@@ -31,7 +34,9 @@ export default class AllRestaurantsScreen extends React.Component {
 			restaurantDetailsList: [],
 			activeRestaurantId: null,
 			detailToggleStatus: false,
-			isLoading: false
+			isLoading: false,
+			phoneNumber: '',
+			guestList: []
 		}
 	}
 	componentDidMount = () => {
@@ -39,7 +44,7 @@ export default class AllRestaurantsScreen extends React.Component {
 	};
 
 	getLocationAsync = async () => {
-		const { status } = await Permissions.askAsync(Permissions.LOCATION);
+		const { status } = await Permissions.askAsync(Permissions.LOCATION).catch(err => {console.log(err)});
 		if (status === 'granted') {
 			let location = await Location.getCurrentPositionAsync({});
 			this.setState({
@@ -60,7 +65,6 @@ export default class AllRestaurantsScreen extends React.Component {
 		const type = '&type=restaurant';
 		const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
 		const restaurantSearchUrl = url + location + radius + type + key;
-		console.log(restaurantSearchUrl)
 		fetch(restaurantSearchUrl, {
 			mode: 'no-cors',
 			cache: 'no-cache',
@@ -74,76 +78,106 @@ export default class AllRestaurantsScreen extends React.Component {
 			.catch((e) => console.log(e));
 	};
 
-	fetchImage = (photoRef) => {
-		const ref = photoRef[0].photo_reference;
-		const url = 'https://maps.googleapis.com/maps/api/place/photo?';
-		const maxWidth = '&maxwidth=600';
-		const photoReference = `&photoreference=${ref}`;
-		const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
-		const fetchImageUrl = url + maxWidth + photoReference + key;
-		return fetchImageUrl;
-	};
 
-	// to add:
-	// onPress function for a user to add a restaurant to his/her favorites
-	// addToFavorites = () => {}
+  fetchImage = (photoRef) => {
+    const ref = photoRef[0].photo_reference;
+    const url = 'https://maps.googleapis.com/maps/api/place/photo?';
+    const maxWidth = '&maxwidth=600';
+    const photoReference = `&photoreference=${ref}`;
+    const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
+    const fetchImageUrl = url + maxWidth + photoReference + key;
+    return fetchImageUrl;
+  };
+// to add:
+    // onPress function for a user to add a restaurant to his/her favorites
+    // addToFavorites = () => {}
+    //logic needs fixing: 
+    //user cannot open multiple detail toggles @ once
+    handleActiveRestaurantDetails = (placeId) => {
+      const url = 'https://maps.googleapis.com/maps/api/place/details/json?';
+      const place_id = `&place_id=${placeId}`;
+      const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
+      const activeRestaurantDetailsUrl = url + place_id + key;
+  
+      if(this.state.detailToggleStatus === false){
+          fetch(activeRestaurantDetailsUrl, {
+              mode: 'no-cors',
+              cache: 'no-cache',
+          })
+              .then((response) => {
+                  return response.json();
+              })
+              .then((result) => {
+                  return this.setState({ activeRestaurantDetails: result, activeRestaurantId: placeId, detailToggleStatus: true });
+              })
+              .catch((e) => console.log(e));
+      }
+      if(this.state.activeRestaurantId === placeId && this.state.detailToggleStatus === true) {
+          return this.setState({ activeRestaurantDetails: null, activeRestaurantId: null, detailToggleStatus: false });
+      }
+  }
 
-	//logic needs fixing: 
-	//user cannot open multiple detail toggles @ once
-	handleActiveRestaurantDetails = (placeId) => {
-		const url = 'https://maps.googleapis.com/maps/api/place/details/json?';
-		const place_id = `&place_id=${placeId}`;
-		const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
-		const activeRestaurantDetailsUrl = url + place_id + key;
-	
-		if(this.state.detailToggleStatus === false){
-			fetch(activeRestaurantDetailsUrl, {
-				mode: 'no-cors',
-				cache: 'no-cache',
-			})
-				.then((response) => {
-					return response.json();
-				})
-				.then((result) => {
-					return this.setState({ activeRestaurantDetails: result, activeRestaurantId: placeId, detailToggleStatus: true });
-				})
-				.catch((e) => console.log(e));
-		}
 
-		if(this.state.activeRestaurantId === placeId && this.state.detailToggleStatus === true) {
-			return this.setState({ activeRestaurantDetails: null, activeRestaurantId: null, detailToggleStatus: false });
-		}
+	setPhoneNumber = (text) => {
+		if(text.length < 9) {
+			return this.setState({phoneNumber: text})
+		} else {
+			Alert.alert('Enter only a 9-digit phone number!');
+	   }
 	}
 
-	handleWebsiteUrl = (placeSite) => {
-		Linking.openURL(placeSite);
+	setGuestList = (phoneNumber) => {
+		Alert.alert('Friend successfully invited!');
+		Communications.text(phoneNumber,`Hello, friend! I'd love to invite you to join me for an event! Download the ExpoGo app, sign-up, RSVP, and vote for a restaurant! Instructions: https://bit.ly/2Py12XG`);
+		return this.setState(prevState => ({guestList: [...prevState.guestList, phoneNumber], phoneNumber: '' }))
 	}
 
-	handleSelection = (item) => {
-		if (item.checked) {
-			this.setState({
-				isLoading: true,
-			  });
-			  this.selectionRef
-				.add({
-				  id: item.place_id,
-				  name: item.name,
-				  rating: item.rating,
-				})
-
-		}
     
-	}
+  handleWebsiteUrl = (placeSite) => {
+    Linking.openURL(placeSite);
+  };
 
-	render() {	
+  handleSelection = (item) => {
+    if (item.checked) {
+      this.setState({
+        isLoading: true,
+	  });
+	  const restaurants = firebase
+	  .firestore()
+	  .collection('eventRestaurants')
+      
+        restaurants.doc(item.place_id)
+        .set({
+          name: item.name,
+          rating: item.rating,
+        })
+        .then(() => {
+          console.log('Document successfully written!');
+        })
+        .catch((error) => {
+          console.error('Error writing document: ', error);
+        });
+      //   this.selectionRef
+      // 	.add({
+      // 	  id: item.place_id,
+      // 	  name: item.name,
+      // 	  rating: item.rating,
+      // 	})
+    }
+  };
 
-		return (
-			<SafeAreaView>
+  render() {
+    return (
+      <SafeAreaView>
+        <View style={styles.restaurantsContainer}>
+          <Text style={styles.restaurantsTextHeader}>
+            Select Restaurants for Your Event
+          </Text>
+          <Text style={styles.restaurantsText}>
+            -select between 3-7 restaurants-
+          </Text>
+        </View>
 
-                <View style={styles.restaurantsContainer}>
-                    <Text style={styles.restaurantsTextHeader}>Select Restaurants for Your Event</Text>
-                    <Text style={styles.restaurantsText}>-select between 3-7 restaurants-</Text>
-                </View>
 
 				{this.state.restaurantList.length === 0 ? 
 				<View style={styles.restaurantsContainer}>
@@ -152,6 +186,35 @@ export default class AllRestaurantsScreen extends React.Component {
 							Choose From Restaurants Near You
 						</Text>
 					</TouchableOpacity>
+					<Text></Text>
+					<TextInput
+						style={styles.input}
+						placeholder='Enter Guest Phone Number'
+						placeholderTextColor='#aaaaaa'
+						onChangeText={(text) => this.setPhoneNumber(text)}
+						underlineColorAndroid='transparent'
+						autoCapitalize='none'
+						value={this.state.phoneNumber}
+						maxLength={9}
+						clearButtonMode='always'
+					/>
+					<TouchableOpacity onPress={(phoneNumber) => this.setGuestList(this.state.phoneNumber)} >
+							<Text style={styles.restaurantsTextHeader}>Invite Friend Over Text</Text>
+					</TouchableOpacity>
+
+					<Text></Text>
+						<TouchableOpacity onPress={() => this.getUserContacts()}>
+							<Text style={styles.restaurantsTextHeader}>Choose Guests for Your Event</Text>
+							{this.state.allContacts ? 
+								this.state.allContacts.map(contact => 
+									<View key={contact.id}>
+									<Text>{contact.Name}</Text>
+									</View>
+								)	
+								:
+								<Text></Text>	
+							}
+						</TouchableOpacity>
 				</View>
 				
 				:
@@ -159,10 +222,6 @@ export default class AllRestaurantsScreen extends React.Component {
 				<View>
 					<View style={styles.restaurantsContainer}>
 						<Text style={styles.restaurantsTextHeader}>Restaurants Near You</Text>
-						<Text></Text>
-						<TouchableOpacity onPress={() => Communications.text(null,`Hello, friend! I'd love to invite you to join me for an event! Download the Expo app, sign-up, RSVP, and vote for a restaurant! Here's a link to your invite: Here's a link to the app: https://expo.io/@weronikajanczuk/projects/eventplanningapp`)}>
-							<Text style={styles.restaurantsTextHeader}>Invite Friends Over Text</Text>
-						</TouchableOpacity>
 					</View>
 					<View style={styles.restaurantContainer}>
 						<FlatList
@@ -230,6 +289,6 @@ export default class AllRestaurantsScreen extends React.Component {
 				</View>}
 				<StatusBar style='auto' />
 			</SafeAreaView>
-		);
+		)
 	}
 }

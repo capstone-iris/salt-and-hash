@@ -4,12 +4,13 @@ export default StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: 'center',
-		backgroundColor: '#eee1db',
 		justifyContent: 'center',
+		backgroundColor: '#eee1db',
+		color: 'black',
 	},
 	logo: {
 		height: 120,
-		width: 120,
+		width: 90,
 		alignSelf: 'center',
 		margin: 30,
 	},
@@ -43,7 +44,7 @@ export default StyleSheet.create({
 	},
 	footerView: {
 		alignItems: 'center',
-		marginTop: 20,
+		marginTop: 10,
 	},
 	footerText: {
 		fontSize: 16,
@@ -53,5 +54,24 @@ export default StyleSheet.create({
 		color: '#ddb39d',
 		fontWeight: 'bold',
 		fontSize: 16,
+	},
+	restaurant: {
+		flex: 1,
+		alignItems: 'flex-start',
+		justifyContent: 'space-evenly',
+		backgroundColor: '#eee1db',
+		flexDirection: 'row',
+	},
+	image: {
+		height: 120,
+		width: 120,
+		borderRadius: 10,
+		borderWidth: 3,
+		borderColor: 'maroon',
+	},
+	singleBlock: {
+		flexDirection: 'column',
+		margin: 10,
+		marginTop: 30,
 	},
 });

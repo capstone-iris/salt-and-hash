@@ -9,7 +9,7 @@ export default StyleSheet.create({
 	},
 	logo: {
 		height: 120,
-		width: 90,
+		width: 150,
 		alignSelf: 'center',
 		margin: 30,
 	},
