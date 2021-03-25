@@ -11,7 +11,7 @@ import {
 	ActivityIndicator,
 	Button,
 } from 'react-native';
-import { firebase } from '../../../firebase/config';
+import { firebase } from '../../../../firebase/config';
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -30,15 +30,6 @@ export default class CreateEventForm extends React.Component {
 			isLoading: false,
 		};
 	}
-
-	
-	// const eventRestaurantsRef = firebase.firestore().collection('eventRestaurants');
-	// eventRestaurantsRef.doc().set(Hello).add()
-
-
-
-
-
 
 	inputValueUpdate = (val, prop) => {
 		const state = this.state;
