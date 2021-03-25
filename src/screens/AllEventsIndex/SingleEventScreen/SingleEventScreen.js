@@ -14,59 +14,61 @@ import { useNavigation } from '@react-navigation/native';
 
 import { firebase } from './../../../firebase/config';
 
-const eventsCollection = firebase.firestore().collection('events');
-
 export default function SingleEventScreen() {
 	const navigation = useNavigation();
 	const [eventsData, setEventsData] = useState([]);
+	const eventsCollection = firebase.firestore().collection('events');
 
-	// useEffect(() => {
-	// 	const currentUser = firebase.auth().currentUser.uid;
-	// 	console.log(currentUser);
-	// 	// // console.log(currentUser);
-	// 	// if (currentUser) {
-	// 	// 	eventsCollection.get().then((data) => {
-	// 	// 		let result = [];
-	// 	// 		data.forEach((element) => {
-	// 	// 			if (element.exists == true && element.data().userId != null) {
-	// 	// 				if (element.data().userId === currentUser) {
-	// 	// 					result.push(element.data());
-	// 	// 				}
-	// 	// 			}
-	// 	// 		});
+	useEffect(() => {
+		async function fetchData() {
+			const currentUser = await firebase.auth().currentUser.uid;
 
-	// 	// 		setEventsData(result);
+			let data = await eventsCollection.get();
+			let result = [];
 
-	// 	// 		console.log(eventsData);
-	// 	// 	});
-	// 	// }
-	// }, []);
+			data.forEach((element) => {
+				if (element.exists == true && element.data().userId != null) {
+					if (element.data().userId === currentUser) {
+						result.push(element.data());
+					}
+				}
+			});
+			setEventsData(result);
+			console.log(result);
+		}
 
-	//max 30minutes
-
-	// firestore data is array...
+		fetchData();
+	}, []);
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<Text style={styles.eventNameText}>Lauren's Graduation Bash </Text>
+			<Text style={styles.eventNameText}>
+				{eventsData.length > 0 ? eventsData[0].name : ''}
+			</Text>
 			<View style={(styles.menuWrapper, { marginTop: 20 })}>
 				<View>
 					<View style={styles.menuItem}>
 						<Icon name='calendar-range' color='#FF6347' size={25} />
-						<Text style={styles.menuItemText}>April 10, 2021</Text>
+						<Text style={styles.menuItemText}>
+							{eventsData.length > 0 ? eventsData[0].date : ''}
+						</Text>
 					</View>
 				</View>
 				<View>
 					<View style={styles.menuItem}>
 						<Icon name='clock-outline' color='#FF6347' size={25} />
-						<Text style={styles.menuItemText}>7:00 PM</Text>
+						<Text style={styles.menuItemText}>
+							{eventsData.length > 0 ? eventsData[0].eventStartTime : ''} -{' '}
+							{eventsData.length > 0 ? eventsData[0].eventEndTime : ''}
+						</Text>
 					</View>
 				</View>
 				<View>
 					<View style={styles.menuItem}>
 						<Icon name='timer-sand' color='#FF6347' size={25} />
 						<Text style={styles.menuItemText}>
-							Voting Deadline: April 8, 2021{' '}
+							Voting Deadline:{' '}
+							{eventsData.length > 0 ? eventsData[0].votingDeadline : ''}
 						</Text>
 					</View>
 				</View>
@@ -74,11 +76,7 @@ export default function SingleEventScreen() {
 					<View style={styles.menuItem}>
 						<Icon name='information-outline' color='#FF6347' size={25} />
 						<Text style={styles.menuItemText}>
-							You have been invited to celebrate Lauren's Graduation from
-							Fullstack Academy! Please click on a image to select which
-							restaurants you would like the event to be held at. Look forward
-							to see you there! Not sure if we should just include the Voting
-							deadline in the description?
+							{eventsData.length > 0 ? eventsData[0].description : ''}
 						</Text>
 					</View>
 				</View>
