@@ -15,7 +15,7 @@ import {
 import { firebase } from '../../../firebase/config';
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
-
+const currentUser = firebase.auth().currentUser.uid;
 export default class CreateEventForm extends React.Component {
 	constructor() {
 		super();
@@ -54,6 +54,7 @@ export default class CreateEventForm extends React.Component {
 					votingDeadline: this.state.votingDeadline,
 					eventEndTime: this.state.eventEndTime,
 					eventCreated: timestamp,
+					userId: currentUser,
 				})
 				.then((res) => {
 					this.setState({

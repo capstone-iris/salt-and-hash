@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './styles';
 import {
 	SafeAreaView,
@@ -10,11 +10,45 @@ import {
 import { Text, TouchableRipple } from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native';
 
-export default function SingleEventScreen({ navigation }) {
+import { firebase } from './../../../firebase/config';
+
+const eventsCollection = firebase.firestore().collection('events');
+
+export default function SingleEventScreen() {
+	const navigation = useNavigation();
+	const [eventsData, setEventsData] = useState([]);
+
+	// useEffect(() => {
+	// 	const currentUser = firebase.auth().currentUser.uid;
+	// 	console.log(currentUser);
+	// 	// // console.log(currentUser);
+	// 	// if (currentUser) {
+	// 	// 	eventsCollection.get().then((data) => {
+	// 	// 		let result = [];
+	// 	// 		data.forEach((element) => {
+	// 	// 			if (element.exists == true && element.data().userId != null) {
+	// 	// 				if (element.data().userId === currentUser) {
+	// 	// 					result.push(element.data());
+	// 	// 				}
+	// 	// 			}
+	// 	// 		});
+
+	// 	// 		setEventsData(result);
+
+	// 	// 		console.log(eventsData);
+	// 	// 	});
+	// 	// }
+	// }, []);
+
+	//max 30minutes
+
+	// firestore data is array...
+
 	return (
 		<SafeAreaView style={styles.container}>
-			<Text style={styles.eventNameText}>Lauren's Graduation Bash</Text>
+			<Text style={styles.eventNameText}>Lauren's Graduation Bash </Text>
 			<View style={(styles.menuWrapper, { marginTop: 20 })}>
 				<View>
 					<View style={styles.menuItem}>
