@@ -14,15 +14,6 @@ import {
 import { firebase } from '../../../firebase/config';
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
-// const currentUser = firebase.auth().currentUser
-
-// firebase.auth().onAuthStateChanged(function(user) {
-// 	if (user) {
-	  
-// 	} else {
-// 	  // No user is signed in.
-// 	}
-//   });
 
 export default class CreateEventForm extends React.Component {
 	constructor() {
@@ -37,41 +28,17 @@ export default class CreateEventForm extends React.Component {
 			votingDeadline: '',
 			eventEndTime: '',
 			isLoading: false,
-			// userId: ''
 		};
 	}
 
 	
+	// const eventRestaurantsRef = firebase.firestore().collection('eventRestaurants');
+	// eventRestaurantsRef.doc().set(Hello).add()
 
-	// async componentDidMount () { 
-	// 	let currentUser = await firebase.auth().currentUser
-	// 	this.setState({
-	// 			   userId: currentUser
-	// 		   })
-	// }
 
-	// 	if (user) {
-	// 	  console.log('user logged in');
-	// 	//   console.log(currentUser)
-	// 	}
-	//   });
-	
 
-	// // Get firebase auth status.
-	// getAuthStatus = () => {
-	//   firebase.auth().onAuthStateChanged((resp) => {
-  
-	// 	  // Pass response to a call back func to update state
-	// 	  this.updateUserState(resp);
-	//   });
-	// }
-  
-	// // update state
-	// updateUserState = (resp) => {
-	//    this.setState({
-	// 	   userId: resp
-	//    })
-	// }
+
+
 
 	inputValueUpdate = (val, prop) => {
 		const state = this.state;
@@ -86,8 +53,8 @@ export default class CreateEventForm extends React.Component {
 			this.setState({
 				isLoading: true,
 			});
-			this.eventsRef
-				.add({
+			this.eventsRef.doc(this.state.name)
+				.set({
 					name: this.state.name,
 					date: this.state.date,
 					eventStartTime: this.state.eventStartTime,
@@ -95,7 +62,6 @@ export default class CreateEventForm extends React.Component {
 					votingDeadline: this.state.votingDeadline,
 					eventEndTime: this.state.eventEndTime,
 					eventCreated: timestamp,
-					// userId: currentUser.uid
 				})
 				.then((res) => {
 					this.setState({
@@ -125,7 +91,7 @@ export default class CreateEventForm extends React.Component {
 				</View>
 			);
 		}
-
+		
 		return (
 			<SafeAreaView style={styles.container}>
 				<ScrollView>
@@ -200,14 +166,14 @@ export default class CreateEventForm extends React.Component {
 
 						<TouchableOpacity
 							style={styles.button}
-							onPress={() => this.storeEvent()}
+							// onPress={() => this.storeEvent()}
 						>
 							<Text style={styles.Btn}>Invite Friends</Text>
 						</TouchableOpacity>
 
 						<TouchableOpacity
 							style={styles.button}
-							onPress={() => this.storeEvent()}
+							// onPress={() => this.storeEvent()}
 						>
 							<Text style={styles.Btn} onPress={() => {}}>
 								Preview Invitation
