@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 
 import {
@@ -15,9 +16,9 @@ import { firebase } from '../../../../firebase/config';
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
-export default class CreateEventForm extends React.Component {
-	constructor() {
-		super();
+export class CreateEventForm extends React.Component {
+	constructor(props) {
+		super(props);
 
 		this.eventsRef = firebase.firestore().collection('events');
 		this.state = {
@@ -38,6 +39,8 @@ export default class CreateEventForm extends React.Component {
 	};
 
 	storeEvent() {
+		const currentUser = firebase.auth().currentUser.uid;
+
 		if (this.state.name === '') {
 			alert('Please fill in event name!');
 		} else {
@@ -53,6 +56,7 @@ export default class CreateEventForm extends React.Component {
 					votingDeadline: this.state.votingDeadline,
 					eventEndTime: this.state.eventEndTime,
 					eventCreated: timestamp,
+					userId: currentUser,
 				})
 				.then((res) => {
 					this.setState({
@@ -75,6 +79,8 @@ export default class CreateEventForm extends React.Component {
 	}
 
 	render() {
+		const { navigation } = this.props;
+		console.log(navigation);
 		if (this.state.isLoading) {
 			return (
 				<View style={styles.preloader}>
@@ -166,7 +172,10 @@ export default class CreateEventForm extends React.Component {
 							style={styles.button}
 							// onPress={() => this.storeEvent()}
 						>
-							<Text style={styles.Btn} onPress={() => {}}>
+							<Text
+								style={styles.Btn}
+								onPress={() => navigation.navigate('Single Event')}
+							>
 								Preview Invitation
 							</Text>
 						</TouchableOpacity>
@@ -175,6 +184,12 @@ export default class CreateEventForm extends React.Component {
 			</SafeAreaView>
 		);
 	}
+}
+
+export default function (props) {
+	const navigation = useNavigation();
+
+	return <CreateEventForm {...props} navigation={navigation} />;
 }
 
 const styles = StyleSheet.create({
