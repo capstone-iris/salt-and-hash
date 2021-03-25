@@ -45,7 +45,7 @@ export default function LoginScreen({ navigation }) {
 			contentContainerStyle={styles.container}
 			scrollEnabled={false}
 		>
-			<Image style={styles.logo} source={require('../../../assets/icon.png')} />
+			<Image style={styles.logo} source={require('../../../assets/saltAndHashLogo.png')} />
 			<TextInput
 				style={styles.input}
 				placeholder='E-mail'

@@ -7,7 +7,9 @@ import {
 	FlatList,
 	StatusBar,
     TouchableOpacity,
-	Linking
+	Linking,
+	TextInput,
+	Alert
 } from 'react-native';
 import {TouchableRipple} from 'react-native-paper';
 import { CheckBox } from 'react-native-elements';
@@ -17,7 +19,6 @@ import styles from './styles';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import { firebase } from '../../../firebase/config';
-
 
 export default class AllRestaurantsScreen extends React.Component {
 	constructor() {
@@ -31,7 +32,9 @@ export default class AllRestaurantsScreen extends React.Component {
 			restaurantDetailsList: [],
 			activeRestaurantId: null,
 			detailToggleStatus: false,
-			isLoading: false
+			isLoading: false,
+			phoneNumber: '',
+			guestList: []
 		}
 	}
 	componentDidMount = () => {
@@ -39,7 +42,7 @@ export default class AllRestaurantsScreen extends React.Component {
 	};
 
 	getLocationAsync = async () => {
-		const { status } = await Permissions.askAsync(Permissions.LOCATION);
+		const { status } = await Permissions.askAsync(Permissions.LOCATION).catch(err => {console.log(err)});
 		if (status === 'granted') {
 			let location = await Location.getCurrentPositionAsync({});
 			this.setState({
@@ -60,7 +63,6 @@ export default class AllRestaurantsScreen extends React.Component {
 		const type = '&type=restaurant';
 		const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
 		const restaurantSearchUrl = url + location + radius + type + key;
-		console.log(restaurantSearchUrl)
 		fetch(restaurantSearchUrl, {
 			mode: 'no-cors',
 			cache: 'no-cache',
@@ -130,9 +132,21 @@ export default class AllRestaurantsScreen extends React.Component {
 				  name: item.name,
 				  rating: item.rating,
 				})
-
 		}
-    
+	}
+
+	setPhoneNumber = (text) => {
+		if(text.length < 9) {
+			return this.setState({phoneNumber: text})
+		} else {
+			Alert.alert('Enter only a 9-digit phone number!');
+	   }
+	}
+
+	setGuestList = (phoneNumber) => {
+		Alert.alert('Friend successfully invited!');
+		Communications.text(phoneNumber,`Hello, friend! I'd love to invite you to join me for an event! Download the ExpoGo app, sign-up, RSVP, and vote for a restaurant! Instructions: https://bit.ly/2Py12XG`);
+		return this.setState(prevState => ({guestList: [...prevState.guestList, phoneNumber], phoneNumber: '' }))
 	}
 
 	render() {	
@@ -152,6 +166,35 @@ export default class AllRestaurantsScreen extends React.Component {
 							Choose From Restaurants Near You
 						</Text>
 					</TouchableOpacity>
+					<Text></Text>
+					<TextInput
+						style={styles.input}
+						placeholder='Enter Guest Phone Number'
+						placeholderTextColor='#aaaaaa'
+						onChangeText={(text) => this.setPhoneNumber(text)}
+						underlineColorAndroid='transparent'
+						autoCapitalize='none'
+						value={this.state.phoneNumber}
+						maxLength={9}
+						clearButtonMode='always'
+					/>
+					<TouchableOpacity onPress={(phoneNumber) => this.setGuestList(this.state.phoneNumber)} >
+							<Text style={styles.restaurantsTextHeader}>Invite Friend Over Text</Text>
+					</TouchableOpacity>
+
+					<Text></Text>
+						<TouchableOpacity onPress={() => this.getUserContacts()}>
+							<Text style={styles.restaurantsTextHeader}>Choose Guests for Your Event</Text>
+							{this.state.allContacts ? 
+								this.state.allContacts.map(contact => 
+									<View key={contact.id}>
+									<Text>{contact.Name}</Text>
+									</View>
+								)	
+								:
+								<Text></Text>	
+							}
+						</TouchableOpacity>
 				</View>
 				
 				:
@@ -159,10 +202,6 @@ export default class AllRestaurantsScreen extends React.Component {
 				<View>
 					<View style={styles.restaurantsContainer}>
 						<Text style={styles.restaurantsTextHeader}>Restaurants Near You</Text>
-						<Text></Text>
-						<TouchableOpacity onPress={() => Communications.text(null,`Hello, friend! I'd love to invite you to join me for an event! Download the Expo app, sign-up, RSVP, and vote for a restaurant! Here's a link to your invite: Here's a link to the app: https://expo.io/@weronikajanczuk/projects/eventplanningapp`)}>
-							<Text style={styles.restaurantsTextHeader}>Invite Friends Over Text</Text>
-						</TouchableOpacity>
 					</View>
 					<View style={styles.restaurantContainer}>
 						<FlatList
@@ -230,6 +269,6 @@ export default class AllRestaurantsScreen extends React.Component {
 				</View>}
 				<StatusBar style='auto' />
 			</SafeAreaView>
-		);
+		)
 	}
 }
