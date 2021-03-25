@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {TouchableRipple} from 'react-native-paper';
 import { CheckBox } from 'react-native-elements';
+import Communications from 'react-native-communications';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './styles';
 import * as Location from 'expo-location';
@@ -73,17 +74,15 @@ export default class AllRestaurantsScreen extends React.Component {
 			.catch((e) => console.log(e));
 	};
 
-	// to fix:
-	// fetchImage = (photoRef) => {
-	// const ref = photoRef[0].photo_reference;
-	// 	const url = 'https://maps.googleapis.com/maps/api/place/photo?';
-	// 	const maxWidth = '&maxwidth=300';
-	// 	const photoReference = `&photoreference=${ref}`;
-	// 	const key = '&key=<key>'; //insert key here
-	// 	const fetchImageUrl = url + maxWidth + photoReference + key;
-	// 	return fetchImageUrl;
-	// 	};
-	// --> for below: <Image source={{ uri: this.fetchImage(item.photos) }} />
+	fetchImage = (photoRef) => {
+		const ref = photoRef[0].photo_reference;
+		const url = 'https://maps.googleapis.com/maps/api/place/photo?';
+		const maxWidth = '&maxwidth=600';
+		const photoReference = `&photoreference=${ref}`;
+		const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
+		const fetchImageUrl = url + maxWidth + photoReference + key;
+		return fetchImageUrl;
+	};
 
 	// to add:
 	// onPress function for a user to add a restaurant to his/her favorites
@@ -160,6 +159,10 @@ export default class AllRestaurantsScreen extends React.Component {
 				<View>
 					<View style={styles.restaurantsContainer}>
 						<Text style={styles.restaurantsTextHeader}>Restaurants Near You</Text>
+						<Text></Text>
+						<TouchableOpacity onPress={() => Communications.text(null,`Hello, friend! I'd love to invite you to join me for an event! Download the Expo app, sign-up, RSVP, and vote for a restaurant! Here's a link to your invite: Here's a link to the app: https://expo.io/@weronikajanczuk/projects/eventplanningapp`)}>
+							<Text style={styles.restaurantsTextHeader}>Invite Friends Over Text</Text>
+						</TouchableOpacity>
 					</View>
 					<View style={styles.restaurantContainer}>
 						<FlatList
@@ -175,12 +178,15 @@ export default class AllRestaurantsScreen extends React.Component {
 											const currentItemIndex = items.findIndex(v => v.place_id === item.place_id);
 											items[currentItemIndex].checked = !items[currentItemIndex].checked;
 											this.setState(state => ({ ...state, items }))
+											console.log(item)
 											this.handleSelection(item)
 										}}
 										uncheckedColor='black'
 										checkedTitle='Restaurant selected!'
 									/>
 									<View style={styles.indRestaurantInsideContainer}>
+										<Image source={{uri: this.fetchImage(item.photos)}} style={{width: 300, height: 150}}/>
+										<Text></Text>
 										<View style={styles.selectionHeader}>
 											<Text style={styles.indRestaurantTextHeader}>{item.name}</Text>
 										</View>
