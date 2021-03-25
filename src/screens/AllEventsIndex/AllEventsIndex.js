@@ -4,7 +4,6 @@ import MyEventsScreen from './MyEventsScreen/MyEventsScreen'
 import EventsHostedScreen from './EventsHostedScreen/EventsHostedScreen'
 import EventsInvitedToScreen from './EventsInvitedToScreen/EventsInvitedToScreen'
 import RestaurantSwipeScreen from '../RestaurantsIndex/RestaurantSwipeScreen/RestaurantSwipeScreen'
-import CreateEventForm from './CreateEventScreen/CreateEventForm'
 import CreateEventIndex from './CreateEventIndex/CreateEventIndex'
 import SingleEventScreen from './SingleEventScreen/SingleEventScreen';
 
