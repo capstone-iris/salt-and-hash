@@ -11,7 +11,6 @@ import {
 	ActivityIndicator,
 	Button,
 } from 'react-native';
-// import styles from './styles'
 import { firebase } from '../../../firebase/config';
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
@@ -32,6 +31,15 @@ export default class CreateEventForm extends React.Component {
 		};
 	}
 
+	
+	// const eventRestaurantsRef = firebase.firestore().collection('eventRestaurants');
+	// eventRestaurantsRef.doc().set(Hello).add()
+
+
+
+
+
+
 	inputValueUpdate = (val, prop) => {
 		const state = this.state;
 		state[prop] = val;
@@ -45,8 +53,8 @@ export default class CreateEventForm extends React.Component {
 			this.setState({
 				isLoading: true,
 			});
-			this.eventsRef
-				.add({
+			this.eventsRef.doc(this.state.name)
+				.set({
 					name: this.state.name,
 					date: this.state.date,
 					eventStartTime: this.state.eventStartTime,
@@ -83,6 +91,7 @@ export default class CreateEventForm extends React.Component {
 				</View>
 			);
 		}
+		
 		return (
 			<SafeAreaView style={styles.container}>
 				<ScrollView>
@@ -157,14 +166,14 @@ export default class CreateEventForm extends React.Component {
 
 						<TouchableOpacity
 							style={styles.button}
-							onPress={() => this.storeEvent()}
+							// onPress={() => this.storeEvent()}
 						>
 							<Text style={styles.Btn}>Invite Friends</Text>
 						</TouchableOpacity>
 
 						<TouchableOpacity
 							style={styles.button}
-							onPress={() => this.storeEvent()}
+							// onPress={() => this.storeEvent()}
 						>
 							<Text style={styles.Btn} onPress={() => {}}>
 								Preview Invitation

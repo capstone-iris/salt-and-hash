@@ -20,6 +20,8 @@ import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import { firebase } from '../../../firebase/config';
 
+const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+
 export default class AllRestaurantsScreen extends React.Component {
 	constructor() {
 		super(),
@@ -76,64 +78,45 @@ export default class AllRestaurantsScreen extends React.Component {
 			.catch((e) => console.log(e));
 	};
 
-	fetchImage = (photoRef) => {
-		const ref = photoRef[0].photo_reference;
-		const url = 'https://maps.googleapis.com/maps/api/place/photo?';
-		const maxWidth = '&maxwidth=600';
-		const photoReference = `&photoreference=${ref}`;
-		const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
-		const fetchImageUrl = url + maxWidth + photoReference + key;
-		return fetchImageUrl;
-	};
 
-	// to add:
-	// onPress function for a user to add a restaurant to his/her favorites
-	// addToFavorites = () => {}
+  fetchImage = (photoRef) => {
+    const ref = photoRef[0].photo_reference;
+    const url = 'https://maps.googleapis.com/maps/api/place/photo?';
+    const maxWidth = '&maxwidth=600';
+    const photoReference = `&photoreference=${ref}`;
+    const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
+    const fetchImageUrl = url + maxWidth + photoReference + key;
+    return fetchImageUrl;
+  };
+// to add:
+    // onPress function for a user to add a restaurant to his/her favorites
+    // addToFavorites = () => {}
+    //logic needs fixing: 
+    //user cannot open multiple detail toggles @ once
+    handleActiveRestaurantDetails = (placeId) => {
+      const url = 'https://maps.googleapis.com/maps/api/place/details/json?';
+      const place_id = `&place_id=${placeId}`;
+      const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
+      const activeRestaurantDetailsUrl = url + place_id + key;
+  
+      if(this.state.detailToggleStatus === false){
+          fetch(activeRestaurantDetailsUrl, {
+              mode: 'no-cors',
+              cache: 'no-cache',
+          })
+              .then((response) => {
+                  return response.json();
+              })
+              .then((result) => {
+                  return this.setState({ activeRestaurantDetails: result, activeRestaurantId: placeId, detailToggleStatus: true });
+              })
+              .catch((e) => console.log(e));
+      }
+      if(this.state.activeRestaurantId === placeId && this.state.detailToggleStatus === true) {
+          return this.setState({ activeRestaurantDetails: null, activeRestaurantId: null, detailToggleStatus: false });
+      }
+  }
 
-	//logic needs fixing: 
-	//user cannot open multiple detail toggles @ once
-	handleActiveRestaurantDetails = (placeId) => {
-		const url = 'https://maps.googleapis.com/maps/api/place/details/json?';
-		const place_id = `&place_id=${placeId}`;
-		const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
-		const activeRestaurantDetailsUrl = url + place_id + key;
-	
-		if(this.state.detailToggleStatus === false){
-			fetch(activeRestaurantDetailsUrl, {
-				mode: 'no-cors',
-				cache: 'no-cache',
-			})
-				.then((response) => {
-					return response.json();
-				})
-				.then((result) => {
-					return this.setState({ activeRestaurantDetails: result, activeRestaurantId: placeId, detailToggleStatus: true });
-				})
-				.catch((e) => console.log(e));
-		}
-
-		if(this.state.activeRestaurantId === placeId && this.state.detailToggleStatus === true) {
-			return this.setState({ activeRestaurantDetails: null, activeRestaurantId: null, detailToggleStatus: false });
-		}
-	}
-
-	handleWebsiteUrl = (placeSite) => {
-		Linking.openURL(placeSite);
-	}
-
-	handleSelection = (item) => {
-		if (item.checked) {
-			this.setState({
-				isLoading: true,
-			  });
-			  this.selectionRef
-				.add({
-				  id: item.place_id,
-				  name: item.name,
-				  rating: item.rating,
-				})
-		}
-	}
 
 	setPhoneNumber = (text) => {
 		if(text.length < 9) {
@@ -149,15 +132,52 @@ export default class AllRestaurantsScreen extends React.Component {
 		return this.setState(prevState => ({guestList: [...prevState.guestList, phoneNumber], phoneNumber: '' }))
 	}
 
-	render() {	
+    
+  handleWebsiteUrl = (placeSite) => {
+    Linking.openURL(placeSite);
+  };
 
-		return (
-			<SafeAreaView>
+  handleSelection = (item) => {
+    if (item.checked) {
+      this.setState({
+        isLoading: true,
+	  });
+	  const restaurants = firebase
+	  .firestore()
+	  .collection('eventRestaurants')
+      
+        restaurants.doc(item.place_id)
+        .set({
+          name: item.name,
+          rating: item.rating,
+        })
+        .then(() => {
+          console.log('Document successfully written!');
+        })
+        .catch((error) => {
+          console.error('Error writing document: ', error);
+        });
+      //   this.selectionRef
+      // 	.add({
+      // 	  id: item.place_id,
+      // 	  name: item.name,
+      // 	  rating: item.rating,
+      // 	})
+    }
+  };
 
-                <View style={styles.restaurantsContainer}>
-                    <Text style={styles.restaurantsTextHeader}>Select Restaurants for Your Event</Text>
-                    <Text style={styles.restaurantsText}>-select between 3-7 restaurants-</Text>
-                </View>
+  render() {
+    return (
+      <SafeAreaView>
+        <View style={styles.restaurantsContainer}>
+          <Text style={styles.restaurantsTextHeader}>
+            Select Restaurants for Your Event
+          </Text>
+          <Text style={styles.restaurantsText}>
+            -select between 3-7 restaurants-
+          </Text>
+        </View>
+
 
 				{this.state.restaurantList.length === 0 ? 
 				<View style={styles.restaurantsContainer}>
