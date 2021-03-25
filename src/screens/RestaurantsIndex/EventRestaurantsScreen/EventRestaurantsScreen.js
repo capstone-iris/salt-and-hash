@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {TouchableRipple} from 'react-native-paper';
 import { CheckBox } from 'react-native-elements';
+import Communications from 'react-native-communications';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './styles';
 import * as Location from 'expo-location';
@@ -135,6 +136,10 @@ export default class AllRestaurantsScreen extends React.Component {
 				<View>
 					<View style={styles.restaurantsContainer}>
 						<Text style={styles.restaurantsTextHeader}>Restaurants Near You</Text>
+						<Text></Text>
+						<TouchableOpacity onPress={() => Communications.text(null,`Hello, friend! I'd love to invite you to join me for an event! Download the Expo app, sign-up, RSVP, and vote for a restaurant! Here's a link to your invite: Here's a link to the app: https://expo.io/@weronikajanczuk/projects/eventplanningapp`)}>
+							<Text style={styles.restaurantsTextHeader}>Invite Friends Over Text</Text>
+						</TouchableOpacity>
 					</View>
 					<View style={styles.restaurantContainer}>
 						<FlatList
