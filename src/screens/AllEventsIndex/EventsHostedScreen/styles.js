@@ -84,14 +84,16 @@ export default StyleSheet.create({
 			// marginHorizontal: 10,
 			height: 150,
 			width: 150,
-			borderRadius: 5,
+			borderRadius: 10,
 	},
 	indRestaurantInsideContainer: {
 		margin: 10
 	},
 	eventsContainer: {
+		flexDirection: 'row',
+		flexWrap: 'wrap',
 		alignItems: 'center',
-		justifyContent: 'center',
+		// justifyContent: 'center',
 
 	},
 	restaurantsTextHeader: {
