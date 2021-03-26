@@ -142,10 +142,9 @@ class AddRestaurantsToEventScreen extends React.Component {
 	}
 
 	deleteRestaurant = (eventId, restaurant) => {
-		let document = this.eventRestaurantsRef.doc(eventId).collection('restaurants').doc(restaurant.place_id).get()
+		console.log('entered deleteRestaurants-->')
 
-		if(document) {
-			this.eventRestaurantsRef.doc(eventId).collection('restaurants').doc(restaurant.place_id).delete()
+		this.eventRestaurantsRef.doc(eventId).collection('restaurants').doc(restaurant.place_id).delete()
 			.then(() => 
 					this.setState(
 						{restaurantCounter: this.state.restaurantCounter - 1}))
@@ -153,7 +152,6 @@ class AddRestaurantsToEventScreen extends React.Component {
 					console.error('Error found: ', e)
 				})
 		}
-	}
 
 	submitRestaurantSelection = (eventId) => {
 		if(this.state.restaurantCounter < 3) {
