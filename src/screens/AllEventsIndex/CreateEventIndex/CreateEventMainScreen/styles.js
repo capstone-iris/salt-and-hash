@@ -1,35 +1,32 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-	container: {
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: '#eee1db',
-		color: 'black',
+	inputContainer: {
+		padding: 10,
 	},
-	logo: {
-		height: 120,
-		width: 90,
-		alignSelf: 'center',
-		margin: 30,
+	textInput: {
+		borderColor: '#CCCCCC',
+		borderWidth: 1,
+		// borderTopWidth: 1,
+		// borderBottomWidth: 1,
+		height: 40,
+		fontSize: 18,
+		paddingLeft: 10,
+		paddingRight: 10,
+		margin: 5,
 	},
-	input: {
-		height: 48,
-		borderRadius: 5,
-		overflow: 'hidden',
-		backgroundColor: 'white',
-		marginTop: 10,
-		marginBottom: 10,
-		marginLeft: 30,
-		marginRight: 30,
-		paddingLeft: 16,
-		width: 250,
+	preferences: {
+		fontWeight: 'bold',
+		fontSize: 20,
+		margin: 5,
+	},
+	title: {
+		fontSize: 35,
+		padding: 5,
 	},
 	button: {
 		backgroundColor: '#ddb39d',
-		marginLeft: 30,
-		marginRight: 30,
+		margin: 10,
 		marginTop: 20,
 		height: 48,
 		borderRadius: 5,
@@ -37,41 +34,18 @@ export default StyleSheet.create({
 		justifyContent: 'center',
 		width: 250,
 	},
-	buttonTitle: {
+	Btn: {
 		color: 'white',
 		fontSize: 16,
 		fontWeight: 'bold',
 	},
-	footerView: {
+	preloader: {
+		left: 0,
+		right: 0,
+		top: 0,
+		bottom: 0,
+		position: 'absolute',
 		alignItems: 'center',
-		marginTop: 10,
-	},
-	footerText: {
-		fontSize: 16,
-		color: '#2e2e2d',
-	},
-	footerLink: {
-		color: '#ddb39d',
-		fontWeight: 'bold',
-		fontSize: 16,
-	},
-	restaurant: {
-		flex: 1,
-		alignItems: 'flex-start',
-		justifyContent: 'space-evenly',
-		backgroundColor: '#eee1db',
-		flexDirection: 'row',
-	},
-	image: {
-		height: 120,
-		width: 120,
-		borderRadius: 10,
-		borderWidth: 3,
-		borderColor: 'maroon',
-	},
-	singleBlock: {
-		flexDirection: 'column',
-		margin: 10,
-		marginTop: 30,
+		justifyContent: 'center',
 	},
 });

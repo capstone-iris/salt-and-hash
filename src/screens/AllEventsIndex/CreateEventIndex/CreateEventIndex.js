@@ -1,8 +1,8 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import CreateEventMainScreen from './CreateEventMainScreen/CreateEventMainScreen'
-import AddRestaurantsToEventScreen from './AddRestaurantsToEventScreen/AddRestaurantsToEventScreen'
-import AddGuestsToEventScreen from './AddGuestsToEventScreen/AddGuestsToEventScreen'
+import CreateEventMainScreen from './CreateEventMainScreen/CreateEventMainScreen';
+import AddRestaurantsToEventScreen from './AddRestaurantsToEventScreen/AddRestaurantsToEventScreen';
+import AddGuestsToEventScreen from './AddGuestsToEventScreen/AddGuestsToEventScreen';
 
 const CreateEventBase = createStackNavigator();
 

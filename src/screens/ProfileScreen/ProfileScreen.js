@@ -32,47 +32,35 @@ export default class ProfileScreen extends Component {
 		//   });
 	}
 
-	// const data = firebase
-	// 	.firestore()
-	// 	.collection('users')
-	// 	.get()
-	// 	.then((snapshot) => {
-	// 		snapshot.docs.forEach((doc) => {
-	// 			doc;
-	// 		});
-	// 	});
+	// // Get firebase auth status.
+	// getAuthStatus = () => {
+	//   firebase.auth().onAuthStateChanged((resp) => {
 
-	// console.log(data);
+	// 	  // Pass response to a call back func to update state
+	// 	  this.updateUserState(resp);
+	//   });
+	// }
+
+	// // update state
+	// updateUserState = (resp) => {
+	//    this.setState({
+	// 	   userId: resp
+	//    })
+	// }
 
 	getUsers = () => {
 		const usersRef = firebase.firestore().collection('users');
 		let currentUser = firebase.auth().currentUser.uid;
 
-		// usersRef.get().then((snapshot) => {
-		// 	snapshot.docs.forEach((doc) => {
-		usersRef.get().then((snapshot) => {
-			//   console.log('snapshot', snapshot.docs)
+    usersRef
+      .get()
+      .then((snapshot) => {
 			snapshot.docs.forEach((doc) => {
-				if (currentUser === doc.data().id) this.setState({ users: doc.data() });
-			});
-		});
-	};
-
-	// getUsers();
-
-	// const usersCollection = firebase.database().ref('users');
-	// usersCollection.on('value', (snapshot) => {
-	// 	const data = snapshot.val();
-	// 	console.log(snapshot);
-	// });
-
-	// const [email, setEmail] = React.useState('');
-
-	// React.useEffect(() => {
-	// 	let userEmail = firebase.auth().currentUser.email;
-	// 	setEmail(userEmail);
-	// 	console.log('User email is', userEmail);
-	// }, []);
+				if (currentUser === doc.data().id)
+          this.setState({ users: doc.data() });
+      })
+	  })
+  }
 
 	onSignOut = () => {
 		firebase
@@ -114,12 +102,6 @@ export default class ProfileScreen extends Component {
 				</View>
 
 				<View style={styles.userInfoSection}>
-					{/* <View style={styles.row}>
-            <Icon name='map-marker-radius' size={20} color='#777777' />
-            <Text style={{ color: '#777777', marginLeft: 20 }}>
-              Fort Lauderdale, FL
-            </Text>
-          </View> */}
 					<View style={styles.row}>
 						<Icon name='phone' size={20} color='#777777' />
 						<Text style={{ color: '#777777', marginLeft: 20 }}>
@@ -181,4 +163,3 @@ export default class ProfileScreen extends Component {
 		);
 	}
 }
-
