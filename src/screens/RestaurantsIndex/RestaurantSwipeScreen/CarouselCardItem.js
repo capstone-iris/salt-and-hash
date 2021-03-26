@@ -26,13 +26,12 @@ export default class CarouselCardItem extends React.Component {
 
   handleSelect = () => {
     if (this.state.rightSelected) {
-      this.props.restaurantSelection.push(this.props.item);
       this.setState({
-        restaurantsSelected: this.props.restaurantSelection,
+        // restaurantsSelected: this.props.restaurantSelection,
         rightSelected: false,
       });
       alert('Restaurant added!');
-      console.log('Restaurant added!', this.props.restaurantSelection);
+      // console.log('Restaurant added!', this.props.restaurantSelection);
     }
   };
 
