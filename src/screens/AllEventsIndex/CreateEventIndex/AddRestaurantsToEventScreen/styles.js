@@ -2,17 +2,56 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
 	container: {
+		backgroundColor: '#fed8b1',
 		flex: 1,
+		flexDirection: 'row'
+	},
+	buttonContainer: {
+		justifyContent: 'center'
+	},
+	restaurantContainer: {
+		margin: 25,
+	},
+	indRestaurantContainer: {
+		flex: 1,
+		marginBottom: 25,
+		backgroundColor: '#fab59e'
+	},
+	indRestaurantInsideContainer: {
+		margin: 10
+	},
+	restaurantsContainer: {
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#eee1db',
-		color: 'black',
+		margin: 10
 	},
-	logo: {
+	restaurantsTextHeader: {
+		fontSize: 16,
+		fontWeight: 'bold'
+	},
+	restaurantsText: {
+		fontSize: 14
+	},
+	indRestaurantTextHeader: {
+		fontSize: 16,
+		fontWeight: 'bold',
+	},
+	indRestaurantTextBody: {
+		fontSize: 15
+	},
+	activeRestaurantDetailsContainer: {
+		marginLeft: 21
+	},
+	image: {
 		height: 120,
-		width: 90,
-		alignSelf: 'center',
-		margin: 30,
+		width: 120,
+		borderRadius: 10,
+		borderWidth: 3,
+		borderColor: 'maroon',
+	},
+	voteContainer: {
+		flex: 1,
+		flexDirection: 'row'
 	},
 	input: {
 		height: 48,
@@ -25,53 +64,5 @@ export default StyleSheet.create({
 		marginRight: 30,
 		paddingLeft: 16,
 		width: 250,
-	},
-	button: {
-		backgroundColor: '#ddb39d',
-		marginLeft: 30,
-		marginRight: 30,
-		marginTop: 20,
-		height: 48,
-		borderRadius: 5,
-		alignItems: 'center',
-		justifyContent: 'center',
-		width: 250,
-	},
-	buttonTitle: {
-		color: 'white',
-		fontSize: 16,
-		fontWeight: 'bold',
-	},
-	footerView: {
-		alignItems: 'center',
-		marginTop: 10,
-	},
-	footerText: {
-		fontSize: 16,
-		color: '#2e2e2d',
-	},
-	footerLink: {
-		color: '#ddb39d',
-		fontWeight: 'bold',
-		fontSize: 16,
-	},
-	restaurant: {
-		flex: 1,
-		alignItems: 'flex-start',
-		justifyContent: 'space-evenly',
-		backgroundColor: '#eee1db',
-		flexDirection: 'row',
-	},
-	image: {
-		height: 120,
-		width: 120,
-		borderRadius: 10,
-		borderWidth: 3,
-		borderColor: 'maroon',
-	},
-	singleBlock: {
-		flexDirection: 'column',
-		margin: 10,
-		marginTop: 30,
-	},
+	}
 });

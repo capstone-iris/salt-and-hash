@@ -4,21 +4,21 @@ import {
 	Text,
 	SafeAreaView,
 	ScrollView,
-	StyleSheet,
 	TextInput,
 	View,
 	TouchableOpacity,
 	ActivityIndicator,
-	Button,
+	Alert
 } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import { firebase } from '../../../../firebase/config';
+import styles from './styles'
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
-export default class CreateEventForm extends React.Component {
+class CreateEventMainScreen extends React.Component {
 	constructor() {
 		super();
-
 		this.eventsRef = firebase.firestore().collection('events');
 		this.state = {
 			name: '',
@@ -37,14 +37,17 @@ export default class CreateEventForm extends React.Component {
 		this.setState(state);
 	};
 
-	storeEvent() {
+	storeEvent = () => {
 		if (this.state.name === '') {
 			alert('Please fill in event name!');
 		} else {
+			Alert.alert('Event successfully added!')
 			this.setState({
 				isLoading: true,
 			});
-			this.eventsRef.doc(this.state.name)
+			const document = this.eventsRef.doc();
+			const documentId = document.id;
+			this.eventsRef.doc(documentId)
 				.set({
 					name: this.state.name,
 					date: this.state.date,
@@ -54,7 +57,7 @@ export default class CreateEventForm extends React.Component {
 					eventEndTime: this.state.eventEndTime,
 					eventCreated: timestamp,
 				})
-				.then((res) => {
+				.then(() => {
 					this.setState({
 						name: '',
 						date: '',
@@ -70,11 +73,13 @@ export default class CreateEventForm extends React.Component {
 					this.setState({
 						isLoading: false,
 					});
-				});
+				})
+			this.props.navigation.navigate('Add Restaurants to Event', { eventId: documentId })
 		}
 	}
 
 	render() {
+
 		if (this.state.isLoading) {
 			return (
 				<View style={styles.preloader}>
@@ -135,11 +140,6 @@ export default class CreateEventForm extends React.Component {
 						</View>
 						<TextInput
 							style={styles.textInput}
-							placeholder='Restaurant Selections Dropdown'
-							maxLength={20}
-						/>
-						<TextInput
-							style={styles.textInput}
 							multiline={true}
 							placeholder='Write a description...'
 							maxLength={200}
@@ -147,28 +147,16 @@ export default class CreateEventForm extends React.Component {
 							value={this.state.description}
 							onChangeText={(val) => this.inputValueUpdate(val, 'description')}
 						/>
-						<Text style={styles.preferences}>Optional Preferences</Text>
+						<TouchableOpacity style={styles.button}>
+							<Text style={styles.Btn} onPress={() => {}}>
+								Preview Invitation
+							</Text>
+						</TouchableOpacity>
 						<TouchableOpacity
 							style={styles.button}
 							onPress={() => this.storeEvent()}
 						>
-							<Text style={styles.Btn}>Submit</Text>
-						</TouchableOpacity>
-
-						<TouchableOpacity
-							style={styles.button}
-							// onPress={() => this.storeEvent()}
-						>
-							<Text style={styles.Btn}>Invite Friends</Text>
-						</TouchableOpacity>
-
-						<TouchableOpacity
-							style={styles.button}
-							// onPress={() => this.storeEvent()}
-						>
-							<Text style={styles.Btn} onPress={() => {}}>
-								Preview Invitation
-							</Text>
+							<Text style={styles.Btn}>Save Event</Text>
 						</TouchableOpacity>
 					</View>
 				</ScrollView>
@@ -177,52 +165,4 @@ export default class CreateEventForm extends React.Component {
 	}
 }
 
-const styles = StyleSheet.create({
-	inputContainer: {
-		padding: 10,
-	},
-	textInput: {
-		borderColor: '#CCCCCC',
-		borderWidth: 1,
-		// borderTopWidth: 1,
-		// borderBottomWidth: 1,
-		height: 40,
-		fontSize: 18,
-		paddingLeft: 10,
-		paddingRight: 10,
-		margin: 5,
-	},
-	preferences: {
-		fontWeight: 'bold',
-		fontSize: 20,
-		margin: 5,
-	},
-	title: {
-		fontSize: 35,
-		padding: 5,
-	},
-	button: {
-		backgroundColor: '#ddb39d',
-		margin: 10,
-		marginTop: 20,
-		height: 48,
-		borderRadius: 5,
-		alignItems: 'center',
-		justifyContent: 'center',
-		width: 250,
-	},
-	Btn: {
-		color: 'white',
-		fontSize: 16,
-		fontWeight: 'bold',
-	},
-	preloader: {
-		left: 0,
-		right: 0,
-		top: 0,
-		bottom: 0,
-		position: 'absolute',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-});
+export default withNavigation(CreateEventMainScreen);

@@ -25,7 +25,6 @@ export default class ProfileScreen extends Component {
     // this.getAuthStatus()
   }
 
-
 	// // Get firebase auth status.
 	// getAuthStatus = () => {
 	//   firebase.auth().onAuthStateChanged((resp) => {
@@ -46,7 +45,6 @@ export default class ProfileScreen extends Component {
 	const usersRef = firebase.firestore().collection('users');
 	let currentUser = firebase.auth().currentUser.uid
 
- 
     usersRef
       .get()
       .then((snapshot) => {
@@ -54,9 +52,8 @@ export default class ProfileScreen extends Component {
 				if (currentUser === doc.data().id)
           this.setState({ users: doc.data() });
       })
-	})
-}
-
+	  })
+  }
 
   onSignOut = () => {
     firebase
