@@ -39,6 +39,8 @@ class CreateEventMainScreen extends React.Component {
 	};
 
 	storeEvent = () => {
+		const currentUser = firebase.auth().currentUser.uid;
+
 		if (this.state.name === '') {
 			alert('Please fill in event name!');
 		} else {
