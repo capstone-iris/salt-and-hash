@@ -14,43 +14,45 @@ import { useNavigation } from '@react-navigation/native';
 
 import { firebase } from './../../../firebase/config';
 
-export default function SingleEventScreen() {
+export default function SingleEventScreen({route}) {
+	const { event } = route.params;
 	const navigation = useNavigation();
 	const [eventsData, setEventsData] = useState([]);
 	const eventsCollection = firebase.firestore().collection('events');
 
-	useEffect(() => {
-		async function fetchData() {
-			const currentUser = await firebase.auth().currentUser.uid;
+	// useEffect(() => {
+	// 	async function fetchData() {
+	// 		const currentUser = await firebase.auth().currentUser.uid;
 
-			let data = await eventsCollection.get();
-			let result = [];
+	// 		let data = await eventsCollection.get();
+	// 		let result = [];
 
-			data.forEach((element) => {
-				if (element.exists == true && element.data().userId != null) {
-					if (element.data().userId === currentUser) {
-						result.push(element.data());
-					}
-				}
-			});
-			setEventsData(result);
-			console.log(result);
-		}
+	// 		data.forEach((element) => {
+	// 			if (element.exists == true && element.data().userId != null) {
+	// 				if (element.data().userId === currentUser) {
+	// 					result.push(element.data());
+	// 				}
+	// 			}
+	// 		});
+	// 		setEventsData(result);
+	// 		console.log(result);
+	// 	}
 
-		fetchData();
-	}, []);
+	// 	fetchData();
+	// }, []);
 
 	return (
+
 		<SafeAreaView style={styles.container}>
 			<Text style={styles.eventNameText}>
-				{eventsData.length > 0 ? eventsData[0].name : ''}
+				{event.name}
 			</Text>
 			<View style={(styles.menuWrapper, { marginTop: 20 })}>
 				<View>
 					<View style={styles.menuItem}>
 						<Icon name='calendar-range' color='#FF6347' size={25} />
 						<Text style={styles.menuItemText}>
-							{eventsData.length > 0 ? eventsData[0].date : ''}
+							{event.date}
 						</Text>
 					</View>
 				</View>
@@ -58,8 +60,8 @@ export default function SingleEventScreen() {
 					<View style={styles.menuItem}>
 						<Icon name='clock-outline' color='#FF6347' size={25} />
 						<Text style={styles.menuItemText}>
-							{eventsData.length > 0 ? eventsData[0].eventStartTime : ''} -{' '}
-							{eventsData.length > 0 ? eventsData[0].eventEndTime : ''}
+							{event.eventStartTime } -{' '}
+							{event.eventEndTime }
 						</Text>
 					</View>
 				</View>
@@ -68,7 +70,7 @@ export default function SingleEventScreen() {
 						<Icon name='timer-sand' color='#FF6347' size={25} />
 						<Text style={styles.menuItemText}>
 							Voting Deadline:{' '}
-							{eventsData.length > 0 ? eventsData[0].votingDeadline : ''}
+							{event.votingDeadline }
 						</Text>
 					</View>
 				</View>
@@ -76,7 +78,7 @@ export default function SingleEventScreen() {
 					<View style={styles.menuItem}>
 						<Icon name='information-outline' color='#FF6347' size={25} />
 						<Text style={styles.menuItemText}>
-							{eventsData.length > 0 ? eventsData[0].description : ''}
+							{event.description}
 						</Text>
 					</View>
 				</View>
