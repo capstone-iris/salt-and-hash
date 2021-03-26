@@ -4,10 +4,10 @@ export default StyleSheet.create({
 	container: {
 		backgroundColor: '#fed8b1',
 		flex: 1,
-		flexDirection: 'row'
+		flexDirection: 'row',
 	},
 	buttonContainer: {
-		justifyContent: 'center'
+		justifyContent: 'center',
 	},
 	restaurantContainer: {
 		margin: 25,
@@ -17,25 +17,25 @@ export default StyleSheet.create({
 		backgroundColor: '#fab59e',
 	},
 	indRestaurantInsideContainer: {
-		margin: 10
+		margin: 10,
 	},
 	restaurantsContainer: {
 		alignItems: 'center',
-		justifyContent: 'center'
+		justifyContent: 'center',
 	},
 	restaurantsTextHeader: {
 		fontSize: 16,
-		fontWeight: 'bold'
+		fontWeight: 'bold',
 	},
 	indRestaurantTextHeader: {
 		fontSize: 16,
 		fontWeight: 'bold',
 	},
 	indRestaurantTextBody: {
-		fontSize: 15
+		fontSize: 15,
 	},
 	activeRestaurantDetailsContainer: {
-		marginLeft: 21
+		marginLeft: 21,
 	},
 	indRestaurantText: {
 		margin: 10,

@@ -139,12 +139,14 @@ export default class ProfileScreen extends Component {
 							<Text style={styles.menuItemText}>Notifications</Text>
 						</View>
 					</TouchableRipple>
+
 					<TouchableRipple onPress={() => {}}>
 						<View style={styles.menuItem}>
 							<Icon name='account-check-outline' color='#FF6347' size={25} />
 							<Text style={styles.menuItemText}>Support</Text>
 						</View>
 					</TouchableRipple>
+
 					<TouchableRipple onPress={this.onSignOut}>
 						<View style={styles.menuItem}>
 							<Icon name='logout' color='#FF6347' size={25} />

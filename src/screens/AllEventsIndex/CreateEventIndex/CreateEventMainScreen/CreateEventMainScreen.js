@@ -47,7 +47,8 @@ export class CreateEventForm extends React.Component {
 			this.setState({
 				isLoading: true,
 			});
-			this.eventsRef.doc(this.state.name)
+			this.eventsRef
+				.doc(this.state.name)
 				.set({
 					name: this.state.name,
 					date: this.state.date,
@@ -88,7 +89,7 @@ export class CreateEventForm extends React.Component {
 				</View>
 			);
 		}
-		
+
 		return (
 			<SafeAreaView style={styles.container}>
 				<ScrollView>
