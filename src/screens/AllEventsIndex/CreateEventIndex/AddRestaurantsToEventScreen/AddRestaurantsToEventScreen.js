@@ -135,6 +135,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 					.then(() => 
 						this.setState(
 							{restaurantCounter: this.state.restaurantCounter + 1}))
+					.then(() => console.log('Restaurant added!'))
 					.catch((e) => {
 						console.error('Error found: ', e)
 					})
@@ -142,15 +143,15 @@ class AddRestaurantsToEventScreen extends React.Component {
 	}
 
 	deleteRestaurant = (eventId, restaurant) => {
-		console.log('entered deleteRestaurants-->')
 
-		this.eventRestaurantsRef.doc(eventId).collection('restaurants').doc(restaurant.place_id).delete()
+		this.eventRestaurantsRef.doc(eventId).collection('eventRestaurants').doc(restaurant.place_id).delete()
 			.then(() => 
 					this.setState(
 						{restaurantCounter: this.state.restaurantCounter - 1}))
-				.catch((e) => {
-					console.error('Error found: ', e)
-				})
+			.then(() => console.log('Restaurant deleted!'))
+			.catch((e) => {
+				console.error('Error found: ', e)
+			})
 		}
 
 	submitRestaurantSelection = (eventId) => {
