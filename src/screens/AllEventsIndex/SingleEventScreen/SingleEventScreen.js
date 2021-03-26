@@ -166,50 +166,6 @@ export default function SingleEventScreen() {
 								}}
 							/>
 						</TouchableOpacity>
-						<TouchableOpacity
-							activeOpacity={0.5}
-							onPress={() => navigation.navigate('Restaurant Swipe')}
-						>
-							<Image
-								style={styles.image}
-								source={{
-									uri: 'https://picsum.photos/seed/picsum/536/354',
-								}}
-							/>
-						</TouchableOpacity>
-						<TouchableOpacity
-							activeOpacity={0.5}
-							onPress={() => navigation.navigate('Restaurant Swipe')}
-						>
-							<Image
-								style={styles.image}
-								source={{
-									uri: 'https://picsum.photos/seed/picsum/536/354',
-								}}
-							/>
-						</TouchableOpacity>
-						<TouchableOpacity
-							activeOpacity={0.5}
-							onPress={() => navigation.navigate('Restaurant Swipe')}
-						>
-							<Image
-								style={styles.image}
-								source={{
-									uri: 'https://picsum.photos/seed/picsum/536/354',
-								}}
-							/>
-						</TouchableOpacity>
-						<TouchableOpacity
-							activeOpacity={0.5}
-							onPress={() => navigation.navigate('Restaurant Swipe')}
-						>
-							<Image
-								style={styles.image}
-								source={{
-									uri: 'https://picsum.photos/seed/picsum/536/354',
-								}}
-							/>
-						</TouchableOpacity>
 					</View>
 				</ScrollView>
 			</View>
