@@ -35,12 +35,12 @@ export default class ProfileScreen extends Component {
 	// // Get firebase auth status.
 	// getAuthStatus = () => {
 	//   firebase.auth().onAuthStateChanged((resp) => {
-  
+
 	// 	  // Pass response to a call back func to update state
 	// 	  this.updateUserState(resp);
 	//   });
 	// }
-  
+
 	// // update state
 	// updateUserState = (resp) => {
 	//    this.setState({

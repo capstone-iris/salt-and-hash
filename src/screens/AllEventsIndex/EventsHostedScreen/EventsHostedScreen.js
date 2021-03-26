@@ -1,15 +1,85 @@
-import React from 'react';
-import { Text, SafeAreaView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, SafeAreaView, View, FlatList , TouchableOpacity} from 'react-native';
 import styles from './styles';
+import { useNavigation } from '@react-navigation/native';
+import { firebase } from './../../../firebase/config';
+
+
+let result
 
 export default function ProfileScreen() {
+	const navigation = useNavigation();
+	const [eventsData, setEventsData] = useState([]);
+	const eventsCollection = firebase.firestore().collection('events');
+
+	useEffect(() => {
+		async function fetchData() {
+			const currentUser = await firebase.auth().currentUser.uid;
+
+			let data = await eventsCollection.get();
+			result = [];
+
+			data.forEach((element) => {
+				if (element.exists == true && element.data().userId != null) {
+					if (element.data().userId === currentUser) {
+						result.push(element.data());
+					}
+				}
+			});
+			setEventsData(result);
+			console.log('RESULT==>',result);
+		}
+
+		fetchData();
+	}, []);
+
 	return (
 		<SafeAreaView style={styles.container}>
-			<Text>
-				{'\n'}
-				Events Hosted Screen Link to My Events Screen | Link to Events Invited
-				To Screen
-			</Text>
+
+
+			<View style={styles.eventsContainer}>
+
+				{eventsData.map((event, index) => {
+							return (
+								<TouchableOpacity
+								style={styles.singleEventContainer}
+								activeOpacity={0.5}
+								key={index}
+								onPress={() => navigation.navigate('Single Event', {event})}
+								>
+
+								<Text >{event.name}</Text>
+
+							</TouchableOpacity>
+
+
+
+							)
+						})}
+
+				{/* <FlatList
+					data={result}
+					horizontal={false}
+					key={'_'}
+					keyExtractor={(event, index) => "_" + index.toString()}
+					numColumns={2}
+					renderItem={ (event) => (
+
+							<TouchableOpacity
+							style={styles.singleEventContainer}
+							activeOpacity={0.5}
+							onPress={() => navigation.navigate('Single Event')}
+						>
+								<Text style={styles.singleEventTextHeader}>{event.name}</Text>
+						</TouchableOpacity>
+					)}
+
+
+					/> */}
+
+
+
+			</View>
 		</SafeAreaView>
 	);
 }

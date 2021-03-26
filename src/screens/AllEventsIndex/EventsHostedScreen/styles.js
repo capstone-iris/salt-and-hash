@@ -73,5 +73,51 @@ export default StyleSheet.create({
 		flexDirection: 'column',
 		margin: 10,
 		marginTop: 30,
+	},restaurantContainer: {
+		margin: 25,
+	},
+	singleEventContainer: {
+		margin: 12,
+		backgroundColor: '#fab59e',
+			padding: 20,
+			// marginVertical: 8,
+			// marginHorizontal: 10,
+			height: 150,
+			width: 150,
+			borderRadius: 10,
+	},
+	indRestaurantInsideContainer: {
+		margin: 10
+	},
+	eventsContainer: {
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		alignItems: 'center',
+		// justifyContent: 'center',
+
+	},
+	restaurantsTextHeader: {
+		fontSize: 16,
+		fontWeight: 'bold'
+	},
+	singleEventTextHeader: {
+		fontSize: 16,
+		fontWeight: 'bold',
+	},
+	indRestaurantTextBody: {
+		fontSize: 15
+	},
+	activeRestaurantDetailsContainer: {
+		marginLeft: 21
+	},
+	indRestaurantText: {
+		margin: 10,
+	},
+	image: {
+		height: 120,
+		width: 120,
+		borderRadius: 10,
+		borderWidth: 3,
+		borderColor: 'maroon',
 	},
 });
