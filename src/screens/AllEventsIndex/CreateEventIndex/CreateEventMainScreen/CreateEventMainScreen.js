@@ -162,7 +162,7 @@ class CreateEventMainScreen extends React.Component {
 							style={styles.button}
 							onPress={() => this.storeEvent()}
 						>
-							<Text style={styles.Btn}>Save Event</Text>
+							<Text style={styles.Btn}>Create Event</Text>
 						</TouchableOpacity>
 					</View>
 				</ScrollView>

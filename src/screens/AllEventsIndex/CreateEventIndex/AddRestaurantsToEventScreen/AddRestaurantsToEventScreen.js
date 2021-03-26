@@ -189,13 +189,11 @@ class AddRestaurantsToEventScreen extends React.Component {
 				:
 
 				<View>
-					<View style={styles.restaurantContainer}>
-						<TouchableOpacity onPress={() => this.submitRestaurantSelection(eventId)} >
-							<Text style={styles.restaurantsTextHeader}>Add Selected Restaurants to Event</Text>
-						</TouchableOpacity>
-					</View>
-					<View style={styles.restaurantsContainer}>
-						<Text style={styles.restaurantsTextHeader}>Restaurants Near You</Text>
+					<TouchableOpacity style={styles.button} onPress={() => this.submitRestaurantSelection(eventId)} >
+						<Text style={styles.Btn}>Add Selected Restaurants to Event</Text>
+					</TouchableOpacity>
+					<View style={styles.button}>
+						<Text style={styles.Btn}>Restaurants Near You</Text>
 					</View>
 					<View style={styles.restaurantContainer}>
 						<FlatList

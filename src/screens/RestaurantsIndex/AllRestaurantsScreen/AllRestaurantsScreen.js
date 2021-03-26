@@ -121,8 +121,8 @@ export default class AllRestaurantsScreen extends React.Component {
 
 				{this.state.restaurantList.length === 0 ?
 				<View style={styles.restaurantsContainer}>
-					<TouchableOpacity onPress={() => this.handleRestaurantSearch()}>
-						<Text style={styles.restaurantsTextHeader}>
+					<TouchableOpacity style={styles.button} onPress={() => this.handleRestaurantSearch()}>
+						<Text style={styles.Btn}>
 							Explore Restaurants Near You
 						</Text>
 					</TouchableOpacity>
