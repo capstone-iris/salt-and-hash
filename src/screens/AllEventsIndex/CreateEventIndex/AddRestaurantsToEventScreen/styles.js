@@ -13,19 +13,24 @@ export default StyleSheet.create({
 		margin: 25,
 	},
 	indRestaurantContainer: {
+		flex: 1,
 		marginBottom: 25,
-		backgroundColor: '#fab59e',
+		backgroundColor: '#fab59e'
 	},
 	indRestaurantInsideContainer: {
 		margin: 10
 	},
 	restaurantsContainer: {
 		alignItems: 'center',
-		justifyContent: 'center'
+		justifyContent: 'center',
+		margin: 10
 	},
 	restaurantsTextHeader: {
 		fontSize: 16,
 		fontWeight: 'bold'
+	},
+	restaurantsText: {
+		fontSize: 14
 	},
 	indRestaurantTextHeader: {
 		fontSize: 16,
@@ -37,9 +42,6 @@ export default StyleSheet.create({
 	activeRestaurantDetailsContainer: {
 		marginLeft: 21
 	},
-	indRestaurantText: {
-		margin: 10,
-	},
 	image: {
 		height: 120,
 		width: 120,
@@ -47,4 +49,20 @@ export default StyleSheet.create({
 		borderWidth: 3,
 		borderColor: 'maroon',
 	},
+	voteContainer: {
+		flex: 1,
+		flexDirection: 'row'
+	},
+	input: {
+		height: 48,
+		borderRadius: 5,
+		overflow: 'hidden',
+		backgroundColor: 'white',
+		marginTop: 10,
+		marginBottom: 10,
+		marginLeft: 30,
+		marginRight: 30,
+		paddingLeft: 16,
+		width: 250,
+	}
 });

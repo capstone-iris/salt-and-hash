@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
+
     container: {
         flex: 1,
         alignItems: 'center',
@@ -54,12 +55,12 @@ export default StyleSheet.create({
         color: "#ddb39d",
         fontWeight: "bold",
         fontSize: 16
-    }, 
+    },
     restaurant: {
         flex: 1,
         alignItems: 'flex-start',
         justifyContent: 'space-evenly',
-        backgroundColor: '#eee1db', 
+        backgroundColor: '#eee1db',
         flexDirection: 'row'
     },
     image: {
@@ -69,9 +70,20 @@ export default StyleSheet.create({
         borderWidth: 3,
         borderColor: 'maroon'
     },
-    singleBlock: { 
+    singleBlock: {
         flexDirection: 'column',
         margin: 10,
-        marginTop: 30 
+        marginTop: 30
+    },
+    hostedEventsTab: {
+        flex: 1,
+        backgroundColor: '#ff4081'
+    },
+    invitedEventsTab: {
+        flex: 1,
+        backgroundColor: '#673ab7'
+    },
+    createEventsTab: {
+
     }
 })

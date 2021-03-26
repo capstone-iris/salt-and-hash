@@ -1,86 +1,83 @@
-import React from 'react';
-import { Text, SafeAreaView, StyleSheet, FlatList } from 'react-native';
+import * as React from 'react';
+import { View, useWindowDimensions, Text, SafeAreaView } from 'react-native';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import CreateEventIndex from '../CreateEventIndex/CreateEventIndex';
+import EventsHostedScreen from '../EventsHostedScreen/EventsHostedScreen';
+import EventsInvitedToScreen from '../EventsInvitedToScreen/EventsInvitedToScreen';
 // import styles from './styles';
-import { restaurantSelection, index } from '../../RestaurantsIndex/RestaurantSwipeScreen/CarouselCards'
 
+// const HostedEvents = () => (
+//   <View style={{ flex: 1, backgroundColor: '#ddb39d' }} />
+// );
 
-export default function ProfileScreen({ navigation }) {
-	console.log(restaurantSelection)
+// const SecondRoute = () => (
+//   <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
+// );
+
+// const CreateRoute = () => (
+//   <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
+// );
+
+export default function MyEventsScreen({ navigation }) {
+	const layout = useWindowDimensions();
+
+	const [index, setIndex] = React.useState(0);
+	const [routes] = React.useState([
+		{ key: 'hosted', title: 'Hosted Events' },
+		{ key: 'invited', title: 'Invited Events' },
+		{ key: 'create', title: 'Create Event' },
+	]);
+
+	const renderScene = SceneMap({
+		hosted: EventsHostedScreen,
+		invited: EventsInvitedToScreen,
+		create: CreateEventIndex,
+	});
+
 	return (
-		<SafeAreaView >
-			<FlatList
-        data={restaurantSelection}
-        keyExtractor={index}
-        renderItem={({item}) => (
-          <View style={styles.container}>
-            <Image source={{uri: item.imgUrl}} />
-            <View >
-              <Text>{item.title}</Text>
-              <Text>{item.body}</Text>
-            </View>
-          </View>
-        )}
-      />
-			<Text onPress={() => navigation.navigate('Restaurant Swipe')}>
-				{'\n'}
-				My Events Screen{'\n'}
-				Link to Events Hosted Screen | Link to Events Invited To Screen
-			</Text>
-		</SafeAreaView>
+		<TabView
+			style={{ marginTop: 60 }}
+			navigationState={{ index, routes }}
+			renderScene={renderScene}
+			onIndexChange={setIndex}
+			initialLayout={{ width: layout.width, height: layout.height }}
+			// renderTabBar={props => <TabBar {...props}/>}
+			renderTabBar={(props) => (
+				<TabBar
+					{...props}
+					style={{ backgroundColor: '#EEE1DB' }}
+					indicatorStyle={{ backgroundColor: '#A46950' }}
+				/>
+			)}
+		/>
 	);
 }
 
-const styles = StyleSheet.create({
-	container: {
-	  display: 'flex',
-	  justifyContent: 'space-between',
-	  flexDirection: 'column',
-	  backgroundColor: 'white',
-	  borderRadius: 8,
-	  width: 100,
-	  paddingBottom: 40,
-	  shadowColor: "#000",
-	  shadowOffset: {
-		width: 0,
-		height: 3,
-	  },
-	  shadowOpacity: 0.29,
-	  shadowRadius: 4.65,
-	  elevation: 7,
-	  // borderColor: 'red',
-	  // borderWidth: 2
-	},
-	image: {
-	  width: 100,
-	  height: 300,
-	},
-	header: {
-	  color: "#222",
-	  fontSize: 28,
-	  fontWeight: "bold",
-	  paddingLeft: 20,
-	  paddingTop: 20
-	},
-	body: {
-	  color: "#222",
-	  fontSize: 18,
-	  paddingLeft: 20,
-	  paddingLeft: 20,
-	  paddingRight: 20
-	},
-	voteContainer:{
-	  display: 'flex',
-	  justifyContent: 'space-between',
-	  flexDirection: 'row',
-	  // borderColor: 'red',
-	  // borderWidth: 2,
-	  marginTop: 20,
-	  marginBottom: -40
-	},
-	leftButton: {
-	  // color: 'red'
-	},
-	rightButton:{
-	  // color: 'green'
-	}
-  })
+// import React from 'react';
+// import { Text, SafeAreaView } from 'react-native';
+// import styles from './styles';
+
+// export default function ProfileScreen({ navigation }) {
+// 	return (
+// 		<SafeAreaView style={styles.container}>
+// 			<Text>
+// 				{'\n'}
+// 				My Events Screen{'\n'}
+
+// 			</Text>
+
+// 			<View flex={false} row>
+//             {tabs.map(tab => this.renderTab(tab))}
+// 			</View>
+
+// 			<Text onPress={() => navigation.navigate('Restaurant Swipe')}>
+// 			Vote Restuarants {'\n'}
+// 			</Text>
+// 			<Text onPress={() => navigation.navigate('Create Event Form')}>
+// 			Create Event {'\n'}
+// 			</Text>
+
+// 			<Text>	Link to Events Hosted Screen | Link to Events Invited To Screen</Text>
+// 		</SafeAreaView>
+// 	);
+// }
