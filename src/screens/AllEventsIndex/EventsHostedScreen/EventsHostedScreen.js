@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, SafeAreaView } from 'react-native';
 import styles from './styles';
 
-export default function ProfileScreen({ navigation }) {
+export default function ProfileScreen() {
 	return (
 		<SafeAreaView style={styles.container}>
 			<Text>

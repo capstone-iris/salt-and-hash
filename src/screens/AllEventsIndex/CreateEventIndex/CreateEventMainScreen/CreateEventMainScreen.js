@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 
 import {
@@ -56,6 +57,7 @@ class CreateEventMainScreen extends React.Component {
 					votingDeadline: this.state.votingDeadline,
 					eventEndTime: this.state.eventEndTime,
 					eventCreated: timestamp,
+					userId: currentUser,
 				})
 				.then(() => {
 					this.setState({
@@ -79,7 +81,6 @@ class CreateEventMainScreen extends React.Component {
 	}
 
 	render() {
-
 		if (this.state.isLoading) {
 			return (
 				<View style={styles.preloader}>
