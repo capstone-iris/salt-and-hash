@@ -9,11 +9,11 @@ import {
 	View,
 	TouchableOpacity,
 	ActivityIndicator,
-	Alert
+	Alert,
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { firebase } from '../../../../firebase/config';
-import styles from './styles'
+import styles from './styles';
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -44,13 +44,14 @@ class CreateEventMainScreen extends React.Component {
 		if (this.state.name === '') {
 			alert('Please fill in event name!');
 		} else {
-			Alert.alert('Event successfully added!')
+			Alert.alert('Event successfully added!');
 			this.setState({
 				isLoading: true,
 			});
 			const document = this.eventsRef.doc();
 			const documentId = document.id;
-			this.eventsRef.doc(documentId)
+			this.eventsRef
+				.doc(documentId)
 				.set({
 					name: this.state.name,
 					date: this.state.date,
@@ -77,10 +78,12 @@ class CreateEventMainScreen extends React.Component {
 					this.setState({
 						isLoading: false,
 					});
-				})
-			this.props.navigation.navigate('Add Restaurants to Event', { eventId: documentId })
+				});
+			this.props.navigation.navigate('Add Restaurants to Event', {
+				eventId: documentId,
+			});
 		}
-	}
+	};
 
 	render() {
 		if (this.state.isLoading) {
@@ -90,7 +93,7 @@ class CreateEventMainScreen extends React.Component {
 				</View>
 			);
 		}
-		
+
 		return (
 			<SafeAreaView style={styles.container}>
 				<ScrollView>
