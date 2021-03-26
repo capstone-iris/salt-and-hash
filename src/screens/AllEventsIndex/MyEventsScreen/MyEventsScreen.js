@@ -45,8 +45,8 @@ export default function MyEventsScreen({ navigation }) {
 			renderTabBar={(props) => (
 				<TabBar
 					{...props}
-					style={{ backgroundColor: '#EEE1DB' }}
-					indicatorStyle={{ backgroundColor: '#A46950' }}
+					style={{ backgroundColor: '#A46950' }}
+					indicatorStyle={{ backgroundColor: 'black' }}
 				/>
 			)}
 		/>
