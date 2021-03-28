@@ -5,6 +5,7 @@ import {
 	View,
 	FlatList,
 	TouchableOpacity,
+	Button,
 } from 'react-native';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
@@ -15,23 +16,46 @@ let result;
 export default function ProfileScreen() {
 	const navigation = useNavigation();
 	const [eventsData, setEventsData] = useState([]);
-	const eventsCollection = firebase.firestore().collection('events');
+
+	// useEffect(() => {
+	// 	async function fetchData() {
+	// 		const currentUser = await firebase.auth().currentUser.uid;
+	// 		result = [];
+
+	// 		const eventsCollection = firebase.firestore().collection('events');
+
+	// 		eventsCollection.get().then((snapshot) => {
+	// 			snapshot.docs.forEach((doc) => {
+	// 				if (doc.exists === true && doc.data().userId !== null) {
+	// 					if (doc.data().userId === currentUser) {
+	// 						result.push(doc.data());
+	// 					}
+	// 				}
+	// 				setEventsData(result);
+	// 			});
+	// 		});
+	// 	}
+	// 	fetchData();
+	// }, []);
 
 	useEffect(() => {
 		async function fetchData() {
 			const currentUser = await firebase.auth().currentUser.uid;
-
-			let data = await eventsCollection.get();
 			result = [];
 
-			data.forEach((element) => {
-				if (element.exists == true && element.data().userId != null) {
-					if (element.data().userId === currentUser) {
-						result.push(element.data());
+			const eventsCollection = firebase.firestore().collection('events');
+
+			eventsCollection.get().then((snapshot) => {
+				snapshot.docs.forEach((doc) => {
+					if (doc.exists === true && doc.data().userId !== null) {
+						if (doc.data().userId === currentUser) {
+							result.push(doc.data());
+						}
 					}
-				}
+				});
+				setEventsData(result);
 			});
-			setEventsData(result);
+
 			console.log('RESULT==>', result);
 		}
 
@@ -41,38 +65,32 @@ export default function ProfileScreen() {
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.eventsContainer}>
-				{eventsData.map((event, index) => {
-					return (
-						<TouchableOpacity
-							style={styles.singleEventContainer}
-							activeOpacity={0.5}
-							key={index}
-							onPress={() => navigation.navigate('Single Event', { event })}
-						>
-							<Text>{event.name}</Text>
+				{eventsData < 1 ? (
+					<View>
+						<Text style={styles.txt}> You don't have any hosted events. </Text>
+						<TouchableOpacity style={styles.button}>
+							<Text
+								style={styles.Btn}
+								onPress={() => navigation.navigate('Create Event Index')}
+							>
+								Please Create An Event
+							</Text>
 						</TouchableOpacity>
-					);
-				})}
-
-				{/* <FlatList
-					data={result}
-					horizontal={false}
-					key={'_'}
-					keyExtractor={(event, index) => "_" + index.toString()}
-					numColumns={2}
-					renderItem={ (event) => (
-
+					</View>
+				) : (
+					eventsData.map((event, index) => {
+						return (
 							<TouchableOpacity
-							style={styles.singleEventContainer}
-							activeOpacity={0.5}
-							onPress={() => navigation.navigate('Single Event')}
-						>
-								<Text style={styles.singleEventTextHeader}>{event.name}</Text>
-						</TouchableOpacity>
-					)}
-
-
-					/> */}
+								style={styles.singleEventContainer}
+								activeOpacity={0.5}
+								key={index}
+								onPress={() => navigation.navigate('Single Event', { event })}
+							>
+								<Text style={styles.txt}>{event.name}</Text>
+							</TouchableOpacity>
+						);
+					})
+				)}
 			</View>
 		</SafeAreaView>
 	);
