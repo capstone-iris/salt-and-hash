@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
 	Text,
@@ -10,27 +10,141 @@ import {
 	TouchableOpacity,
 	ActivityIndicator,
 	Alert,
+	Button,
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { firebase } from '../../../../firebase/config';
 import styles from './styles';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment';
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+
+// const CreateEventMainScreen = () => {
+// 	const [date, setDate] = useState(new Date(1598051730000));
+// 	const [mode, setMode] = useState('date');
+// 	const [show, setShow] = useState(false);
+
+// 	const onChange = (event, selectedDate) => {
+// 		const currentDate = selectedDate || date;
+// 		setShow(Platform.OS === 'ios');
+// 		setDate(currentDate);
+// 	};
+
+// 	const showMode = (currentMode) => {
+// 		setShow(true);
+// 		setMode(currentMode);
+// 	};
+
+// 	const showDatepicker = () => {
+// 		showMode('date');
+// 	};
+
+// 	const showTimepicker = () => {
+// 		showMode('time');
+// 	};
+
+// 	return (
+// 		<View>
+// 			<View>
+// 				<Button onPress={showDatepicker} title='Show date picker!' />
+// 			</View>
+// 			<View>
+// 				<Button onPress={showTimepicker} title='Show time picker!' />
+// 			</View>
+// 			{show && (
+// 				<DateTimePicker
+// 					testID='dateTimePicker'
+// 					value={date}
+// 					mode={mode}
+// 					is24Hour={true}
+// 					display='default'
+// 					onChange={onChange}
+// 				/>
+// 			)}
+// 		</View>
+// 	);
+// };
+
+// export default withNavigation(CreateEventMainScreen);
+
+// const styles = StyleSheet.create({
+// 	container: {
+// 		flex: 1,
+// 		justifyContent: 'center',
+// 		alignItems: 'center',
+// 		backgroundColor: '#F5FCFF',
+// 	},
+// 	button: {
+// 		width: 250,
+// 		height: 50,
+// 		backgroundColor: '#330066',
+// 		borderRadius: 30,
+// 		justifyContent: 'center',
+// 		marginTop: 15,
+// 	},
+// 	text: {
+// 		fontSize: 18,
+// 		color: 'white',
+// 		textAlign: 'center',
+// 	},
+// });
 
 class CreateEventMainScreen extends React.Component {
 	constructor() {
 		super();
 		this.eventsRef = firebase.firestore().collection('events');
 		this.state = {
+			mode: '',
+			show: false,
 			name: '',
-			date: '',
-			eventStartTime: '',
+			date: new Date(),
+			eventStartTime: new Date(),
 			description: '',
-			votingDeadline: '',
-			eventEndTime: '',
+			votingDeadline: new Date(),
+			eventEndTime: new Date(),
 			isLoading: false,
 		};
 	}
+
+	onChange = (event, selectedDate) => {
+		const currentDate = selectedDate || date;
+		const showFlag = Platform.OS === 'ios';
+		this.setState({ show: showFlag });
+		this.inputValueUpdate(
+			selectedDate,
+			this.state.mode === 'date' ? 'date' : 'eventStartTime'
+		);
+	};
+
+	onChangeEventEndTime = (event, selectedDate) => {
+		console.log('event endTimeChange +++', selectedDate);
+		const currentDate = selectedDate || date;
+		const showFlag = Platform.OS === 'ios';
+		this.setState({ show: showFlag });
+		this.inputValueUpdate(selectedDate, 'eventEndTime');
+	};
+
+	onChangeVotingDeadline = (event, selectedDate) => {
+		console.log('event endTimeChange +++', selectedDate);
+		const currentDate = selectedDate || date;
+		const showFlag = Platform.OS === 'ios';
+		this.setState({ show: showFlag });
+		this.inputValueUpdate(selectedDate, 'votingDeadline');
+	};
+
+	showMode = (currentMode) => {
+		this.setState({ show: true });
+		this.setState({ mode: currentMode });
+	};
+
+	showDatepicker = () => {
+		this.showMode('date');
+	};
+
+	showTimepicker = () => {
+		this.showMode('time');
+	};
 
 	inputValueUpdate = (val, prop) => {
 		const state = this.state;
@@ -64,12 +178,14 @@ class CreateEventMainScreen extends React.Component {
 				})
 				.then(() => {
 					this.setState({
+						mode: '',
+						show: false,
 						name: '',
-						date: '',
-						eventStartTime: '',
+						date: new Date(),
+						eventStartTime: new Date(),
 						description: '',
-						votingDeadline: '',
-						eventEndTime: '',
+						votingDeadline: new Date(),
+						eventEndTime: new Date(),
 						isLoading: false,
 					});
 				})
@@ -108,15 +224,58 @@ class CreateEventMainScreen extends React.Component {
 							value={this.state.name}
 							onChangeText={(val) => this.inputValueUpdate(val, 'name')}
 						/>
-						<TextInput
+						{/* <TextInput
 							style={styles.textInput}
 							placeholder='Date Dropdown'
 							maxLength={20}
 							value={this.state.date}
 							onChangeText={(val) => this.inputValueUpdate(val, 'date')}
-						/>
+						/> */}
+						<View>
+							<DateTimePicker
+								testID='datePicker'
+								value={this.state.date}
+								mode='date'
+								is24Hour={true}
+								display='default'
+								onChange={this.onChange}
+							/>
+						</View>
+						<View>
+							<DateTimePicker
+								testID='TimePicker'
+								value={this.state.eventStartTime}
+								mode='time'
+								is24Hour={true}
+								display='default'
+								onChange={this.onChange}
+							/>
+						</View>
+
+						<View>
+							<DateTimePicker
+								testID='TimePicker'
+								value={this.state.eventEndTime}
+								mode='time'
+								is24Hour={true}
+								display='default'
+								onChange={this.onChangeEventEndTime}
+							/>
+						</View>
+
+						<View>
+							<DateTimePicker
+								testID='TimePicker'
+								value={this.state.votingDeadline}
+								mode='date'
+								is24Hour={true}
+								display='default'
+								onChange={this.onChangeVotingDeadline}
+							/>
+						</View>
+
 						<View style={styles.eventTime}>
-							<TextInput
+							{/* <TextInput
 								style={styles.textInput}
 								placeholder='Time'
 								maxLength={20}
@@ -124,7 +283,7 @@ class CreateEventMainScreen extends React.Component {
 								onChangeText={(val) =>
 									this.inputValueUpdate(val, 'eventStartTime')
 								}
-							/>
+							/> */}
 							<TextInput
 								style={styles.textInput}
 								placeholder='Event End Time'
