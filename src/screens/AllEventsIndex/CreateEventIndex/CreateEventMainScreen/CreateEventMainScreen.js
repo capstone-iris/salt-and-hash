@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React from 'react';
 
 import {
 	Text,
@@ -10,85 +10,13 @@ import {
 	TouchableOpacity,
 	ActivityIndicator,
 	Alert,
-	Button,
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { firebase } from '../../../../firebase/config';
 import styles from './styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import moment from 'moment';
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
-
-// const CreateEventMainScreen = () => {
-// 	const [date, setDate] = useState(new Date(1598051730000));
-// 	const [mode, setMode] = useState('date');
-// 	const [show, setShow] = useState(false);
-
-// 	const onChange = (event, selectedDate) => {
-// 		const currentDate = selectedDate || date;
-// 		setShow(Platform.OS === 'ios');
-// 		setDate(currentDate);
-// 	};
-
-// 	const showMode = (currentMode) => {
-// 		setShow(true);
-// 		setMode(currentMode);
-// 	};
-
-// 	const showDatepicker = () => {
-// 		showMode('date');
-// 	};
-
-// 	const showTimepicker = () => {
-// 		showMode('time');
-// 	};
-
-// 	return (
-// 		<View>
-// 			<View>
-// 				<Button onPress={showDatepicker} title='Show date picker!' />
-// 			</View>
-// 			<View>
-// 				<Button onPress={showTimepicker} title='Show time picker!' />
-// 			</View>
-// 			{show && (
-// 				<DateTimePicker
-// 					testID='dateTimePicker'
-// 					value={date}
-// 					mode={mode}
-// 					is24Hour={true}
-// 					display='default'
-// 					onChange={onChange}
-// 				/>
-// 			)}
-// 		</View>
-// 	);
-// };
-
-// export default withNavigation(CreateEventMainScreen);
-
-// const styles = StyleSheet.create({
-// 	container: {
-// 		flex: 1,
-// 		justifyContent: 'center',
-// 		alignItems: 'center',
-// 		backgroundColor: '#F5FCFF',
-// 	},
-// 	button: {
-// 		width: 250,
-// 		height: 50,
-// 		backgroundColor: '#330066',
-// 		borderRadius: 30,
-// 		justifyContent: 'center',
-// 		marginTop: 15,
-// 	},
-// 	text: {
-// 		fontSize: 18,
-// 		color: 'white',
-// 		textAlign: 'center',
-// 	},
-// });
 
 class CreateEventMainScreen extends React.Component {
 	constructor() {
@@ -224,14 +152,9 @@ class CreateEventMainScreen extends React.Component {
 							value={this.state.name}
 							onChangeText={(val) => this.inputValueUpdate(val, 'name')}
 						/>
-						{/* <TextInput
-							style={styles.textInput}
-							placeholder='Date Dropdown'
-							maxLength={20}
-							value={this.state.date}
-							onChangeText={(val) => this.inputValueUpdate(val, 'date')}
-						/> */}
+
 						<View>
+							<Text> Event Date </Text>
 							<DateTimePicker
 								testID='datePicker'
 								value={this.state.date}
@@ -239,11 +162,14 @@ class CreateEventMainScreen extends React.Component {
 								is24Hour={true}
 								display='default'
 								onChange={this.onChange}
+								placeholderText='Please select a date'
 							/>
 						</View>
+
 						<View>
+							<Text> Event Start Time </Text>
 							<DateTimePicker
-								testID='TimePicker'
+								testID='timePicker'
 								value={this.state.eventStartTime}
 								mode='time'
 								is24Hour={true}
@@ -253,8 +179,9 @@ class CreateEventMainScreen extends React.Component {
 						</View>
 
 						<View>
+							<Text> Event End Time </Text>
 							<DateTimePicker
-								testID='TimePicker'
+								testID='timePicker'
 								value={this.state.eventEndTime}
 								mode='time'
 								is24Hour={true}
@@ -264,62 +191,34 @@ class CreateEventMainScreen extends React.Component {
 						</View>
 
 						<View>
+							<Text> Votes Due By </Text>
 							<DateTimePicker
-								testID='TimePicker'
+								testID='datePicker'
 								value={this.state.votingDeadline}
 								mode='date'
 								is24Hour={true}
 								display='default'
 								onChange={this.onChangeVotingDeadline}
+								placeholder='Votes Due By'
 							/>
 						</View>
-
-						<View style={styles.eventTime}>
-							{/* <TextInput
-								style={styles.textInput}
-								placeholder='Time'
-								maxLength={20}
-								value={this.state.eventStartTime}
-								onChangeText={(val) =>
-									this.inputValueUpdate(val, 'eventStartTime')
-								}
-							/> */}
-							<TextInput
-								style={styles.textInput}
-								placeholder='Event End Time'
-								maxLength={20}
-								value={this.state.eventEndTime}
-								onChangeText={(val) =>
-									this.inputValueUpdate(val, 'eventEndTime')
-								}
-							/>
-							<TextInput
-								style={styles.textInput}
-								placeholder='Voting Deadline'
-								maxLength={20}
-								value={this.state.votingDeadline}
-								onChangeText={(val) =>
-									this.inputValueUpdate(val, 'votingDeadline')
-								}
-							/>
-						</View>
-						<TextInput
-							style={styles.textInput}
-							multiline={true}
-							placeholder='Write a description...'
-							maxLength={200}
-							height={90}
-							value={this.state.description}
-							onChangeText={(val) => this.inputValueUpdate(val, 'description')}
-						/>
-
-						<TouchableOpacity
-							style={styles.button}
-							onPress={() => this.storeEvent()}
-						>
-							<Text style={styles.Btn}>Create Event</Text>
-						</TouchableOpacity>
 					</View>
+					<TextInput
+						style={styles.textInput}
+						multiline={true}
+						placeholder='Write a description...'
+						maxLength={200}
+						height={90}
+						value={this.state.description}
+						onChangeText={(val) => this.inputValueUpdate(val, 'description')}
+					/>
+
+					<TouchableOpacity
+						style={styles.button}
+						onPress={() => this.storeEvent()}
+					>
+						<Text style={styles.Btn}>Create Event</Text>
+					</TouchableOpacity>
 				</ScrollView>
 			</SafeAreaView>
 		);
