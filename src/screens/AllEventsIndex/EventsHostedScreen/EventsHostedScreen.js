@@ -27,7 +27,7 @@ export default function ProfileScreen() {
 				}
 			});
 			setEventsData(result);
-			console.log('RESULT==>',result);
+			// console.log('RESULT==>',result);
 		}
 
 		fetchData();

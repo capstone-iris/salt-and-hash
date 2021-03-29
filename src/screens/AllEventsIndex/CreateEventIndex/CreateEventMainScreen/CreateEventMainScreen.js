@@ -61,6 +61,7 @@ class CreateEventMainScreen extends React.Component {
 					eventEndTime: this.state.eventEndTime,
 					eventCreated: timestamp,
 					userId: currentUser,
+					docId: documentId
 				})
 				.then(() => {
 					this.setState({

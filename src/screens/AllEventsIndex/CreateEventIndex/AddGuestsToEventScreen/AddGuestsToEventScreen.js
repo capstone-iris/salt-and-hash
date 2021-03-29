@@ -40,7 +40,8 @@ export default class CreateEventForm extends React.Component {
 	setGuestList = (eventId, phoneNumber) => {
 		this.eventGuestsRef.doc(eventId).collection('eventGuests').doc()
 					.set({
-						phoneNumber: phoneNumber
+						phoneNumber: phoneNumber,
+						eventId: eventId
 					})
 					.then(() => 
 						this.setState(

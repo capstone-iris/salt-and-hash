@@ -13,36 +13,43 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export const SLIDER_WIDTH = Dimensions.get('window').width + 80;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
-;
+
 
 export default class CarouselCardItem extends React.Component {
   constructor(props) {
     super(props),
-      (this.state = {
+    this.state = {
         leftSelected: false,
         rightSelected: false,
-      });
+      }
   }
 
   handleSelect = () => {
     if (this.state.rightSelected) {
       this.setState({
-        // restaurantsSelected: this.props.restaurantSelection,
         rightSelected: false,
       });
       alert('Restaurant added!');
-      // console.log('Restaurant added!', this.props.restaurantSelection);
     }
   };
 
+  fetchImage = (photoRef) => {
+    const ref = photoRef
+		const url = 'https://maps.googleapis.com/maps/api/place/photo?';
+		const maxWidth = '&maxwidth=600';
+		const photoReference = `&photoreference=${ref}`;
+		const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
+		const fetchImageUrl = url + maxWidth + photoReference + key;
+		return fetchImageUrl;
+	};
+
   render() {
     const { item, index } = this.props;
-    console.log('STATE', this.state.rightSelected);
     return (
       <View style={styles.container} key={index}>
-        <Image source={{ uri: item.imgUrl }} style={styles.image} />
-        <Text style={styles.header}>{item.title}</Text>
-        <Text style={styles.body}>{item.body}</Text>
+        <Image source={{ uri: this.fetchImage(item.photo)}} style={styles.image} />
+        <Text style={styles.header}>{item.name}</Text>
+        {/* <Text style={styles.body}>{item.body}</Text> */}
         <View style={styles.voteContainer}>
           {this.state.leftSelected ? (
             <TouchableOpacity
