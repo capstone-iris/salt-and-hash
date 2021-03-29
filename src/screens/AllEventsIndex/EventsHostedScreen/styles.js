@@ -73,42 +73,42 @@ export default StyleSheet.create({
 		flexDirection: 'column',
 		margin: 10,
 		marginTop: 30,
-	},restaurantContainer: {
+	},
+	restaurantContainer: {
 		margin: 25,
 	},
 	singleEventContainer: {
 		margin: 12,
 		backgroundColor: '#fab59e',
-			padding: 20,
-			// marginVertical: 8,
-			// marginHorizontal: 10,
-			height: 150,
-			width: 150,
-			borderRadius: 10,
+		padding: 20,
+		// marginVertical: 8,
+		// marginHorizontal: 10,
+		height: 150,
+		width: 150,
+		borderRadius: 10,
 	},
 	indRestaurantInsideContainer: {
-		margin: 10
+		margin: 10,
 	},
 	eventsContainer: {
 		flexDirection: 'row',
 		flexWrap: 'wrap',
 		alignItems: 'center',
 		// justifyContent: 'center',
-
 	},
 	restaurantsTextHeader: {
 		fontSize: 16,
-		fontWeight: 'bold'
+		fontWeight: 'bold',
 	},
 	singleEventTextHeader: {
 		fontSize: 16,
 		fontWeight: 'bold',
 	},
 	indRestaurantTextBody: {
-		fontSize: 15
+		fontSize: 15,
 	},
 	activeRestaurantDetailsContainer: {
-		marginLeft: 21
+		marginLeft: 21,
 	},
 	indRestaurantText: {
 		margin: 10,
@@ -119,5 +119,25 @@ export default StyleSheet.create({
 		borderRadius: 10,
 		borderWidth: 3,
 		borderColor: 'maroon',
+	},
+	button: {
+		backgroundColor: '#ddb39d',
+		margin: 10,
+		marginTop: 20,
+		height: 48,
+		borderRadius: 5,
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: 250,
+	},
+	Btn: {
+		color: 'white',
+		fontSize: 16,
+		fontWeight: 'bold',
+	},
+	txt: {
+		fontSize: 20,
+		fontWeight: 'bold',
+		textAlign: 'center',
 	},
 });

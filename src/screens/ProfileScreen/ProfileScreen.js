@@ -52,15 +52,12 @@ export default class ProfileScreen extends Component {
 		const usersRef = firebase.firestore().collection('users');
 		let currentUser = firebase.auth().currentUser.uid;
 
-    usersRef
-      .get()
-      .then((snapshot) => {
+		usersRef.get().then((snapshot) => {
 			snapshot.docs.forEach((doc) => {
-				if (currentUser === doc.data().id)
-          this.setState({ users: doc.data() });
-      })
-	  })
-  }
+				if (currentUser === doc.data().id) this.setState({ users: doc.data() });
+			});
+		});
+	};
 
 	onSignOut = () => {
 		firebase
