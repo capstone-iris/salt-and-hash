@@ -12,8 +12,6 @@ export default function EventsInvitedToScreen(){
   const [usersData, setUsersData] = useState([]);
   const [ guestsData, setGuestsData ] = useState([]);
   const [eventsData, setEventsData] = useState([]);
-  const userPhoneNumber = usersData[0].phoneNumber;
-  const eventInvitedTo = guestsData[0].eventId
 
 
 
@@ -47,6 +45,8 @@ export default function EventsInvitedToScreen(){
     async function fetchGuests() {
 
 
+        const userPhoneNumber = usersData[0].phoneNumber;
+
       const guestsRef = await firebase
             .firestore()
             .collection('eventGuests')
@@ -67,6 +67,7 @@ export default function EventsInvitedToScreen(){
     fetchGuests()
 
     async function fetchEvents() {
+  const eventInvitedTo = guestsData[0].eventId
 
       const eventsRef = await firebase
 			.firestore()
