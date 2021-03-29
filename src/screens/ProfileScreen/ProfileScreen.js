@@ -22,31 +22,7 @@ export default class ProfileScreen extends Component {
 
 	componentDidMount() {
 		this.getUsers();
-		// firebase
-		//   .database()
-		//   .ref('users')
-		//   .on('value', (querySnapShot) => {
-		//     let data = querySnapShot.val() ? querySnapShot.val() : {};
-		//     let usersItems = { ...data };
-		//     this.setState({ users: usersItems });
-		//   });
 	}
-
-	// // Get firebase auth status.
-	// getAuthStatus = () => {
-	//   firebase.auth().onAuthStateChanged((resp) => {
-
-	// 	  // Pass response to a call back func to update state
-	// 	  this.updateUserState(resp);
-	//   });
-	// }
-
-	// // update state
-	// updateUserState = (resp) => {
-	//    this.setState({
-	// 	   userId: resp
-	//    })
-	// }
 
 	getUsers = () => {
 		const usersRef = firebase.firestore().collection('users');
@@ -73,7 +49,6 @@ export default class ProfileScreen extends Component {
 
 	render() {
 		const user = this.state.users;
-		//   console.log(user)
 		return (
 			<SafeAreaView style={styles.container}>
 				<View style={styles.userInfoSection}>
@@ -93,7 +68,6 @@ export default class ProfileScreen extends Component {
 						/>
 						<View style={{ marginLeft: 20 }}>
 							<Title style={styles.title}>{user.fullName}</Title>
-							{/* <Caption style={styles.caption}>@j_doe</Caption> */}
 						</View>
 					</View>
 				</View>

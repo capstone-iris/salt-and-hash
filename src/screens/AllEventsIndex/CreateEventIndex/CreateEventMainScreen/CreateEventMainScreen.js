@@ -14,6 +14,7 @@ import {
 import { withNavigation } from 'react-navigation';
 import { firebase } from '../../../../firebase/config';
 import styles from './styles';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -22,15 +23,56 @@ class CreateEventMainScreen extends React.Component {
 		super();
 		this.eventsRef = firebase.firestore().collection('events');
 		this.state = {
+			mode: '',
+			show: false,
 			name: '',
-			date: '',
-			eventStartTime: '',
+			date: new Date(),
+			eventStartTime: new Date(),
 			description: '',
-			votingDeadline: '',
-			eventEndTime: '',
+			votingDeadline: new Date(),
+			eventEndTime: new Date(),
 			isLoading: false,
 		};
 	}
+
+	onChange = (event, selectedDate) => {
+		const currentDate = selectedDate || date;
+		const showFlag = Platform.OS === 'ios';
+		this.setState({ show: showFlag });
+		this.inputValueUpdate(
+			selectedDate,
+			this.state.mode === 'date' ? 'date' : 'eventStartTime'
+		);
+	};
+
+	onChangeEventEndTime = (event, selectedDate) => {
+		console.log('event endTimeChange +++', selectedDate);
+		const currentDate = selectedDate || date;
+		const showFlag = Platform.OS === 'ios';
+		this.setState({ show: showFlag });
+		this.inputValueUpdate(selectedDate, 'eventEndTime');
+	};
+
+	onChangeVotingDeadline = (event, selectedDate) => {
+		console.log('event endTimeChange +++', selectedDate);
+		const currentDate = selectedDate || date;
+		const showFlag = Platform.OS === 'ios';
+		this.setState({ show: showFlag });
+		this.inputValueUpdate(selectedDate, 'votingDeadline');
+	};
+
+	showMode = (currentMode) => {
+		this.setState({ show: true });
+		this.setState({ mode: currentMode });
+	};
+
+	showDatepicker = () => {
+		this.showMode('date');
+	};
+
+	showTimepicker = () => {
+		this.showMode('time');
+	};
 
 	inputValueUpdate = (val, prop) => {
 		const state = this.state;
@@ -61,16 +103,18 @@ class CreateEventMainScreen extends React.Component {
 					eventEndTime: this.state.eventEndTime,
 					eventCreated: timestamp,
 					userId: currentUser,
-					docId: documentId
+					docId: documentId,
 				})
 				.then(() => {
 					this.setState({
+						mode: '',
+						show: false,
 						name: '',
-						date: '',
-						eventStartTime: '',
+						date: new Date(),
+						eventStartTime: new Date(),
 						description: '',
-						votingDeadline: '',
-						eventEndTime: '',
+						votingDeadline: new Date(),
+						eventEndTime: new Date(),
 						isLoading: false,
 					});
 				})
@@ -109,59 +153,73 @@ class CreateEventMainScreen extends React.Component {
 							value={this.state.name}
 							onChangeText={(val) => this.inputValueUpdate(val, 'name')}
 						/>
-						<TextInput
-							style={styles.textInput}
-							placeholder='Date Dropdown'
-							maxLength={20}
-							value={this.state.date}
-							onChangeText={(val) => this.inputValueUpdate(val, 'date')}
-						/>
-						<View style={styles.eventTime}>
-							<TextInput
-								style={styles.textInput}
-								placeholder='Time'
-								maxLength={20}
-								value={this.state.eventStartTime}
-								onChangeText={(val) =>
-									this.inputValueUpdate(val, 'eventStartTime')
-								}
-							/>
-							<TextInput
-								style={styles.textInput}
-								placeholder='Event End Time'
-								maxLength={20}
-								value={this.state.eventEndTime}
-								onChangeText={(val) =>
-									this.inputValueUpdate(val, 'eventEndTime')
-								}
-							/>
-							<TextInput
-								style={styles.textInput}
-								placeholder='Voting Deadline'
-								maxLength={20}
-								value={this.state.votingDeadline}
-								onChangeText={(val) =>
-									this.inputValueUpdate(val, 'votingDeadline')
-								}
+
+						<View>
+							<Text> Event Date </Text>
+							<DateTimePicker
+								testID='datePicker'
+								value={this.state.date}
+								mode='date'
+								is24Hour={true}
+								display='default'
+								onChange={this.onChange}
+								placeholderText='Please select a date'
 							/>
 						</View>
-						<TextInput
-							style={styles.textInput}
-							multiline={true}
-							placeholder='Write a description...'
-							maxLength={200}
-							height={90}
-							value={this.state.description}
-							onChangeText={(val) => this.inputValueUpdate(val, 'description')}
-						/>
 
-						<TouchableOpacity
-							style={styles.button}
-							onPress={() => this.storeEvent()}
-						>
-							<Text style={styles.Btn}>Create Event</Text>
-						</TouchableOpacity>
+						<View>
+							<Text> Event Start Time </Text>
+							<DateTimePicker
+								testID='timePicker'
+								value={this.state.eventStartTime}
+								mode='time'
+								is24Hour={true}
+								display='default'
+								onChange={this.onChange}
+							/>
+						</View>
+
+						<View>
+							<Text> Event End Time </Text>
+							<DateTimePicker
+								testID='timePicker'
+								value={this.state.eventEndTime}
+								mode='time'
+								is24Hour={true}
+								display='default'
+								onChange={this.onChangeEventEndTime}
+							/>
+						</View>
+
+						<View>
+							<Text> Votes Due By </Text>
+							<DateTimePicker
+								testID='datePicker'
+								value={this.state.votingDeadline}
+								mode='date'
+								is24Hour={true}
+								display='default'
+								onChange={this.onChangeVotingDeadline}
+								placeholder='Votes Due By'
+							/>
+						</View>
 					</View>
+					<TextInput
+						style={styles.textInput}
+						multiline={true}
+						placeholder='Write a description...'
+						maxLength={200}
+						height={90}
+						value={this.state.description}
+						onChangeText={(val) => this.inputValueUpdate(val, 'description')}
+					/>
+
+					<TouchableOpacity
+						style={styles.button}
+						onPress={() => this.storeEvent()}
+					>
+						<Text style={styles.Btn}>Create Event</Text>
+					</TouchableOpacity>
 				</ScrollView>
 			</SafeAreaView>
 		);
