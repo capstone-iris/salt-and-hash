@@ -18,7 +18,6 @@ export default function EventsHostedScreen() {
 	const [eventsData, setEventsData] = useState([]);
 
 	useEffect(() => {
-
 		// Check if currentUser exists to avoid errors
 		if (!firebase.auth().currentUser) {
 			return;
@@ -33,7 +32,6 @@ export default function EventsHostedScreen() {
 			.collection('events')
 			.where('userId', '==', currentUser)
 			.onSnapshot((snapshot) => {
-
 				const result = [];
 				snapshot.forEach((doc) => {
 					result.push(doc.data());
@@ -47,17 +45,13 @@ export default function EventsHostedScreen() {
 		// Add currentUser to useEffect dependency array, so useEffect runs when it changes
 	}, [firebase.auth().currentUser]);
 
-
 	return (
-		<ScrollView>
+		<ScrollView style={{ backgroundColor: '#eee1db' }}>
 			<SafeAreaView style={styles.container}>
 				<View style={styles.eventsContainer}>
 					{eventsData < 1 ? (
-						<View>
-							<Text style={styles.txt}>
-								{' '}
-								You don't have any hosted events.{' '}
-							</Text>
+						<View styles={{ marginTop: 100 }}>
+							<Text style={styles.txt}>You don't have any hosted events. </Text>
 							<TouchableOpacity style={styles.button}>
 								<Text
 									style={styles.Btn}
@@ -68,18 +62,37 @@ export default function EventsHostedScreen() {
 							</TouchableOpacity>
 						</View>
 					) : (
-						eventsData.map((event, index) => {
-							return (
-								<TouchableOpacity
-									style={styles.singleEventContainer}
-									activeOpacity={0.5}
-									key={index}
-									onPress={() => navigation.navigate('Single Event', { event })}
-								>
-									<Text style={styles.txt}>{event.name}</Text>
-								</TouchableOpacity>
-							);
-						})
+						<View
+							style={{
+								flexDirection: 'row',
+								flexWrap: 'wrap',
+								marginTop: 80,
+								backgroundColor: '#eee1db',
+							}}
+						>
+							<TouchableOpacity
+								style={styles.singleEventContainer}
+								activeOpacity={0.5}
+								onPress={() => navigation.navigate('Create Event Index')}
+							>
+								<Text style={styles.addEvent}>+</Text>
+							</TouchableOpacity>
+
+							{eventsData.map((event, index) => {
+								return (
+									<TouchableOpacity
+										style={styles.singleEventContainer}
+										activeOpacity={0.5}
+										key={index}
+										onPress={() =>
+											navigation.navigate('Single Event', { event })
+										}
+									>
+										<Text style={styles.txt}>{event.name}</Text>
+									</TouchableOpacity>
+								);
+							})}
+						</View>
 					)}
 				</View>
 			</SafeAreaView>

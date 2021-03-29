@@ -94,6 +94,7 @@ export default StyleSheet.create({
 		flexDirection: 'row',
 		flexWrap: 'wrap',
 		alignItems: 'center',
+		marginTop: 200,
 		// justifyContent: 'center',
 	},
 	restaurantsTextHeader: {
@@ -134,10 +135,18 @@ export default StyleSheet.create({
 		color: 'white',
 		fontSize: 16,
 		fontWeight: 'bold',
+		textAlign: 'center',
 	},
 	txt: {
 		fontSize: 20,
 		fontWeight: 'bold',
 		textAlign: 'center',
+	},
+	addEvent: {
+		textAlign: 'center',
+		fontSize: 30,
+		marginTop: 30,
+		color: 'white',
+		fontWeight: 'bold',
 	},
 });
