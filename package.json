@@ -25,6 +25,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+    "react-native-app-intro-slider": "^4.0.4",
     "react-native-communications": "^2.2.1",
     "react-native-contacts": "^6.0.5",
     "react-native-elements": "^3.3.2",
