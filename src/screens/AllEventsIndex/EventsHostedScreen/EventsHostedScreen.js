@@ -39,28 +39,25 @@ export default function ProfileScreen() {
 	// }, []);
 
 	useEffect(() => {
-		async function fetchData() {
-			const currentUser = await firebase.auth().currentUser.uid;
-			result = [];
-
-			const eventsCollection = firebase.firestore().collection('events');
-
-			eventsCollection.get().then((snapshot) => {
-				snapshot.docs.forEach((doc) => {
-					if (doc.exists === true && doc.data().userId !== null) {
-						if (doc.data().userId === currentUser) {
-							result.push(doc.data());
-						}
-					}
-				});
-				setEventsData(result);
+		
+			const currentUser = firebase.auth().currentUser.uid;
+			const unsubscribe = firebase
+			.firestore()
+			.collection('events')
+			.where('userId', '==', currentUser)
+			.onSnapshot((snapshot) => {
+			  const result = [];
+			  snapshot.forEach((doc) => {
+				result.push(doc.data());
+			  });
+		
+			  setEventsData(result);
 			});
 
-		}
-
-		fetchData();
-	}, []);
-
+			return () => unsubscribe();
+			// Add currentUser to useEffect dependency array, so useEffect runs when it changes
+			}, [firebase.auth().currentUser]);
+	
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.eventsContainer}>

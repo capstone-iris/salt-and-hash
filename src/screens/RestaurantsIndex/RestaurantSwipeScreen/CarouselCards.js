@@ -26,7 +26,7 @@ export default CarouselCards = () => {
           const restaurantData = await firebase
             .firestore()
             .collection('eventRestaurants')
-            .doc(eventId)
+            .doc('0iAdNdpWlhgIuShGlsya')
             .collection('eventRestaurants')
             .get();
             console.log('restData', restaurantData)
