@@ -23,9 +23,9 @@ export default function MyEventsScreen({ navigation }) {
 
 	const [index, setIndex] = React.useState(0);
 	const [routes] = React.useState([
-		{ key: 'hosted', title: 'Hosted Events' },
-		{ key: 'invited', title: 'Invited Events' },
-		{ key: 'create', title: 'Create Event' },
+		{ key: 'create', title: 'CREATE' },
+		{ key: 'hosted', title: 'HOST' },
+		{ key: 'invited', title: 'ATTEND' },
 	]);
 
 	const renderScene = SceneMap({
@@ -45,8 +45,8 @@ export default function MyEventsScreen({ navigation }) {
 			renderTabBar={(props) => (
 				<TabBar
 					{...props}
-					style={{ backgroundColor: '#EEE1DB' }}
-					indicatorStyle={{ backgroundColor: '#A46950' }}
+					style={{ backgroundColor: '#A46950' }}
+					indicatorStyle={{ backgroundColor: 'black' }}
 				/>
 			)}
 		/>

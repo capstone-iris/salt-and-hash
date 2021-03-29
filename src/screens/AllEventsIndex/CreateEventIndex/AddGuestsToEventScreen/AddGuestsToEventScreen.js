@@ -9,8 +9,10 @@ import {
 	Alert
 } from 'react-native';
 import { firebase } from '../../../../firebase/config';
+// import { withNavigation } from 'react-navigation';
 import styles from './styles';
 import Communications from 'react-native-communications';
+import CreateEventMainScreen from '../CreateEventMainScreen/CreateEventMainScreen';
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -53,6 +55,10 @@ export default class CreateEventForm extends React.Component {
 		Communications.text(phoneNumber,`Hello, friend! I'd love to invite you to join me for an event! Download the ExpoGo app, sign-up, RSVP, and vote for a restaurant! Instructions: https://bit.ly/2Py12XG`);
 	}
 
+	// createNewEvent = () => {
+	// 	this.props.navigation.navigate('Create Event')
+	// }
+
 	render() {
 		const eventId = this.props.route.params.eventId
 		
@@ -71,9 +77,9 @@ export default class CreateEventForm extends React.Component {
 							maxLength={10}
 							clearButtonMode='always'
 						/>
-						<TouchableOpacity onPress={() => {
+						<TouchableOpacity style={styles.button} onPress={() => {
 							this.setGuestList(eventId, this.state.phoneNumber)}} >
-								<Text style={styles.restaurantsTextHeader}>Invite Friend Over Text</Text>
+								<Text style={styles.Btn}>Invite Friend Over Text</Text>
 						</TouchableOpacity>
 					</View>
 				</ScrollView>
@@ -81,3 +87,9 @@ export default class CreateEventForm extends React.Component {
 		);
 	}
 }
+
+// <TouchableOpacity style={styles.button} >
+// <Text style={styles.Btn}>Create New Event</Text>
+// </TouchableOpacity>
+// onPress={() => this.createNewEvent()}
+// export default withNavigation(CreateEventMainScreen);

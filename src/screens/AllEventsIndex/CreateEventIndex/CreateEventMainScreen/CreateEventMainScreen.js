@@ -154,16 +154,12 @@ class CreateEventMainScreen extends React.Component {
 							value={this.state.description}
 							onChangeText={(val) => this.inputValueUpdate(val, 'description')}
 						/>
-						<TouchableOpacity style={styles.button}>
-							<Text style={styles.Btn} onPress={() => {}}>
-								Preview Invitation
-							</Text>
-						</TouchableOpacity>
+
 						<TouchableOpacity
 							style={styles.button}
 							onPress={() => this.storeEvent()}
 						>
-							<Text style={styles.Btn}>Save Event</Text>
+							<Text style={styles.Btn}>Create Event</Text>
 						</TouchableOpacity>
 					</View>
 				</ScrollView>

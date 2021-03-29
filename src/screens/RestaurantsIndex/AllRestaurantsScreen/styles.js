@@ -47,4 +47,19 @@ export default StyleSheet.create({
 		borderWidth: 3,
 		borderColor: 'maroon',
 	},
+	button: {
+		backgroundColor: '#ddb39d',
+		margin: 10,
+		marginTop: 20,
+		height: 48,
+		borderRadius: 5,
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: 250,
+	},
+	Btn: {
+		color: 'white',
+		fontSize: 16,
+		fontWeight: 'bold',
+	}
 });
