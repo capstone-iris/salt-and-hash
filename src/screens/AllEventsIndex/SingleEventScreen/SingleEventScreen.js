@@ -14,11 +14,44 @@ import { useNavigation } from '@react-navigation/native';
 
 import { firebase } from './../../../firebase/config';
 
-export default function SingleEventScreen({route}) {
+export default function SingleEventScreen({ route }) {
 	const { event } = route.params;
 	const navigation = useNavigation();
 	const [eventsData, setEventsData] = useState([]);
 	const eventsCollection = firebase.firestore().collection('events');
+
+	function convertDateTime(ss, type) {
+		console.log('ss +++', ss);
+		let date_ob = new Date(ss * 1000);
+		let date = ('0' + date_ob.getDate()).slice(-2);
+		let year = date_ob.getFullYear();
+		let monthNames = [
+			'January',
+			'February',
+			'March',
+			'April',
+			'May',
+			'June',
+			'July',
+			'August',
+			'September',
+			'October',
+			'November',
+			'December',
+		];
+
+		let hours = date_ob.getHours();
+		let minutes = date_ob.getMinutes();
+		let amPm = hours >= 12 ? 'pm' : 'am';
+		hours = hours % 12;
+		hours = hours ? hours : 12; // the hour '0' should be '12'
+		minutes = minutes < 10 ? '0' + minutes : minutes;
+		let time = hours + ':' + minutes + ' ' + amPm;
+
+		return type == 'date'
+			? monthNames[date_ob.getMonth()] + ' ' + date + ', ' + year
+			: time;
+	}
 
 	// useEffect(() => {
 	// 	async function fetchData() {
@@ -42,17 +75,14 @@ export default function SingleEventScreen({route}) {
 	// }, []);
 
 	return (
-
 		<SafeAreaView style={styles.container}>
-			<Text style={styles.eventNameText}>
-				{event.name}
-			</Text>
+			<Text style={styles.eventNameText}>{event.name}</Text>
 			<View style={(styles.menuWrapper, { marginTop: 20 })}>
 				<View>
 					<View style={styles.menuItem}>
 						<Icon name='calendar-range' color='#FF6347' size={25} />
 						<Text style={styles.menuItemText}>
-							{event.date}
+							{convertDateTime(event.date.seconds, 'date')}
 						</Text>
 					</View>
 				</View>
@@ -60,8 +90,8 @@ export default function SingleEventScreen({route}) {
 					<View style={styles.menuItem}>
 						<Icon name='clock-outline' color='#FF6347' size={25} />
 						<Text style={styles.menuItemText}>
-							{event.eventStartTime } -{' '}
-							{event.eventEndTime }
+							{convertDateTime(event.eventStartTime.seconds, 'time')} -{' '}
+							{convertDateTime(event.eventEndTime.seconds, 'time')}
 						</Text>
 					</View>
 				</View>
@@ -70,16 +100,14 @@ export default function SingleEventScreen({route}) {
 						<Icon name='timer-sand' color='#FF6347' size={25} />
 						<Text style={styles.menuItemText}>
 							Voting Deadline:{' '}
-							{event.votingDeadline }
+							{convertDateTime(event.votingDeadline.seconds, 'date')}
 						</Text>
 					</View>
 				</View>
 				<View>
 					<View style={styles.menuItem}>
 						<Icon name='information-outline' color='#FF6347' size={25} />
-						<Text style={styles.menuItemText}>
-							{event.description}
-						</Text>
+						<Text style={styles.menuItemText}>{event.description}</Text>
 					</View>
 				</View>
 				<TouchableRipple onPress={() => {}}>
