@@ -12,29 +12,30 @@ export default CarouselCards = () => {
 	const [restaurantsData, setRestaurantsData] = useState([]);
 	const isCarousel = React.useRef(null);
 
-	useEffect(() => {
-		async function fetchData() {
-			console.log('in fetch data');
-			const eventsRef = await firebase.firestore().collection('events').get();
-			console.log('eventsRef', eventsRef);
-			eventsRef.forEach(async (event) => {
-				const eventId = event.data().docId;
-				console.log('eventID', eventId);
-				if (eventId) {
-					console.log('in event id func', eventId);
-					const restaurantData = await firebase
-						.firestore()
-						.collection('eventRestaurants')
-						.doc(eventId)
-						.collection('eventRestaurants')
-						.get();
-					console.log('restData', restaurantData);
-					result = [];
-					restaurantData.forEach((element) => {
-						result.push(element.data());
-					});
-					setRestaurantsData(result);
-				}
+  useEffect(() => {
+    async function fetchData() {
+      console.log('in fetch data')
+      const eventsRef = await firebase.firestore().collection('events').get();
+      console.log('eventsRef', eventsRef)
+      eventsRef.forEach(async (event) => {
+        const eventId = event.data().docId
+        console.log('eventID', eventId);
+        if (eventId) {
+          console.log('in event id func', eventId)
+          const restaurantData = await firebase
+            .firestore()
+            .collection('eventRestaurants')
+            .doc('0iAdNdpWlhgIuShGlsya')
+            .collection('eventRestaurants')
+            .get();
+            console.log('restData', restaurantData)
+          result = [];
+          restaurantData.forEach((element) => {
+            result.push(element.data());
+          });
+          setRestaurantsData(result);
+        }
+
 
 				console.log(result);
 			});

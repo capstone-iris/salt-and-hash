@@ -18,6 +18,7 @@ export default function EventsHostedScreen() {
 	const [eventsData, setEventsData] = useState([]);
 
 	useEffect(() => {
+
 		// Check if currentUser exists to avoid errors
 		if (!firebase.auth().currentUser) {
 			return;
@@ -27,10 +28,12 @@ export default function EventsHostedScreen() {
 
 		// Create subscription to listen for changes
 		const unsubscribe = firebase
+
 			.firestore()
 			.collection('events')
 			.where('userId', '==', currentUser)
 			.onSnapshot((snapshot) => {
+
 				const result = [];
 				snapshot.forEach((doc) => {
 					result.push(doc.data());
@@ -43,6 +46,7 @@ export default function EventsHostedScreen() {
 		return () => unsubscribe();
 		// Add currentUser to useEffect dependency array, so useEffect runs when it changes
 	}, [firebase.auth().currentUser]);
+
 
 	return (
 		<ScrollView>
