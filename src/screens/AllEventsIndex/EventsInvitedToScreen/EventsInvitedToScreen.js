@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { firebase } from './../../../firebase/config';
 
 export default function EventsInvitedToScreen() {
+
 	const navigation = useNavigation();
 	const [usersData, setUsersData] = useState([]);
 	const [guestsData, setGuestsData] = useState([]);
@@ -76,25 +77,25 @@ export default function EventsInvitedToScreen() {
 		fetchEvents();
 	}, []);
 
-	return (
-		<SafeAreaView style={styles.container}>
-			<Text>
-				{'\n'}
-				Events Invited To Screen
-				{'\n'}
-			</Text>
-			{eventsData.map((event, index) => {
-				return (
-					<TouchableOpacity
-						style={styles.singleEventContainer}
-						activeOpacity={0.5}
-						key={index}
-						onPress={() => navigation.navigate('Single Event', { event })}
-					>
-						<Text style={styles.txt}>{event.name}</Text>
-					</TouchableOpacity>
-				);
-			})}
-		</SafeAreaView>
-	);
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text>
+        {'\n'}
+        Events Invited To Screen
+        {'\n'}
+      </Text>
+      {eventsData.map((event, index) => {
+        return (
+          <TouchableOpacity
+            style={styles.singleEventContainer}
+            activeOpacity={0.5}
+            key={index}
+            onPress={() => navigation.navigate('Single Event', { event })}
+          >
+            <Text style={styles.txt}>{event.name}</Text>
+          </TouchableOpacity>
+        );
+      })}
+    </SafeAreaView>
+  );
 }

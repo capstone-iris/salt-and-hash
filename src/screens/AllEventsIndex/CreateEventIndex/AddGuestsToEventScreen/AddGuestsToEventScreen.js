@@ -6,8 +6,12 @@ import {
 	TextInput,
 	View,
 	TouchableOpacity,
-	Alert
+	Alert,
+	Modal,
 } from 'react-native';
+import {
+Input, Button, Label, Form, Item , Root}
+from 'native-base'
 import { firebase } from '../../../../firebase/config';
 // import { withNavigation } from 'react-navigation';
 import styles from './styles';
@@ -28,7 +32,12 @@ export default class CreateEventForm extends React.Component {
 			votingDeadline: '',
 			eventEndTime: '',
 			isLoading: false,
+			visibleModal: false,
+			phoneNumber: '',
+			eventId: ''
+
 		};
+		this.renderModalContent = this.renderModalContent.bind(this)
 	}
 
 	setPhoneNumber = (text) => {
@@ -45,48 +54,103 @@ export default class CreateEventForm extends React.Component {
 						phoneNumber: phoneNumber,
 						eventId: eventId
 					})
-					.then(() => 
+					.then(() =>
 						this.setState(
-							{restaurantCounter: this.state.restaurantCounter + 1}))
+							{restaurantCounter: this.state.restaurantCounter + 1,
+								visibleModal: false,
+								phoneNumber: ''
+							}))
 					.catch((e) => {
 						console.error('Error found: ', e)
 					})
 		Alert.alert('Friend successfully entered!');
 		Communications.text(phoneNumber,`Hello, friend! I'd love to invite you to join me for an event! Download the ExpoGo app, sign-up, RSVP, and vote for a restaurant! Instructions: https://bit.ly/2Py12XG`);
+
+
 	}
 
 	// createNewEvent = () => {
 	// 	this.props.navigation.navigate('Create Event')
 	// }
+	renderModalContent(){
+		const {eventId} = this.props
+		return (
+		<Root>
+			<View style={styles.modalView} >
+				<Form style={styles.modalForm}>
+					{/* <Text>Enter Phone Number</Text> */}
+					<Item fixedLabel style={styles.modalInput}>
+						{/* <Label>Phone Number</Label> */}
+						<Input
+						  	style={styles.input}
+								placeholder='Enter Guest Phone Number'
+								placeholderTextColor='#aaaaaa'
+								onChangeText={(text) => this.setPhoneNumber(text)}
+								underlineColorAndroid='transparent'
+								autoCapitalize='none'
+								value={this.state.phoneNumber}
+								maxLength={10}
+								clearButtonMode='always'
+						/>
+					</Item>
+					<Button style={styles.modalButton}
+						onPress={() => {
+							this.setGuestList(eventId, this.state.phoneNumber)}
+						}
+					>
+					<Text style={styles.modalButtonText}>Invite Friend</Text>
+					</Button>
+					<Button style={styles.modalButton}
+						onPress={() => {
+							this.setState({
+								visibleModal: false,
+							})
+						}}
+					>
+					<Text style={styles.modalButtonText}>Close</Text>
+					</Button>
+				</Form>
+			</View>
+			</Root>
+		)
+	}
 
 	render() {
-		const eventId = this.props.route.params.eventId
-		
+
+
+
 		return (
-			<SafeAreaView style={styles.container}>
-				<ScrollView>
-					<View style={styles.inputContainer}>
-						<TextInput
-							style={styles.input}
-							placeholder='Enter Guest Phone Number'
-							placeholderTextColor='#aaaaaa'
-							onChangeText={(text) => this.setPhoneNumber(text)}
-							underlineColorAndroid='transparent'
-							autoCapitalize='none'
-							value={this.state.phoneNumber}
-							maxLength={10}
-							clearButtonMode='always'
-						/>
+			// <SafeAreaView style={styles.container}>
+				// <ScrollView>
+					<View style={styles.centeredView} onPress={() => {
+						this.setState({
+							visibleModal: false,
+						})
+					}}>
+						<Modal
+                  transparent={true}
+                  visible={this.state.visibleModal}
+                  animationType="slide"
+              >
+                  {this.renderModalContent()}
+              </Modal>
+
 						<TouchableOpacity style={styles.button} onPress={() => {
-							this.setGuestList(eventId, this.state.phoneNumber)}} >
-								<Text style={styles.Btn}>Invite Friend Over Text</Text>
+							this.setState({
+								visibleModal: true,
+							})
+						}}>
+								<Text style={styles.Btn}>Invite Friends Over Text</Text>
 						</TouchableOpacity>
+
 					</View>
-				</ScrollView>
-			</SafeAreaView>
+				// </ScrollView>
+			// </SafeAreaView>
 		);
 	}
 }
+
+
 
 // <TouchableOpacity style={styles.button} >
 // <Text style={styles.Btn}>Create New Event</Text>
