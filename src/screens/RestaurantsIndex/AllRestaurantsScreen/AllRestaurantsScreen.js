@@ -15,6 +15,8 @@ import styles from './styles';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
+// same note in here regarding keys
+
 export default class AllRestaurantsScreen extends React.Component {
 
 	state = {

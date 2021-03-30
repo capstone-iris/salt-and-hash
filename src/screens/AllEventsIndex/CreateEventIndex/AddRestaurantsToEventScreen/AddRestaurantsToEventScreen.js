@@ -62,8 +62,14 @@ class AddRestaurantsToEventScreen extends React.Component {
 		//const location = `location=${this.state.latitude},${this.state.longitude}`;
 		const radius = '&radius=1000';
 		const type = '&type=restaurant';
+		// not ideal to have your API key saved in plain text
+		// you could make it an environment variable for now at least so it's not saved on Github
+		// would also help since the key is copied and pasted in a couple locations
+		// secrets file, declare it as environment variable or global, place in gitignore
+		// refresh it 
 		const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
 		const restaurantSearchUrl = url + location + radius + type + key;
+		// async await vs. .then
 		fetch(restaurantSearchUrl, {
 			mode: 'no-cors',
 			cache: 'no-cache',
