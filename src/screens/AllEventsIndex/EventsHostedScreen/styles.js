@@ -152,4 +152,20 @@ export default StyleSheet.create({
 		color: 'white',
 		fontWeight: 'bold',
 	},
+	AddEventContainer: {
+		margin: 12,
+		backgroundColor: '#fab59e60', // keep the 60 at the end if you want change the color for a muted color
+		padding: 20,
+		// marginVertical: 8,
+		// marginHorizontal: 10,
+		height: 150,
+		width: 150,
+		borderRadius: 10,
+	},
+	CreateEventText: {
+		textAlign: 'center',
+		color: 'white',
+		fontSize: 18,
+		fontWeight: 'bold',
+	},
 });

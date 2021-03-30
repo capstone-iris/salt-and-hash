@@ -71,11 +71,14 @@ export default function EventsHostedScreen() {
 							}}
 						>
 							<TouchableOpacity
-								style={styles.singleEventContainer}
+								style={styles.AddEventContainer}
 								activeOpacity={0.5}
 								onPress={() => navigation.navigate('Create Event Index')}
 							>
-								<Text style={styles.addEvent}>+</Text>
+								<View opacity={5}>
+									<Text style={styles.addEvent}>+</Text>
+									<Text style={styles.CreateEventText}>Create Event</Text>
+								</View>
 							</TouchableOpacity>
 
 							{eventsData.map((event, index) => {
