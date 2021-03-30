@@ -15,6 +15,10 @@ export default StyleSheet.create({
 		paddingRight: 10,
 		margin: 5,
 	},
+	text: {
+		fontSize: 18,
+		color: 'grey',
+	},
 	preferences: {
 		fontWeight: 'bold',
 		fontSize: 20,
