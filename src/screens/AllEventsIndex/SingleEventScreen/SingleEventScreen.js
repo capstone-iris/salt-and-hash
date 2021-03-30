@@ -13,12 +13,14 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 
 import { firebase } from './../../../firebase/config';
+import AddGuestsToEventScreen from '../CreateEventIndex/AddGuestsToEventScreen/AddGuestsToEventScreen.js'
 
 export default function SingleEventScreen({ route }) {
 	const { event } = route.params;
 	const navigation = useNavigation();
 	const [restaurantsData, setRestaurantsData] = useState([]);
 	const eventsCollection = firebase.firestore().collection('events');
+	const currentUser = firebase.auth().currentUser.uid;
 
 	function convertDateTime(ss, type) {
 		console.log('ss +++', ss);
@@ -67,7 +69,7 @@ export default function SingleEventScreen({ route }) {
 
 	async function fetchData() {
 		console.log('in fetch data')
-	  
+
 			const restaurantData = await firebase
 			  .firestore()
 			  .collection('eventRestaurants')
@@ -79,12 +81,11 @@ export default function SingleEventScreen({ route }) {
 			  result.push(element.data());
 			});
 			setRestaurantsData(result);
-		  
+
 			  };
-		  
+
 		  fetchData();
 			}, []);
-
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -129,11 +130,22 @@ export default function SingleEventScreen({ route }) {
 					</View>
 				</TouchableRipple>
 
+				{currentUser === event.userId ?
+				// <Text style={styles.menuItemText}>Invite Friends</Text>
+
+				<SafeAreaView>
+
+					<AddGuestsToEventScreen eventId={event.docId}/>
+
+				</SafeAreaView>
+				: null
+				}
+
 				<ScrollView>
 					<View style={styles.imageContainer}>
 						{restaurantsData.map((restaurant, index) => {
 							 return (
-						
+
 						<TouchableOpacity
 							activeOpacity={0.5}
 							key={index}
