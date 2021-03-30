@@ -18,6 +18,7 @@ import styles from './styles';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import { firebase } from '../../../../firebase/config';
+import * as base from "../../../../../secrets.js";
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -62,7 +63,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 		//const location = `location=${this.state.latitude},${this.state.longitude}`;
 		const radius = '&radius=1000';
 		const type = '&type=restaurant';
-		const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
+		const key = `&key=${base.GOOGLE_PLACES_API}`;
 		const restaurantSearchUrl = url + location + radius + type + key;
 		fetch(restaurantSearchUrl, {
 			mode: 'no-cors',
@@ -82,7 +83,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 		const url = 'https://maps.googleapis.com/maps/api/place/photo?';
 		const maxWidth = '&maxwidth=600';
 		const photoReference = `&photoreference=${ref}`;
-		const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
+		const key = `&key=${base.GOOGLE_PLACES_API}`;
 		const fetchImageUrl = url + maxWidth + photoReference + key;
 		return fetchImageUrl;
 	};
@@ -96,7 +97,7 @@ class AddRestaurantsToEventScreen extends React.Component {
     handleActiveRestaurantDetails = (placeId) => {
       const url = 'https://maps.googleapis.com/maps/api/place/details/json?';
       const place_id = `&place_id=${placeId}`;
-      const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
+      const key = `&key=${base.GOOGLE_PLACES_API}`;
       const activeRestaurantDetailsUrl = url + place_id + key;
   
       if(this.state.detailToggleStatus === false){

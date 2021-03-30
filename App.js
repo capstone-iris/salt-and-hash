@@ -11,7 +11,7 @@ import {
 	ActivityIndicatorScreen
 } from './src/screens';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import { decode, encode } from 'base-64';
+import { decode, encode } from 'base-64'
 
 if (!global.btoa) {
 	global.btoa = encode;
