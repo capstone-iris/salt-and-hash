@@ -8,7 +8,7 @@ import { firebase } from './../../../firebase/config';
 export default function EventsInvitedToScreen() {
 
 	const navigation = useNavigation();
-  	const [usersData, setUsersData] = useState({});
+	const [usersData, setUsersData] = useState([]);
 	const [guestsData, setGuestsData] = useState([]);
   const [eventsData, setEventsData] = useState([]);
   
@@ -16,7 +16,8 @@ export default function EventsInvitedToScreen() {
     if (!firebase.auth().currentUser) {
       return;
     }
-    const currentUser = await firebase.auth().currentUser.uid;
+    const currentUser = await firebase.auth().currentUser;
+    console.log('currentUser', currentUser)
     let result = [];
 
     const unsubscribe = firebase
@@ -25,7 +26,7 @@ export default function EventsInvitedToScreen() {
       .where('id', '==', currentUser)
       .onSnapshot((snapshot) => {
         snapshot.forEach((doc) => {
-          result = doc.data();
+          result.push(doc.data());
         });
         setUsersData(result);
       });
@@ -39,13 +40,13 @@ export default function EventsInvitedToScreen() {
     const guestsRef = await firebase
       .firestore()
       .collection('eventGuests')
-      .doc(usersData.phoneNumber)
+      .doc(usersData[0].phoneNumber)
       .collection('eventsInvitedTo');
     guestsRef.get().then((snapshot) => {
       snapshot.docs.forEach((doc) => {
         result.push(doc.data());
       });
-    });
+    })
     setGuestsData(result);
     console.log('in fetch guests', guestsData);
 
@@ -69,9 +70,8 @@ export default function EventsInvitedToScreen() {
     console.log('in fetchEvents', eventsData);
   }
 
-
 	useEffect(() => {
-    fetchUser()
+    fetchUser();
     fetchGuests();
     fetchEvents();
   },[]);

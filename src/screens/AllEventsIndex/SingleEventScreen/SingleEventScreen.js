@@ -160,7 +160,6 @@ export default function SingleEventScreen({ route }) {
 							<Text>{restaurant.name}</Text>
 						</TouchableOpacity>
 						)})}
-					<Text>Hello</Text>
 					</View>
 				</ScrollView>
 			</View>
