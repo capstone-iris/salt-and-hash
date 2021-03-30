@@ -104,7 +104,6 @@ export default class CreateEventForm extends React.Component {
 						onPress={() => {
 							this.setState({
 								visibleModal: false,
-
 							})
 						}}
 					>
@@ -126,7 +125,6 @@ export default class CreateEventForm extends React.Component {
 					<View style={styles.centeredView} onPress={() => {
 						this.setState({
 							visibleModal: false,
-
 						})
 					}}>
 						<Modal
@@ -140,7 +138,6 @@ export default class CreateEventForm extends React.Component {
 						<TouchableOpacity style={styles.button} onPress={() => {
 							this.setState({
 								visibleModal: true,
-
 							})
 						}}>
 								<Text style={styles.Btn}>Invite Friends Over Text</Text>

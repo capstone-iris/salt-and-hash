@@ -33,7 +33,7 @@ export default function EventsInvitedToScreen() {
         return () => unsubscribe();
     }
     fetchUser();
-  }, [usersData]);
+  }, []);
 
   useEffect(() => {
 
@@ -56,7 +56,7 @@ export default function EventsInvitedToScreen() {
     }
       fetchGuests()
 
-    
+
   }, []);
 
   useEffect(() => {
@@ -79,11 +79,11 @@ export default function EventsInvitedToScreen() {
       console.log('in fetchEvents', eventsData);
     }
     fetchEvents()
-  
+
 }, []);
 
 
-  
+
 
 
 

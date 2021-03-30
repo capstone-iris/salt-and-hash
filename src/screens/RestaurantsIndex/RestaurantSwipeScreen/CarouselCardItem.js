@@ -8,12 +8,11 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import * as base from "../../../../secrets.js";
 
 export const SLIDER_WIDTH = Dimensions.get('window').width + 80;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
-
 
 export default class CarouselCardItem extends React.Component {
   constructor(props) {
@@ -38,7 +37,7 @@ export default class CarouselCardItem extends React.Component {
 		const url = 'https://maps.googleapis.com/maps/api/place/photo?';
 		const maxWidth = '&maxwidth=600';
 		const photoReference = `&photoreference=${ref}`;
-		const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
+		const key = `&key=${base.GOOGLE_PLACES_API}`;
 		const fetchImageUrl = url + maxWidth + photoReference + key;
 		return fetchImageUrl;
 	};
