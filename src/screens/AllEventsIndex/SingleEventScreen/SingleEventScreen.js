@@ -11,7 +11,7 @@ import { Text, TouchableRipple } from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
-
+import * as base from '../../../../secrets.js';
 import { firebase } from './../../../firebase/config';
 import AddGuestsToEventScreen from '../CreateEventIndex/AddGuestsToEventScreen/AddGuestsToEventScreen.js'
 
@@ -60,7 +60,7 @@ export default function SingleEventScreen({ route }) {
 			const url = 'https://maps.googleapis.com/maps/api/place/photo?';
 			const maxWidth = '&maxwidth=600';
 			const photoReference = `&photoreference=${ref}`;
-			const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
+			const key = `&key=${base.GOOGLE_PLACES_API}`; //insert key here
 			const fetchImageUrl = url + maxWidth + photoReference + key;
 			return fetchImageUrl;
 		};
