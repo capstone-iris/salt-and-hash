@@ -2,10 +2,12 @@ import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import CarouselCards from './CarouselCards';
 
-export default function RestaurantSwipeScreen() {
-	return (
+export default function RestaurantSwipeScreen({route}) {
+	const { restaurantsData } = route.params
+	console.log('restData', route.params)
+		return (
 		<SafeAreaView style={styles.container}>
-			<CarouselCards />
+			<CarouselCards/>
 		</SafeAreaView>
 	);
 }

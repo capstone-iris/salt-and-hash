@@ -17,7 +17,7 @@ import { firebase } from './../../../firebase/config';
 export default function SingleEventScreen({ route }) {
 	const { event } = route.params;
 	const navigation = useNavigation();
-	const [eventsData, setEventsData] = useState([]);
+	const [restaurantsData, setRestaurantsData] = useState([]);
 	const eventsCollection = firebase.firestore().collection('events');
 
 	function convertDateTime(ss, type) {
@@ -53,26 +53,38 @@ export default function SingleEventScreen({ route }) {
 			: time;
 	}
 
-	// useEffect(() => {
-	// 	async function fetchData() {
-	// 		const currentUser = await firebase.auth().currentUser.uid;
+	function fetchImage (photoRef)  {
+		const ref = photoRef
+			const url = 'https://maps.googleapis.com/maps/api/place/photo?';
+			const maxWidth = '&maxwidth=600';
+			const photoReference = `&photoreference=${ref}`;
+			const key = '&key=AIzaSyDH-uzWyDRZg0G2GDoTGRKDjlrcXOSVYOs'; //insert key here
+			const fetchImageUrl = url + maxWidth + photoReference + key;
+			return fetchImageUrl;
+		};
 
-	// 		let data = await eventsCollection.get();
-	// 		let result = [];
+	useEffect(() => {
 
-	// 		data.forEach((element) => {
-	// 			if (element.exists == true && element.data().userId != null) {
-	// 				if (element.data().userId === currentUser) {
-	// 					result.push(element.data());
-	// 				}
-	// 			}
-	// 		});
-	// 		setEventsData(result);
-	// 		console.log(result);
-	// 	}
+	async function fetchData() {
+		console.log('in fetch data')
+	  
+			const restaurantData = await firebase
+			  .firestore()
+			  .collection('eventRestaurants')
+			  .doc(event.docId)
+			  .collection('eventRestaurants')
+			  .get();
+			result = [];
+			restaurantData.forEach((element) => {
+			  result.push(element.data());
+			});
+			setRestaurantsData(result);
+		  
+			  };
+		  
+		  fetchData();
+			}, []);
 
-	// 	fetchData();
-	// }, []);
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -119,83 +131,24 @@ export default function SingleEventScreen({ route }) {
 
 				<ScrollView>
 					<View style={styles.imageContainer}>
+						{restaurantsData.map((restaurant, index) => {
+							 return (
+						
 						<TouchableOpacity
 							activeOpacity={0.5}
-							onPress={() => navigation.navigate('Restaurant Swipe')}
+							key={index}
+							onPress={() => navigation.navigate('Restaurant Swipe', {restaurantsData: restaurantsData})}
 						>
 							<Image
 								style={styles.image}
 								source={{
-									uri: 'https://picsum.photos/seed/picsum/596/354',
+									uri: fetchImage(restaurant.photo),
 								}}
 							/>
+							<Text>{restaurant.name}</Text>
 						</TouchableOpacity>
-						<TouchableOpacity
-							activeOpacity={0.5}
-							onPress={() => navigation.navigate('Restaurant Swipe')}
-						>
-							<Image
-								style={styles.image}
-								source={{
-									uri: 'https://picsum.photos/seed/picsum/536/354',
-								}}
-							/>
-						</TouchableOpacity>
-						<TouchableOpacity
-							activeOpacity={0.5}
-							onPress={() => navigation.navigate('Restaurant Swipe')}
-						>
-							<Image
-								style={styles.image}
-								source={{
-									uri: 'https://picsum.photos/seed/picsum/536/354',
-								}}
-							/>
-						</TouchableOpacity>
-						<TouchableOpacity
-							activeOpacity={0.5}
-							onPress={() => navigation.navigate('Restaurant Swipe')}
-						>
-							<Image
-								style={styles.image}
-								source={{
-									uri: 'https://picsum.photos/seed/picsum/536/354',
-								}}
-							/>
-						</TouchableOpacity>
-						<TouchableOpacity
-							activeOpacity={0.5}
-							onPress={() => navigation.navigate('Restaurant Swipe')}
-						>
-							<Image
-								style={styles.image}
-								source={{
-									uri: 'https://picsum.photos/seed/picsum/536/354',
-								}}
-							/>
-						</TouchableOpacity>
-						<TouchableOpacity
-							activeOpacity={0.5}
-							onPress={() => navigation.navigate('Restaurant Swipe')}
-						>
-							<Image
-								style={styles.image}
-								source={{
-									uri: 'https://picsum.photos/seed/picsum/536/354',
-								}}
-							/>
-						</TouchableOpacity>
-						<TouchableOpacity
-							activeOpacity={0.5}
-							onPress={() => navigation.navigate('Restaurant Swipe')}
-						>
-							<Image
-								style={styles.image}
-								source={{
-									uri: 'https://picsum.photos/seed/picsum/536/354',
-								}}
-							/>
-						</TouchableOpacity>
+						)})}
+					<Text>Hello</Text>
 					</View>
 				</ScrollView>
 			</View>

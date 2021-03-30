@@ -6,9 +6,9 @@ This event planning app offers a Tinder-inspired voting system for invited guest
 
 ## Tech Stack
 
-* [React Native](https://reactnative.dev/) - framework for building native apps using React
-* [ReactJS](https://reactjs.org/) - front-end framework
-* [Firebase](firebase.google.com) - database, authorization framework
+- [React Native](https://reactnative.dev/) - framework for building native apps using React
+- [ReactJS](https://reactjs.org/) - front-end framework
+- [Firebase](firebase.google.com) - database, authorization framework
 
 ## Installation
 
@@ -16,7 +16,7 @@ Instructions to come.
 
 ## Developers
 
-* [Malika Abdulina](https://github.com/MalikaAbdulina)
-* [Victoria Ho](https://github.com/Victoriaho91)
-* [Weronika Janczuk](https://github.com/wjanczuk)
-* [Kathleen Tran](https://github.com/serenity8468)
+- [Malika Abdulina](https://github.com/MalikaAbdulina)
+- [Victoria Ho](https://github.com/Victoriaho91)
+- [Weronika Janczuk](https://github.com/wjanczuk)
+- [Kathleen Tran](https://github.com/serenity8468)
