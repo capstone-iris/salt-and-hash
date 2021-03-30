@@ -13,12 +13,14 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 
 import { firebase } from './../../../firebase/config';
+import AddGuestsToEventScreen from '../CreateEventIndex/AddGuestsToEventScreen/AddGuestsToEventScreen.js'
 
 export default function SingleEventScreen({ route }) {
 	const { event } = route.params;
 	const navigation = useNavigation();
 	const [eventsData, setEventsData] = useState([]);
 	const eventsCollection = firebase.firestore().collection('events');
+	const currentUser = firebase.auth().currentUser.uid;
 
 	function convertDateTime(ss, type) {
 		console.log('ss +++', ss);
@@ -73,6 +75,8 @@ export default function SingleEventScreen({ route }) {
 
 	// 	fetchData();
 	// }, []);
+	console.log('event.userId==>', event.userId)
+	console.log('currentUser==>', currentUser)
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -116,6 +120,17 @@ export default function SingleEventScreen({ route }) {
 						<Text style={styles.menuItemText}>Pending...</Text>
 					</View>
 				</TouchableRipple>
+
+				{currentUser === event.userId ?
+				// <Text style={styles.menuItemText}>Invite Friends</Text>
+
+				<SafeAreaView>
+
+					<AddGuestsToEventScreen eventId={event.docId}/>
+
+				</SafeAreaView>
+				: null
+				}
 
 				<ScrollView>
 					<View style={styles.imageContainer}>
