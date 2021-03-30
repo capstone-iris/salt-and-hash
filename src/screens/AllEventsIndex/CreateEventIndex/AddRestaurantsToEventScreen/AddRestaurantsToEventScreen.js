@@ -13,7 +13,7 @@ import {
 import {TouchableRipple} from 'react-native-paper';
 import { CheckBox } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 import styles from './styles';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
@@ -228,14 +228,14 @@ class AddRestaurantsToEventScreen extends React.Component {
 											<Text style={styles.indRestaurantTextHeader}>{item.name}</Text>
 										</View>
 										<Text style={styles.indRestaurantTextBody}>
-											<Icon name='star' size={16} /> {item.rating} |{' '}
+											<AntDesign name='star' size={16} /> {item.rating} |{' '}
 											{item.user_ratings_total} ratings
 										</Text>
 										<TouchableRipple onPress={() => {}}><Text style={styles.indRestaurantTextBody}>
-											<Icon name='heart' size={16} /> Add to Favorites
+											<AntDesign name='heart' size={16} /> Add to Favorites
 										</Text></TouchableRipple>
 										<Text></Text>
-										<TouchableRipple onPress={(placeId) => {this.handleActiveRestaurantDetails(item.place_id)}}><Text style={styles.indRestaurantTextBody}><Icon name='subdirectory-arrow-right' size={15} /> Location Details</Text></TouchableRipple>
+										<TouchableRipple onPress={(placeId) => {this.handleActiveRestaurantDetails(item.place_id)}}><Text style={styles.indRestaurantTextBody}><MaterialIcons name='subdirectory-arrow-right' size={15} /> Location Details</Text></TouchableRipple>
 										{this.state.activeRestaurantId === item.place_id && 
 										<View style={styles.activeRestaurantDetailsContainer}>
 										<Text>
@@ -254,7 +254,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 												<Text>{this.state.activeRestaurantDetails.result.opening_hours.weekday_text[5]}</Text>
 												<Text>{this.state.activeRestaurantDetails.result.opening_hours.weekday_text[6]}</Text>
 												<Text></Text>
-												{this.state.activeRestaurantDetails.result.website && <TouchableRipple onPress={(placeSite) => {this.handleWebsiteUrl(this.state.activeRestaurantDetails.result.website)}}><Text><Icon name='search-web' size={16} /> see restaurant website</Text></TouchableRipple>}
+												{this.state.activeRestaurantDetails.result.website && <TouchableRipple onPress={(placeSite) => {this.handleWebsiteUrl(this.state.activeRestaurantDetails.result.website)}}><Text><MaterialCommunityIcons name='search-web' size={16} /> see restaurant website</Text></TouchableRipple>}
 											</View>
 										</Text>
 										</View>}

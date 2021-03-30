@@ -9,8 +9,7 @@ import {
 	Text,
 	TouchableRipple,
 } from 'react-native-paper';
-
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { AntDesign, MaterialCommunityIcons, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 export default class ProfileScreen extends Component {
 	constructor() {
@@ -74,13 +73,13 @@ export default class ProfileScreen extends Component {
 
 				<View style={styles.userInfoSection}>
 					<View style={styles.row}>
-						<Icon name='phone' size={20} color='#777777' />
+						<FontAwesome name='phone' size={20} color='#777777' />
 						<Text style={{ color: '#777777', marginLeft: 20 }}>
 							{user.phoneNumber}
 						</Text>
 					</View>
 					<View style={styles.row}>
-						<Icon name='email' size={20} color='#777777' />
+						<MaterialIcons name='email' size={20} color='#777777' />
 						<Text style={{ color: '#777777', marginLeft: 20 }}>
 							{user.email}
 						</Text>
@@ -101,31 +100,31 @@ export default class ProfileScreen extends Component {
 				<View style={styles.menuWrapper}>
 					<TouchableRipple onPress={() => {}}>
 						<View style={styles.menuItem}>
-							<Icon name='heart-outline' color='#FF6347' size={25} />
+							<AntDesign name='hearto' color='#FF6347' size={25} />
 							<Text style={styles.menuItemText}>Your Favorites</Text>
 						</View>
 					</TouchableRipple>
 					<TouchableRipple onPress={() => {}}>
 						<View style={styles.menuItem}>
-							<Icon name='credit-card-outline' color='#FF6347' size={25} />
+							<AntDesign name='creditcard' color='#FF6347' size={25} />
 							<Text style={styles.menuItemText}>Payment</Text>
 						</View>
 					</TouchableRipple>
 					<TouchableRipple onPress={() => {}}>
 						<View style={styles.menuItem}>
-							<Icon name='bell-outline' color='#FF6347' size={25} />
+							<AntDesign name='bells' color='#FF6347' size={25} />
 							<Text style={styles.menuItemText}>Notifications</Text>
 						</View>
 					</TouchableRipple>
 					<TouchableRipple onPress={() => {}}>
 						<View style={styles.menuItem}>
-							<Icon name='account-check-outline' color='#FF6347' size={25} />
+							<MaterialCommunityIcons name='account-box-outline' color='#FF6347' size={25} />
 							<Text style={styles.menuItemText}>Support</Text>
 						</View>
 					</TouchableRipple>
 					<TouchableRipple onPress={this.onSignOut}>
 						<View style={styles.menuItem}>
-							<Icon name='logout' color='#FF6347' size={25} />
+							<AntDesign name='logout' color='#FF6347' size={25} />
 							<Text style={styles.menuItemText}>Sign out</Text>
 						</View>
 					</TouchableRipple>
