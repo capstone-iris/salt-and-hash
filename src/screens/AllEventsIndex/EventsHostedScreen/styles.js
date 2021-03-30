@@ -162,4 +162,10 @@ export default StyleSheet.create({
 		width: 150,
 		borderRadius: 10,
 	},
+	CreateEventText: {
+		textAlign: 'center',
+		color: 'white',
+		fontSize: 18,
+		fontWeight: 'bold',
+	},
 });

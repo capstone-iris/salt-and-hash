@@ -77,6 +77,7 @@ export default function EventsHostedScreen() {
 							>
 								<View opacity={5}>
 									<Text style={styles.addEvent}>+</Text>
+									<Text style={styles.CreateEventText}>Create Event</Text>
 								</View>
 							</TouchableOpacity>
 
