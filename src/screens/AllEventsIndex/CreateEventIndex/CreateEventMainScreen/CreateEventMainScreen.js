@@ -26,7 +26,7 @@ class CreateEventMainScreen extends React.Component {
 			mode: '',
 			show: false,
 			name: '',
-			date: new Date(),
+			date: new Date(), // not allowing me have '' or false to use placeholders
 			eventStartTime: new Date(),
 			description: '',
 			votingDeadline: new Date(),
@@ -154,8 +154,8 @@ class CreateEventMainScreen extends React.Component {
 							onChangeText={(val) => this.inputValueUpdate(val, 'name')}
 						/>
 
-						<View>
-							<Text> Event Date </Text>
+						<View style={{ marginHorizontal: 8 }}>
+							<Text style={styles.text}>Date </Text>
 							<DateTimePicker
 								testID='datePicker'
 								value={this.state.date}
@@ -163,12 +163,13 @@ class CreateEventMainScreen extends React.Component {
 								is24Hour={true}
 								display='default'
 								onChange={this.onChange}
-								placeholderText='Please select a date'
+								placeholder='Select a date'
+								style={{ marginHorizontal: 10 }}
 							/>
 						</View>
 
-						<View>
-							<Text> Event Start Time </Text>
+						<View style={{ marginHorizontal: 8 }}>
+							<Text style={styles.text}>Start Time </Text>
 							<DateTimePicker
 								testID='timePicker'
 								value={this.state.eventStartTime}
@@ -176,11 +177,13 @@ class CreateEventMainScreen extends React.Component {
 								is24Hour={true}
 								display='default'
 								onChange={this.onChange}
+								placeholder='Start time'
+								style={{ marginHorizontal: 10 }}
 							/>
 						</View>
 
-						<View>
-							<Text> Event End Time </Text>
+						<View style={{ marginHorizontal: 8 }}>
+							<Text style={styles.text}>End Time </Text>
 							<DateTimePicker
 								testID='timePicker'
 								value={this.state.eventEndTime}
@@ -188,11 +191,13 @@ class CreateEventMainScreen extends React.Component {
 								is24Hour={true}
 								display='default'
 								onChange={this.onChangeEventEndTime}
+								placeholder='End time'
+								style={{ marginHorizontal: 10 }}
 							/>
 						</View>
 
-						<View>
-							<Text> Votes Due By </Text>
+						<View style={{ marginHorizontal: 8 }}>
+							<Text style={styles.text}>Votes Due By </Text>
 							<DateTimePicker
 								testID='datePicker'
 								value={this.state.votingDeadline}
@@ -201,6 +206,7 @@ class CreateEventMainScreen extends React.Component {
 								display='default'
 								onChange={this.onChangeVotingDeadline}
 								placeholder='Votes Due By'
+								style={{ marginHorizontal: 10 }}
 							/>
 						</View>
 					</View>
