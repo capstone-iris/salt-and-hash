@@ -12,12 +12,14 @@ export default function EventsInvitedToScreen() {
 	const [guestsData, setGuestsData] = useState([]);
   const [eventsData, setEventsData] = useState([]);
   
+  useEffect(() => {
+
   async function fetchUser() {
     if (!firebase.auth().currentUser) {
       return;
     }
-    const currentUser = await firebase.auth().currentUser.uid;
-    let result = [];
+    const currentUser = firebase.auth().currentUser.uid;
+    let result;
 
     const unsubscribe = firebase
       .firestore()
@@ -32,6 +34,10 @@ export default function EventsInvitedToScreen() {
       console.log('in fetch user', usersData)
     return () => unsubscribe();
   }
+  fetchUser()
+  },[]);
+
+  useEffect(() => {
 
   async function fetchGuests() {
     let result = [];
@@ -50,6 +56,8 @@ export default function EventsInvitedToScreen() {
     console.log('in fetch guests', guestsData);
 
   }
+  fetchGuests()
+
 
   async function fetchEvents() {
     let result = [];
@@ -68,13 +76,14 @@ export default function EventsInvitedToScreen() {
     setEventsData(result);
     console.log('in fetchEvents', eventsData);
   }
+}, [])
 
 
-	useEffect(() => {
-    fetchUser()
-    fetchGuests();
-    fetchEvents();
-  },[]);
+	// useEffect(() => {
+  //   fetchUser()
+  //   fetchGuests();
+  //   fetchEvents();
+  // },[]);
 
 
   return (
