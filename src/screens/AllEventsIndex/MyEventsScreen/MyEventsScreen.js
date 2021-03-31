@@ -20,6 +20,8 @@ import EventsInvitedToScreen from '../EventsInvitedToScreen/EventsInvitedToScree
 // );
 
 export default function MyEventsScreen({ navigation }) {
+
+	console.log('navigation', navigation)
 	const layout = useWindowDimensions();
 
 	const [index, setIndex] = React.useState(0);
@@ -29,11 +31,24 @@ export default function MyEventsScreen({ navigation }) {
 		{ key: 'invited', title: 'ATTEND' },
 	]);
 
-	const renderScene = SceneMap({
-		hosted: EventsHostedScreen,
-		invited: EventsInvitedToScreen,
-		create: CreateEventIndex,
-	});
+	// const renderScene = SceneMap({
+	// 	hosted: EventsHostedScreen,
+	// 	invited: EventsInvitedToScreen,
+	// 	create: CreateEventIndex,
+	// });
+
+	const renderScene = ({route}) => {
+		switch (route.key) {
+			case 'create':
+				return <CreateEventIndex />;
+			case 'hosted':
+				return <EventsHostedScreen />;
+			case 'invited':
+				return <EventsInvitedToScreen navigation={navigation} />;
+			default:
+				return null;
+      	}
+	};
 
 	return (
 		<TabView

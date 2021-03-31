@@ -10,88 +10,88 @@ let result;
 export default CarouselCards = () => {
 	// const { restaurantsData } = route.params;
 	// console.log('RESTAURANTS', route.params)
-	const [index, setIndex] = React.useState(0);
-	const [restaurantsData, setRestaurantsData] = useState([]);
-	const [usersData, setUsersData] = useState([]);
-	const [ guestsData, setGuestsData ] = useState([]);
+	// const [index, setIndex] = React.useState(0);
+	// const [restaurantsData, setRestaurantsData] = useState([]);
+	// const [usersData, setUsersData] = useState([]);
+	// const [ guestsData, setGuestsData ] = useState([]);
 
 
 	const isCarousel = React.useRef(null);
 
-  useEffect(() => {
+//   useEffect(() => {
 	
-		async function fetchUser() {
-      if (!firebase.auth().currentUser) {
-        return;
-      }
-      const currentUser = await firebase.auth().currentUser.uid;
-			let result = [];
+// 		async function fetchUser() {
+//       if (!firebase.auth().currentUser) {
+//         return;
+//       }
+//       const currentUser = await firebase.auth().currentUser.uid;
+// 			let result = [];
 
-			const usersCollection = firebase.firestore().collection('users');
+// 			const usersCollection = firebase.firestore().collection('users');
 
-			usersCollection.get().then((snapshot) => {
-				snapshot.docs.forEach((doc) => {
-					if (doc.exists === true && doc.data().id !== null) {
-          result.push(doc.data())
-					}
-        });
-        result = result.filter((user) => user.id === currentUser)
+// 			usersCollection.get().then((snapshot) => {
+// 				snapshot.docs.forEach((doc) => {
+// 					if (doc.exists === true && doc.data().id !== null) {
+//           result.push(doc.data())
+// 					}
+//         });
+//         result = result.filter((user) => user.id === currentUser)
 
-      console.log('user data', usersData)
-				setUsersData(result);
-			});
+//       console.log('user data', usersData)
+// 				setUsersData(result);
+// 			});
 
-    }
+//     }
   
-	fetchUser();
+// 	fetchUser();
 
-	async function fetchGuests() {
+// 	async function fetchGuests() {
 
 
-		const userPhoneNumber = usersData[0].phoneNumber;
-		console.log('user data', usersData)
+// 		const userPhoneNumber = usersData[0].phoneNumber;
+// 		console.log('user data', usersData)
 
-      const guestsRef = await firebase
-            .firestore()
-            .collection('eventGuests')
-            .doc('5z56qNBt1Q3WPjQBeskc')              
-            .collection('eventGuests')
-            .where('phoneNumber', '==', userPhoneNumber)
-            .onSnapshot((snapshot) => {
-              const result2 = [];
-              snapshot.forEach((doc) => {
-              result2.push(doc.data());
-              });
+//       const guestsRef = await firebase
+//             .firestore()
+//             .collection('eventGuests')
+//             .doc('5z56qNBt1Q3WPjQBeskc')              
+//             .collection('eventGuests')
+//             .where('phoneNumber', '==', userPhoneNumber)
+//             .onSnapshot((snapshot) => {
+//               const result2 = [];
+//               snapshot.forEach((doc) => {
+//               result2.push(doc.data());
+//               });
           
-              setGuestsData(result2);
-              console.log('guests data', guestsData)
-            });
+//               setGuestsData(result2);
+//               console.log('guests data', guestsData)
+//             });
            
-    }
-    fetchGuests()
+//     }
+//     fetchGuests()
 	
-    async function fetchData() {
-      console.log('in fetch data')
+//     async function fetchData() {
+//       console.log('in fetch data')
     
-          const restaurantData = await firebase
-            .firestore()
-            .collection('eventRestaurants')
-            .doc('7XmJrCiCD0oAnc7s95PP')
-            .collection('eventRestaurants')
-            .get();
-          result = [];
-          restaurantData.forEach((element) => {
-            result.push(element.data());
-          });
-          setRestaurantsData(result);
+//           const restaurantData = await firebase
+//             .firestore()
+//             .collection('eventRestaurants')
+//             .doc('7XmJrCiCD0oAnc7s95PP')
+//             .collection('eventRestaurants')
+//             .get();
+//           result = [];
+//           restaurantData.forEach((element) => {
+//             result.push(element.data());
+//           });
+//           setRestaurantsData(result);
         
 
 
-				console.log(result);
-			};
+// 				console.log(result);
+// 			};
 		
-		fetchData();
-	}, []);
+// 		fetchData();
+// 	}, []);
 
 	return (
 		<View>
@@ -99,7 +99,7 @@ export default CarouselCards = () => {
 				layout={'default'}
 				layoutCardOffset={9}
 				ref={isCarousel}
-				data={restaurantsData}
+				data={data}
 				renderItem={({ item }) => (
 					<CarouselCardItem item={item} index={index} />
 				)}
@@ -109,7 +109,7 @@ export default CarouselCards = () => {
 				useScrollView={true}
 			/>
 			<Pagination
-				dotsLength={restaurantsData.length}
+				dotsLength={data.length}
 				activeDotIndex={index}
 				carouselRef={isCarousel}
 				dotStyle={{

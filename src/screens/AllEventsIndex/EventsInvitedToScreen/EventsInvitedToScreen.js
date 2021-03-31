@@ -11,7 +11,6 @@ export default class EventsInvitedToScreen extends React.Component {
     this.state = {
       eventsData: [],
     };
-   console.log('PROPS', this.props)
     this.fetchData = this.fetchData.bind(this)
   }
 
@@ -42,11 +41,9 @@ export default class EventsInvitedToScreen extends React.Component {
           .doc(userResult.phoneNumber)
           .collection('eventsInvitedTo')
           .onSnapshot((snapshot) => {
-            console.log('inguestsdata')
             snapshot.forEach((doc) => {
               guestsResult.push(doc.data());
             })
-            console.log('guestsResult', guestsResult)
               guestsResult.forEach(async (event) => {
                      await firebase
                       .firestore()
@@ -68,6 +65,7 @@ export default class EventsInvitedToScreen extends React.Component {
     }
  
   render() {
+    const { navigation } = this.props
     return (
       <SafeAreaView style={styles.container}>
         {this.state.eventsData.length < 1 ? (
@@ -95,7 +93,7 @@ export default class EventsInvitedToScreen extends React.Component {
                 style={styles.singleEventContainer}
                 activeOpacity={0.5}
                 key={index}
-                onPress={() => this.props.navigation.navigate('Single Event', { event })}
+                onPress={() => navigation.navigate('Single Event', { event })}
                 >
                   <Text style={styles.txt}>{event.name}</Text>
                 </TouchableOpacity>
@@ -106,8 +104,4 @@ export default class EventsInvitedToScreen extends React.Component {
       </SafeAreaView>
     );
   }
-
-
- 
-
- 
+} 
