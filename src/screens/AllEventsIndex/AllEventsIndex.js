@@ -11,6 +11,7 @@ const EventsBase = createStackNavigator();
 
 export default function AllEventsIndex() {
 
+
     return (
         <EventsBase.Navigator initialRouteName={MyEventsScreen} screenOptions={{headerShown: false, animationEnabled: false}}>
             <EventsBase.Screen name='My Events' component={MyEventsScreen} />

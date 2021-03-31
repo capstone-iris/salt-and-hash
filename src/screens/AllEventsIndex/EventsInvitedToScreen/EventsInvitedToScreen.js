@@ -12,15 +12,17 @@ export default function EventsInvitedToScreen() {
 	const [guestsData, setGuestsData] = useState([]);
 	const [eventsData, setEventsData] = useState([]);
 
+
 	useEffect(() => {
 		async function fetchUser() {
-			if (!firebase.auth().currentUser) {
+      const currentUser = await firebase.auth().currentUser.uid;
+      console.log('CURRENT USER==> ', currentUser)
+			if (!currentUser) {
 				return;
 			}
-			const currentUser = firebase.auth().currentUser.uid;
 			let result = [];
 
-			const unsubscribe = firebase
+			const unsubscribe = await firebase
 				.firestore()
 				.collection('users')
 				.where('id', '==', currentUser)
@@ -29,32 +31,14 @@ export default function EventsInvitedToScreen() {
 						result.push(doc.data());
 					});
 					setUsersData(result);
-					console.log('in fetchuser', usersData);
+          console.log('userDate ==>', usersData)
 				});
 			return () => unsubscribe();
 		}
 		fetchUser();
 	}, []);
 
-	useEffect(() => {
-		async function fetchGuests() {
-			let result = [];
 
-			const guestsRef = await firebase
-				.firestore()
-				.collection('eventGuests')
-				.doc(usersData[0].phoneNumber)
-				.collection('eventsInvitedTo');
-			guestsRef.get().then((snapshot) => {
-				snapshot.docs.forEach((doc) => {
-					result.push(doc.data());
-				});
-				setGuestsData(result);
-				console.log('in fetch guests', guestsData);
-			});
-		}
-		fetchGuests();
-	}, []);
 
 	useEffect(() => {
 		async function fetchEvents() {
@@ -65,7 +49,8 @@ export default function EventsInvitedToScreen() {
 					.firestore()
 					.collection('events')
 					.where('docId', '==', event.eventId)
-					.onSnapshot((snapshot) => {
+          eventsRef.get()
+          .then((snapshot) => {
 						snapshot.forEach((doc) => {
 							result.push(doc.data());
 						});
