@@ -218,44 +218,64 @@ class AddRestaurantsToEventScreen extends React.Component {
 										uncheckedColor='black'
 										checkedTitle='Restaurant selected!'
 									/>
-									<View style={styles.indRestaurantInsideContainer}>
-										<Image source={{uri: this.fetchImage(item.photos)}} style={{width: 300, height: 150}}/>
-										<Text></Text>
-										<View style={styles.selectionHeader}>
-											<Text style={styles.indRestaurantTextHeader}>{item.name}</Text>
+
+									<Image source={{uri: this.fetchImage(item.photos)}} style={styles.image}/>
+
+							<Text></Text>
+							
+							<Text style={styles.indRestaurantHeader}>
+								{item.name}
+							</Text>
+					
+
+							<Text style={styles.indRestaurantTextBody}>
+								<AntDesign name='star' size={16} color='#e6a80c'/> {item.rating} |{' '}
+								{item.user_ratings_total} ratings
+							</Text>
+						
+							<TouchableRipple onPress={() => {}}>
+								<Text style={styles.indRestaurantTextBody}>
+								<AntDesign name='heart' size={16} color='#e6a80c'/> Add to Favorites
+								</Text>
+							</TouchableRipple>
+							
+							<Text></Text>
+							
+							<TouchableRipple onPress={() => {this.handleActiveRestaurantDetails(item.place_id)}}>
+								<Text style={styles.indRestaurantTextBody}>
+								<MaterialIcons name='subdirectory-arrow-right' size={15}/> Location Details
+								</Text>
+							</TouchableRipple>
+							
+							{this.state.activeRestaurantId === item.place_id &&
+							<View style={styles.activeRestaurantDetailsContainer}>
+							<Text>
+								<View>
+									<Text style={styles.indRestaurantTextBody}></Text>
+									<Text style={styles.indRestaurantTextBody}>business status: {this.state.activeRestaurantDetails.result.business_status.toLowerCase()}</Text>
+									<Text style={styles.indRestaurantTextBody}></Text>
+									<Text style={styles.indRestaurantTextBody}>{this.state.activeRestaurantDetails.result.formatted_address}</Text>
+									<Text style={styles.indRestaurantTextBody}>{this.state.activeRestaurantDetails.result.formatted_phone_number}</Text>
+									<Text style={styles.indRestaurantTextBody}></Text>
+									<Text style={styles.indRestaurantTextBody}>{this.state.activeRestaurantDetails.result.opening_hours.weekday_text[0]}</Text>
+									<Text style={styles.indRestaurantTextBody}>{this.state.activeRestaurantDetails.result.opening_hours.weekday_text[1]}</Text>
+									<Text style={styles.indRestaurantTextBody}>{this.state.activeRestaurantDetails.result.opening_hours.weekday_text[2]}</Text>
+									<Text style={styles.indRestaurantTextBody}>{this.state.activeRestaurantDetails.result.opening_hours.weekday_text[3]}</Text>
+									<Text style={styles.indRestaurantTextBody}>{this.state.activeRestaurantDetails.result.opening_hours.weekday_text[4]}</Text>
+									<Text style={styles.indRestaurantTextBody}>{this.state.activeRestaurantDetails.result.opening_hours.weekday_text[5]}</Text>
+									<Text style={styles.indRestaurantTextBody}>{this.state.activeRestaurantDetails.result.opening_hours.weekday_text[6]}</Text>
+									<Text style={styles.indRestaurantTextBody}></Text>
+									{this.state.activeRestaurantDetails.result.website && 
+										<TouchableRipple onPress={() => {this.handleWebsiteUrl(this.state.activeRestaurantDetails.result.website)}}>
+										<Text style={styles.indRestaurantHyperlink}>
+											<MaterialCommunityIcons name='search-web' size={16} /> see restaurant website
+										</Text>
+										</TouchableRipple>}
 										</View>
-										<Text style={styles.indRestaurantTextBody}>
-											<AntDesign name='star' size={16} /> {item.rating} |{' '}
-											{item.user_ratings_total} ratings
-										</Text>
-										<TouchableRipple onPress={() => {}}><Text style={styles.indRestaurantTextBody}>
-											<AntDesign name='heart' size={16} /> Add to Favorites
-										</Text></TouchableRipple>
-										<Text></Text>
-										<TouchableRipple onPress={(placeId) => {this.handleActiveRestaurantDetails(item.place_id)}}><Text style={styles.indRestaurantTextBody}><MaterialIcons name='subdirectory-arrow-right' size={15} /> Location Details</Text></TouchableRipple>
-										{this.state.activeRestaurantId === item.place_id && 
-										<View style={styles.activeRestaurantDetailsContainer}>
-										<Text>
-											<View>
-												<Text></Text>
-												<Text>business status: {this.state.activeRestaurantDetails.result.business_status.toLowerCase()}</Text>
-												<Text></Text>
-												<Text>{this.state.activeRestaurantDetails.result.formatted_address}</Text>
-												<Text>{this.state.activeRestaurantDetails.result.formatted_phone_number}</Text>
-												<Text></Text>
-												<Text>{this.state.activeRestaurantDetails.result.opening_hours.weekday_text[0]}</Text>
-												<Text>{this.state.activeRestaurantDetails.result.opening_hours.weekday_text[1]}</Text>
-												<Text>{this.state.activeRestaurantDetails.result.opening_hours.weekday_text[2]}</Text>
-												<Text>{this.state.activeRestaurantDetails.result.opening_hours.weekday_text[3]}</Text>
-												<Text>{this.state.activeRestaurantDetails.result.opening_hours.weekday_text[4]}</Text>
-												<Text>{this.state.activeRestaurantDetails.result.opening_hours.weekday_text[5]}</Text>
-												<Text>{this.state.activeRestaurantDetails.result.opening_hours.weekday_text[6]}</Text>
-												<Text></Text>
-												{this.state.activeRestaurantDetails.result.website && <TouchableRipple onPress={(placeSite) => {this.handleWebsiteUrl(this.state.activeRestaurantDetails.result.website)}}><Text><MaterialCommunityIcons name='search-web' size={16} /> see restaurant website</Text></TouchableRipple>}
-											</View>
-										</Text>
-										</View>}
-									</View>
+									</Text>
+									</View>}
+									<Text></Text>
+								<View style={styles.borderLine}></View>
 								</View>
 							)}
 						/>

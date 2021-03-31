@@ -4,82 +4,74 @@ export default StyleSheet.create({
 	container: {
 		backgroundColor: '#ffffff',
 		flex: 1,
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignContent: 'center',
 		flexDirection: 'row'
 	},
-	buttonContainer: {
-		justifyContent: 'center'
-	},
-	restaurantContainer: {
-		margin: 25,
-	},
-	indRestaurantContainer: {
-		flex: 1,
-		marginBottom: 25,
-		backgroundColor: '#fab59e'
-	},
-	indRestaurantInsideContainer: {
-		margin: 10
-	},
-	restaurantsContainer: {
+    buttonContainer: {
+        alignItems: 'center',
+		justifyContent: 'center',
+        alignSelf: 'center'
+    },
+    button: {
+		backgroundColor: '#e95531',
+		height: 48,
+		borderRadius: 5,
 		alignItems: 'center',
 		justifyContent: 'center',
-		margin: 10
-	},
-	restaurantsTextHeader: {
-		fontSize: 24,
+		width: 275
+    },
+    buttonText: {
+        color: 'white',
+		fontSize: 16,
+		fontWeight: 'bold'
+    },
+    restaurantContainer: {
+        margin: 10
+    },
+    restaurantHeaderContainer: {
+        justifyContent: 'flex-start',
+        alignContent: 'flex-start',
+        alignSelf: 'flex-start'
+    },
+    restaurantHeaderText: {
+        fontSize: 24,
 		fontWeight: 'bold',
-		fontFamily: 'PurplePurse',
 		color: '#e95530',
-	},
-	restaurantsText: {
-		fontSize: 14
-	},
-	indRestaurantTextHeader: {
+		fontFamily: 'PurplePurse'
+    },
+    indRestaurantContainer: {
+        justifyContent: 'center',
+        alignContent: 'center',
+        margin: 10
+    },
+    image: {
+        width: 340, 
+        height: 175
+    },
+    indRestaurantTextBody: {
 		fontSize: 16,
+        color: '#656565'
+    },
+    indRestaurantHeader: {
+        fontSize: 20,
 		fontWeight: 'bold',
-	},
-	indRestaurantTextBody: {
-		fontSize: 15
-	},
-	activeRestaurantDetailsContainer: {
-		marginLeft: 21
-	},
-	image: {
-		height: 120,
-		width: 120,
-		borderRadius: 10,
-		borderWidth: 3,
-		borderColor: 'maroon',
-	},
+		color: '#e95530',
+		fontFamily: 'PurplePurse'
+    },
+    indRestaurantHyperlink: {
+        fontSize: 15,
+        color: '#df817f'
+    },
+    activeRestaurantDetailsContainer: {
+        marginLeft: 21
+    },
+    borderLine: {
+        borderBottomColor: '#656565',
+        borderBottomWidth: .5
+    },
 	voteContainer: {
-		flex: 1,
-		flexDirection: 'row'
-	},
-	input: {
-		height: 48,
-		borderRadius: 5,
-		overflow: 'hidden',
-		backgroundColor: 'white',
-		marginTop: 10,
-		marginBottom: 10,
-		marginLeft: 30,
-		marginRight: 30,
-		paddingLeft: 16,
-		width: 250,
-	},
-	button: {
-		backgroundColor: '#ddb39d',
-		margin: 10,
-		marginTop: 20,
-		height: 48,
-		borderRadius: 5,
-		alignItems: 'center',
-		justifyContent: 'center',
-		width: 250,
-	},
-	Btn: {
-		color: 'white',
-		fontSize: 16,
-		fontWeight: 'bold',
-	},
-});
+		
+	}
+})
