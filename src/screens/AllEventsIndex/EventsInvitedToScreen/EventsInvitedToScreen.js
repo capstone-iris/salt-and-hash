@@ -5,62 +5,45 @@ import RestaurantSwipeScreen from '../../RestaurantsIndex/RestaurantSwipeScreen/
 import { useNavigation } from '@react-navigation/native';
 import { firebase } from './../../../firebase/config';
 
-export default function EventsInvitedToScreen() {
+export default function EventsInvitedToScreen(props) {
 
+  const {invitedEventsData} = props
 	const navigation = useNavigation();
-	const [usersData, setUsersData] = useState([]);
-	const [guestsData, setGuestsData] = useState([]);
-	const [eventsData, setEventsData] = useState([]);
+
+  const [eventsData, setEventsData] = useState([]);
+
+  console.log('PROPS IN EventsInvitedToScreen==>', props)
+
+useEffect(()=>{
+
+     firebase
+      .firestore()
+      .collection('events')
+      .onSnapshot((snapshot) => {
+        let result = [];
+        snapshot.forEach((doc) => {
+          result.push(doc.data());
+        });
+        setEventsData(result);
+      });
+
+},[])
 
 
-	useEffect(() => {
-		async function fetchUser() {
-      const currentUser = await firebase.auth().currentUser.uid;
-      console.log('CURRENT USER==> ', currentUser)
-			if (!currentUser) {
-				return;
-			}
-			let result = [];
+  const invitedEvents = [];
 
-			const unsubscribe = await firebase
-				.firestore()
-				.collection('users')
-				.where('id', '==', currentUser)
-				.onSnapshot((snapshot) => {
-					snapshot.forEach((doc) => {
-						result.push(doc.data());
-					});
-					setUsersData(result);
-          console.log('userDate ==>', usersData)
-				});
-			return () => unsubscribe();
-		}
-		fetchUser();
-	}, []);
+  for(let i = 0; i < eventsData.length; i++){
+    let event = eventsData[i]
+    for(let j = 0; j < invitedEventsData.length; j++){
+     let invitedEvent = invitedEventsData[j]
+     if(event.docId === invitedEvent.eventId){
+       invitedEvents.push(event)
+     }
+    }
+  }
 
+  console.log('invitedEvents Array ==> ',invitedEvents)
 
-
-	useEffect(() => {
-		async function fetchEvents() {
-			let result = [];
-
-			guestsData.forEach(async (event) => {
-				const eventsRef = await firebase
-					.firestore()
-					.collection('events')
-					.where('docId', '==', event.eventId)
-          eventsRef.get()
-          .then((snapshot) => {
-						snapshot.forEach((doc) => {
-							result.push(doc.data());
-						});
-					});
-			});
-			setEventsData(result);
-			console.log('in fetchEvents', eventsData);
-		}
-		fetchEvents();
-	}, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -69,7 +52,7 @@ export default function EventsInvitedToScreen() {
         Events Invited To Screen
         {'\n'}
       </Text>
-      {eventsData.map((event, index) => {
+      {invitedEvents.map((event, index) => {
         return (
           <TouchableOpacity
             style={styles.singleEventContainer}
