@@ -2,8 +2,11 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
 	container: {
-		backgroundColor: '#fed8b1',
+		backgroundColor: '#ffffff',
 		flex: 1,
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignContent: 'center',
 		flexDirection: 'row'
 	},
 	buttonContainer: {
@@ -11,6 +14,7 @@ export default StyleSheet.create({
 	},
 	restaurantContainer: {
 		margin: 25,
+		backgroundColor: '#ffffff'
 	},
 	indRestaurantContainer: {
 		marginBottom: 25,
@@ -21,11 +25,13 @@ export default StyleSheet.create({
 	},
 	restaurantsContainer: {
 		alignItems: 'center',
-		justifyContent: 'center'
+		justifyContent: 'center',
+		marginTop: 25
 	},
 	restaurantsTextHeader: {
 		fontSize: 16,
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		color: '#e95530'
 	},
 	indRestaurantTextHeader: {
 		fontSize: 16,
@@ -48,14 +54,14 @@ export default StyleSheet.create({
 		borderColor: 'maroon',
 	},
 	button: {
-		backgroundColor: '#ddb39d',
+		backgroundColor: '#e95531',
 		margin: 10,
 		marginTop: 20,
 		height: 48,
 		borderRadius: 5,
 		alignItems: 'center',
 		justifyContent: 'center',
-		width: 250,
+		width: 275,
 	},
 	Btn: {
 		color: 'white',

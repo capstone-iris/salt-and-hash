@@ -114,7 +114,7 @@ export default class AllRestaurantsScreen extends React.Component {
 	render() {
 
 		return (
-			<SafeAreaView>
+			<SafeAreaView style={styles.container}>
 
 				{this.state.restaurantList.length === 0 ?
 				<View style={styles.restaurantsContainer}>
