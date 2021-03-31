@@ -1,100 +1,113 @@
 import React, { useState, useEffect } from 'react';
-import { Text, SafeAreaView, TouchableOpacity } from 'react-native';
+import { Text, SafeAreaView, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 import RestaurantSwipeScreen from '../../RestaurantsIndex/RestaurantSwipeScreen/RestaurantSwipeScreen';
 import { useNavigation } from '@react-navigation/native';
 import { firebase } from './../../../firebase/config';
 
-export default function EventsInvitedToScreen() {
+export default class EventsInvitedToScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      eventsData: [],
+    };
+   console.log('PROPS', this.props)
+    this.fetchData = this.fetchData.bind(this)
+  }
 
-	const navigation = useNavigation();
-  const [usersData, setUsersData] = useState({});
-	const [guestsData, setGuestsData] = useState([]);
-  const [eventsData, setEventsData] = useState([]);
+ async componentDidMount() {
+   await this.fetchData()
+  }
+
+  async fetchData() {
+      try {
+      if (!firebase.auth().currentUser) {
+        return;
+      }
+      const currentUser = await firebase.auth().currentUser.uid;
+      let userResult;
+      let guestsResult = [];
+      let eventsResult = [];
   
-  async function fetchUser() {
-    if (!firebase.auth().currentUser) {
-      return;
-    }
-    
-    const currentUser = await firebase.auth().currentUser.uid;
-    let result = [];
-
-    const unsubscribe = firebase
-      .firestore()
-      .collection('users')
-      .where('id', '==', currentUser)
-      .onSnapshot((snapshot) => {
-        snapshot.forEach((doc) => {
-          result = doc.data();
-        });
-        setUsersData(result);
-      });
-      console.log('in fetch user', usersData)
-    return () => unsubscribe();
-  }
-
-  async function fetchGuests() {
-    let result = [];
-
-    const guestsRef = await firebase
-      .firestore()
-      .collection('eventGuests')
-      .doc(usersData.phoneNumber)
-      .collection('eventsInvitedTo');
-    guestsRef.get().then((snapshot) => {
-      snapshot.docs.forEach((doc) => {
-        result.push(doc.data());
-      });
-    });
-    setGuestsData(result);
-    console.log('in fetch guests', guestsData);
-
-  }
-
-  async function fetchEvents() {
-    let result = [];
-
-    guestsData.forEach(async (event) => {
-      const eventsRef = await firebase
+      const userData = await firebase
         .firestore()
-        .collection('events')
-        .where('docId', '==', event.eventId)
+        .collection('users')
+        .where('id', '==', currentUser)
         .onSnapshot((snapshot) => {
           snapshot.forEach((doc) => {
-            result.push(doc.data());
+            userResult = doc.data();
+          })
+            firebase.firestore()
+          .collection('eventGuests')
+          .doc(userResult.phoneNumber)
+          .collection('eventsInvitedTo')
+          .onSnapshot((snapshot) => {
+            console.log('inguestsdata')
+            snapshot.forEach((doc) => {
+              guestsResult.push(doc.data());
+            })
+            console.log('guestsResult', guestsResult)
+              guestsResult.forEach(async (event) => {
+                     await firebase
+                      .firestore()
+                      .collection('events')
+                      .where('docId', '==', event.eventId)
+                      .onSnapshot((snapshot) => {
+                        snapshot.forEach((doc) => {
+                          eventsResult.push(doc.data());
+                        });
+                        this.setState({eventsData: eventsResult})
+
+            });
           });
         });
-    });
-    setEventsData(result);
-    console.log('in fetchEvents', eventsData);
+      })
+          } catch (error) {
+            console.log(error)
+      }
+    }
+ 
+  render() {
+    return (
+      <SafeAreaView style={styles.container}>
+        {this.state.eventsData.length < 1 ? (
+          <View styles={{ marginTop: 100 }}>
+            <Text style={styles.txt}>You haven't been invited to any events yet. </Text>
+            <TouchableOpacity style={styles.button}>
+              <Text
+                style={styles.Btn}
+                onPress={() => navigation.navigate('Create Event Index')}
+                >
+                Create one and invite friends!
+              </Text>
+            </TouchableOpacity>
+          </View>
+         ) : (
+          <View style={styles.container}>
+            <Text>
+              {'\n'}
+              Events Invited To Screen
+              {'\n'}
+            </Text>
+            {this.state.eventsData.map((event, index) => {
+              return (
+                <TouchableOpacity
+                style={styles.singleEventContainer}
+                activeOpacity={0.5}
+                key={index}
+                onPress={() => this.props.navigation.navigate('Single Event', { event })}
+                >
+                  <Text style={styles.txt}>{event.name}</Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+         )}
+      </SafeAreaView>
+    );
   }
 
-	useEffect(() => {
-    fetchUser()
-    fetchGuests();
-    fetchEvents();
-  },[]);
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text>
-        {'\n'}
-        Events Invited To Screen
-        {'\n'}
-      </Text>
-      {eventsData.map((event, index) => {
-        return (
-          <TouchableOpacity
-            style={styles.singleEventContainer}
-            activeOpacity={0.5}
-            key={index}
-            onPress={() => navigation.navigate('Single Event', { event })}
-          >
-            <Text style={styles.txt}>{event.name}</Text>
-          </TouchableOpacity>
-        );
-      })}
-    </SafeAreaView>
-  );
-}
+ 
+
+ 

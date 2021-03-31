@@ -33,8 +33,8 @@ export default class CreateEventForm extends React.Component {
 			eventEndTime: '',
 			isLoading: false,
 			visibleModal: false,
-			phoneNumber: '',
-			eventId: ''
+			// phoneNumber: '',
+			// eventId: ''
 
 		};
 		this.renderModalContent = this.renderModalContent.bind(this)
@@ -58,7 +58,7 @@ export default class CreateEventForm extends React.Component {
 						this.setState(
 							{restaurantCounter: this.state.restaurantCounter + 1,
 								visibleModal: false,
-								phoneNumber: ''
+								// phoneNumber: ''
 							}))
 					.catch((e) => {
 						console.error('Error found: ', e)
@@ -152,8 +152,8 @@ export default class CreateEventForm extends React.Component {
 
 
 
-// <TouchableOpacity style={styles.button} >
-// <Text style={styles.Btn}>Create New Event</Text>
-// </TouchableOpacity>
-// onPress={() => this.createNewEvent()}
-// export default withNavigation(CreateEventMainScreen);
+{/* <TouchableOpacity style={styles.button} >
+<Text style={styles.Btn}>Create New Event</Text>
+</TouchableOpacity>
+onPress={() => this.createNewEvent()}
+export default withNavigation(CreateEventMainScreen); */}

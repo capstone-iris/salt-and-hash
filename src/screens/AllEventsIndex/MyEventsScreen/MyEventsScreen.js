@@ -4,6 +4,7 @@ import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import CreateEventIndex from '../CreateEventIndex/CreateEventIndex';
 import EventsHostedScreen from '../EventsHostedScreen/EventsHostedScreen';
 import EventsInvitedToScreen from '../EventsInvitedToScreen/EventsInvitedToScreen';
+// import EventsInvitedTo from '../EventsInvitedToScreen/events'
 // import styles from './styles';
 
 // const HostedEvents = () => (
