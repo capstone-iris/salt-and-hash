@@ -12,7 +12,7 @@ import { firebase } from './../../../firebase/config';
 export default function MyEventsScreen({ navigation }) {
 	const layout = useWindowDimensions();
   const [usersData, setUsersData] = useState([]);
-	const [invitedEventsData, setInvitedEventsData] = useState([]);
+	// const [invitedEventsData, setInvitedEventsData] = useState([]);
 
 	const [index, setIndex] = useState(0);
 	const [routes] = useState([
@@ -43,29 +43,29 @@ export default function MyEventsScreen({ navigation }) {
 		return () => unsubscribe();
 	}, []);
 
-	useEffect(()=>{
-
-			console.log('in eventGuests useEffect..')
-			let result = [];
-			const guestsRef = firebase
-			.firestore()
-			.collection('eventGuests')
-			.doc(usersData.phoneNumber)
-			.collection('eventsInvitedTo')
-			.onSnapshot((snapshot) => {
-				snapshot.forEach((doc) => {
-					result.push(doc.data());
-				});
-				setInvitedEventsData(result)
-				});
-
-	}, [usersData]);
+	// useEffect(()=>{
 
 
-	// console.log('usersData MyEventsScreen ==>', usersData)
+	// 		let result = [];
+	// 		const guestsRef = firebase
+	// 		.firestore()
+	// 		.collection('eventGuests')
+	// 		.doc(usersData.phoneNumber)
+	// 		.collection('eventsInvitedTo')
+	// 		.onSnapshot((snapshot) => {
+	// 			snapshot.forEach((doc) => {
+	// 				result.push(doc.data());
+	// 			});
+	// 			setInvitedEventsData(result)
+	// 			});
+
+	// }, [usersData]);
+
+
+	console.log('usersData MyEventsScreen ==>', usersData)
 
   // console.log('invitedEventsData MyEventsScreen ==>', invitedEventsData)
-console.log('userData==>', usersData)
+
 
 	const renderScene = ({ route }) => {
 		switch (route.key) {
@@ -74,7 +74,7 @@ console.log('userData==>', usersData)
 			case 'hosted':
 				return <EventsHostedScreen currentUser={usersData} />;
 			case 'invited':
-				return <EventsInvitedToScreen invitedEventsData={invitedEventsData}/>;
+				return <EventsInvitedToScreen currentUser={usersData}/>;
 			default:
 				return null;
 		}
