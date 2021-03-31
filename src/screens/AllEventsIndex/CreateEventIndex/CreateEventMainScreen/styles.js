@@ -27,7 +27,8 @@ export default StyleSheet.create({
 	},
 	break2: {
 		alignContent: 'center',
-		justifyContent: 'center'
+		justifyContent: 'center',
+		alignSelf: 'center'
 	},
 	break3: {
 		marginTop: 10,
@@ -50,7 +51,8 @@ export default StyleSheet.create({
 	},
 	buttonContainer: {
 		justifyContent: 'center',
-		alignContent: 'center'
+		alignContent: 'center',
+		alignSelf: 'center'
 	},
 	button: {
 		backgroundColor: '#e95531',
