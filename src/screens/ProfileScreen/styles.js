@@ -3,16 +3,20 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#eee1db',
+		backgroundColor: '#ffffff',
 		color: 'black',
+	},
+	userInfoContainer: {
+		backgroundColor: '#e95530'
 	},
 	userInfoSection: {
 		paddingHorizontal: 30,
-		marginBottom: 25,
+		marginBottom: 25
 	},
 	title: {
 		fontSize: 24,
 		fontWeight: 'bold',
+		color: '#ffffff'
 	},
 	caption: {
 		fontSize: 14,
@@ -24,30 +28,35 @@ export default StyleSheet.create({
 		marginBottom: 10,
 	},
 	infoBoxWrapper: {
-		borderBottomColor: 'grey',
+		borderBottomColor: '#ffffff',
 		borderBottomWidth: 1,
-		borderTopColor: 'grey',
+		borderTopColor: '#ffffff',
 		borderTopWidth: 1,
 		flexDirection: 'row',
 		height: 100,
+		backgroundColor: '#e6a80c'
 	},
 	infoBox: {
 		width: '50%',
 		alignItems: 'center',
 		justifyContent: 'center',
-		borderRightColor: 'grey',
+		borderRightColor: '#ffffff',
 		borderRightWidth: 1,
+	},
+	hr: {
+		 borderBottomWidth: 3,
+		 borderBottomColor: '#e95530'
 	},
 	menuWrapper: {
 		marginTop: 10,
 	},
 	menuItem: {
 		flexDirection: 'row',
-		paddingVertical: 15,
+		paddingVertical: 13,
 		paddingHorizontal: 30,
 	},
 	menuItemText: {
-		color: '#777777',
+		color: '#656565',
 		marginLeft: 20,
 		fontWeight: '600',
 		fontSize: 16,

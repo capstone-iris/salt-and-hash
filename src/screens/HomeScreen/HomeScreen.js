@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 import RestaurantsIndex from '../RestaurantsIndex/RestaurantsIndex';
 import ProfileScreen from '../ProfileScreen/ProfileScreen';
 import AllEventsIndex from '../AllEventsIndex/AllEventsIndex';
@@ -12,12 +12,12 @@ function BottomTabNavigator() {
 		<Tab.Navigator
 			tabBarOptions={{
 				showIcon: true,
-				activeTintColor: '#a46950',
-				activeBackgroundColor: '#eee1db',
-				inactiveTintColor: '#999999',
-				inactiveBackgroundColor: '#eee1db',
+				activeTintColor: '#e95530',
+				activeBackgroundColor: '#ffffff',
+				inactiveTintColor: '#656565',
+				inactiveBackgroundColor: '#ffffff',
 				style: {
-					backgroundColor: '#eee1db',
+					backgroundColor: '#ffffff',
 					paddingBottom: 7,
 					paddingTop: 7,
 				},
@@ -28,7 +28,7 @@ function BottomTabNavigator() {
 				component={AllEventsIndex}
 				options={{
 					tabBarIcon: ({ color }) => (
-						<Icon name='calendar-alt' size={20} color={color} />
+						<MaterialIcons name='event' size={20} color={color} />
 					),
 				}}
 			/>
@@ -37,7 +37,7 @@ function BottomTabNavigator() {
 				component={RestaurantsIndex}
 				options={{
 					tabBarIcon: ({ color }) => (
-						<Icon name='utensils' size={20} color={color} />
+						<MaterialIcons name='restaurant-menu' size={20} color={color} />
 					),
 				}}
 			/>
@@ -46,7 +46,7 @@ function BottomTabNavigator() {
 				component={ProfileScreen}
 				options={{
 					tabBarIcon: ({ color }) => (
-						<Icon name='user-circle' size={20} color={color} />
+						<FontAwesome name='user' size={20} color={color} />
 					),
 				}}
 			/>

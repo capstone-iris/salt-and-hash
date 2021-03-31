@@ -1,23 +1,41 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-	inputContainer: {
-		padding: 10,
+	container: {
+		backgroundColor: '#ffffff',
+		flex: 1,
+		justifyContent: 'center'
 	},
-	textInput: {
-		borderColor: '#CCCCCC',
-		borderWidth: 1,
-		// borderTopWidth: 1,
-		// borderBottomWidth: 1,
-		height: 40,
-		fontSize: 18,
-		paddingLeft: 10,
-		paddingRight: 10,
-		margin: 5,
+	inputContainer: {
+		padding: 10
+	},
+	indInputContainer: {
+		marginLeft: 10,
+		marginRight: 10,
+		marginBottom: 25
+	},
+	indInputContainerLast: {
+		marginLeft: 10,
+		marginRight: 10
+	},
+	dateTimePicker: {
+		marginTop: 15
+	},
+	break1: {
+		marginBottom: 20,
+		marginTop: 20
+	},
+	break2: {
+		alignContent: 'center',
+		justifyContent: 'center'
+	},
+	break3: {
+		marginTop: 10,
+		marginBottom: 10
 	},
 	text: {
-		fontSize: 18,
-		color: 'grey',
+		fontSize: 16,
+		color: '#656565',
 	},
 	preferences: {
 		fontWeight: 'bold',
@@ -25,18 +43,24 @@ export default StyleSheet.create({
 		margin: 5,
 	},
 	title: {
-		fontSize: 35,
 		padding: 5,
+		fontSize: 16,
+		fontWeight: 'bold',
+		color: '#e95530'
+	},
+	buttonContainer: {
+		justifyContent: 'center',
+		alignContent: 'center'
 	},
 	button: {
-		backgroundColor: '#ddb39d',
+		backgroundColor: '#e95531',
 		margin: 10,
 		marginTop: 20,
 		height: 48,
 		borderRadius: 5,
 		alignItems: 'center',
 		justifyContent: 'center',
-		width: 250,
+		width: 275,
 	},
 	Btn: {
 		color: 'white',

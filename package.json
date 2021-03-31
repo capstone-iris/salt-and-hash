@@ -45,10 +45,12 @@
     "react-native-screens": "^2.18.1",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-tab-view": "^3.0.0",
+    "react-native-textinput-effects": "^0.6.1",
     "react-native-vector-icons": "^8.1.0",
     "react-native-web": "~0.13.12",
     "react-navigation": "^4.4.4",
-    "reanimated-bottom-sheet": "^1.0.0-alpha.22"
+    "reanimated-bottom-sheet": "^1.0.0-alpha.22",
+    "reinput": "^3.7.2"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",

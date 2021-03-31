@@ -13,7 +13,7 @@ import {
 import {TouchableRipple} from 'react-native-paper';
 import { CheckBox } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
-import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { AntDesign, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from './styles';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';

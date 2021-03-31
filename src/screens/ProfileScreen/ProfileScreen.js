@@ -9,7 +9,7 @@ import {
 	Text,
 	TouchableRipple,
 } from 'react-native-paper';
-import { AntDesign, MaterialCommunityIcons, FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import { AntDesign, MaterialCommunityIcons, Entypo, MaterialIcons } from '@expo/vector-icons';
 
 export default class ProfileScreen extends Component {
 	constructor() {
@@ -50,6 +50,7 @@ export default class ProfileScreen extends Component {
 		const user = this.state.users;
 		return (
 			<SafeAreaView style={styles.container}>
+				<View style={styles.userInfoContainer}>
 				<View style={styles.userInfoSection}>
 					<View
 						style={{
@@ -73,59 +74,62 @@ export default class ProfileScreen extends Component {
 
 				<View style={styles.userInfoSection}>
 					<View style={styles.row}>
-						<FontAwesome name='phone' size={20} color='#777777' />
-						<Text style={{ color: '#777777', marginLeft: 20 }}>
+						<Entypo name='phone' size={20} color='#ffffff' />
+						<Text style={{ color: '#ffffff', marginLeft: 20 }}>
 							{user.phoneNumber}
 						</Text>
 					</View>
 					<View style={styles.row}>
-						<MaterialIcons name='email' size={20} color='#777777' />
-						<Text style={{ color: '#777777', marginLeft: 20 }}>
+						<MaterialIcons name='email' size={20} color='#ffffff' />
+						<Text style={{ color: '#ffffff', marginLeft: 20 }}>
 							{user.email}
 						</Text>
+					</View>
 					</View>
 				</View>
 
 				<View style={styles.infoBoxWrapper}>
 					<View style={styles.infoBox}>
-						<Title>1</Title>
-						<Caption>Hosted Events</Caption>
+						<Title style={{color: '#ffffff'}}>1</Title>
+						<Caption style={{color: '#ffffff'}}>Hosted Events</Caption>
 					</View>
 					<View style={styles.infoBox}>
-						<Title>4</Title>
-						<Caption>Invited Events</Caption>
+						<Title style={{color: '#ffffff'}}>4</Title>
+						<Caption style={{color: '#ffffff'}}>Invited Events</Caption>
 					</View>
 				</View>
+
+				<View style={styles.hr}></View>
 
 				<View style={styles.menuWrapper}>
 					<TouchableRipple onPress={() => {}}>
 						<View style={styles.menuItem}>
-							<AntDesign name='hearto' color='#FF6347' size={25} />
+							<AntDesign name='hearto' color='#e95632' size={25} />
 							<Text style={styles.menuItemText}>Your Favorites</Text>
 						</View>
 					</TouchableRipple>
 					<TouchableRipple onPress={() => {}}>
 						<View style={styles.menuItem}>
-							<AntDesign name='creditcard' color='#FF6347' size={25} />
+							<AntDesign name='creditcard' color='#e95632' size={25} />
 							<Text style={styles.menuItemText}>Payment</Text>
 						</View>
 					</TouchableRipple>
 					<TouchableRipple onPress={() => {}}>
 						<View style={styles.menuItem}>
-							<AntDesign name='bells' color='#FF6347' size={25} />
+							<AntDesign name='bells' color='#e95632' size={25} />
 							<Text style={styles.menuItemText}>Notifications</Text>
 						</View>
 					</TouchableRipple>
 					<TouchableRipple onPress={() => {}}>
 						<View style={styles.menuItem}>
-							<MaterialCommunityIcons name='account-box-outline' color='#FF6347' size={25} />
+							<MaterialCommunityIcons name='account-box-outline' color='#e95632' size={25} />
 							<Text style={styles.menuItemText}>Support</Text>
 						</View>
 					</TouchableRipple>
 					<TouchableRipple onPress={this.onSignOut}>
 						<View style={styles.menuItem}>
-							<AntDesign name='logout' color='#FF6347' size={25} />
-							<Text style={styles.menuItemText}>Sign out</Text>
+							<AntDesign name='logout' color='#e95632' size={25} />
+							<Text style={styles.menuItemText}>Sign Out</Text>
 						</View>
 					</TouchableRipple>
 				</View>
