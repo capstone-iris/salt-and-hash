@@ -23,15 +23,20 @@ export default StyleSheet.create({
 	indRestaurantInsideContainer: {
 		margin: 10
 	},
+	restaurantHeaderContainer: {
+		marginLeft: 10,
+		marginTop: 25
+	},
 	restaurantsContainer: {
 		alignItems: 'center',
 		justifyContent: 'center',
 		marginTop: 25
 	},
 	restaurantsTextHeader: {
-		fontSize: 16,
+		fontSize: 24,
 		fontWeight: 'bold',
-		color: '#e95530'
+		color: '#e95530',
+		fontFamily: 'PurplePurse'
 	},
 	indRestaurantTextHeader: {
 		fontSize: 16,

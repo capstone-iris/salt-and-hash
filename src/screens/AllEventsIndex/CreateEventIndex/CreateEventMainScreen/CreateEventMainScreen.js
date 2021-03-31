@@ -159,6 +159,7 @@ class CreateEventMainScreen extends React.Component {
 							borderHeight={2}
 							autoCapitalize={'none'}
 							autoCorrect={false}
+							onChangeText={(val) => this.inputValueUpdate(val, 'name')}
 						/>
 						<Sae
 							style={{marginLeft: 10, marginRight: 10}}
@@ -173,6 +174,7 @@ class CreateEventMainScreen extends React.Component {
 							borderHeight={2}
 							autoCapitalize={'none'}
 							autoCorrect={false}
+							onChangeText={(val) => this.inputValueUpdate(val, 'description')}
 						/>
 
 						<View style={styles.break1}></View>
