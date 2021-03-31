@@ -3,8 +3,8 @@ import { View, useWindowDimensions, Text, SafeAreaView } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import CreateEventIndex from '../CreateEventIndex/CreateEventIndex';
 import EventsHostedScreen from '../EventsHostedScreen/EventsHostedScreen';
-// import EventsInvitedToScreen from '../EventsInvitedToScreen/EventsInvitedToScreen';
-import EventsInvitedTo from '../EventsInvitedToScreen/events'
+import EventsInvitedToScreen from '../EventsInvitedToScreen/EventsInvitedToScreen';
+// import EventsInvitedTo from '../EventsInvitedToScreen/events'
 // import styles from './styles';
 
 // const HostedEvents = () => (
@@ -31,8 +31,7 @@ export default function MyEventsScreen({ navigation }) {
 
 	const renderScene = SceneMap({
 		hosted: EventsHostedScreen,
-		// invited: EventsInvitedToScreen,
-		invited: EventsInvitedTo,
+		invited: EventsInvitedToScreen,
 		create: CreateEventIndex,
 	});
 
