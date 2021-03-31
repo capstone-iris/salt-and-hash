@@ -45,9 +45,10 @@ export default StyleSheet.create({
 	},
 	title: {
 		padding: 5,
-		fontSize: 16,
+		fontSize: 24,
 		fontWeight: 'bold',
-		color: '#e95530'
+		color: '#e95530',
+		fontFamily: 'PurplePurse'
 	},
 	buttonContainer: {
 		justifyContent: 'center',

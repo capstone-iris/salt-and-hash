@@ -10,6 +10,7 @@ import {
 	RegistrationScreen,
 	ActivityIndicatorScreen,
 } from './src/screens';
+import * as Font from 'expo-font';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { decode, encode } from 'base-64'
 
@@ -26,7 +27,6 @@ const LoggedOutBase = createStackNavigator();
 const styles = StyleSheet.create({
 	slide: {
 		flex: 1,
-		// paddingTop: 20,
 		alignItems: 'center',
 		justifyContent: 'center',
 		padding: 20,
@@ -106,10 +106,22 @@ export default class App extends React.Component {
 		this.state = {
 			loading: true,
 			showMainApp: false,
+			fontsLoaded: false
 		};
 	}
 
+	loadFontsAsync = async () => {
+		let isLoaded = await Font.loadAsync({
+			// Bangers: require("./assets/fonts/Bangers-Regular.ttf"),
+			// LondrinaShadow: require("./assets/fonts/LondrinaShadow-Regular.ttf")
+			PurplePurse: require("./assets/fonts/PurplePurse-Regular.ttf")
+		});
+		this.setState({ fontsLoaded: isLoaded });
+	};
+
+	// --> !this.state.fontsLoaded in render needs fixing
 	componentDidMount() {
+		this.loadFontsAsync();
 		this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
 			this.setState({
 				loading: false,
@@ -143,21 +155,7 @@ export default class App extends React.Component {
 	render() {
 		if (this.state.loading) return <ActivityIndicatorScreen />;
 
-		if (this.state.showMainApp) {
-			if (this.state.user)
-				return (
-					<NavigationContainer>
-						<StatusBar
-							hidden={false}
-							backgroundColor='#00BCD4'
-							translucent={true}
-						/>
-						<LoggedInBase.Navigator screenOptions={{ headerShown: false }}>
-							<LoggedInBase.Screen name='Home' component={HomeScreen} />
-						</LoggedInBase.Navigator>
-					</NavigationContainer>
-				);
-
+		if(this.state.user) {
 			return (
 				<NavigationContainer>
 					<StatusBar
@@ -165,25 +163,40 @@ export default class App extends React.Component {
 						backgroundColor='#00BCD4'
 						translucent={true}
 					/>
-					<LoggedOutBase.Navigator screenOptions={{ headerShown: false }}>
-						<LoggedOutBase.Screen name='Login' component={LoginScreen} />
-						<LoggedOutBase.Screen
-							name='Registration'
-							component={RegistrationScreen}
-						/>
-					</LoggedOutBase.Navigator>
+					<LoggedInBase.Navigator screenOptions={{ headerShown: false }}>
+						<LoggedInBase.Screen name='Home' component={HomeScreen} />
+					</LoggedInBase.Navigator>
 				</NavigationContainer>
 			);
 		} else {
-			return (
-				<AppIntroSlider
-					renderItem={this.renderItem}
-					data={slides}
-					onDone={this.onDone}
-					showSkipButton={true}
-					onSkip={this.onSkip}
-				/>
-			);
+			if (this.state.showMainApp) {
+				return (
+					<NavigationContainer>
+						<StatusBar
+							hidden={false}
+							backgroundColor='#00BCD4'
+							translucent={true}
+						/>
+						<LoggedOutBase.Navigator screenOptions={{ headerShown: false }}>
+							<LoggedOutBase.Screen name='Login' component={LoginScreen} />
+							<LoggedOutBase.Screen
+								name='Registration'
+								component={RegistrationScreen}
+							/>
+						</LoggedOutBase.Navigator>
+					</NavigationContainer>
+				);
+			} else {
+				return (
+					<AppIntroSlider
+						renderItem={this.renderItem}
+						data={slides}
+						onDone={this.onDone}
+						showSkipButton={true}
+						onSkip={this.onSkip}
+					/>
+				);
+			}
 		}
 	}
 }

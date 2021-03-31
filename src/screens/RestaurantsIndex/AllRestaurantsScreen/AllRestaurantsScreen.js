@@ -128,7 +128,7 @@ export default class AllRestaurantsScreen extends React.Component {
 				:
 
 				<View>
-					<View style={styles.restaurantsContainer}>
+					<View style={styles.restaurantHeaderContainer}>
 						<Text style={styles.restaurantsTextHeader}>Restaurants Near You</Text>
 					</View>
 					<View style={styles.restaurantContainer}>

@@ -16,7 +16,8 @@ export default StyleSheet.create({
 	title: {
 		fontSize: 24,
 		fontWeight: 'bold',
-		color: '#ffffff'
+		color: '#ffffff',
+		fontFamily: 'PurplePurse'
 	},
 	caption: {
 		fontSize: 14,
