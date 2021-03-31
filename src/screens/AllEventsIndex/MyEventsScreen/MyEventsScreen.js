@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, useWindowDimensions, Text, SafeAreaView } from 'react-native';
+import { View, useWindowDimensions } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import CreateEventIndex from '../CreateEventIndex/CreateEventIndex';
 import EventsHostedScreen from '../EventsHostedScreen/EventsHostedScreen';
@@ -37,17 +37,16 @@ export default function MyEventsScreen({ navigation }) {
 
 	return (
 		<TabView
-			style={{ marginTop: 60 }}
+			style={{ marginTop: 20 }}
 			navigationState={{ index, routes }}
 			renderScene={renderScene}
 			onIndexChange={setIndex}
 			initialLayout={{ width: layout.width, height: layout.height }}
-			// renderTabBar={props => <TabBar {...props}/>}
 			renderTabBar={(props) => (
 				<TabBar
 					{...props}
-					style={{ backgroundColor: '#A46950' }}
-					indicatorStyle={{ backgroundColor: 'black' }}
+					style={{ backgroundColor: '#e6a80c', color: '#e95531' }}
+					indicatorStyle={{ backgroundColor: '#e95531' }}
 				/>
 			)}
 		/>

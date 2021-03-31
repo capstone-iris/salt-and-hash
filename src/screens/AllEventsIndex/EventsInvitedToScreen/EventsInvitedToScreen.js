@@ -13,8 +13,6 @@ export default class EventsInvitedToScreen extends React.Component {
     };
    console.log('PROPS', this.props)
     this.fetchData = this.fetchData.bind(this)
-  
-
   }
 
  async componentDidMount() {
@@ -108,6 +106,8 @@ export default class EventsInvitedToScreen extends React.Component {
       </SafeAreaView>
     );
   }
-}
+
+
+ 
 
  

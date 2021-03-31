@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
 	container: {
-		backgroundColor: '#fed8b1',
+		backgroundColor: '#ffffff',
 		flex: 1,
 		flexDirection: 'row'
 	},
@@ -26,8 +26,10 @@ export default StyleSheet.create({
 		margin: 10
 	},
 	restaurantsTextHeader: {
-		fontSize: 16,
-		fontWeight: 'bold'
+		fontSize: 24,
+		fontWeight: 'bold',
+		fontFamily: 'PurplePurse',
+		color: '#e95530',
 	},
 	restaurantsText: {
 		fontSize: 14

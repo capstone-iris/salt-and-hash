@@ -172,10 +172,7 @@ class AddRestaurantsToEventScreen extends React.Component {
       <SafeAreaView>
         <View style={styles.restaurantsContainer}>
           <Text style={styles.restaurantsTextHeader}>
-            Select Restaurants for Your Event
-          </Text>
-          <Text style={styles.restaurantsText}>
-            -select between 3-7 restaurants-
+            Select 3-7 Restaurants for Your Event
           </Text>
         </View>
 

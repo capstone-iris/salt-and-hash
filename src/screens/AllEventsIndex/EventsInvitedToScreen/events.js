@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+
 import { Text, SafeAreaView, TouchableOpacity, View } from 'react-native';
+
 import styles from './styles';
 import RestaurantSwipeScreen from '../../RestaurantsIndex/RestaurantSwipeScreen/RestaurantSwipeScreen';
 import { useNavigation } from '@react-navigation/native';

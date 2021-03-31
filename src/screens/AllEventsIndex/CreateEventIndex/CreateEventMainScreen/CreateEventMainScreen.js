@@ -1,20 +1,21 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-
 import {
 	Text,
 	SafeAreaView,
 	ScrollView,
-	TextInput,
 	View,
 	TouchableOpacity,
 	ActivityIndicator,
-	Alert,
+	Alert
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { firebase } from '../../../../firebase/config';
 import styles from './styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { Sae } from 'react-native-textinput-effects';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { FontAwesome } from '@expo/vector-icons'
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -146,16 +147,43 @@ class CreateEventMainScreen extends React.Component {
 						<View>
 							<Text style={styles.title}>Create An Event</Text>
 						</View>
-						<TextInput
-							style={styles.textInput}
-							placeholder='Event Name'
-							maxLength={20}
-							value={this.state.name}
+						<Sae
+							style={{marginLeft: 10, marginRight: 10, marginBottom: 10}}
+							labelStyle={{color: '#656565'}}
+							label={'Event Name'}
+							iconClass={FontAwesomeIcon}
+							iconName={'calendar-check-o'}
+							iconColor={'#e95530'}
+							inputPadding={16}
+							labelHeight={20}
+							borderHeight={2}
+							autoCapitalize={'none'}
+							autoCorrect={false}
 							onChangeText={(val) => this.inputValueUpdate(val, 'name')}
 						/>
+						<Sae
+							style={{marginLeft: 10, marginRight: 10}}
+							labelStyle={{color: '#656565'}}
+							inputStyle={{fontSize: 16}}
+							label={'Event Description'}
+							iconClass={FontAwesomeIcon}
+							iconName={'pencil'}
+							iconColor={'#e95530'}
+							inputPadding={16}
+							labelHeight={20}
+							borderHeight={2}
+							autoCapitalize={'none'}
+							autoCorrect={false}
+							onChangeText={(val) => this.inputValueUpdate(val, 'description')}
+						/>
 
-						<View style={{ marginHorizontal: 8 }}>
-							<Text style={styles.text}>Date </Text>
+						<View style={styles.break1}></View>
+						<View style={styles.break2}><FontAwesome name='circle' color='#e6a80c'/></View>
+						<View style={styles.break3}></View>
+						
+						<View style={styles.indInputContainer}>
+							<Text style={styles.text}>Event Date: </Text>
+							<View style={styles.dateTimePicker}>
 							<DateTimePicker
 								testID='datePicker'
 								value={this.state.date}
@@ -166,10 +194,12 @@ class CreateEventMainScreen extends React.Component {
 								placeholder='Select a date'
 								style={{ marginHorizontal: 10 }}
 							/>
+							</View>
 						</View>
 
-						<View style={{ marginHorizontal: 8 }}>
-							<Text style={styles.text}>Start Time </Text>
+						<View style={styles.indInputContainer}>
+							<Text style={styles.text}>Event Start Time: </Text>
+							<View style={styles.dateTimePicker}>
 							<DateTimePicker
 								testID='timePicker'
 								value={this.state.eventStartTime}
@@ -180,10 +210,12 @@ class CreateEventMainScreen extends React.Component {
 								placeholder='Start time'
 								style={{ marginHorizontal: 10 }}
 							/>
+							</View>
 						</View>
 
-						<View style={{ marginHorizontal: 8 }}>
-							<Text style={styles.text}>End Time </Text>
+						<View style={styles.indInputContainer}>
+							<Text style={styles.text}>Event End Time: </Text>
+							<View style={styles.dateTimePicker}>
 							<DateTimePicker
 								testID='timePicker'
 								value={this.state.eventEndTime}
@@ -194,10 +226,12 @@ class CreateEventMainScreen extends React.Component {
 								placeholder='End time'
 								style={{ marginHorizontal: 10 }}
 							/>
+							</View>
 						</View>
 
-						<View style={{ marginHorizontal: 8 }}>
-							<Text style={styles.text}>Votes Due By </Text>
+						<View style={styles.indInputContainerLast}>
+							<Text style={styles.text}>Guests' Votes Due By: </Text>
+							<View style={styles.dateTimePicker}>
 							<DateTimePicker
 								testID='datePicker'
 								value={this.state.votingDeadline}
@@ -208,24 +242,17 @@ class CreateEventMainScreen extends React.Component {
 								placeholder='Votes Due By'
 								style={{ marginHorizontal: 10 }}
 							/>
+							</View>
 						</View>
 					</View>
-					<TextInput
-						style={styles.textInput}
-						multiline={true}
-						placeholder='Write a description...'
-						maxLength={200}
-						height={90}
-						value={this.state.description}
-						onChangeText={(val) => this.inputValueUpdate(val, 'description')}
-					/>
-
-					<TouchableOpacity
-						style={styles.button}
-						onPress={() => this.storeEvent()}
-					>
-						<Text style={styles.Btn}>Create Event</Text>
-					</TouchableOpacity>
+					<View style={styles.buttonContainer}>
+						<TouchableOpacity
+							style={styles.button}
+							onPress={() => this.storeEvent()}
+						>
+							<Text style={styles.Btn}>Create Event</Text>
+						</TouchableOpacity>
+					</View>
 				</ScrollView>
 			</SafeAreaView>
 		);
@@ -233,3 +260,4 @@ class CreateEventMainScreen extends React.Component {
 }
 
 export default withNavigation(CreateEventMainScreen);
+
