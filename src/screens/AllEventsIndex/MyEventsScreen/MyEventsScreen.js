@@ -1,39 +1,85 @@
-import * as React from 'react';
+// import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, useWindowDimensions } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import CreateEventIndex from '../CreateEventIndex/CreateEventIndex';
 import EventsHostedScreen from '../EventsHostedScreen/EventsHostedScreen';
 import EventsInvitedToScreen from '../EventsInvitedToScreen/EventsInvitedToScreen';
-// import EventsInvitedTo from '../EventsInvitedToScreen/events'
+import { firebase } from './../../../firebase/config';
 // import styles from './styles';
 
-// const HostedEvents = () => (
-//   <View style={{ flex: 1, backgroundColor: '#ddb39d' }} />
-// );
-
-// const SecondRoute = () => (
-//   <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
-// );
-
-// const CreateRoute = () => (
-//   <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
-// );
 
 export default function MyEventsScreen({ navigation }) {
 	const layout = useWindowDimensions();
+  const [usersData, setUsersData] = useState([]);
+	// const [invitedEventsData, setInvitedEventsData] = useState([]);
 
-	const [index, setIndex] = React.useState(0);
-	const [routes] = React.useState([
+	const [index, setIndex] = useState(0);
+	const [routes] = useState([
 		{ key: 'create', title: 'CREATE' },
 		{ key: 'hosted', title: 'HOST' },
 		{ key: 'invited', title: 'ATTEND' },
 	]);
 
-	const renderScene = SceneMap({
-		hosted: EventsHostedScreen,
-		invited: EventsInvitedToScreen,
-		create: CreateEventIndex,
-	});
+	useEffect(()=>{
+		if (!firebase.auth().currentUser) {
+			return;
+		}
+		const currentUser = firebase.auth().currentUser.uid;
+
+		// Create subscription to listen for changes
+		const unsubscribe = firebase
+
+			.firestore()
+			.collection('users')
+			.where('id', '==', currentUser)
+			.onSnapshot((snapshot) => {
+				let result = [];
+				snapshot.forEach((doc) => {
+					result = doc.data();
+				});
+				setUsersData(result);
+			});
+		return () => unsubscribe();
+	}, []);
+
+	// useEffect(()=>{
+
+
+	// 		let result = [];
+	// 		const guestsRef = firebase
+	// 		.firestore()
+	// 		.collection('eventGuests')
+	// 		.doc(usersData.phoneNumber)
+	// 		.collection('eventsInvitedTo')
+	// 		.onSnapshot((snapshot) => {
+	// 			snapshot.forEach((doc) => {
+	// 				result.push(doc.data());
+	// 			});
+	// 			setInvitedEventsData(result)
+	// 			});
+
+	// }, [usersData]);
+
+
+	console.log('usersData MyEventsScreen ==>', usersData)
+
+  // console.log('invitedEventsData MyEventsScreen ==>', invitedEventsData)
+
+
+	const renderScene = ({ route }) => {
+		switch (route.key) {
+			case 'create':
+				return <CreateEventIndex currentUser={usersData}  />;
+			case 'hosted':
+				return <EventsHostedScreen currentUser={usersData} />;
+			case 'invited':
+				return <EventsInvitedToScreen currentUser={usersData}/>;
+			default:
+				return null;
+		}
+	};
+
 
 	return (
 		<TabView

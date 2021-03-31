@@ -28,7 +28,7 @@ export default class EventsInvitedToScreen extends React.Component {
       let userResult;
       let guestsResult = [];
       let eventsResult = [];
-  
+
       const userData = await firebase
         .firestore()
         .collection('users')
@@ -48,6 +48,7 @@ export default class EventsInvitedToScreen extends React.Component {
             })
             console.log('guestsResult', guestsResult)
               guestsResult.forEach(async (event) => {
+
                      await firebase
                       .firestore()
                       .collection('events')
@@ -66,7 +67,7 @@ export default class EventsInvitedToScreen extends React.Component {
             console.log(error)
       }
     }
- 
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -107,7 +108,7 @@ export default class EventsInvitedToScreen extends React.Component {
     );
   }
 
+}
 
- 
 
- 
+
