@@ -39,7 +39,7 @@ export default function EventsHostedScreen() {
 
 				setEventsData(result);
 			});
-			console.log('eventsData hosted', eventsData)
+			// console.log('eventsData hosted', eventsData)
 
 		// Remove the listener when component unmounts
 		return () => unsubscribe();
@@ -47,32 +47,33 @@ export default function EventsHostedScreen() {
 	}, [firebase.auth().currentUser]);
 
 	return (
-		<SafeAreaView style={styles.container}>
-		
+		<SafeAreaView style={styles.mainContainer}>
 			
-				<View style={styles.eventsContainer}>
-					{eventsData < 1 ? 
+			{eventsData < 1 ? 
 						
-						(
-						<View styles={styles.buttonContainer}>
-							<TouchableOpacity style={styles.button}>
-								<Text style={styles.buttonText} onPress={() => navigation.navigate('Create Event Index')}>
-									Create An Event
-								</Text>
-							</TouchableOpacity>
+					(
+						<View style={styles.firstContainer}>
+							<View styles={styles.buttonContainer}>
+								<TouchableOpacity style={styles.button}>
+									<Text style={styles.buttonText} onPress={() => navigation.navigate('Create Event Index')}>
+										Create An Event
+									</Text>
+								</TouchableOpacity>
+							</View>
 						</View>
 					) 
 					
 					: 
 					
 					(
-						<ScrollView style={{ backgroundColor: '#ffffff' }}>
+						<View style={styles.secondContainer}>
+						<ScrollView style={styles.innerContainer}>
 
 						<TouchableOpacity style={styles.addEventContainer} onPress={() => navigation.navigate('Create Event Index')}>
 							<Text style={styles.addEvent}>+</Text>
-							<Text style={styles.createEventText}>Create An Event</Text>
+							<Text style={styles.createEventText}>Add An Event</Text>
 						</TouchableOpacity>
-
+						
 						<View style={styles.eventContainer}>
 							{eventsData.map((event, index) => {
 								return (
@@ -89,9 +90,8 @@ export default function EventsHostedScreen() {
 							})}
 						</View>
 						</ScrollView>
+						</View>
 					)}
-				</View>
-			</SafeAreaView>
+		</SafeAreaView>
 	);
 }
-
