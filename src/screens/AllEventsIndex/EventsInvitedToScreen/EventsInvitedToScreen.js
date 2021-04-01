@@ -73,13 +73,11 @@ export default class EventsInvitedToScreen extends React.Component {
                       eventsInvitedTo.docs.forEach((doc)=> {
                         eventsResult.push(doc.data())
                       })
-                      console.log('eventsResult1', eventsResult)
                       // .onSnapshot((snapshot) => {
                       //   snapshot.forEach((doc) => {
                       //     eventsResult.push(doc.data());
                       //   });
                         this.setState({eventsData: eventsResult})   
-                        console.log('eventsResult2', eventsResult)
                   
             });
           // });

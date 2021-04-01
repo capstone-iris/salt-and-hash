@@ -185,7 +185,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 		} else if (this.state.restaurantCouner > 7) {
 			Alert.alert('You cannot choose more than 7 restaurants!');
 		} else {
-			this.props.navigation.navigate('Add Guests to Event', {
+			this.props.navigation.navigate('Single Event', {
 				eventId: eventId,
 			});
 		}
@@ -193,6 +193,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 
 	render() {
 		const eventId = this.props.route.params.eventId;
+		console.log('eventId', eventId)
 
 		return (
 			<SafeAreaView style={styles.container}>
