@@ -6,11 +6,11 @@ import {
 	SafeAreaView,
 	FlatList,
 	StatusBar,
-    TouchableOpacity,
+	TouchableOpacity,
 	Linking,
-	Alert
+	Alert,
 } from 'react-native';
-import {TouchableRipple} from 'react-native-paper';
+import { TouchableRipple } from 'react-native-paper';
 import { CheckBox } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
@@ -18,14 +18,16 @@ import styles from './styles';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import { firebase } from '../../../../firebase/config';
-import * as base from "../../../../../secrets.js";
+import * as base from '../../../../../secrets.js';
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
 class AddRestaurantsToEventScreen extends React.Component {
 	constructor() {
 		super(),
-		this.eventRestaurantsRef = firebase.firestore().collection('eventRestaurants');
+			(this.eventRestaurantsRef = firebase
+				.firestore()
+				.collection('eventRestaurants'));
 		this.state = {
 			hasLocationPermission: false,
 			latitude: 0,
@@ -35,8 +37,8 @@ class AddRestaurantsToEventScreen extends React.Component {
 			activeRestaurantId: null,
 			detailToggleStatus: false,
 			isLoading: false,
-			restaurantCounter: 0
-		}
+			restaurantCounter: 0,
+		};
 	}
 
 	componentDidMount = () => {
@@ -44,7 +46,11 @@ class AddRestaurantsToEventScreen extends React.Component {
 	};
 
 	getLocationAsync = async () => {
-		const { status } = await Permissions.askAsync(Permissions.LOCATION).catch(err => {console.log(err)});
+		const { status } = await Permissions.askAsync(Permissions.LOCATION).catch(
+			(err) => {
+				console.log(err);
+			}
+		);
 		if (status === 'granted') {
 			let location = await Location.getCurrentPositionAsync({});
 			this.setState({
@@ -89,125 +95,149 @@ class AddRestaurantsToEventScreen extends React.Component {
 	};
 
 	// to add:
-    // onPress function for a user to add a restaurant to his/her favorites
-    // addToFavorites = () => {}
+	// onPress function for a user to add a restaurant to his/her favorites
+	// addToFavorites = () => {}
 
-    //logic needs fixing: 
-    //user cannot open multiple detail toggles @ once
-    handleActiveRestaurantDetails = (placeId) => {
-      const url = 'https://maps.googleapis.com/maps/api/place/details/json?';
-      const place_id = `&place_id=${placeId}`;
-      const key = `&key=${base.GOOGLE_PLACES_API}`;
-      const activeRestaurantDetailsUrl = url + place_id + key;
-  
-      if(this.state.detailToggleStatus === false){
-          fetch(activeRestaurantDetailsUrl, {
-              mode: 'no-cors',
-              cache: 'no-cache',
-          })
-              .then((response) => {
-                  return response.json();
-              })
-              .then((result) => {
-                  return this.setState({ activeRestaurantDetails: result, activeRestaurantId: placeId, detailToggleStatus: true });
-              })
-              .catch((e) => console.log(e));
+	//logic needs fixing:
+	//user cannot open multiple detail toggles @ once
+	handleActiveRestaurantDetails = (placeId) => {
+		const url = 'https://maps.googleapis.com/maps/api/place/details/json?';
+		const place_id = `&place_id=${placeId}`;
+		const key = `&key=${base.GOOGLE_PLACES_API}`;
+		const activeRestaurantDetailsUrl = url + place_id + key;
+
+		if (this.state.detailToggleStatus === false) {
+			fetch(activeRestaurantDetailsUrl, {
+				mode: 'no-cors',
+				cache: 'no-cache',
+			})
+				.then((response) => {
+					return response.json();
+				})
+				.then((result) => {
+					return this.setState({
+						activeRestaurantDetails: result,
+						activeRestaurantId: placeId,
+						detailToggleStatus: true,
+					});
+				})
+				.catch((e) => console.log(e));
 		}
-		if(this.state.activeRestaurantId === placeId && this.state.detailToggleStatus === true) {
-			return this.setState({ activeRestaurantDetails: null, activeRestaurantId: null, detailToggleStatus: false });
+		if (
+			this.state.activeRestaurantId === placeId &&
+			this.state.detailToggleStatus === true
+		) {
+			return this.setState({
+				activeRestaurantDetails: null,
+				activeRestaurantId: null,
+				detailToggleStatus: false,
+			});
 		}
-	}
-    
+	};
+
 	handleWebsiteUrl = (placeSite) => {
 		Linking.openURL(placeSite);
-	}
+	};
 
 	storeRestaurant = (eventId, restaurant) => {
-			if(this.state.restaurantCounter === 8) {
-				Alert.alert('You cannot choose more than 8 restaurants!')
-			} else {
-				this.eventRestaurantsRef.doc(eventId).collection('eventRestaurants').doc(restaurant.place_id)
-					.set({
-						name: restaurant.name,
-						photo: restaurant.photos[0].photo_reference,
-						address: restaurant.vicinity,
-						eventId: eventId
-						//restaurant website is on the restaurant details page; stretch integration
-					})
-					.then(() => 
-						this.setState(
-							{restaurantCounter: this.state.restaurantCounter + 1}))
-					.then(() => console.log('Restaurant added!'))
-					.catch((e) => {
-						console.error('Error found: ', e)
-					})
-			}
-	}
+		if (this.state.restaurantCounter === 8) {
+			Alert.alert('You cannot choose more than 8 restaurants!');
+		} else {
+			this.eventRestaurantsRef
+				.doc(eventId)
+				.collection('eventRestaurants')
+				.doc(restaurant.place_id)
+				.set({
+					name: restaurant.name,
+					photo: restaurant.photos[0].photo_reference,
+					address: restaurant.vicinity,
+					eventId: eventId,
+					//restaurant website is on the restaurant details page; stretch integration
+				})
+				.then(() =>
+					this.setState({ restaurantCounter: this.state.restaurantCounter + 1 })
+				)
+				.then(() => console.log('Restaurant added!'))
+				.catch((e) => {
+					console.error('Error found: ', e);
+				});
+		}
+	};
 
 	deleteRestaurant = (eventId, restaurant) => {
-		this.eventRestaurantsRef.doc(eventId).collection('eventRestaurants').doc(restaurant.place_id).delete()
-			.then(() => 
-					this.setState(
-						{restaurantCounter: this.state.restaurantCounter - 1}))
+		this.eventRestaurantsRef
+			.doc(eventId)
+			.collection('eventRestaurants')
+			.doc(restaurant.place_id)
+			.delete()
+			.then(() =>
+				this.setState({ restaurantCounter: this.state.restaurantCounter - 1 })
+			)
 			.then(() => console.log('Restaurant deleted!'))
 			.catch((e) => {
-				console.error('Error found: ', e)
-			})
-		}
+				console.error('Error found: ', e);
+			});
+	};
 
 	submitRestaurantSelection = (eventId) => {
-		if(this.state.restaurantCounter < 3) {
-			Alert.alert('You must select at least three restaurants!')
-		} else if(this.state.restaurantCouner > 7) {
-			Alert.alert('You cannot choose more than 7 restaurants!')
+		if (this.state.restaurantCounter < 3) {
+			Alert.alert('You must select at least three restaurants!');
+		} else if (this.state.restaurantCouner > 7) {
+			Alert.alert('You cannot choose more than 7 restaurants!');
 		} else {
-		this.props.navigation.navigate('Add Guests to Event', { eventId: eventId })
+			this.props.navigation.navigate('Add Guests to Event', {
+				eventId: eventId,
+			});
 		}
-	}
+	};
 
-  render() {
-	const eventId = this.props.route.params.eventId
+	render() {
+		const eventId = this.props.route.params.eventId;
 
-    return (
-      <SafeAreaView>
-        <View style={styles.restaurantsContainer}>
-          <Text style={styles.restaurantsTextHeader}>
-            Select 3-7 Restaurants for Your Event
-          </Text>
-        </View>
-
-				{this.state.restaurantList.length === 0 ? 
+		return (
+			<SafeAreaView>
 				<View style={styles.restaurantsContainer}>
-					<TouchableOpacity onPress={() => this.handleRestaurantSearch()}>
-						<Text style={styles.restaurantsTextHeader}>					
-							Restaurants Near You
-						</Text>
-					</TouchableOpacity>
+					<Text style={styles.restaurantsTextHeader}>
+						Select 3-7 Restaurants for Your Event
+					</Text>
 				</View>
-				
-				:
 
-				<View>
-					<TouchableOpacity style={styles.button} onPress={() => this.submitRestaurantSelection(eventId)} >
-						<Text style={styles.Btn}>Add Selected Restaurants to Event</Text>
-					</TouchableOpacity>
-					<View style={styles.button}>
-						<Text style={styles.Btn}>Restaurants Near You</Text>
+				{this.state.restaurantList.length === 0 ? (
+					<View style={styles.restaurantsContainer}>
+						<TouchableOpacity onPress={() => this.handleRestaurantSearch()}>
+							<Text style={styles.restaurantsTextHeader}>
+								Restaurants Near You
+							</Text>
+						</TouchableOpacity>
 					</View>
-					<View style={styles.restaurantContainer}>
-						<FlatList
-							data={this.state.restaurantList.results}
-							keyExtractor={(item) => item.place_id}
-							renderItem={({ item }) => (
-							
-								<View style={styles.indRestaurantContainer}>
-									<CheckBox
-										checked={!!item.checked}
-										onPress={() => {
-											const items = [...this.state.restaurantList.results];
-											const currentItemIndex = items.findIndex(v => v.place_id === item.place_id);
-											items[currentItemIndex].checked = !items[currentItemIndex].checked;
-											this.setState(state => ({ ...state, items }))
+				) : (
+					<View>
+						<TouchableOpacity
+							style={styles.button}
+							onPress={() => this.submitRestaurantSelection(eventId)}
+						>
+							<Text style={styles.Btn}>Add Selected Restaurants to Event</Text>
+						</TouchableOpacity>
+						<View style={styles.button}>
+							<Text style={styles.Btn}>Restaurants Near You</Text>
+						</View>
+						<View style={styles.restaurantContainer}>
+							<FlatList
+								data={this.state.restaurantList.results}
+								keyExtractor={(item) => item.place_id}
+								renderItem={({ item }) => (
+									<View style={styles.indRestaurantContainer}>
+										<CheckBox
+											checked={!!item.checked}
+											onPress={() => {
+												const items = [...this.state.restaurantList.results];
+												const currentItemIndex = items.findIndex(
+													(v) => v.place_id === item.place_id
+												);
+												items[currentItemIndex].checked = !items[
+													currentItemIndex
+												].checked;
+												this.setState((state) => ({ ...state, items }));
 
 											if(items[currentItemIndex].checked) {
 												this.storeRestaurant(eventId, items[currentItemIndex])
@@ -280,10 +310,10 @@ class AddRestaurantsToEventScreen extends React.Component {
 							)}
 						/>
 					</View>
-				</View>}
+				)}
 				<StatusBar style='auto' />
 			</SafeAreaView>
-		)
+		);
 	}
 }
 
