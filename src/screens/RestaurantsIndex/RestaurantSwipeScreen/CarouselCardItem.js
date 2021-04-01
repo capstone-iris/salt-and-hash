@@ -42,8 +42,14 @@ export default class CarouselCardItem extends React.Component {
     this.setState({votes: this.state.votes - 1})
   }
 
-  toggleLeft = () => {
+  toggleLeft = (eventId, item) => {
     this.setState({leftSelected: !this.state.leftSelected})
+    if (item.votes > 0) {
+    this.handleUnvote(eventId, item) 
+    } else {
+      alert('You haven\'t voted for this restaurant!')
+    }
+
   }
 
   toggleRight = (eventId, item) => {
@@ -54,7 +60,7 @@ export default class CarouselCardItem extends React.Component {
       this.handleVote(eventId, item)
     } else {
       this.decrement()
-      this.handleUnvote(eventId, item)
+
     }
   }
 
@@ -90,7 +96,7 @@ export default class CarouselCardItem extends React.Component {
         <Text style={styles.header}>{item.name}</Text>
         <Text style={styles.body}>{item.body}</Text>
         <View style={styles.voteContainer}>
-          <TouchableOpacity onPress={() => this.toggleLeft()}>
+          <TouchableOpacity onPress={() => this.toggleLeft(eventId, item)}>
           {this.state.leftSelected ? (
             <MaterialCommunityIcons
             name='close-circle-outline'

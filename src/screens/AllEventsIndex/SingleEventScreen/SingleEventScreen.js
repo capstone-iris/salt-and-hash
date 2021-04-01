@@ -66,6 +66,7 @@ export default function SingleEventScreen({ route }) {
 		};
 
 	useEffect(() => {
+
 		// async function fetchData() {
 		console.log('in fetch data')
 			const unsubscribe = firebase
@@ -82,6 +83,7 @@ export default function SingleEventScreen({ route }) {
 			});
 			return () => unsubscribe();
 	}, []);
+
 
 	return (
 		<SafeAreaView style={styles.container}>

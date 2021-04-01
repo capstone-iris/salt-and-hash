@@ -1,7 +1,6 @@
 import firebase from 'firebase';
 import '@firebase/auth';
 import '@firebase/firestore';
-
 const firebaseConfig = {
 	apiKey: 'AIzaSyDuxn3vOIuhebiKqD5EcT_7ld6PVzHV00s',
 	authDomain: 'salt-and-hash.firebaseapp.com',
@@ -12,6 +11,6 @@ const firebaseConfig = {
 	appId: '1:681081627618:ios:55fd9632b65645f9fbcfbb',
 };
 if (!firebase.apps.length) {
-	firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
 }
 export { firebase };

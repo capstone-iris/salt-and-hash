@@ -39,7 +39,6 @@ export default function EventsHostedScreen() {
 
 				setEventsData(result);
 			});
-			// console.log('eventsData hosted', eventsData)
 
 		// Remove the listener when component unmounts
 		return () => unsubscribe();
