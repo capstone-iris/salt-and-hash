@@ -27,7 +27,7 @@ export default class EventsInvitedToScreen extends React.Component {
       let userResult;
       let guestsResult = [];
       let eventsResult = [];
-  
+
       const userData = await firebase
         .firestore()
         .collection('users')
@@ -45,6 +45,7 @@ export default class EventsInvitedToScreen extends React.Component {
               guestsResult.push(doc.data());
             })
               guestsResult.forEach(async (event) => {
+
                      await firebase
                       .firestore()
                       .collection('events')
@@ -63,7 +64,7 @@ export default class EventsInvitedToScreen extends React.Component {
             console.log(error)
       }
     }
- 
+
   render() {
     const { navigation } = this.props
     return (

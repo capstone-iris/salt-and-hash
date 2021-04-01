@@ -181,7 +181,7 @@ class CreateEventMainScreen extends React.Component {
 						<View style={styles.break1}></View>
 						<View style={styles.break2}><FontAwesome name='circle' color='#e6a80c'/></View>
 						<View style={styles.break3}></View>
-						
+
 						<View style={styles.indInputContainer}>
 							<Text style={styles.text}>Event Date: </Text>
 							<View style={styles.dateTimePicker}>
