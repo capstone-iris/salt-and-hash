@@ -150,6 +150,7 @@ class CreateEventMainScreen extends React.Component {
 						<Sae
 							style={{marginLeft: 10, marginRight: 10, marginBottom: 10}}
 							labelStyle={{color: '#656565'}}
+							inputStyle={{ color: 'black' }}
 							label={'Event Name'}
 							iconClass={FontAwesomeIcon}
 							iconName={'calendar-check-o'}
@@ -164,7 +165,7 @@ class CreateEventMainScreen extends React.Component {
 						<Sae
 							style={{marginLeft: 10, marginRight: 10}}
 							labelStyle={{color: '#656565'}}
-							inputStyle={{fontSize: 16}}
+							inputStyle={{fontSize: 16, color: 'black'}}
 							label={'Event Description'}
 							iconClass={FontAwesomeIcon}
 							iconName={'pencil'}

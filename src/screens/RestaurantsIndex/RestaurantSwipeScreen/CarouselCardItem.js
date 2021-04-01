@@ -5,11 +5,12 @@ import {
   StyleSheet,
   Dimensions,
   Image,
-  TouchableOpacity,
-  Alert,
+  TouchableOpacity
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as base from "../../../../secrets.js";
+import { firebase } from '../../../firebase/config';
+
 
 export const SLIDER_WIDTH = Dimensions.get('window').width + 80;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
@@ -18,19 +19,55 @@ export default class CarouselCardItem extends React.Component {
   constructor(props) {
     super(props),
     this.state = {
-        leftSelected: false,
-        rightSelected: false,
+        votes: 0,
+        leftSelected: true,
+        rightSelected: true
       }
+      const {item, eventId} = this.props
+      this.eventRestaurantsRef = firebase.firestore().collection('eventRestaurants');
+      this.increment = this.increment.bind(this);
+      this.decrement = this.decrement.bind(this);
+      this.toggleLeft = this.toggleLeft.bind(this);
+      this.toggleRight = this.toggleRight.bind(this)
+      this.handleVote = this.handleVote.bind(this)
+      this.handleUnvote = this.handleUnvote.bind(this)
+
   }
 
-  handleSelect = () => {
+  increment = () => {
+    this.setState({votes: this.state.votes + 1})
+  }
+
+  decrement = () => {
+    this.setState({votes: this.state.votes - 1})
+  }
+
+  toggleLeft = () => {
+    this.setState({leftSelected: !this.state.leftSelected})
+  }
+
+  toggleRight = (eventId, item) => {
+    this.setState({rightSelected: !this.state.rightSelected})
     if (this.state.rightSelected) {
-      this.setState({
-        rightSelected: false,
-      });
-      alert('Restaurant added!');
+      alert('Restaurant added!')
+      this.increment()
+      this.handleVote(eventId, item)
+    } else {
+      this.decrement()
+      this.handleUnvote(eventId, item)
     }
-  };
+  }
+
+  handleVote = (eventId, item) => {
+    const increment = firebase.firestore.FieldValue.increment(1);
+    this.eventRestaurantsRef.doc(eventId).collection('eventRestaurants').doc(item.id).update({'votes': increment})
+  }
+
+  handleUnvote = (eventId, item) => {
+    const decrement = firebase.firestore.FieldValue.increment(-1);
+    this.eventRestaurantsRef.doc(eventId).collection('eventRestaurants').doc(item.id).update({'votes': decrement})
+  }
+ 
 
   fetchImage = (photoRef) => {
     const ref = photoRef
@@ -43,63 +80,46 @@ export default class CarouselCardItem extends React.Component {
 	};
 
   render() {
-    const { item, index } = this.props;
+    const { item, index, eventId } = this.props;
     return (
       <View style={styles.container} key={index}>
-        <Image source={{ uri: this.fetchImage(item.photo)}} style={styles.image} />
+        <Image
+          source={{ uri: this.fetchImage(item.photo) }}
+          style={styles.image}
+        />
         <Text style={styles.header}>{item.name}</Text>
-        {/* <Text style={styles.body}>{item.body}</Text> */}
+        <Text style={styles.body}>{item.body}</Text>
         <View style={styles.voteContainer}>
+          <TouchableOpacity onPress={() => this.toggleLeft()}>
           {this.state.leftSelected ? (
-            <TouchableOpacity
-              onPress={() => this.setState({ leftSelected: false })}
-            >
-              <Icon
-                style={styles.leftButton}
-                name='close-circle'
-                size={60}
-                color='#ff5e5e'
-              />
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              onPress={() => this.setState({ leftSelected: true })}
-            >
-              <Icon
-                style={styles.leftButton}
-                name='close-circle-outline'
-                size={60}
-                color='#ff5e5e'
-              />
-            </TouchableOpacity>
-          )}
-          {/*bug here for voting yes, only alerts when unchecking*/}
+            <MaterialCommunityIcons
+            name='close-circle-outline'
+            color='#ff5e5e'
+            size={60}
+          />
+        ) : (
+          <MaterialCommunityIcons
+            name='close-circle'
+            color='#ff5e5e'
+            size={60}
+          />
+        )}
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => this.toggleRight(eventId, item)}>
           {this.state.rightSelected ? (
-            <TouchableOpacity
-              onPress={
-                (() => this.setState({ rightSelected: false }),
-                this.handleSelect)
-              }
-            >
-              <Icon
-                style={styles.rightButton}
-                name='check-circle'
-                size={60}
-                color='#8dc293'
-              />
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              onPress={() => this.setState({ rightSelected: true })}
-            >
-              <Icon
-                style={styles.rightButton}
+              <MaterialCommunityIcons
                 name='check-circle-outline'
-                size={60}
                 color='#8dc293'
+                size={60}
               />
-            </TouchableOpacity>
-          )}
+            ) : (
+              <MaterialCommunityIcons
+                name='check-circle'
+                color='#8dc293'
+                size={60}
+              />
+            )}
+          </TouchableOpacity>
         </View>
       </View>
     );

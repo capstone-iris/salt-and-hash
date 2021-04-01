@@ -7,12 +7,14 @@ export default StyleSheet.create({
 		justifyContent: 'center'
 	},
 	inputContainer: {
-		padding: 10
+		padding: 10,
 	},
 	indInputContainer: {
 		marginLeft: 10,
 		marginRight: 10,
-		marginBottom: 25
+		marginBottom: 25,
+		color: '#000000'
+
 	},
 	indInputContainerLast: {
 		marginLeft: 10,

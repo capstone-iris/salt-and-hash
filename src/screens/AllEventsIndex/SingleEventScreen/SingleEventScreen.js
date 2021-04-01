@@ -85,7 +85,9 @@ export default function SingleEventScreen({ route }) {
 			  };
 
 		  fetchData();
-			}, []);
+			}, [restaurantsData]);
+
+			
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -149,7 +151,7 @@ export default function SingleEventScreen({ route }) {
 						<TouchableOpacity
 							activeOpacity={0.5}
 							key={index}
-							onPress={() => navigation.navigate('Restaurant Swipe', {restaurantsData: restaurantsData})}
+							onPress={() => navigation.navigate('Restaurant Swipe', {restaurantsData: restaurantsData, eventId:event.docId, navigation: navigation})}
 						>
 							<Image
 								style={styles.image}
@@ -158,6 +160,7 @@ export default function SingleEventScreen({ route }) {
 								}}
 							/>
 							<Text>{restaurant.name}</Text>
+							<Text>Votes: {restaurant.votes}</Text>
 						</TouchableOpacity>
 						)})}
 					</View>

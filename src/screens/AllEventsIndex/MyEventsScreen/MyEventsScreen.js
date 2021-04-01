@@ -21,7 +21,6 @@ import EventsInvitedToScreen from '../EventsInvitedToScreen/EventsInvitedToScree
 
 export default function MyEventsScreen({ navigation }) {
 
-	console.log('navigation', navigation)
 	const layout = useWindowDimensions();
 
 	const [index, setIndex] = React.useState(0);
