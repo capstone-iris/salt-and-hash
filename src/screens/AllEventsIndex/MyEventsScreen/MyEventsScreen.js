@@ -8,20 +8,19 @@ import EventsInvitedToScreen from '../EventsInvitedToScreen/EventsInvitedToScree
 import { firebase } from './../../../firebase/config';
 // import styles from './styles';
 
-
 export default function MyEventsScreen({ navigation }) {
 	const layout = useWindowDimensions();
-  const [usersData, setUsersData] = useState([]);
+	const [usersData, setUsersData] = useState([]);
 	// const [invitedEventsData, setInvitedEventsData] = useState([]);
 
 	const [index, setIndex] = useState(0);
 	const [routes] = useState([
-		{ key: 'create', title: 'CREATE' },
+		// { key: 'create', title: 'CREATE' },
 		{ key: 'hosted', title: 'HOST' },
 		{ key: 'invited', title: 'ATTEND' },
 	]);
 
-	useEffect(()=>{
+	useEffect(() => {
 		if (!firebase.auth().currentUser) {
 			return;
 		}
@@ -45,7 +44,6 @@ export default function MyEventsScreen({ navigation }) {
 
 	// useEffect(()=>{
 
-
 	// 		let result = [];
 	// 		const guestsRef = firebase
 	// 		.firestore()
@@ -61,25 +59,22 @@ export default function MyEventsScreen({ navigation }) {
 
 	// }, [usersData]);
 
+	console.log('usersData MyEventsScreen ==>', usersData);
 
-	console.log('usersData MyEventsScreen ==>', usersData)
-
-  // console.log('invitedEventsData MyEventsScreen ==>', invitedEventsData)
-
+	// console.log('invitedEventsData MyEventsScreen ==>', invitedEventsData)
 
 	const renderScene = ({ route }) => {
 		switch (route.key) {
 			case 'create':
-				return <CreateEventIndex currentUser={usersData}  />;
+				return <CreateEventIndex currentUser={usersData} />;
 			case 'hosted':
 				return <EventsHostedScreen currentUser={usersData} />;
 			case 'invited':
-				return <EventsInvitedToScreen currentUser={usersData}/>;
+				return <EventsInvitedToScreen currentUser={usersData} />;
 			default:
 				return null;
 		}
 	};
-
 
 	return (
 		<TabView
