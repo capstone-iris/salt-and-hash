@@ -4,15 +4,26 @@ export default StyleSheet.create({
 	container: {
 		backgroundColor: '#ffffff',
 		flex: 1,
-		flexDirection: 'row',
 		justifyContent: 'center',
 		alignContent: 'center',
-		flexDirection: 'row'
 	},
+    // headerContainer: {
+    //     justifyContent: 'flex-start',
+    //     alignContent: 'flex-start',
+    //     alignSelf: 'flex-start'
+    // },
+    headerText: {
+        margin: 10,
+		fontSize: 24,
+		fontWeight: 'bold',
+		color: '#e95530',
+		fontFamily: 'PurplePurse'
+    },
     buttonContainer: {
         alignItems: 'center',
 		justifyContent: 'center',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        backgroundColor: '#ffffff'
     },
     button: {
 		backgroundColor: '#e95531',

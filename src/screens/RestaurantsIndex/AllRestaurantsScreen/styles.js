@@ -6,8 +6,7 @@ export default StyleSheet.create({
 		flex: 1,
 		flexDirection: 'row',
 		justifyContent: 'center',
-		alignContent: 'center',
-		flexDirection: 'row'
+		alignContent: 'center'
 	},
     buttonContainer: {
         alignItems: 'center',

@@ -3,13 +3,13 @@ import '@firebase/auth';
 import '@firebase/firestore';
 
 const firebaseConfig = {
-	apiKey: 'AIzaSyAV0dF3DSzxFMrC8dAHK3kstAIW1xvDTQc',
-	authDomain: 'event-planning-app-89bec.firebaseapp.com',
-	databaseURL: 'https://event-planning-app-89bec-default-rtdb.firebaseio.com/',
-	projectId: 'event-planning-app-89bec',
-	storageBucket: 'event-planning-app-89bec.appspot.com',
-	messagingSenderId: '325804923316',
-	appId: '1:325804923316:ios:a46ac0ae8bb28808bbfae1',
+	apiKey: 'AIzaSyDuxn3vOIuhebiKqD5EcT_7ld6PVzHV00s',
+	authDomain: 'salt-and-hash.firebaseapp.com',
+	databaseURL: 'https://salt-and-hash-default-rtdb.firebaseio.com/',
+	projectId: 'salt-and-hash',
+	storageBucket: 'salt-and-hash.appspot.com',
+	messagingSenderId: '681081627618',
+	appId: '1:681081627618:ios:55fd9632b65645f9fbcfbb',
 };
 if (!firebase.apps.length) {
 	firebase.initializeApp(firebaseConfig);

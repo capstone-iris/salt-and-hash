@@ -195,28 +195,28 @@ class AddRestaurantsToEventScreen extends React.Component {
 		const eventId = this.props.route.params.eventId;
 
 		return (
-			<SafeAreaView>
-				<View style={styles.restaurantsContainer}>
-					<Text style={styles.restaurantsTextHeader}>
+			<SafeAreaView style={styles.container}>
+				<View style={styles.headerContainer}>
+					<Text style={styles.headerText}>
 						Select 3-7 Restaurants for Your Event
 					</Text>
 				</View>
 
 				{this.state.restaurantList.length === 0 ? (
-					<View style={styles.restaurantsContainer}>
-						<TouchableOpacity onPress={() => this.handleRestaurantSearch()}>
-							<Text style={styles.restaurantsTextHeader}>
-								Restaurants Near You
+					<View style={styles.buttonContainer}>
+						<TouchableOpacity style={styles.button} onPress={() => this.handleRestaurantSearch()}>
+							<Text style={styles.buttonText}>
+								Explore Restaurants Near You
 							</Text>
 						</TouchableOpacity>
 					</View>
 				) : (
-					<View>
+					<View style={{backgroundColor: '#ffffff'}}>
 						<TouchableOpacity
 							style={styles.button}
 							onPress={() => this.submitRestaurantSelection(eventId)}
 						>
-							<Text style={styles.Btn}>Add Selected Restaurants to Event</Text>
+							<Text style={styles.buttonText}>Add Selected Restaurants to Event</Text>
 						</TouchableOpacity>
 						<View style={styles.button}>
 							<Text style={styles.Btn}>Restaurants Near You</Text>
@@ -309,6 +309,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 								</View>
 							)}
 						/>
+					</View>
 					</View>
 				)}
 				<StatusBar style='auto' />

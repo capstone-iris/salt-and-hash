@@ -47,46 +47,37 @@ export default function EventsHostedScreen() {
 	}, [firebase.auth().currentUser]);
 
 	return (
-		<ScrollView style={{ backgroundColor: '#eee1db' }}>
-			<SafeAreaView style={styles.container}>
+		<SafeAreaView style={styles.container}>
+		
+			
 				<View style={styles.eventsContainer}>
-					{eventsData < 1 ? (
-						<View styles={{ marginTop: 100 }}>
-							<Text style={styles.txt}>You don't have any hosted events. </Text>
+					{eventsData < 1 ? 
+						
+						(
+						<View styles={styles.buttonContainer}>
 							<TouchableOpacity style={styles.button}>
-								<Text
-									style={styles.Btn}
-									onPress={() => navigation.navigate('Create Event Index')}
-								>
-									Please Create An Event
+								<Text style={styles.buttonText} onPress={() => navigation.navigate('Create Event Index')}>
+									Create An Event
 								</Text>
 							</TouchableOpacity>
 						</View>
-					) : (
-						<View
-							style={{
-								flexDirection: 'row',
-								flexWrap: 'wrap',
-								marginTop: 80,
-								backgroundColor: '#eee1db',
-							}}
-						>
-							<TouchableOpacity
-								style={styles.AddEventContainer}
-								activeOpacity={0.5}
-								onPress={() => navigation.navigate('Create Event Index')}
-							>
-								<View opacity={5}>
-									<Text style={styles.addEvent}>+</Text>
-									<Text style={styles.CreateEventText}>Create Event</Text>
-								</View>
-							</TouchableOpacity>
+					) 
+					
+					: 
+					
+					(
+						<ScrollView style={{ backgroundColor: '#ffffff' }}>
 
+						<TouchableOpacity style={styles.addEventContainer} onPress={() => navigation.navigate('Create Event Index')}>
+							<Text style={styles.addEvent}>+</Text>
+							<Text style={styles.createEventText}>Create An Event</Text>
+						</TouchableOpacity>
+
+						<View style={styles.eventContainer}>
 							{eventsData.map((event, index) => {
 								return (
 									<TouchableOpacity
 										style={styles.singleEventContainer}
-										activeOpacity={0.5}
 										key={index}
 										onPress={() =>
 											navigation.navigate('Single Event', { event })
@@ -97,10 +88,10 @@ export default function EventsHostedScreen() {
 								);
 							})}
 						</View>
+						</ScrollView>
 					)}
 				</View>
 			</SafeAreaView>
-		</ScrollView>
 	);
 }
 

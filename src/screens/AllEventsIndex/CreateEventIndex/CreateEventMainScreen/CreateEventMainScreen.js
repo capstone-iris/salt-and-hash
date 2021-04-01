@@ -85,7 +85,9 @@ class CreateEventMainScreen extends React.Component {
 		const currentUser = firebase.auth().currentUser.uid;
 
 		if (this.state.name === '') {
-			alert('Please fill in event name!');
+			alert('Please add an event name!');
+		} else if (this.state.description === '') {
+			alert('Please add an event description!');
 		} else {
 			Alert.alert('Event successfully added!');
 			this.setState({
@@ -150,7 +152,7 @@ class CreateEventMainScreen extends React.Component {
 						<Sae
 							style={{marginLeft: 10, marginRight: 10, marginBottom: 10}}
 							labelStyle={{color: '#656565'}}
-							inputStyle={{ color: 'black' }}
+							inputStyle={{ color: '#656565' }}
 							label={'Event Name'}
 							iconClass={FontAwesomeIcon}
 							iconName={'calendar-check-o'}
