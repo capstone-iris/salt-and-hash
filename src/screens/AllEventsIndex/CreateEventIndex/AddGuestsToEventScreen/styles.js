@@ -75,20 +75,18 @@ export default StyleSheet.create({
 		marginTop: 30,
 	},
 	button: {
-		backgroundColor: '#ddb39d',
-		margin: 10,
-		marginTop: 20,
+		backgroundColor: '#e95531',
 		height: 48,
 		borderRadius: 5,
 		alignItems: 'center',
 		justifyContent: 'center',
-		width: 250,
+		width: 275
 	},
-	Btn: {
-		color: 'white',
+	buttonText: {
+        color: 'white',
 		fontSize: 16,
-		fontWeight: 'bold',
-	},
+		fontWeight: 'bold'
+    },
 	inputContainer:{
 		alignItems: 'center',
 		justifyContent: 'center',
@@ -104,14 +102,14 @@ export default StyleSheet.create({
 		marginLeft:20,
 		marginRight:20,
 		height: 200,
-    backgroundColor: "white",
-    borderRadius: 10,
-    padding: 10,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
+		backgroundColor: "white",
+		borderRadius: 10,
+		padding: 10,
+		alignItems: "center",
+		shadowColor: "#000",
+		shadowOffset: {
+		width: 0,
+		height: 2
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
@@ -121,7 +119,8 @@ export default StyleSheet.create({
 		flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    margin: 20
+    margin: 20,
+	backgroundColor: '#ffffff'
 	},
 	modalForm:{
 		// flex: 1,
