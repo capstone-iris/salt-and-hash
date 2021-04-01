@@ -51,7 +51,8 @@ export default class EventsInvitedToScreen extends React.Component {
           const guestsData = await firebase.firestore()
           .collection('eventGuests')
           .doc(userResult.phoneNumber)
-          .collection('eventsInvitedTo').get()
+          .collection('eventsInvitedTo')
+          .get()
           guestsData.docs.forEach((doc) => {
             guestsResult.push(doc.data())
           })
@@ -62,7 +63,7 @@ export default class EventsInvitedToScreen extends React.Component {
           //     guestsResult.push(doc.data());
           //     console.log('guestsResult', guestsResult)
           //   })
-             const unsubscribe = guestsResult.forEach(async (event) => {
+             guestsResult.forEach(async (event) => {
                 /// taking all of the events from events collection that the user phone Number is associated with/invited to and adding to events Data on state
                 const eventsInvitedTo = await firebase
                       .firestore()
@@ -81,7 +82,6 @@ export default class EventsInvitedToScreen extends React.Component {
                         console.log('eventsResult2', eventsResult)
                   
             });
-            return () => unsubscribe();
           // });
         // });
       // })
