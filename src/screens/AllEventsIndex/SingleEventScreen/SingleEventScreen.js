@@ -85,7 +85,7 @@ export default function SingleEventScreen({ route }) {
 			  };
 
 		  fetchData();
-			}, [restaurantsData]);
+			}, []);
 
 			
 

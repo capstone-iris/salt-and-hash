@@ -42,8 +42,10 @@ export default class CarouselCardItem extends React.Component {
     this.setState({votes: this.state.votes - 1})
   }
 
-  toggleLeft = () => {
+  toggleLeft = (eventId, item) => {
     this.setState({leftSelected: !this.state.leftSelected})
+    this.handleUnvote(eventId, item)
+
   }
 
   toggleRight = (eventId, item) => {
@@ -54,7 +56,6 @@ export default class CarouselCardItem extends React.Component {
       this.handleVote(eventId, item)
     } else {
       this.decrement()
-      this.handleUnvote(eventId, item)
     }
   }
 
