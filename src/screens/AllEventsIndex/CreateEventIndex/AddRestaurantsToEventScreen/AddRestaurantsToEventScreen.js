@@ -25,9 +25,9 @@ const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 class AddRestaurantsToEventScreen extends React.Component {
 	constructor() {
 		super(),
-			(this.eventRestaurantsRef = firebase
+		this.eventRestaurantsRef = firebase
 				.firestore()
-				.collection('eventRestaurants'));
+				.collection('eventRestaurants');
 		this.state = {
 			hasLocationPermission: false,
 			latitude: 0,
