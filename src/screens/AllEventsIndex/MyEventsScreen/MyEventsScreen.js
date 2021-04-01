@@ -21,27 +21,27 @@ export default function MyEventsScreen({ navigation }) {
 		{ key: 'invited', title: 'ATTEND' },
 	]);
 
-	useEffect(() => {
-		if (!firebase.auth().currentUser) {
-			return;
-		}
-		const currentUser = firebase.auth().currentUser.uid;
+	// useEffect(() => {
+	// 	if (!firebase.auth().currentUser) {
+	// 		return;
+	// 	}
+	// 	const currentUser = firebase.auth().currentUser.uid;
 
-		// Create subscription to listen for changes
-		const unsubscribe = firebase
+	// 	// Create subscription to listen for changes
+	// 	const unsubscribe = firebase
 
-			.firestore()
-			.collection('users')
-			.where('id', '==', currentUser)
-			.onSnapshot((snapshot) => {
-				let result = [];
-				snapshot.forEach((doc) => {
-					result = doc.data();
-				});
-				setUsersData(result);
-			});
-		return () => unsubscribe();
-	}, []);
+	// 		.firestore()
+	// 		.collection('users')
+	// 		.where('id', '==', currentUser)
+	// 		.onSnapshot((snapshot) => {
+	// 			let result = [];
+	// 			snapshot.forEach((doc) => {
+	// 				result = doc.data();
+	// 			});
+	// 			setUsersData(result);
+	// 		});
+	// 	return () => unsubscribe();
+	// }, []);
 
 	// useEffect(()=>{
 
@@ -60,18 +60,17 @@ export default function MyEventsScreen({ navigation }) {
 
 	// }, [usersData]);
 
-	console.log('usersData MyEventsScreen ==>', usersData);
 
 	// console.log('invitedEventsData MyEventsScreen ==>', invitedEventsData)
 
 	const renderScene = ({ route }) => {
 		switch (route.key) {
 			case 'create':
-				return <CreateEventIndex currentUser={usersData} />;
+				return <CreateEventIndex />;
 			case 'hosted':
-				return <EventsHostedScreen currentUser={usersData} />;
+				return <EventsHostedScreen />;
 			case 'invited':
-				return <EventsInvitedToScreen currentUser={usersData} navigation={navigation} />;
+				return <EventsInvitedToScreen navigation={navigation} />;
 			default:
 				return null;
 		}

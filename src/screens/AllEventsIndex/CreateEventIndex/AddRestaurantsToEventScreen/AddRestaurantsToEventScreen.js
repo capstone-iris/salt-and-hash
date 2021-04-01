@@ -309,6 +309,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 								</View>
 							)}
 						/>
+						</View>
 					</View>
 				)}
 				<StatusBar style='auto' />

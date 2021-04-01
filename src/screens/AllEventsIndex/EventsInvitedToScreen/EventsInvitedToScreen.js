@@ -35,6 +35,7 @@ export default class EventsInvitedToScreen extends React.Component {
         .onSnapshot((snapshot) => {
           snapshot.forEach((doc) => {
             userResult = doc.data();
+            console.log('userResult', userResult)
           })
             firebase.firestore()
           .collection('eventGuests')
@@ -53,10 +54,13 @@ export default class EventsInvitedToScreen extends React.Component {
                       .onSnapshot((snapshot) => {
                         snapshot.forEach((doc) => {
                           eventsResult.push(doc.data());
+                          // console.log('eventsResult', eventsResult)
                         });
                         this.setState({eventsData: eventsResult})
+                        // console.log('eventsData', this.state.eventsData)
 
             });
+
           });
         });
       })
