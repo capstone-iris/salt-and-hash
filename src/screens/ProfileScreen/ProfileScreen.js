@@ -12,8 +12,8 @@ import {
 import { AntDesign, MaterialCommunityIcons, Entypo, MaterialIcons } from '@expo/vector-icons';
 
 export default class ProfileScreen extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			users: [],
 		};
@@ -48,6 +48,7 @@ export default class ProfileScreen extends Component {
 
 	render() {
 		const user = this.state.users;
+		const { hostedEventsData, invitedEventsData } = this.props
 		return (
 			<SafeAreaView style={styles.container}>
 				<View style={styles.userInfoContainer}>
@@ -59,13 +60,14 @@ export default class ProfileScreen extends Component {
 							alignItems: 'center',
 						}}
 					>
-						<Avatar.Image
+						<MaterialCommunityIcons name='account-circle-outline' color='#ffffff' size={60} />
+						{/* <Avatar.Image
 							source={{
 								uri:
 									'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUTBClYADFs5Xv7s0Uu3_1eXFalW-VzKMp74KcMmwDuYJwGdyeFpSSNB6x1w&usqp=CAc',
 							}}
 							size={80}
-						/>
+						/> */}
 						<View style={{ marginLeft: 20 }}>
 							<Title style={styles.title}>{user.fullName}</Title>
 						</View>
@@ -90,11 +92,12 @@ export default class ProfileScreen extends Component {
 
 				<View style={styles.infoBoxWrapper}>
 					<View style={styles.infoBox}>
-						<Title style={{color: '#ffffff'}}>1</Title>
+						<Title style={{color: '#ffffff'}}>{hostedEventsData.length}</Title>
 						<Caption style={{color: '#ffffff'}}>Hosted Events</Caption>
 					</View>
 					<View style={styles.infoBox}>
-						<Title style={{color: '#ffffff'}}>4</Title>
+						{/* <Title style={{color: '#ffffff'}}>{invitedEventsData.length}</Title> */}
+						<Title style={{color: '#ffffff'}}>3</Title>
 						<Caption style={{color: '#ffffff'}}>Invited Events</Caption>
 					</View>
 				</View>

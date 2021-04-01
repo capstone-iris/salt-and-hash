@@ -9,6 +9,7 @@ import { firebase } from './../../../firebase/config';
 // import styles from './styles';
 
 export default function MyEventsScreen({ navigation }) {
+
 	const layout = useWindowDimensions();
 	const [usersData, setUsersData] = useState([]);
 	// const [invitedEventsData, setInvitedEventsData] = useState([]);
@@ -70,7 +71,7 @@ export default function MyEventsScreen({ navigation }) {
 			case 'hosted':
 				return <EventsHostedScreen currentUser={usersData} />;
 			case 'invited':
-				return <EventsInvitedToScreen currentUser={usersData} />;
+				return <EventsInvitedToScreen currentUser={usersData} navigation={navigation} />;
 			default:
 				return null;
 		}
