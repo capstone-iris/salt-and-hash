@@ -60,7 +60,7 @@ export default function MyEventsScreen({ navigation }) {
 
 	// }, [usersData]);
 
-	console.log('usersData MyEventsScreen ==>', usersData);
+	// console.log('usersData MyEventsScreen ==>', usersData);
 
 	// console.log('invitedEventsData MyEventsScreen ==>', invitedEventsData)
 
