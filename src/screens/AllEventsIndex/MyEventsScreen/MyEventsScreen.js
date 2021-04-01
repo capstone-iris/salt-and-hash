@@ -12,7 +12,6 @@ export default function MyEventsScreen({ navigation }) {
 
 	const layout = useWindowDimensions();
 	const [usersData, setUsersData] = useState([]);
-	// const [invitedEventsData, setInvitedEventsData] = useState([]);
 
 	const [index, setIndex] = useState(0);
 	const [routes] = useState([

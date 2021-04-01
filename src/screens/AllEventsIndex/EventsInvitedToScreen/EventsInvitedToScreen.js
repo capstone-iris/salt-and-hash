@@ -28,38 +28,63 @@ export default class EventsInvitedToScreen extends React.Component {
       let guestsResult = [];
       let eventsResult = [];
 
+
       const userData = await firebase
         .firestore()
         .collection('users')
         .where('id', '==', currentUser)
-        .onSnapshot((snapshot) => {
-          snapshot.forEach((doc) => {
-            userResult = doc.data();
-          })
-            firebase.firestore()
+        .get()
+        userData.docs.forEach((doc) => {
+          userResult = doc.data()
+          console.log('doc.data', doc.data())})
+        /// making call to FB to get user information for current User
+        // .onSnapshot((snapshot) => {
+        //   snapshot.forEach((doc) => {
+        //     userResult = doc.data();
+        //     console.log('inside snapshot', userResult)
+        //   })
+        //   console.log('inside onsnapshot', userResult)
+        // });
+         console.log('userResult', userResult)
+        //  console.log('userData', userData)
+          ///taking current Users information (phone number) - finding reference to events user is invited to via the eventGuests collection
+          const guestsData = await firebase.firestore()
           .collection('eventGuests')
           .doc(userResult.phoneNumber)
-          .collection('eventsInvitedTo')
-          .onSnapshot((snapshot) => {
-            snapshot.forEach((doc) => {
-              guestsResult.push(doc.data());
-            })
-              guestsResult.forEach(async (event) => {
+          .collection('eventsInvitedTo').get()
+          guestsData.docs.forEach((doc) => {
+            guestsResult.push(doc.data())
+          })
+          console.log('guestResult', guestsResult)
 
-                     await firebase
+          // .onSnapshot((snapshot) => {
+          //   snapshot.forEach((doc) => {
+          //     guestsResult.push(doc.data());
+          //     console.log('guestsResult', guestsResult)
+          //   })
+             const unsubscribe = guestsResult.forEach(async (event) => {
+                /// taking all of the events from events collection that the user phone Number is associated with/invited to and adding to events Data on state
+                const eventsInvitedTo = await firebase
                       .firestore()
                       .collection('events')
                       .where('docId', '==', event.eventId)
-                      .onSnapshot((snapshot) => {
-                        snapshot.forEach((doc) => {
-                          eventsResult.push(doc.data());
-                        });
-                        this.setState({eventsData: eventsResult})
-
+                      .get()       
+                      eventsInvitedTo.docs.forEach((doc)=> {
+                        eventsResult.push(doc.data())
+                      })
+                      console.log('eventsResult1', eventsResult)
+                      // .onSnapshot((snapshot) => {
+                      //   snapshot.forEach((doc) => {
+                      //     eventsResult.push(doc.data());
+                      //   });
+                        this.setState({eventsData: eventsResult})   
+                        console.log('eventsResult2', eventsResult)
+                  
             });
-          });
-        });
-      })
+            return () => unsubscribe();
+          // });
+        // });
+      // })
           } catch (error) {
             console.log(error)
       }

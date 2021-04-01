@@ -67,24 +67,24 @@ export default function SingleEventScreen({ route }) {
 
 	useEffect(() => {
 
-	async function fetchData() {
+	// async function fetchData() {
 		console.log('in fetch data')
 
-			const restaurantData = await firebase
+			const unsubscribe = firebase
 			  .firestore()
 			  .collection('eventRestaurants')
 			  .doc(event.docId)
 			  .collection('eventRestaurants')
-			  .get();
-			result = [];
-			restaurantData.forEach((element) => {
-			  result.push(element.data());
-			});
+			  .onSnapshot((snapshot) => {
+				const result = [];
+				snapshot.forEach((doc) => {
+					result.push(doc.data());
+				});
 			setRestaurantsData(result);
+		});
 
-			  };
+			  return () => unsubscribe();
 
-		  fetchData();
 			}, []);
 
 			
