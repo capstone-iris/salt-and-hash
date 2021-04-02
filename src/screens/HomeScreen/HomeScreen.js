@@ -42,6 +42,62 @@ function BottomTabNavigator() {
 		// Add currentUser to useEffect dependency array, so useEffect runs when it changes
 	}, [firebase.auth().currentUser]);
 
+	useEffect(() => {
+
+	async function fetchData() {
+		try {
+			if (!firebase.auth().currentUser) {
+				return;
+			}
+			const currentUser = await firebase.auth().currentUser.uid;
+			let userResult;
+			const userData = await firebase
+				.firestore()
+				.collection('users')
+				.where('id', '==', currentUser)
+				.get();
+			userData.docs.forEach((doc) => {
+				userResult = doc.data();
+				console.log('doc.data', doc.data());
+			});
+
+			firebase
+				.firestore()
+				.collection('eventGuests')
+				.doc(userResult.phoneNumber)
+				.collection('eventsInvitedTo')
+				.onSnapshot(async (guestsData) => {
+					// reset guestResult on each snapshot to void duplication
+					// only need the snapshot on the guestData to see if new numbers where add
+					let guestsResult = [];
+					guestsData.docs.forEach((doc) => {
+						guestsResult.push(doc.data());
+					});
+					let eventsResult = [];
+					console.log('====result', guestsResult);
+
+					for (let i = 0; i < guestsResult.length; i++) {
+						const event = guestsResult[i];
+						const eventsInvitedTo = await firebase
+							.firestore()
+							.collection('events')
+							.where('docId', '==', event.eventId)
+							.get();
+						eventsInvitedTo.docs.forEach((doc) => {
+							eventsResult.push(doc.data());
+						});
+						setInvitedEventsData({ eventsResult });
+						// console.log('eventsResult2', eventsResult);
+					}
+					console.log('invitedevents state', invitedEventsData)
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	}
+	}, [])
+
+
 	
 	return (
 		<Tab.Navigator
@@ -78,8 +134,8 @@ function BottomTabNavigator() {
 			/>
 			<Tab.Screen
 				name='Profile'
-				// children={()=><ProfileScreen hostedEventsData={hostedEventsData} invitedEventsData={invitedEventsData}/>}
-				children={()=><ProfileScreen hostedEventsData={hostedEventsData}/>}
+				children={()=><ProfileScreen hostedEventsData={hostedEventsData} invitedEventsData={invitedEventsData}/>}
+				// children={()=><ProfileScreen hostedEventsData={hostedEventsData}/>}
 
 				// component={ProfileScreen}
 				options={{

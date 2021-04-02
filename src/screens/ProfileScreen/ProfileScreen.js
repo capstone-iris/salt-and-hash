@@ -17,6 +17,8 @@ export default class ProfileScreen extends Component {
 		this.state = {
 			users: [],
 		};
+		console.log('props', props)
+
 	}
 
 	componentDidMount() {
@@ -49,6 +51,7 @@ export default class ProfileScreen extends Component {
 	render() {
 		const user = this.state.users;
 		const { hostedEventsData, invitedEventsData } = this.props
+		console.log('invitedevents', invitedEventsData)
 		return (
 			<SafeAreaView style={styles.container}>
 				<View style={styles.userInfoContainer}>
@@ -96,8 +99,8 @@ export default class ProfileScreen extends Component {
 						<Caption style={{color: '#ffffff'}}>Hosted Events</Caption>
 					</View>
 					<View style={styles.infoBox}>
-						{/* <Title style={{color: '#ffffff'}}>{invitedEventsData.length}</Title> */}
-						<Title style={{color: '#ffffff'}}>3</Title>
+						<Title style={{color: '#ffffff'}}>{invitedEventsData.length}</Title>
+						{/* <Title style={{color: '#ffffff'}}>3</Title> */}
 						<Caption style={{color: '#ffffff'}}>Events Attending</Caption>
 					</View>
 				</View>
