@@ -4,8 +4,10 @@ import {
 	SafeAreaView,
 	View,
 	ScrollView,
+	Button,
 	TouchableOpacity,
 	Image
+
 } from 'react-native';
 import { Text, TouchableRipple } from 'react-native-paper';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
@@ -13,9 +15,13 @@ import { useNavigation } from '@react-navigation/native';
 import * as base from '../../../../secrets.js';
 import { firebase } from './../../../firebase/config';
 import AddGuestsToEventScreen from '../CreateEventIndex/AddGuestsToEventScreen/AddGuestsToEventScreen.js'
+import { Alert } from 'react-native';
+import EventsHostedScreen from '../EventsHostedScreen/EventsHostedScreen'
 
 export default function SingleEventScreen({ route }) {
 	const { event } = route.params;
+
+
 	const navigation = useNavigation();
 	const [restaurantsData, setRestaurantsData] = useState([]);
 	const eventsCollection = firebase.firestore().collection('events');
@@ -54,6 +60,7 @@ export default function SingleEventScreen({ route }) {
 			: time;
 	}
 
+
 	function fetchImage (photoRef)  {
 		const ref = photoRef
 			const url = 'https://maps.googleapis.com/maps/api/place/photo?';
@@ -63,6 +70,28 @@ export default function SingleEventScreen({ route }) {
 			const fetchImageUrl = url + maxWidth + photoReference + key;
 			return fetchImageUrl;
 		};
+
+	const deleteAlert=()=>
+	Alert.alert(
+		"Are you sure you want to delete this event?",
+		" ",
+		[
+			{
+				text: "Cancel",
+				onPress: () => console.log("Cancel Pressed"),
+				style: "cancel"
+			},
+			{ text: "OK", onPress: () => deleteEvent()}
+		]
+	);
+
+	function deleteEvent(){
+		firebase.firestore().collection('events').doc(event.docId).delete()
+		navigation.navigate('My Events')
+
+	}
+
+
 
 	useEffect(() => {
 
@@ -126,6 +155,7 @@ export default function SingleEventScreen({ route }) {
 						<MaterialCommunityIcons name='map-marker-radius' color='#FF6347' size={25} />
 						<Text style={styles.menuItemText}>Final Restaurant Pending...</Text>
 					</View>
+
 					</TouchableRipple>
 				</View>
 				<View>
@@ -138,6 +168,13 @@ export default function SingleEventScreen({ route }) {
 					}
 				</View>
 				</View>
+
+
+				{currentUser === event.userId ?
+					<Button onPress={deleteAlert} title='Delete Event'>
+					</Button>
+				: null
+				}
 
 				<ScrollView>
 				<View style={styles.restaurantsContainer}>

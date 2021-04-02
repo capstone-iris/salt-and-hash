@@ -127,9 +127,23 @@ class CreateEventMainScreen extends React.Component {
 						isLoading: false,
 					});
 				});
+
+
+
+		firebase.firestore().collection('events').where('docId', '==', documentId).onSnapshot((snapshot)=>{
+			let event
+			snapshot.forEach((doc) => {
+				event = doc.data()
+
+			})
+			console.log('EVENT==>', event)
 			this.props.navigation.navigate('Add Restaurants to Event', {
-				eventId: documentId,
+				event: event,
 			});
+
+		})
+
+
 		}
 	};
 

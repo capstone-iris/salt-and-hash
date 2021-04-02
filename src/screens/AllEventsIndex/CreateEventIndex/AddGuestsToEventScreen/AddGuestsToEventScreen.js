@@ -64,7 +64,7 @@ export default class CreateEventForm extends React.Component {
 	renderModalContent(){
 		const {eventId} = this.props
 		return (
-		
+
 		<Root style={{backgroundColor: '#ffffff'}}>
 			<View style={styles.modalView} >
 				<Form style={styles.modalForm}>

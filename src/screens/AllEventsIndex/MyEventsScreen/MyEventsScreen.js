@@ -17,6 +17,7 @@ export default function MyEventsScreen({ navigation }) {
 		{ key: 'invited', title: 'ATTEND' },
 	]);
 
+
 	useEffect(() => {
 		if (!firebase.auth().currentUser) {
 			return;
@@ -41,11 +42,11 @@ export default function MyEventsScreen({ navigation }) {
 	const renderScene = ({ route }) => {
 		switch (route.key) {
 			case 'create':
-				return <CreateEventIndex currentUser={usersData} />;
+				return <CreateEventIndex  />;
 			case 'hosted':
-				return <EventsHostedScreen currentUser={usersData} />;
+				return <EventsHostedScreen />;
 			case 'invited':
-				return <EventsInvitedToScreen currentUser={usersData} navigation={navigation} />;
+				return <EventsInvitedToScreen navigation={navigation} />;
 			default:
 				return null;
 		}
