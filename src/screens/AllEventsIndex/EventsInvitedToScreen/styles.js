@@ -105,13 +105,11 @@ export default StyleSheet.create({
 		marginTop: 30,
 		backgroundColor: '#ffffff',
 	},
-<<<<<<< HEAD
 	text: {
 		color: '#656565',
 		fontWeight: '600',
 		fontSize: 16
 	},
-=======
 	singleEventContainer: {
 		margin: 12,
 		backgroundColor: '#fab59e',
@@ -131,5 +129,4 @@ export default StyleSheet.create({
 	},
 
 
->>>>>>> 94917d1f810ff5298e342e68d6f7ece311fbdcce
 });
