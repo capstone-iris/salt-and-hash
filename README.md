@@ -22,7 +22,7 @@ An Expo download link is forthcoming.
 
 ## Developers
 
-* [Malika Abdulina](https://github.com/MalikaAbdulina)
-* [Victoria Ho](https://github.com/Victoriaho91)
-* [Weronika Janczuk](https://github.com/wjanczuk)
-* [Kathleen Tran](https://github.com/serenity8468)
+- [Malika Abdulina](https://github.com/MalikaAbdulina)
+- [Victoria Ho](https://github.com/Victoriaho91)
+- [Weronika Janczuk](https://github.com/wjanczuk)
+- [Kathleen Tran](https://github.com/serenity8468)
