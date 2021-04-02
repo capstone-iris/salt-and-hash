@@ -1,18 +1,25 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import AllRestaurantsScreen from './AllRestaurantsScreen/AllRestaurantsScreen'
-import SingleRestaurantScreen from './SingleRestaurantScreen/SingleRestaurantScreen'
-import RestaurantSwipeScreen from './RestaurantSwipeScreen/RestaurantSwipeScreen'
+import AllRestaurantsScreen from './AllRestaurantsScreen/AllRestaurantsScreen';
+import SingleRestaurantScreen from './SingleRestaurantScreen/SingleRestaurantScreen';
+// import RestaurantSwipeScreen from './RestaurantSwipeScreen/RestaurantSwipeScreen'
 
 const RestaurantsBase = createStackNavigator();
 
 export default function AllRestaurantsIndex() {
-
-    return (
-        <RestaurantsBase.Navigator initialRouteName={AllRestaurantsScreen} screenOptions={{headerShown: false, animationEnabled: false}}>
-            <RestaurantsBase.Screen name='Restaurants' component={AllRestaurantsScreen} />
-            <RestaurantsBase.Screen name='Single Restaurant' component={SingleRestaurantScreen} />
-            <RestaurantsBase.Screen name='Restaurant Swipe' component={RestaurantSwipeScreen} />
-        </RestaurantsBase.Navigator>
-    )
+	return (
+		<RestaurantsBase.Navigator
+			initialRouteName={AllRestaurantsScreen}
+			screenOptions={{ headerShown: false, animationEnabled: false }}
+		>
+			<RestaurantsBase.Screen
+				name='Restaurants'
+				component={AllRestaurantsScreen}
+			/>
+			<RestaurantsBase.Screen
+				name='Single Restaurant'
+				component={SingleRestaurantScreen}
+			/>
+		</RestaurantsBase.Navigator>
+	);
 }

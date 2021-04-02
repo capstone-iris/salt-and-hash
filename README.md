@@ -10,7 +10,7 @@ Created by a team of developers during the [Grace Hopper Program](https://www.gr
 * [React Native](https://reactnative.dev/) - framework for building native apps using React
 * [Expo](https://expo.io/) - an open-source platform for making universal native apps for Android, iOS, and the web with JavaScript and React
 * [Firebase](firebase.google.com) - cloud real-time NoSQL database, authorization framework
-* [Google Places API](https://developers.google.com/maps/documentation/places/web-service/overview) - a service that returns info about places using HTTP requests
+* [Google Places API](https://developers.google.com/maps/documentation/places/web-service/overview) - service that returns info about places using HTTP requests
 
 ## Installation
 
@@ -20,7 +20,7 @@ An Expo download link is forthcoming.
 
 ## Developers
 
-* [Malika Abdulina](https://github.com/MalikaAbdulina)
-* [Victoria Ho](https://github.com/Victoriaho91)
-* [Weronika Janczuk](https://github.com/wjanczuk)
-* [Kathleen Tran](https://github.com/serenity8468)
+- [Malika Abdulina](https://github.com/MalikaAbdulina)
+- [Victoria Ho](https://github.com/Victoriaho91)
+- [Weronika Janczuk](https://github.com/wjanczuk)
+- [Kathleen Tran](https://github.com/serenity8468)

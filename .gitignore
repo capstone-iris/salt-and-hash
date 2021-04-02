@@ -9,6 +9,8 @@ npm-debug.*
 *.orig.*
 web-build/
 src/firebase/config.js
+secrets.js
+GoogleService-Info.plist
 
 # macOS
 .DS_Store

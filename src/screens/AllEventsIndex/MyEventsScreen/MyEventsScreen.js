@@ -1,15 +1,71 @@
-import React from 'react';
-import { Text, SafeAreaView } from 'react-native';
-import styles from './styles';
+import React, { useState, useEffect } from 'react';
+import { View, useWindowDimensions } from 'react-native';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import CreateEventIndex from '../CreateEventIndex/CreateEventIndex';
+import EventsHostedScreen from '../EventsHostedScreen/EventsHostedScreen';
+import EventsInvitedToScreen from '../EventsInvitedToScreen/EventsInvitedToScreen';
+import { firebase } from './../../../firebase/config'
 
-export default function ProfileScreen({ navigation }) {
+export default function MyEventsScreen({ navigation }) {
+
+	const layout = useWindowDimensions();
+	const [usersData, setUsersData] = useState([]);
+
+	const [index, setIndex] = useState(0);
+	const [routes] = useState([
+		{ key: 'hosted', title: 'HOST' },
+		{ key: 'invited', title: 'ATTEND' },
+	]);
+
+	useEffect(() => {
+		if (!firebase.auth().currentUser) {
+			return;
+		}
+		const currentUser = firebase.auth().currentUser.uid;
+
+		const unsubscribe = firebase
+
+			.firestore()
+			.collection('users')
+			.where('id', '==', currentUser)
+			.onSnapshot((snapshot) => {
+				let result = [];
+				snapshot.forEach((doc) => {
+					result = doc.data();
+				});
+				setUsersData(result);
+			});
+		return () => unsubscribe();
+	}, []);
+
+	const renderScene = ({ route }) => {
+		switch (route.key) {
+			case 'create':
+				return <CreateEventIndex currentUser={usersData} />;
+			case 'hosted':
+				return <EventsHostedScreen currentUser={usersData} />;
+			case 'invited':
+				return <EventsInvitedToScreen currentUser={usersData} navigation={navigation} />;
+			default:
+				return null;
+		}
+	};
+
 	return (
-		<SafeAreaView style={styles.container}>
-			<Text onPress={() => navigation.navigate('Restaurant Swipe')}>
-				{'\n'}
-				My Events Screen{'\n'}
-				Link to Events Hosted Screen | Link to Events Invited To Screen
-			</Text>
-		</SafeAreaView>
+		<TabView
+			style={{ marginTop: 20 }}
+			navigationState={{ index, routes }}
+			renderScene={renderScene}
+			onIndexChange={setIndex}
+			initialLayout={{ width: layout.width, height: layout.height }}
+			renderTabBar={(props) => (
+				<TabBar
+					{...props}
+					style={{ backgroundColor: '#e6a80c', color: '#e95531' }}
+					indicatorStyle={{ backgroundColor: '#e95531' }}
+					labelStyle={{fontWeight: 'bold'}}
+				/>
+			)}
+		/>
 	);
 }
