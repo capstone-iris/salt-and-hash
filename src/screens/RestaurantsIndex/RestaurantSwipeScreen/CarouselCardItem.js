@@ -7,7 +7,7 @@ import {
   Image,
   TouchableOpacity
 } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import * as base from "../../../../secrets.js";
 import { firebase } from '../../../firebase/config';
 
@@ -94,7 +94,9 @@ export default class CarouselCardItem extends React.Component {
           style={styles.image}
         />
         <Text style={styles.header}>{item.name}</Text>
-        <Text style={styles.body}>{item.body}</Text>
+        <Text  style={{paddingLeft: 20}}>
+								<AntDesign name='star' size={16} color='#e6a80c'/> {item.rating} 
+							</Text>
         <View style={styles.voteContainer}>
           <TouchableOpacity onPress={() => this.toggleLeft(eventId, item)}>
           {this.state.leftSelected ? (

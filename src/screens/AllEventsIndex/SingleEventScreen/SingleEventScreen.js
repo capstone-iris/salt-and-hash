@@ -147,7 +147,7 @@ export default function SingleEventScreen({ route }) {
 								<TouchableOpacity
 									activeOpacity={0.5}
 									key={index}
-									onPress={() => navigation.navigate('Restaurant Swipe', {restaurantsData: restaurantsData, eventId:event.docId, navigation: navigation})}
+									onPress={() => navigation.navigate('Restaurant Swipe', {restaurantsData: restaurantsData, eventId:event.docId, navigation: navigation} )}
 								>
 									<Image
 										style={styles.image}
