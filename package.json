@@ -37,6 +37,7 @@
     "react-native-communications": "^2.2.1",
     "react-native-contacts": "^6.0.5",
     "react-native-dotenv": "^2.5.3",
+    "react-native-easy-grid": "^0.2.2",
     "react-native-elements": "^3.3.2",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-keyboard-aware-scroll-view": "^0.9.3",

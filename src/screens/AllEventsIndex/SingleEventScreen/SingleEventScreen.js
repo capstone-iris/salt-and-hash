@@ -67,27 +67,23 @@ export default function SingleEventScreen({ route }) {
 
 	useEffect(() => {
 
-	// async function fetchData() {
+		// async function fetchData() {
 		console.log('in fetch data')
-
 			const unsubscribe = firebase
-			  .firestore()
-			  .collection('eventRestaurants')
-			  .doc(event.docId)
-			  .collection('eventRestaurants')
-			  .onSnapshot((snapshot) => {
+			.firestore()
+			.collection('eventRestaurants')
+			.doc(event.docId)
+			.collection('eventRestaurants')
+			.onSnapshot((snapshot) => {
 				const result = [];
 				snapshot.forEach((doc) => {
-					result.push(doc.data());
-				});
+				result.push(doc.data());
+			});
 			setRestaurantsData(result);
-		});
+			});
+			return () => unsubscribe();
+	}, []);
 
-			  return () => unsubscribe();
-
-			}, []);
-
-			
 
 	return (
 		<SafeAreaView style={styles.container}>

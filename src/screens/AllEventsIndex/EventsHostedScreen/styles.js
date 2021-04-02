@@ -1,12 +1,22 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-	container: {
+	mainContainer: {
+		flex: 1,
+		backgroundColor: '#ffffff'
+	},
+	firstContainer: {
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#ffffff',
-		color: 'black',
+		backgroundColor: '#ffffff'
+	},
+	secondContainer: {
+		flex: 1,
+		backgroundColor: '#ffffff'
+	},
+	innerContainer: {
+		backgroundColor: '#ffffff'
 	},
 	button: {
 		backgroundColor: '#ddb39d',
@@ -27,10 +37,10 @@ export default StyleSheet.create({
 	singleEventContainer: {
 		margin: 12,
 		backgroundColor: '#656565',
-		padding: 20,
-		height: 100,
+		height: 80,
 		width: 150,
 		borderRadius: 10,
+		justifyContent: 'center'
 	},
 	eventsContainer: {
 		flexDirection: 'row',
@@ -70,8 +80,7 @@ export default StyleSheet.create({
 		fontSize: 16,
 		fontWeight: 'bold',
 		textAlign: 'center',
-		color: 'white',
-		marginTop: 20,
+		color: 'white'
 	},
 	addEvent: {
 		textAlign: 'center',
@@ -81,12 +90,12 @@ export default StyleSheet.create({
 	},
 	addEventContainer: {
 		backgroundColor: '#e95530',
-		height: 85,
+		height: 80,
 		width: 150,
 		borderRadius: 10,
 		justifyContent: 'center',
-		alignContent: 'center',
-		alignSelf: 'center'
+		alignSelf: 'center',
+		marginTop: 20
 	},
 	createEventText: {
 		textAlign: 'center',
