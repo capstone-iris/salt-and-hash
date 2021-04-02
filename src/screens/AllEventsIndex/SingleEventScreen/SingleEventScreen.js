@@ -129,12 +129,8 @@ export default function SingleEventScreen({ route }) {
 				</TouchableRipple>
 
 				{currentUser === event.userId ?
-				// <Text style={styles.menuItemText}>Invite Friends</Text>
-
 				<SafeAreaView>
-
 					<AddGuestsToEventScreen eventId={event.docId}/>
-
 				</SafeAreaView>
 				: null
 				}

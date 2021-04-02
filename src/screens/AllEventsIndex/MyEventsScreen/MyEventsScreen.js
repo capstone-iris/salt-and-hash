@@ -69,7 +69,7 @@ export default function MyEventsScreen({ navigation }) {
 			case 'hosted':
 				return <EventsHostedScreen />;
 			case 'invited':
-				return <EventsInvitedToScreen  />;
+				return <EventsInvitedToScreen navigation={navigation} />;
 			default:
 				return null;
 		}
