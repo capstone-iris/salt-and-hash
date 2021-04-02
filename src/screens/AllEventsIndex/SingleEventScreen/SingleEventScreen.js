@@ -70,7 +70,7 @@ export default function SingleEventScreen({ route }) {
 			return fetchImageUrl;
 		};
 
-	deleteAlert=()=>
+	const deleteAlert=()=>
 	Alert.alert(
 		"Are you sure you want to delete this event?",
 		" ",
@@ -80,25 +80,17 @@ export default function SingleEventScreen({ route }) {
 				onPress: () => console.log("Cancel Pressed"),
 				style: "cancel"
 			},
-			{ text: "OK", onPress: () => firebase.firestore().collection('events').doc(event.docId).delete() }
+			{ text: "OK", onPress: () => deleteEvent()}
 		]
 	);
 
-
 	function deleteEvent(){
-		console.log('in delete handler')
-		Alert.alert(
-			"Are you sure you want to delete this event?",
-
-			// [
-			// 	{
-			// 		text: "OK",
-			// 		onPress: () => firebase.firestore().collection('events').doc(event.docId).delete(),
-			// 	}
-			// ]
-		)
+		firebase.firestore().collection('events').doc(event.docId).delete()
+		navigation.navigate('Events Hosted')
 
 	}
+
+
 
 	useEffect(() => {
 
