@@ -7,8 +7,8 @@ import {
 	ScrollView,
 } from 'react-native';
 import styles from './styles';
-import RestaurantSwipeScreen from '../../RestaurantsIndex/RestaurantSwipeScreen/RestaurantSwipeScreen';
-import { useNavigation } from '@react-navigation/native';
+// import RestaurantSwipeScreen from '../../RestaurantsIndex/RestaurantSwipeScreen/RestaurantSwipeScreen';
+// import { useNavigation } from '@react-navigation/native';
 import { firebase } from './../../../firebase/config';
 
 export default class EventsInvitedToScreen extends React.Component {
@@ -31,9 +31,6 @@ export default class EventsInvitedToScreen extends React.Component {
 			}
 			const currentUser = await firebase.auth().currentUser.uid;
 			let userResult;
-			let guestsResult = [];
-			let eventsResult = [];
-
 			const userData = await firebase
 				.firestore()
 				.collection('users')
@@ -43,54 +40,36 @@ export default class EventsInvitedToScreen extends React.Component {
 				userResult = doc.data();
 				console.log('doc.data', doc.data());
 			});
-			/// making call to FB to get user information for current User
-			// .onSnapshot((snapshot) => {
-			//   snapshot.forEach((doc) => {
-			//     userResult = doc.data();
-			//     console.log('inside snapshot', userResult)
-			//   })
-			//   console.log('inside onsnapshot', userResult)
-			// });
-			console.log('userResult', userResult);
-			//  console.log('userData', userData)
-			///taking current Users information (phone number) - finding reference to events user is invited to via the eventGuests collection
-			const guestsData = await firebase
+
+			firebase
 				.firestore()
 				.collection('eventGuests')
 				.doc(userResult.phoneNumber)
 				.collection('eventsInvitedTo')
-				.get();
-			guestsData.docs.forEach((doc) => {
-				guestsResult.push(doc.data());
-			});
-			console.log('guestResult', guestsResult);
+				.onSnapshot(async (guestsData) => {
+					// reset guestResult on each snapshot to void duplication
+					// only need the snapshot on the guestData to see if new numbers where add
+					let guestsResult = [];
+					guestsData.docs.forEach((doc) => {
+						guestsResult.push(doc.data());
+					});
+					let eventsResult = [];
+					console.log('====result', guestsResult);
 
-			// .onSnapshot((snapshot) => {
-			//   snapshot.forEach((doc) => {
-			//     guestsResult.push(doc.data());
-			//     console.log('guestsResult', guestsResult)
-			//   })
-			guestsResult.forEach(async (event) => {
-				/// taking all of the events from events collection that the user phone Number is associated with/invited to and adding to events Data on state
-				const eventsInvitedTo = await firebase
-					.firestore()
-					.collection('events')
-					.where('docId', '==', event.eventId)
-					.get();
-				eventsInvitedTo.docs.forEach((doc) => {
-					eventsResult.push(doc.data());
+					for (let i = 0; i < guestsResult.length; i++) {
+						const event = guestsResult[i];
+						const eventsInvitedTo = await firebase
+							.firestore()
+							.collection('events')
+							.where('docId', '==', event.eventId)
+							.get();
+						eventsInvitedTo.docs.forEach((doc) => {
+							eventsResult.push(doc.data());
+						});
+						this.setState({ eventsData: eventsResult });
+						console.log('eventsResult2', eventsResult);
+					}
 				});
-				console.log('eventsResult1', eventsResult);
-				// .onSnapshot((snapshot) => {
-				//   snapshot.forEach((doc) => {
-				//     eventsResult.push(doc.data());
-				//   });
-				this.setState({ eventsData: eventsResult });
-				console.log('eventsResult2', eventsResult);
-			});
-			// });
-			// });
-			// })
 		} catch (error) {
 			console.log(error);
 		}
