@@ -1,30 +1,22 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-	container: {
+	mainContainer: {
+		flex: 1,
+		backgroundColor: '#ffffff',
+	},
+	firstContainer: {
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#eee1db',
-		color: 'black',
+		backgroundColor: '#ffffff',
 	},
-	logo: {
-		height: 120,
-		width: 90,
-		alignSelf: 'center',
-		margin: 30,
+	secondContainer: {
+		flex: 1,
+		backgroundColor: '#ffffff',
 	},
-	input: {
-		height: 48,
-		borderRadius: 5,
-		overflow: 'hidden',
-		backgroundColor: 'white',
-		marginTop: 10,
-		marginBottom: 10,
-		marginLeft: 30,
-		marginRight: 30,
-		paddingLeft: 16,
-		width: 250,
+	innerContainer: {
+		backgroundColor: '#ffffff',
 	},
 	button: {
 		backgroundColor: '#ddb39d',
@@ -42,36 +34,79 @@ export default StyleSheet.create({
 		fontSize: 16,
 		fontWeight: 'bold',
 	},
-	footerView: {
-		alignItems: 'center',
-		marginTop: 10,
-	},
-	footerText: {
-		fontSize: 16,
-		color: '#2e2e2d',
-	},
-	footerLink: {
-		color: '#ddb39d',
-		fontWeight: 'bold',
-		fontSize: 16,
-	},
-	restaurant: {
-		flex: 1,
-		alignItems: 'flex-start',
-		justifyContent: 'space-evenly',
-		backgroundColor: '#eee1db',
-		flexDirection: 'row',
-	},
-	image: {
-		height: 120,
-		width: 120,
+	singleEventContainer: {
+		margin: 12,
+		backgroundColor: '#656565',
+		height: 80,
+		width: 150,
 		borderRadius: 10,
-		borderWidth: 3,
-		borderColor: 'maroon',
+		justifyContent: 'center',
 	},
-	singleBlock: {
-		flexDirection: 'column',
-		margin: 10,
+	eventsContainer: {
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		alignItems: 'center',
 		marginTop: 30,
+	},
+	restaurantsTextHeader: {
+		fontSize: 16,
+		fontWeight: 'bold',
+	},
+	singleEventTextHeader: {
+		fontSize: 16,
+		fontWeight: 'bold',
+	},
+	buttonContainer: {
+		justifyContent: 'center',
+		alignContent: 'center',
+		alignSelf: 'center',
+	},
+	button: {
+		backgroundColor: '#e95530',
+		height: 48,
+		borderRadius: 5,
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: 250,
+	},
+	buttonText: {
+		color: 'white',
+		fontSize: 16,
+		fontWeight: 'bold',
+		textAlign: 'center',
+		justifyContent: 'center',
+	},
+	txt: {
+		fontSize: 16,
+		fontWeight: 'bold',
+		textAlign: 'center',
+		color: 'white',
+	},
+	addEvent: {
+		textAlign: 'center',
+		fontSize: 25,
+		color: 'white',
+		fontWeight: 'bold',
+	},
+	addEventContainer: {
+		backgroundColor: '#e95530',
+		height: 80,
+		width: 150,
+		borderRadius: 10,
+		justifyContent: 'center',
+		alignSelf: 'center',
+		marginTop: 20,
+	},
+	createEventText: {
+		textAlign: 'center',
+		color: 'white',
+		fontSize: 16,
+		fontWeight: 'bold',
+	},
+	eventContainer: {
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		marginTop: 30,
+		backgroundColor: '#ffffff',
 	},
 });
