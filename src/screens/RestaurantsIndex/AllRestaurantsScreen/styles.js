@@ -1,77 +1,73 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-    container: {
-        flex: 1,
+	container: {
+		backgroundColor: '#ffffff',
+		flex: 1,
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignContent: 'center'
+	},
+    buttonContainer: {
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#eee1db',
-        color: 'black',
-    },
-    logo: {
-        height: 120,
-        width: 90,
-        alignSelf: "center",
-        margin: 30
-    },
-    input: {
-        height: 48,
-        borderRadius: 5,
-        overflow: 'hidden',
-        backgroundColor: 'white',
-        marginTop: 10,
-        marginBottom: 10,
-        marginLeft: 30,
-        marginRight: 30,
-        paddingLeft: 16,
-        width: 250
+		justifyContent: 'center',
+        alignSelf: 'center'
     },
     button: {
-        backgroundColor: '#ddb39d',
-        marginLeft: 30,
-        marginRight: 30,
-        marginTop: 20,
-        height: 48,
-        borderRadius: 5,
-        alignItems: "center",
-        justifyContent: 'center',
-        width: 250
+		backgroundColor: '#e95531',
+		height: 48,
+		borderRadius: 5,
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: 275
     },
-    buttonTitle: {
+    buttonText: {
         color: 'white',
-        fontSize: 16,
-        fontWeight: "bold"
+		fontSize: 16,
+		fontWeight: 'bold'
     },
-    footerView: {
-        alignItems: "center",
-        marginTop: 10
+    restaurantContainer: {
+        margin: 10
     },
-    footerText: {
-        fontSize: 16,
-        color: '#2e2e2d'
+    restaurantHeaderContainer: {
+        justifyContent: 'flex-start',
+        alignContent: 'flex-start',
+        alignSelf: 'flex-start'
     },
-    footerLink: {
-        color: "#ddb39d",
-        fontWeight: "bold",
-        fontSize: 16
-    }, 
-    restaurant: {
-        flex: 1,
-        alignItems: 'flex-start',
-        justifyContent: 'space-evenly',
-        backgroundColor: '#eee1db', 
-        flexDirection: 'row'
+    restaurantHeaderText: {
+        fontSize: 24,
+		fontWeight: 'bold',
+		color: '#e95530',
+		fontFamily: 'PurplePurse'
+    },
+    indRestaurantContainer: {
+        justifyContent: 'center',
+        alignContent: 'center',
+        margin: 10
     },
     image: {
-        height: 120,
-        width: 120,
-        borderRadius: 10,
-        borderWidth: 3,
-        borderColor: 'maroon'
+        width: 340, 
+        height: 175
     },
-    singleBlock: { 
-        flexDirection: 'column',
-        margin: 10,
-        marginTop: 30 
+    indRestaurantTextBody: {
+		fontSize: 16,
+        color: '#656565'
+    },
+    indRestaurantHeader: {
+        fontSize: 20,
+		fontWeight: 'bold',
+		color: '#e95530',
+		fontFamily: 'PurplePurse'
+    },
+    indRestaurantHyperlink: {
+        fontSize: 15,
+        color: '#df817f'
+    },
+    activeRestaurantDetailsContainer: {
+        marginLeft: 21
+    },
+    borderLine: {
+        borderBottomColor: '#656565',
+        borderBottomWidth: .5
     }
 })
