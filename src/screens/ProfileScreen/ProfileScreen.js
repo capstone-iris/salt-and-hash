@@ -98,7 +98,7 @@ export default class ProfileScreen extends Component {
 					<View style={styles.infoBox}>
 						{/* <Title style={{color: '#ffffff'}}>{invitedEventsData.length}</Title> */}
 						<Title style={{color: '#ffffff'}}>3</Title>
-						<Caption style={{color: '#ffffff'}}>Invited Events</Caption>
+						<Caption style={{color: '#ffffff'}}>Events Attending</Caption>
 					</View>
 				</View>
 

@@ -48,10 +48,6 @@ export default StyleSheet.create({
 		alignItems: 'center',
 		marginTop: 30,
 	},
-	restaurantsTextHeader: {
-		fontSize: 16,
-		fontWeight: 'bold',
-	},
 	singleEventTextHeader: {
 		fontSize: 16,
 		fontWeight: 'bold',
@@ -108,5 +104,10 @@ export default StyleSheet.create({
 		flexWrap: 'wrap',
 		marginTop: 30,
 		backgroundColor: '#ffffff',
+	},
+	text: {
+		color: '#656565',
+		fontWeight: '600',
+		fontSize: 16
 	},
 });

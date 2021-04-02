@@ -5,8 +5,7 @@ export default StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#eee1db',
-		color: 'black',
+		backgroundColor: '#ffffff',
 	},
 	logo: {
 		height: 120,

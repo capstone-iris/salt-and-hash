@@ -3,13 +3,12 @@ import styles from './styles';
 import {
 	SafeAreaView,
 	View,
-	Image,
-	TouchableOpacity,
 	ScrollView,
+	TouchableOpacity,
+	Image
 } from 'react-native';
 import { Text, TouchableRipple } from 'react-native-paper';
-
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import * as base from '../../../../secrets.js';
 import { firebase } from './../../../firebase/config';
@@ -88,10 +87,10 @@ export default function SingleEventScreen({ route }) {
 	return (
 		<SafeAreaView style={styles.container}>
 			<Text style={styles.eventNameText}>{event.name}</Text>
-			<View style={(styles.menuWrapper, { marginTop: 20 })}>
+			<View style={{marginBottom: 35}}>
 				<View>
 					<View style={styles.menuItem}>
-						<Icon name='calendar-range' color='#FF6347' size={25} />
+						<MaterialCommunityIcons name='calendar-range' color='#FF6347' size={25} />
 						<Text style={styles.menuItemText}>
 							{convertDateTime(event.date.seconds, 'date')}
 						</Text>
@@ -99,7 +98,7 @@ export default function SingleEventScreen({ route }) {
 				</View>
 				<View>
 					<View style={styles.menuItem}>
-						<Icon name='clock-outline' color='#FF6347' size={25} />
+						<MaterialCommunityIcons name='clock-outline' color='#FF6347' size={25} />
 						<Text style={styles.menuItemText}>
 							{convertDateTime(event.eventStartTime.seconds, 'time')} -{' '}
 							{convertDateTime(event.eventEndTime.seconds, 'time')}
@@ -108,7 +107,7 @@ export default function SingleEventScreen({ route }) {
 				</View>
 				<View>
 					<View style={styles.menuItem}>
-						<Icon name='timer-sand' color='#FF6347' size={25} />
+						<MaterialCommunityIcons name='timer-sand' color='#FF6347' size={25} />
 						<Text style={styles.menuItemText}>
 							Voting Deadline:{' '}
 							{convertDateTime(event.votingDeadline.seconds, 'date')}
@@ -117,51 +116,55 @@ export default function SingleEventScreen({ route }) {
 				</View>
 				<View>
 					<View style={styles.menuItem}>
-						<Icon name='information-outline' color='#FF6347' size={25} />
+						<Ionicons name='information-outline' color='#FF6347' size={25} />
 						<Text style={styles.menuItemText}>{event.description}</Text>
 					</View>
 				</View>
-				<TouchableRipple onPress={() => {}}>
+				<View>
+					<TouchableRipple onPress={() => {}}>
 					<View style={styles.menuItem}>
-						<Icon name='map-marker-radius' color='#FF6347' size={25} />
-						<Text style={styles.menuItemText}>Pending...</Text>
+						<MaterialCommunityIcons name='map-marker-radius' color='#FF6347' size={25} />
+						<Text style={styles.menuItemText}>Final Restaurant Pending...</Text>
 					</View>
-				</TouchableRipple>
-
-				{currentUser === event.userId ?
-				// <Text style={styles.menuItemText}>Invite Friends</Text>
-
-				<SafeAreaView>
-
-					<AddGuestsToEventScreen eventId={event.docId}/>
-
-				</SafeAreaView>
-				: null
-				}
+					</TouchableRipple>
+				</View>
+				<View>
+					{currentUser === event.userId ?
+						<View style={{marginTop: 15, marginBottom: 25}}>
+						<AddGuestsToEventScreen eventId={event.docId}/>
+						</View>
+						: 
+						null
+					}
+				</View>
+				</View>
 
 				<ScrollView>
-					<View style={styles.imageContainer}>
+				<View style={styles.restaurantsContainer}>
 						{restaurantsData.map((restaurant, index) => {
 							 return (
-
-						<TouchableOpacity
-							activeOpacity={0.5}
-							key={index}
-							onPress={() => navigation.navigate('Restaurant Swipe', {restaurantsData: restaurantsData, eventId:event.docId, navigation: navigation})}
-						>
-							<Image
-								style={styles.image}
-								source={{
-									uri: fetchImage(restaurant.photo),
-								}}
-							/>
-							<Text>{restaurant.name}</Text>
-							<Text>Votes: {restaurant.votes}</Text>
-						</TouchableOpacity>
+								<View style={styles.indRestaurantContainer}>
+								<TouchableOpacity
+									activeOpacity={0.5}
+									key={index}
+									onPress={() => navigation.navigate('Restaurant Swipe', {restaurantsData: restaurantsData, eventId:event.docId, navigation: navigation})}
+								>
+									<Image
+										style={styles.image}
+										source={{
+											uri: fetchImage(restaurant.photo),
+										}}
+									/>
+								</TouchableOpacity>
+								<View style={styles.textContainer}>
+									<Text style={styles.restaurantTitle}>{restaurant.name}</Text>
+									<Text style={styles.voteText}>{restaurant.votes} Votes</Text>
+								</View>
+								</View>
 						)})}
-					</View>
+				</View>
 				</ScrollView>
-			</View>
+				
 		</SafeAreaView>
 	);
 }
