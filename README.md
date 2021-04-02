@@ -1,18 +1,22 @@
 # Capstone | Salt & Hash
 
-_Theme to come._
+_Tinder-inspired event venue voting app_
 
-This event planning app offers a Tinder-inspired voting system for invited guests, created by a team of developers during the [Grace Hopper Program](https://www.gracehopper.com/) at Fullstack Academy.
+Created by a team of developers during the [Grace Hopper Program](https://www.gracehopper.com/) at Fullstack Academy, Salt & Hash is an iOS/Android app that allows friend groups to vote on restaurants for organized events. Hosts create an event, select restaurants in their nearby location, and invite friends to RSVP and vote over text; invited guests register for an account, and cast their votes on a host’s selected restaurants. Once the voting deadline passes, a restaurant is listed for the event.
 
 ## Tech Stack
 
-- [React Native](https://reactnative.dev/) - framework for building native apps using React
-- [ReactJS](https://reactjs.org/) - front-end framework
-- [Firebase](firebase.google.com) - database, authorization framework
+* [ReactJS](https://reactjs.org/) - library for building user interfaces
+* [React Native](https://reactnative.dev/) - framework for building native apps using React
+* [Expo](https://expo.io/) - an open-source platform for making universal native apps for Android, iOS, and the web with JavaScript and React
+* [Firebase](firebase.google.com) - cloud real-time NoSQL database, authorization framework
+* [Google Places API](https://developers.google.com/maps/documentation/places/web-service/overview) - service that returns info about places using HTTP requests
 
 ## Installation
 
-Instructions to come.
+To clone and use the repo, establish a Firebase project, introducing your database info into a src/firebase/config.js file, and a Google Places API, introducing the API into a secrets.js file.
+
+An Expo download link is forthcoming.
 
 ## Developers
 
