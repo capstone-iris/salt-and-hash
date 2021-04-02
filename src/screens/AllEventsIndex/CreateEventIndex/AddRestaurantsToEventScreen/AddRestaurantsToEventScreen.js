@@ -24,8 +24,8 @@ import * as base from '../../../../../secrets.js';
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
 class AddRestaurantsToEventScreen extends React.Component {
-	constructor() {
-		super(),
+	constructor(props) {
+		super(props),
 			(this.eventRestaurantsRef = firebase
 				.firestore()
 				.collection('eventRestaurants'));
@@ -180,21 +180,22 @@ class AddRestaurantsToEventScreen extends React.Component {
 			});
 	};
 
-	submitRestaurantSelection = (eventId) => {
+	submitRestaurantSelection = (event) => {
 		if (this.state.restaurantCounter < 3) {
 			Alert.alert('Select at least three restaurants!');
 		} else if (this.state.restaurantCouner > 7) {
 			Alert.alert('You cannot choose more than 7 restaurants!');
 		} else {
-			this.props.navigation.navigate('Add Guests to Event', {
-				eventId: eventId,
+			this.props.navigation.navigate('Single Event', {
+				event: event,
 			});
 		}
 	};
 
 	render() {
-		const eventId = this.props.route.params.eventId;
-
+		const {event} = this.props.route.params;
+		// const {event } = this.props
+		console.log('event from props ==>', this.props)
 		return (
 			<SafeAreaView style={styles.container}>
 				<View style={{margin: 10}}>
@@ -216,7 +217,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 				) : (
 					<View style={{backgroundColor: '#ffffff'}}>
 						<View style={styles.secondButtonContainer}>
-							<TouchableOpacity style={styles.secondButton} onPress={() => this.submitRestaurantSelection(eventId)}>
+							<TouchableOpacity style={styles.secondButton} onPress={() => this.submitRestaurantSelection(event)}>
 								<Text style={styles.buttonText}>Add Selected Restaurants to Event</Text>
 							</TouchableOpacity>
 						</View>
@@ -269,9 +270,9 @@ class AddRestaurantsToEventScreen extends React.Component {
 												this.setState((state) => ({ ...state, items }));
 
 											if(items[currentItemIndex].checked) {
-												this.storeRestaurant(eventId, items[currentItemIndex])
+												this.storeRestaurant(event.docId, items[currentItemIndex])
 											} else {
-												this.deleteRestaurant(eventId, items[currentItemIndex])
+												this.deleteRestaurant(event.docId, items[currentItemIndex])
 											}
 											}}
 										/>

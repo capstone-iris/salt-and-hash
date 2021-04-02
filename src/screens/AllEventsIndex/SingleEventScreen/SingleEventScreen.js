@@ -17,6 +17,8 @@ import AddGuestsToEventScreen from '../CreateEventIndex/AddGuestsToEventScreen/A
 
 export default function SingleEventScreen({ route }) {
 	const { event } = route.params;
+
+
 	const navigation = useNavigation();
 	const [restaurantsData, setRestaurantsData] = useState([]);
 	const eventsCollection = firebase.firestore().collection('events');
