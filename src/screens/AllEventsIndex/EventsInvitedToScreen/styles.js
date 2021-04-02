@@ -74,4 +74,23 @@ export default StyleSheet.create({
 		margin: 10,
 		marginTop: 30,
 	},
+	singleEventContainer: {
+		margin: 12,
+		backgroundColor: '#fab59e',
+		padding: 20,
+		// marginVertical: 8,
+		// marginHorizontal: 10,
+		height: 150,
+		width: 150,
+		borderRadius: 10,
+	},
+	txt: {
+		fontSize: 20,
+		fontWeight: 'bold',
+		textAlign: 'center',
+		color: 'white',
+		marginTop: 20,
+	},
+
+
 });

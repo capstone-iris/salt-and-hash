@@ -33,8 +33,8 @@ export default class CreateEventForm extends React.Component {
 			eventEndTime: '',
 			isLoading: false,
 			visibleModal: false,
-			// phoneNumber: '',
-			// eventId: ''
+			phoneNumber: '',
+			eventId: ''
 
 		};
 		this.renderModalContent = this.renderModalContent.bind(this)

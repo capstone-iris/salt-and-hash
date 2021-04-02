@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, SafeAreaView, TouchableOpacity, View } from 'react-native';
+import { Text, SafeAreaView, TouchableOpacity, View, ScrollView } from 'react-native';
 import styles from './styles';
 import RestaurantSwipeScreen from '../../RestaurantsIndex/RestaurantSwipeScreen/RestaurantSwipeScreen';
 import { useNavigation } from '@react-navigation/native';
@@ -15,7 +15,9 @@ export default class EventsInvitedToScreen extends React.Component {
   }
 
  async componentDidMount() {
-   await this.fetchData()
+   if(!this.state.eventsData.length){
+     await this.fetchData()
+   }
   }
 
   async fetchData() {
@@ -65,9 +67,13 @@ export default class EventsInvitedToScreen extends React.Component {
       }
     }
 
+
+
   render() {
     const { navigation } = this.props
+    console.log('THIS.STATE ==>', this.state.eventsData.length)
     return (
+      <ScrollView style={{ backgroundColor: '#eee1db' }}>
       <SafeAreaView style={styles.container}>
         {this.state.eventsData.length < 1 ? (
           <View styles={{ marginTop: 100 }}>
@@ -88,7 +94,17 @@ export default class EventsInvitedToScreen extends React.Component {
               Events Invited To Screen
               {'\n'}
             </Text>
-            {this.state.eventsData.map((event, index) => {
+
+            <View
+							style={{
+								flexDirection: 'row',
+								flexWrap: 'wrap',
+								marginTop: 80,
+								backgroundColor: '#eee1db',
+							}}
+						>
+
+              {this.state.eventsData.map((event, index) => {
               return (
                 <TouchableOpacity
                 style={styles.singleEventContainer}
@@ -100,9 +116,11 @@ export default class EventsInvitedToScreen extends React.Component {
                 </TouchableOpacity>
               );
             })}
+						</View>
           </View>
          )}
       </SafeAreaView>
+      </ScrollView>
     );
   }
-} 
+}
