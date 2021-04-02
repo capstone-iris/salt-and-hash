@@ -16,6 +16,7 @@ import * as base from '../../../../secrets.js';
 import { firebase } from './../../../firebase/config';
 import AddGuestsToEventScreen from '../CreateEventIndex/AddGuestsToEventScreen/AddGuestsToEventScreen.js'
 import { Alert } from 'react-native';
+import EventsHostedScreen from '../EventsHostedScreen/EventsHostedScreen'
 
 export default function SingleEventScreen({ route }) {
 	const { event } = route.params;
@@ -86,7 +87,7 @@ export default function SingleEventScreen({ route }) {
 
 	function deleteEvent(){
 		firebase.firestore().collection('events').doc(event.docId).delete()
-		navigation.navigate('Events Hosted')
+		navigation.navigate('My Events')
 
 	}
 
