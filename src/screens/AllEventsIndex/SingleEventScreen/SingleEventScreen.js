@@ -6,6 +6,7 @@ import {
 	Image,
 	TouchableOpacity,
 	ScrollView,
+	Button
 } from 'react-native';
 import { Text, TouchableRipple } from 'react-native-paper';
 
@@ -14,6 +15,7 @@ import { useNavigation } from '@react-navigation/native';
 import * as base from '../../../../secrets.js';
 import { firebase } from './../../../firebase/config';
 import AddGuestsToEventScreen from '../CreateEventIndex/AddGuestsToEventScreen/AddGuestsToEventScreen.js'
+import { Alert } from 'react-native';
 
 export default function SingleEventScreen({ route }) {
 	const { event } = route.params;
@@ -57,6 +59,7 @@ export default function SingleEventScreen({ route }) {
 			: time;
 	}
 
+
 	function fetchImage (photoRef)  {
 		const ref = photoRef
 			const url = 'https://maps.googleapis.com/maps/api/place/photo?';
@@ -66,6 +69,36 @@ export default function SingleEventScreen({ route }) {
 			const fetchImageUrl = url + maxWidth + photoReference + key;
 			return fetchImageUrl;
 		};
+
+	deleteAlert=()=>
+	Alert.alert(
+		"Are you sure you want to delete this event?",
+		" ",
+		[
+			{
+				text: "Cancel",
+				onPress: () => console.log("Cancel Pressed"),
+				style: "cancel"
+			},
+			{ text: "OK", onPress: () => firebase.firestore().collection('events').doc(event.docId).delete() }
+		]
+	);
+
+
+	function deleteEvent(){
+		console.log('in delete handler')
+		Alert.alert(
+			"Are you sure you want to delete this event?",
+
+			// [
+			// 	{
+			// 		text: "OK",
+			// 		onPress: () => firebase.firestore().collection('events').doc(event.docId).delete(),
+			// 	}
+			// ]
+		)
+
+	}
 
 	useEffect(() => {
 
@@ -134,6 +167,12 @@ export default function SingleEventScreen({ route }) {
 				<SafeAreaView>
 					<AddGuestsToEventScreen eventId={event.docId}/>
 				</SafeAreaView>
+				: null
+				}
+
+				{currentUser === event.userId ?
+					<Button onPress={deleteAlert} title='Delete Event'>
+					</Button>
 				: null
 				}
 

@@ -130,7 +130,7 @@ class CreateEventMainScreen extends React.Component {
 
 
 
-				firebase.firestore().collection('events').where('docId', '==', documentId).onSnapshot((snapshot)=>{
+		firebase.firestore().collection('events').where('docId', '==', documentId).onSnapshot((snapshot)=>{
 			let event
 			snapshot.forEach((doc) => {
 				event = doc.data()
