@@ -42,52 +42,6 @@ function BottomTabNavigator() {
 		// Add currentUser to useEffect dependency array, so useEffect runs when it changes
 	}, [firebase.auth().currentUser]);
 
-	// useEffect(() => {
-	// 	try{
-	// 		if (!firebase.auth().currentUser) {
-	// 			return;
-	// 		}
-	
-	// 		const currentUser = firebase.auth().currentUser.uid;
-
-	// 	let userResult;
-	// 	let guestsResult = [];
-	// 	let eventsResult = [];
-	
-	// 	const userData =  firebase
-	// 	  .firestore()
-	// 	  .collection('users')
-	// 	  .where('id', '==', currentUser)
-	// 	  .onSnapshot((snapshot) => {
-	// 		snapshot.forEach((doc) => {
-	// 		  userResult = doc.data();
-	// 		})
-	// 		  firebase.firestore()
-	// 		.collection('eventGuests')
-	// 		.doc(userResult.phoneNumber)
-	// 		.collection('eventsInvitedTo')
-	// 		.onSnapshot((snapshot) => {
-	// 		  snapshot.forEach((doc) => {
-	// 			guestsResult.push(doc.data());
-	// 		  })
-	// 			guestsResult.forEach(async (event) => {
-	// 				   await firebase
-	// 					.firestore()
-	// 					.collection('events')
-	// 					.where('docId', '==', event.eventId)
-	// 					.onSnapshot((snapshot) => {
-	// 					  snapshot.forEach((doc) => {
-	// 						eventsResult.push(doc.data());
-	// 					  });
-	// 					  setInvitedEventsData(eventsResult)
-	// 		  });
-	// 		});
-	// 	  });
-	// 	})
-	// 		} catch (error) {
-	// 		  console.log(error)
-	// 	}
-	//   },[]);
 	
 	return (
 		<Tab.Navigator

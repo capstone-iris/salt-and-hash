@@ -3,24 +3,43 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
 	container: {
 		backgroundColor: '#ffffff',
-		flex: 1,
-		flexDirection: 'row',
-		justifyContent: 'center',
-		alignContent: 'center',
-		flexDirection: 'row'
+		flex: 1
 	},
-    buttonContainer: {
+    headerText: {
+        margin: 10,
+		fontSize: 24,
+		fontWeight: 'bold',
+		color: '#e95530',
+		fontFamily: 'PurplePurse'
+    },
+    firstButtonContainer: {
         alignItems: 'center',
 		justifyContent: 'center',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        backgroundColor: '#ffffff'
     },
-    button: {
+    secondButtonContainer: {
+        alignItems: 'center',
+		justifyContent: 'center',
+        alignSelf: 'center',
+        backgroundColor: '#ffffff',
+        marginBottom: 15
+    },
+    firstButton: {
 		backgroundColor: '#e95531',
 		height: 48,
 		borderRadius: 5,
 		alignItems: 'center',
 		justifyContent: 'center',
 		width: 275
+    },
+    secondButton: {
+		backgroundColor: '#e95531',
+		height: 48,
+		borderRadius: 5,
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: 300
     },
     buttonText: {
         color: 'white',
@@ -58,7 +77,8 @@ export default StyleSheet.create({
         fontSize: 20,
 		fontWeight: 'bold',
 		color: '#e95530',
-		fontFamily: 'PurplePurse'
+		fontFamily: 'PurplePurse',
+        marginTop: 10
     },
     indRestaurantHyperlink: {
         fontSize: 15,
@@ -70,8 +90,5 @@ export default StyleSheet.create({
     borderLine: {
         borderBottomColor: '#656565',
         borderBottomWidth: .5
-    },
-	voteContainer: {
-		
-	}
+    }
 })

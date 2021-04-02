@@ -1,30 +1,22 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-	container: {
+	mainContainer: {
+		flex: 1,
+		backgroundColor: '#ffffff'
+	},
+	firstContainer: {
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#eee1db',
-		color: 'black',
+		backgroundColor: '#ffffff'
 	},
-	logo: {
-		height: 120,
-		width: 90,
-		alignSelf: 'center',
-		margin: 30,
+	secondContainer: {
+		flex: 1,
+		backgroundColor: '#ffffff'
 	},
-	input: {
-		height: 48,
-		borderRadius: 5,
-		overflow: 'hidden',
-		backgroundColor: 'white',
-		marginTop: 10,
-		marginBottom: 10,
-		marginLeft: 30,
-		marginRight: 30,
-		paddingLeft: 16,
-		width: 250,
+	innerContainer: {
+		backgroundColor: '#ffffff'
 	},
 	button: {
 		backgroundColor: '#ddb39d',
@@ -42,60 +34,19 @@ export default StyleSheet.create({
 		fontSize: 16,
 		fontWeight: 'bold',
 	},
-	footerView: {
-		alignItems: 'center',
-		marginTop: 10,
-	},
-	footerText: {
-		fontSize: 16,
-		color: '#2e2e2d',
-	},
-	footerLink: {
-		color: '#ddb39d',
-		fontWeight: 'bold',
-		fontSize: 16,
-	},
-	restaurant: {
-		flex: 1,
-		alignItems: 'flex-start',
-		justifyContent: 'space-evenly',
-		backgroundColor: '#eee1db',
-		flexDirection: 'row',
-	},
-	image: {
-		height: 120,
-		width: 120,
-		borderRadius: 10,
-		borderWidth: 3,
-		borderColor: 'maroon',
-	},
-	singleBlock: {
-		flexDirection: 'column',
-		margin: 10,
-		marginTop: 30,
-	},
-	restaurantContainer: {
-		margin: 25,
-	},
 	singleEventContainer: {
 		margin: 12,
-		backgroundColor: '#fab59e',
-		padding: 20,
-		// marginVertical: 8,
-		// marginHorizontal: 10,
-		height: 150,
+		backgroundColor: '#656565',
+		height: 80,
 		width: 150,
 		borderRadius: 10,
-	},
-	indRestaurantInsideContainer: {
-		margin: 10,
+		justifyContent: 'center'
 	},
 	eventsContainer: {
 		flexDirection: 'row',
 		flexWrap: 'wrap',
 		alignItems: 'center',
 		marginTop: 30,
-		// justifyContent: 'center',
 	},
 	restaurantsTextHeader: {
 		fontSize: 16,
@@ -105,33 +56,20 @@ export default StyleSheet.create({
 		fontSize: 16,
 		fontWeight: 'bold',
 	},
-	indRestaurantTextBody: {
-		fontSize: 15,
-	},
-	activeRestaurantDetailsContainer: {
-		marginLeft: 21,
-	},
-	indRestaurantText: {
-		margin: 10,
-	},
-	image: {
-		height: 120,
-		width: 120,
-		borderRadius: 10,
-		borderWidth: 3,
-		borderColor: 'maroon',
+	buttonContainer: {
+		justifyContent: 'center',
+		alignContent: 'center',
+		alignSelf: 'center'
 	},
 	button: {
-		backgroundColor: '#ddb39d',
-		margin: 10,
-		marginTop: 20,
+		backgroundColor: '#e95530',
 		height: 48,
 		borderRadius: 5,
 		alignItems: 'center',
 		justifyContent: 'center',
 		width: 250,
 	},
-	Btn: {
+	buttonText: {
 		color: 'white',
 		fontSize: 16,
 		fontWeight: 'bold',
@@ -139,33 +77,36 @@ export default StyleSheet.create({
 		justifyContent: 'center',
 	},
 	txt: {
-		fontSize: 20,
+		fontSize: 16,
 		fontWeight: 'bold',
 		textAlign: 'center',
-		color: 'white',
-		marginTop: 20,
+		color: 'white'
 	},
 	addEvent: {
 		textAlign: 'center',
-		fontSize: 30,
-		marginTop: 30,
+		fontSize: 25,
 		color: 'white',
 		fontWeight: 'bold',
 	},
-	AddEventContainer: {
-		margin: 12,
-		backgroundColor: '#fab59e60', // keep the 60 at the end if you want change the color for a muted color
-		padding: 20,
-		// marginVertical: 8,
-		// marginHorizontal: 10,
-		height: 150,
+	addEventContainer: {
+		backgroundColor: '#e95530',
+		height: 80,
 		width: 150,
 		borderRadius: 10,
+		justifyContent: 'center',
+		alignSelf: 'center',
+		marginTop: 20
 	},
-	CreateEventText: {
+	createEventText: {
 		textAlign: 'center',
 		color: 'white',
-		fontSize: 18,
+		fontSize: 16,
 		fontWeight: 'bold',
 	},
+	eventContainer: {
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		marginTop: 30,
+		backgroundColor: '#ffffff',
+	}
 });

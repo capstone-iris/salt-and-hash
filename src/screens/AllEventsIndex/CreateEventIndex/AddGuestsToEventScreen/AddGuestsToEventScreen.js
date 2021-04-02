@@ -1,19 +1,16 @@
 import React from 'react';
 import {
 	Text,
-	SafeAreaView,
-	ScrollView,
-	TextInput,
 	View,
 	TouchableOpacity,
 	Alert,
 	Modal,
+	SafeAreaView
 } from 'react-native';
 import {
 Input, Button, Label, Form, Item , Root}
 from 'native-base'
 import { firebase } from '../../../../firebase/config';
-// import { withNavigation } from 'react-navigation';
 import styles from './styles';
 import Communications from 'react-native-communications';
 import CreateEventMainScreen from '../CreateEventMainScreen/CreateEventMainScreen';
@@ -32,10 +29,7 @@ export default class CreateEventForm extends React.Component {
 			votingDeadline: '',
 			eventEndTime: '',
 			isLoading: false,
-			visibleModal: false,
-			phoneNumber: '',
-			eventId: ''
-
+			visibleModal: false
 		};
 		this.renderModalContent = this.renderModalContent.bind(this)
 	}
@@ -69,13 +63,11 @@ export default class CreateEventForm extends React.Component {
 
 	}
 
-	// createNewEvent = () => {
-	// 	this.props.navigation.navigate('Create Event')
-	// }
 	renderModalContent(){
 		const {eventId} = this.props
 		return (
-		<Root>
+
+		<Root style={{backgroundColor: '#ffffff'}}>
 			<View style={styles.modalView} >
 				<Form style={styles.modalForm}>
 					{/* <Text>Enter Phone Number</Text> */}
@@ -118,10 +110,8 @@ export default class CreateEventForm extends React.Component {
 	render() {
 
 
-
 		return (
-			// <SafeAreaView style={styles.container}>
-				// <ScrollView>
+			<SafeAreaView style={{backgroundColor: '#ffffff'}}>
 					<View style={styles.centeredView} onPress={() => {
 						this.setState({
 							visibleModal: false,
@@ -140,20 +130,12 @@ export default class CreateEventForm extends React.Component {
 								visibleModal: true,
 							})
 						}}>
-								<Text style={styles.Btn}>Invite Friends Over Text</Text>
+								<Text style={styles.buttonText}>Invite Friends Over Text</Text>
 						</TouchableOpacity>
 
 					</View>
-				// </ScrollView>
-			// </SafeAreaView>
+					</SafeAreaView>
 		);
 	}
 }
 
-
-
-{/* <TouchableOpacity style={styles.button} >
-<Text style={styles.Btn}>Create New Event</Text>
-</TouchableOpacity>
-onPress={() => this.createNewEvent()}
-export default withNavigation(CreateEventMainScreen); */}
