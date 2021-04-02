@@ -180,11 +180,11 @@ export default function SingleEventScreen({ route }) {
 				<View style={styles.restaurantsContainer}>
 						{restaurantsData.map((restaurant, index) => {
 							 return (
-								<View style={styles.indRestaurantContainer}>
+								<View key={index} style={styles.indRestaurantContainer}>
 								<TouchableOpacity
 									activeOpacity={0.5}
 									key={index}
-									onPress={() => navigation.navigate('Restaurant Swipe', {restaurantsData: restaurantsData, eventId:event.docId, navigation: navigation})}
+									onPress={() => navigation.navigate('Restaurant Swipe', {restaurantsData: restaurantsData, eventId:event.docId})}
 								>
 									<Image
 										style={styles.image}
