@@ -108,5 +108,7 @@ export default StyleSheet.create({
 		flexWrap: 'wrap',
 		marginTop: 30,
 		backgroundColor: '#ffffff',
+		justifyContent: 'center',
+		alignContent: 'center'
 	}
 });

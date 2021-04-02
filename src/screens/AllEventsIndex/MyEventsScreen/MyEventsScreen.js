@@ -1,12 +1,10 @@
-// import * as React from 'react';
 import React, { useState, useEffect } from 'react';
 import { View, useWindowDimensions } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import CreateEventIndex from '../CreateEventIndex/CreateEventIndex';
 import EventsHostedScreen from '../EventsHostedScreen/EventsHostedScreen';
 import EventsInvitedToScreen from '../EventsInvitedToScreen/EventsInvitedToScreen';
-import { firebase } from './../../../firebase/config';
-// import styles from './styles';
+import { firebase } from './../../../firebase/config'
 
 export default function MyEventsScreen({ navigation }) {
 
@@ -15,7 +13,6 @@ export default function MyEventsScreen({ navigation }) {
 
 	const [index, setIndex] = useState(0);
 	const [routes] = useState([
-		// { key: 'create', title: 'CREATE' },
 		{ key: 'hosted', title: 'HOST' },
 		{ key: 'invited', title: 'ATTEND' },
 	]);
@@ -26,7 +23,6 @@ export default function MyEventsScreen({ navigation }) {
 		}
 		const currentUser = firebase.auth().currentUser.uid;
 
-		// Create subscription to listen for changes
 		const unsubscribe = firebase
 
 			.firestore()
@@ -41,27 +37,6 @@ export default function MyEventsScreen({ navigation }) {
 			});
 		return () => unsubscribe();
 	}, []);
-
-	// useEffect(()=>{
-
-	// 		let result = [];
-	// 		const guestsRef = firebase
-	// 		.firestore()
-	// 		.collection('eventGuests')
-	// 		.doc(usersData.phoneNumber)
-	// 		.collection('eventsInvitedTo')
-	// 		.onSnapshot((snapshot) => {
-	// 			snapshot.forEach((doc) => {
-	// 				result.push(doc.data());
-	// 			});
-	// 			setInvitedEventsData(result)
-	// 			});
-
-	// }, [usersData]);
-
-	// console.log('usersData MyEventsScreen ==>', usersData);
-
-	// console.log('invitedEventsData MyEventsScreen ==>', invitedEventsData)
 
 	const renderScene = ({ route }) => {
 		switch (route.key) {
@@ -88,37 +63,9 @@ export default function MyEventsScreen({ navigation }) {
 					{...props}
 					style={{ backgroundColor: '#e6a80c', color: '#e95531' }}
 					indicatorStyle={{ backgroundColor: '#e95531' }}
+					labelStyle={{fontWeight: 'bold'}}
 				/>
 			)}
 		/>
 	);
 }
-
-// import React from 'react';
-// import { Text, SafeAreaView } from 'react-native';
-// import styles from './styles';
-
-// export default function ProfileScreen({ navigation }) {
-// 	return (
-// 		<SafeAreaView style={styles.container}>
-// 			<Text>
-// 				{'\n'}
-// 				My Events Screen{'\n'}
-
-// 			</Text>
-
-// 			<View flex={false} row>
-//             {tabs.map(tab => this.renderTab(tab))}
-// 			</View>
-
-// 			<Text onPress={() => navigation.navigate('Restaurant Swipe')}>
-// 			Vote Restuarants {'\n'}
-// 			</Text>
-// 			<Text onPress={() => navigation.navigate('Create Event Form')}>
-// 			Create Event {'\n'}
-// 			</Text>
-
-// 			<Text>	Link to Events Hosted Screen | Link to Events Invited To Screen</Text>
-// 		</SafeAreaView>
-// 	);
-// }

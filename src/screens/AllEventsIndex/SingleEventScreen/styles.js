@@ -3,11 +3,7 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#eee1db',
-		color: 'black',
-	},
-	menuWrapper: {
-		marginTop: 10,
+		backgroundColor: '#ffffff'
 	},
 	menuItem: {
 		flexDirection: 'row',
@@ -15,32 +11,48 @@ export default StyleSheet.create({
 		paddingHorizontal: 30,
 	},
 	menuItemText: {
-		color: '#777777',
+		color: '#656565',
 		marginLeft: 10,
 		fontWeight: '600',
 		fontSize: 16,
 		lineHeight: 26,
 	},
-	imageContainer: {
+	restaurantsContainer: {
 		flex: 1,
 		flexDirection: 'row',
 		flexWrap: 'wrap',
 		justifyContent: 'space-around',
 		margin: 10,
-		marginTop: 20,
-		height: 1000,
+		marginTop: 20
+	},
+	indRestaurantContainer: {
+		marginBottom: 20
+	},
+	textContainer: {
+		width: 125,
+		marginTop: 5,
+		marginLeft: 10
 	},
 	image: {
 		height: 100,
-		width: 100,
-		marginBottom: 20,
+		width: 150,
 		borderRadius: 15,
 	},
 	eventNameText: {
-		color: 'black',
+		fontSize: 24,
+		fontWeight: 'bold',
+		color: '#e95530',
+		fontFamily: 'PurplePurse',
+		margin: 10
+	},
+	voteText: {
+		color: '#656565',
 		fontWeight: '600',
-		fontSize: 25,
-		textAlign: 'center',
-		marginTop: 25,
+		fontSize: 14,
+	},
+	restaurantTitle: {
+		color: '#e6a80c',
+		fontWeight: '600',
+		fontSize: 14,
 	},
 });

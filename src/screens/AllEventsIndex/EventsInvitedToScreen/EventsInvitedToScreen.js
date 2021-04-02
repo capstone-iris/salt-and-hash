@@ -103,17 +103,9 @@ export default class EventsInvitedToScreen extends React.Component {
 				{this.state.eventsData.length < 1 ? (
 					<View style={styles.firstContainer}>
 						<View styles={styles.buttonContainer}>
-							<Text style={{ color: 'black' }}>
+							<Text style={styles.text}>
 								You haven't been invited to any events yet.{' '}
 							</Text>
-							<TouchableOpacity style={styles.addEventContainer}>
-								<Text
-									style={styles.buttonText}
-									onPress={() => navigation.navigate('Create Event Index')}
-								>
-									Create one and invite friends!
-								</Text>
-							</TouchableOpacity>
 						</View>
 					</View>
 				) : (
