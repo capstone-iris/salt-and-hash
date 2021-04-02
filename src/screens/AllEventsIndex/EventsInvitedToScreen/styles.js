@@ -48,10 +48,6 @@ export default StyleSheet.create({
 		alignItems: 'center',
 		marginTop: 30,
 	},
-	restaurantsTextHeader: {
-		fontSize: 16,
-		fontWeight: 'bold',
-	},
 	singleEventTextHeader: {
 		fontSize: 16,
 		fontWeight: 'bold',
@@ -109,6 +105,7 @@ export default StyleSheet.create({
 		marginTop: 30,
 		backgroundColor: '#ffffff',
 	},
+
 	singleEventContainer: {
 		margin: 12,
 		backgroundColor: '#fab59e',
@@ -127,5 +124,9 @@ export default StyleSheet.create({
 		marginTop: 20,
 	},
 
-
+	text: {
+		color: '#656565',
+		fontWeight: '600',
+		fontSize: 16
+	},
 });

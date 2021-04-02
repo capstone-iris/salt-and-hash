@@ -7,9 +7,7 @@ import {
 	Modal,
 	SafeAreaView
 } from 'react-native';
-import {
-Input, Button, Label, Form, Item , Root}
-from 'native-base'
+import {Input, Button, Label, Form, Item , Root} from 'native-base'
 import { firebase } from '../../../../firebase/config';
 import styles from './styles';
 import Communications from 'react-native-communications';
@@ -109,33 +107,38 @@ export default class CreateEventForm extends React.Component {
 
 	render() {
 
-
 		return (
-			<SafeAreaView style={{backgroundColor: '#ffffff'}}>
-					<View style={styles.centeredView} onPress={() => {
-						this.setState({
-							visibleModal: false,
-						})
-					}}>
-						<Modal
-                  transparent={true}
-                  visible={this.state.visibleModal}
-                  animationType="slide"
-              >
-                  {this.renderModalContent()}
-              </Modal>
+			<SafeAreaView style={styles.container}>
 
-						<TouchableOpacity style={styles.button} onPress={() => {
-							this.setState({
-								visibleModal: true,
-							})
-						}}>
-								<Text style={styles.buttonText}>Invite Friends Over Text</Text>
-						</TouchableOpacity>
+				{this.state.visibleModal ? 
 
+					<View style={{backgroundColor: '#ffffff'}}>
+					<Modal transparent={true} visible={this.state.visibleModal} animationType="slide">
+						{this.renderModalContent()}
+					</Modal>
 					</View>
-					</SafeAreaView>
+				
+					: 
+
+					<View style={{backgroundColor: '#ffffff'}}>
+					<TouchableOpacity style={styles.button} onPress={() => {
+						this.setState({
+							visibleModal: true,
+						})}}>
+						<Text style={styles.buttonText}>Invite Friends Over Text</Text>
+					</TouchableOpacity>
+					</View>
+
+				}
+
+			</SafeAreaView>
 		);
 	}
 }
 
+// <View style={styles.centeredView} onPress={() => {
+// 	this.setState({
+// 		visibleModal: false,
+// 	})s
+// }}>
+// </View>

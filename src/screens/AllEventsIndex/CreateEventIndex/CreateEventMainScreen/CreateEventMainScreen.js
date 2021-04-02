@@ -89,7 +89,7 @@ class CreateEventMainScreen extends React.Component {
 		} else if (this.state.description === '') {
 			alert('Please add an event description!');
 		} else {
-			Alert.alert('Event successfully added!');
+			Alert.alert('Event successfully created!');
 			this.setState({
 				isLoading: true,
 			});
@@ -181,7 +181,7 @@ class CreateEventMainScreen extends React.Component {
 						<Sae
 							style={{marginLeft: 10, marginRight: 10}}
 							labelStyle={{color: '#656565'}}
-							inputStyle={{fontSize: 16, color: 'black'}}
+							inputStyle={{ color: '#656565' }}
 							label={'Event Description'}
 							iconClass={FontAwesomeIcon}
 							iconName={'pencil'}
