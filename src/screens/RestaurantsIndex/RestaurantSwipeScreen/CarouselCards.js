@@ -14,7 +14,6 @@ export default CarouselCards = (props) => {
 	const isCarousel = React.useRef(null);
 
 	return (
-		// TO DO: cannot figure out why the entire background isn't white, given the style props in the SafeAreaView
 		<SafeAreaView style={{backgroundColor: '#ffffff'}}>
 		<View style={{height: 425, marginTop: 25}}>
 		<Carousel
