@@ -275,9 +275,9 @@ class AddRestaurantsToEventScreen extends React.Component {
 												this.deleteRestaurant(event.docId, items[currentItemIndex])
 											}
 											}}
-										/>
-									</Col>
-									</Grid>
+									/>
+							</Col>
+							</Grid>
 
 							<TouchableRipple onPress={() => {this.handleActiveRestaurantDetails(item.place_id)}}>
 								<Text style={styles.indRestaurantTextBody}>
