@@ -14,8 +14,9 @@ export default function RestaurantSwipeScreen({route}) {
 const styles = StyleSheet.create({
 	container: {
 		backgroundColor: '#fff',
+		flex: 1,
+		flexDirection: 'row',
 		alignItems: 'center',
-		justifyContent: 'center',
-		padding: 50,
+		justifyContent: 'center'
 	},
 });
