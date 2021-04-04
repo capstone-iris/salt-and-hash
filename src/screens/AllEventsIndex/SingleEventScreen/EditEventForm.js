@@ -51,24 +51,9 @@ export default class EditEventForm extends React.Component{
     .update({
       name:this.state.name,
       description: this.state.description,
-      date: this.state.date,
-      // eventStartTime: this.state.eventStartTime
     })
 
-    const updatedEventRef = firebase
-        .firestore()
-        .collection('events')
-        .doc(event.docId)
-        .get()
-        .then(documentSnapshot => {
-          console.log('documentsnapshot==>', documentSnapshot)
-        })
-        // .onSnapshot((snapshot) => {
-        //   let event;
-        //   snapshot.forEach((doc) => {
-        //     event = doc.data();
-        //   })
-        // })
+
 
 
     this.setState({
@@ -100,7 +85,7 @@ export default class EditEventForm extends React.Component{
 								clearButtonMode='always'
 						/>
           	</Item>
-            <Item fixedLabel style={styles.modalInput}>
+            {/* <Item fixedLabel style={styles.modalInput}>
             	<Label>Event Date</Label>
                 <Input
                     style={styles.input}
@@ -114,7 +99,7 @@ export default class EditEventForm extends React.Component{
                     maxLength={20}
                     clearButtonMode='always'
                 />
-				  	</Item>
+				  	</Item> */}
             {/* <Item fixedLabel style={styles.modalInput}>
             	<Label>Start Time</Label>
                 <Input
