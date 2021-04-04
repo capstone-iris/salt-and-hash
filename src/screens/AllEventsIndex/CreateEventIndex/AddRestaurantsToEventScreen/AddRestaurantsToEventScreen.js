@@ -151,7 +151,8 @@ class AddRestaurantsToEventScreen extends React.Component {
 						address: restaurant.vicinity,
 						eventId: eventId,
 						votes: 0,
-						id: restaurant.place_id
+						id: restaurant.place_id,
+						rating: restaurant.rating
 						//restaurant website is on the restaurant details page; stretch integration
 					})
 					.then(() =>
