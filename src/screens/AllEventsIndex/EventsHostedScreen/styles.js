@@ -37,10 +37,11 @@ export default StyleSheet.create({
 	singleEventContainer: {
 		margin: 12,
 		backgroundColor: '#656565',
-		height: 80,
+		height: 100,
 		width: 150,
-		borderRadius: 10,
-		justifyContent: 'center'
+		borderRadius: 5,
+		justifyContent: 'center',
+		overflow: 'hidden'
 	},
 	eventsContainer: {
 		flexDirection: 'row',
@@ -55,6 +56,8 @@ export default StyleSheet.create({
 	singleEventTextHeader: {
 		fontSize: 16,
 		fontWeight: 'bold',
+		display: 'flex',
+		alignItems: 'center'
 	},
 	buttonContainer: {
 		justifyContent: 'center',

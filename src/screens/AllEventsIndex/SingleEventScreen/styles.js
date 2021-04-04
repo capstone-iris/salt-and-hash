@@ -20,13 +20,14 @@ export default StyleSheet.create({
 	restaurantsContainer: {
 		flex: 1,
 		flexDirection: 'row',
-		flexWrap: 'wrap',
+		// flexWrap: 'wrap',
 		justifyContent: 'space-around',
-		margin: 10,
-		marginTop: 20
+		margin: 5,
+		height: 200
+		// marginTop: -20
 	},
 	indRestaurantContainer: {
-		marginBottom: 20
+		margin: 10,
 	},
 	textContainer: {
 		width: 125,
@@ -36,19 +37,23 @@ export default StyleSheet.create({
 	image: {
 		height: 100,
 		width: 150,
-		borderRadius: 15,
+		borderRadius: 5,
+		overflow: 'hidden',
 	},
 	eventNameText: {
 		fontSize: 24,
 		fontWeight: 'bold',
 		color: '#e95530',
-		fontFamily: 'PurplePurse',
-		margin: 10
+		fontFamily: 'Georgia',
+		margin: 10,
 	},
 	voteText: {
-		color: '#656565',
+		color: '#FFF',
 		fontWeight: '600',
 		fontSize: 14,
+		position: 'absolute',
+    bottom: 0,
+		padding: 5
 	},
 	restaurantTitle: {
 		color: '#e6a80c',
@@ -121,5 +126,16 @@ export default StyleSheet.create({
 	},
 		dateTimePicker: {
 		marginTop: 15
+	},
+	imageContainer:{
+		shadowColor: "#000",
+		shadowOffset: {
+		width: 0,
+		height: 4
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+		// marginBottom: 8
 	}
 });

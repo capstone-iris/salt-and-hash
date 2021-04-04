@@ -33,14 +33,9 @@ export default CarouselCards = (props) => {
 					flexGrow: 0
 				  }}
 			/>
-<<<<<<< HEAD
-
-			<Pagination
-=======
 		</View>
 		<View style={styles.buttonContainer}>
 		<Pagination
->>>>>>> 4dd8127fd619fd9263c781d33242f9b2d86f6bdc
 				dotsLength={restaurantsData.length}
 				activeDotIndex={index}
 				carouselRef={isCarousel}
@@ -55,16 +50,10 @@ export default CarouselCards = (props) => {
 				inactiveDotScale={0.6}
 				tappableDots={true}
 			/>
-<<<<<<< HEAD
-				<Button title='Submit'
-				onPress={() => navigation.navigate('Single Event')} />
 
-=======
-			
 			<TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Single Event')}>
 				<Text style={styles.buttonText}>Finish Voting</Text>
 			</TouchableOpacity>
->>>>>>> 4dd8127fd619fd9263c781d33242f9b2d86f6bdc
 		</View>
 		</SafeAreaView>
 	);

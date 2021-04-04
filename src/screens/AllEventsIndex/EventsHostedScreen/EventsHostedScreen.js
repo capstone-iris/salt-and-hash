@@ -6,10 +6,13 @@ import {
 	ScrollView,
 	TouchableOpacity,
 	Button,
+	// Image,
+	ImageBackground
 } from 'react-native';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { firebase } from './../../../firebase/config';
+import { EventSubscriptionVendor } from 'react-native';
 
 let result;
 
@@ -48,6 +51,7 @@ export default function EventsHostedScreen() {
 	return (
 		<SafeAreaView style={styles.mainContainer}>
 
+
 			{eventsData < 1 ?
 
 					(
@@ -83,6 +87,10 @@ export default function EventsHostedScreen() {
 											navigation.navigate('Single Event', { event })
 										}
 									>
+										<ImageBackground source={{uri: 'https://loremflickr.com/320/240/food'}} style={{width: '100%', height: '100%', flex: 1}}>
+
+
+										</ImageBackground>
 										<Text style={styles.txt}>{event.name}</Text>
 									</TouchableOpacity>
 								);

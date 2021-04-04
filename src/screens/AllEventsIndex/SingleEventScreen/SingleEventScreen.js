@@ -7,6 +7,7 @@ import {
 	Button,
 	TouchableOpacity,
 	Image,
+	ImageBackground
 } from 'react-native';
 import { Text, TouchableRipple } from 'react-native-paper';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
@@ -15,12 +16,7 @@ import * as base from '../../../../secrets.js';
 import { firebase } from './../../../firebase/config';
 import AddGuestsToEventScreen from '../CreateEventIndex/AddGuestsToEventScreen/AddGuestsToEventScreen.js';
 import { Alert } from 'react-native';
-<<<<<<< HEAD
-import EventsHostedScreen from '../EventsHostedScreen/EventsHostedScreen'
 import EditEventForm from './EditEventForm'
-=======
-import EventsHostedScreen from '../EventsHostedScreen/EventsHostedScreen';
->>>>>>> 4dd8127fd619fd9263c781d33242f9b2d86f6bdc
 
 export default function SingleEventScreen({ route }) {
 	const { event } = route.params;
@@ -125,8 +121,15 @@ export default function SingleEventScreen({ route }) {
 	return (
 		<SafeAreaView style={styles.container}>
 			<Text style={styles.eventNameText}>{event.name}</Text>
-			<View style={{ marginBottom: 35 }}>
+				<View style={styles.imageContainer}>
+						<Image source={{uri: 'https://loremflickr.com/320/240/food'}} style={{width:'100%', height: 220}}/>
+
+				</View>
+			<ScrollView>
+			<View style={{ marginBottom: 35 , marginTop: 20}}>
 				<View>
+
+
 					<View style={styles.menuItem}>
 						<MaterialCommunityIcons
 							name='calendar-range'
@@ -190,35 +193,20 @@ export default function SingleEventScreen({ route }) {
 				</View>
 				<View>
 					{currentUser === event.userId ? (
-						<View style={{ marginTop: 15, marginBottom: 25 }}>
+						<View style={{ marginTop: 15}}>
 							<AddGuestsToEventScreen eventId={event.docId} />
+							<Button onPress={deleteAlert} title='Delete Event'></Button>
+							<EditEventForm event={event} convertDateTime={convertDateTime}/>
 						</View>
 					) : null}
 				</View>
 			</View>
+				<View style={{marginTop: -20}}>
+					<Text style={styles.menuItemText}>Restaurant Selections:</Text>
 
-			{currentUser === event.userId ? (
-				<Button onPress={deleteAlert} title='Delete Event'></Button>
-			) : null}
-
-				{currentUser === event.userId ?
-					<Button onPress={deleteAlert} title='Delete Event'>
-					</Button>
-					: null
-				}
-
-				{currentUser === event.userId ?
-
-					<EditEventForm event={event} convertDateTime={convertDateTime}/>
-
-				: null
-				}
-
-
-
-
-				<ScrollView>
-				<View style={styles.restaurantsContainer}>
+				</View>
+				<View style={styles.restaurantsContainer} >
+				<ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
 					{restaurantsData.map((restaurant, index) => {
 						return (
 							<View style={styles.indRestaurantContainer}>
@@ -233,20 +221,23 @@ export default function SingleEventScreen({ route }) {
 										})
 									}
 								>
-									<Image
+									<ImageBackground
 										style={styles.image}
 										source={{
 											uri: fetchImage(restaurant.photo),
 										}}
-									/>
+									>
+									<Text style={styles.voteText}>{restaurant.votes} Votes</Text>
+
+									</ImageBackground>
 								</TouchableOpacity>
 								<View style={styles.textContainer}>
 									<Text style={styles.restaurantTitle}>{restaurant.name}</Text>
-									<Text style={styles.voteText}>{restaurant.votes} Votes</Text>
 								</View>
 							</View>
 						);
 					})}
+				</ScrollView>
 				</View>
 			</ScrollView>
 		</SafeAreaView>

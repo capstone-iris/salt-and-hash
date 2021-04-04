@@ -193,7 +193,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 	};
 
 	render() {
-		const {event} = this.props.route.params;
+		const {eventId} = this.props.route.params;
 		// const {event } = this.props
 		console.log('event from props ==>', this.props)
 		return (
@@ -270,9 +270,9 @@ class AddRestaurantsToEventScreen extends React.Component {
 												this.setState((state) => ({ ...state, items }));
 
 											if(items[currentItemIndex].checked) {
-												this.storeRestaurant(event.docId, items[currentItemIndex])
+												this.storeRestaurant(eventId, items[currentItemIndex])
 											} else {
-												this.deleteRestaurant(event.docId, items[currentItemIndex])
+												this.deleteRestaurant(eventId, items[currentItemIndex])
 											}
 											}}
 									/>

@@ -127,9 +127,12 @@ class CreateEventMainScreen extends React.Component {
 						isLoading: false,
 					});
 				});
+
 			this.props.navigation.navigate('Add Restaurants to Event', {
 				eventId: documentId,
 			});
+
+
 		}
 	};
 
