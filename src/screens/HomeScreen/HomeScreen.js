@@ -4,17 +4,18 @@ import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 import RestaurantsIndex from '../RestaurantsIndex/RestaurantsIndex';
 import ProfileScreen from '../ProfileScreen/ProfileScreen';
 import AllEventsIndex from '../AllEventsIndex/AllEventsIndex';
-import { useNavigation } from '@react-navigation/native';
 import { firebase } from '../../firebase/config'
 
 const Tab = createBottomTabNavigator();
 
 function BottomTabNavigator() {
-	// const navigation = useNavigation();
 	const [hostedEventsData, setHostedEventsData] = useState([]);
-	const [invitedEventsData, setInvitedEventsData] = useState([]);
+
+	const currentUser = firebase.auth().currentUser.uid;
+
 
 	useEffect(() => {
+		console.log('first use effect ran')
 		// Check if currentUser exists to avoid errors
 		if (!firebase.auth().currentUser) {
 			return;
@@ -36,11 +37,15 @@ function BottomTabNavigator() {
 
 				setHostedEventsData(result);
 			});
-
 		// Remove the listener when component unmounts
 		return () => unsubscribe();
 		// Add currentUser to useEffect dependency array, so useEffect runs when it changes
 	}, [firebase.auth().currentUser]);
+
+	
+
+
+	// console.log('hostedEvents', hostedEventsData)
 
 	
 	return (
@@ -78,10 +83,7 @@ function BottomTabNavigator() {
 			/>
 			<Tab.Screen
 				name='Profile'
-				// children={()=><ProfileScreen hostedEventsData={hostedEventsData} invitedEventsData={invitedEventsData}/>}
 				children={()=><ProfileScreen hostedEventsData={hostedEventsData}/>}
-
-				// component={ProfileScreen}
 				options={{
 					tabBarIcon: ({ color }) => (
 						<FontAwesome name='user' size={20} color={color} />

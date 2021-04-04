@@ -197,8 +197,6 @@ export default function SingleEventScreen({ route }) {
 
 			<ScrollView>
 				<View style={styles.restaurantsContainer}>
-<<<<<<< HEAD
-<<<<<<< HEAD
 						{restaurantsData.map((restaurant, index) => {
 							 return (
 								<View key={index} style={styles.indRestaurantContainer}>
@@ -206,32 +204,6 @@ export default function SingleEventScreen({ route }) {
 									activeOpacity={0.5}
 									key={index}
 									onPress={() => navigation.navigate('Restaurant Swipe', {restaurantsData: restaurantsData, eventId:event.docId})}
-=======
-					{restaurantsData.map((restaurant, index) => {
-						return (
-							<View style={styles.indRestaurantContainer}>
-								<TouchableOpacity
-									activeOpacity={0.5}
-									key={index}
-=======
-					{restaurantsData.map((restaurant, index) => {
-						return (
-							<View style={styles.indRestaurantContainer}>
-								<TouchableOpacity
-									activeOpacity={0.5}
-									key={index}
->>>>>>> 4dd8127fd619fd9263c781d33242f9b2d86f6bdc
-									onPress={() =>
-										navigation.navigate('Restaurant Swipe', {
-											restaurantsData: restaurantsData,
-											eventId: event.docId,
-											navigation: navigation,
-										})
-									}
-<<<<<<< HEAD
->>>>>>> 4dd8127fd619fd9263c781d33242f9b2d86f6bdc
-=======
->>>>>>> 4dd8127fd619fd9263c781d33242f9b2d86f6bdc
 								>
 									<Image
 										style={styles.image}
