@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { SafeAreaView, View, Linking } from 'react-native';
 import styles from './styles';
 import { firebase } from '../../firebase/config';
 import {
@@ -18,7 +18,6 @@ export default class ProfileScreen extends Component {
 			users: [],
 			eventsData: []
 		};
-		// this.fetchData = this.fetchData.bind(this)
 	}
 
 	async componentDidMount() {
@@ -112,13 +111,7 @@ export default class ProfileScreen extends Component {
 						}}
 					>
 						<MaterialCommunityIcons name='account-circle-outline' color='#ffffff' size={60} />
-						{/* <Avatar.Image
-							source={{
-								uri:
-									'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUTBClYADFs5Xv7s0Uu3_1eXFalW-VzKMp74KcMmwDuYJwGdyeFpSSNB6x1w&usqp=CAc',
-							}}
-							size={80}
-						/> */}
+					
 						<View style={{ marginLeft: 20 }}>
 							<Title style={styles.title}>{user.fullName}</Title>
 						</View>
@@ -161,7 +154,7 @@ export default class ProfileScreen extends Component {
 							<Text style={styles.menuItemText}>Your Favorites</Text>
 						</View>
 					</TouchableRipple>
-					<TouchableRipple onPress={() => {}}>
+					<TouchableRipple onPress={() => {Linking.openURL('https://venmo.com/')}}>
 						<View style={styles.menuItem}>
 							<AntDesign name='creditcard' color='#e95632' size={25} />
 							<Text style={styles.menuItemText}>Payment</Text>

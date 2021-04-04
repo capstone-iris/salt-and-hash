@@ -139,7 +139,7 @@ export default class CarouselCardItem extends React.Component {
 											<MaterialCommunityIcons name='search-web' size={16} /> see restaurant website
 										</Text>
 										</TouchableRipple>
-                    </View>
+          </View>
       </View>
     );
   }
