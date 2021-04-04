@@ -67,7 +67,6 @@ export default class EventsInvitedToScreen extends React.Component {
 							eventsResult.push(doc.data());
 						});
 						this.setState({ eventsData: eventsResult });
-						console.log('eventsResult2', eventsResult);
 					}
 				});
 		} catch (error) {

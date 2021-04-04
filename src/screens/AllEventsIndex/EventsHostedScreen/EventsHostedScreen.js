@@ -47,9 +47,9 @@ export default function EventsHostedScreen() {
 
 	return (
 		<SafeAreaView style={styles.mainContainer}>
-			
-			{eventsData < 1 ? 
-						
+
+			{eventsData < 1 ?
+
 					(
 						<View style={styles.firstContainer}>
 							<View styles={styles.buttonContainer}>
@@ -60,10 +60,10 @@ export default function EventsHostedScreen() {
 								</TouchableOpacity>
 							</View>
 						</View>
-					) 
-					
-					: 
-					
+					)
+
+					:
+
 					(
 						<View style={styles.secondContainer}>
 						<ScrollView style={styles.innerContainer}>
@@ -72,7 +72,7 @@ export default function EventsHostedScreen() {
 							<Text style={styles.addEvent}>+</Text>
 							<Text style={styles.createEventText}>Add An Event</Text>
 						</TouchableOpacity>
-						
+
 						<View style={styles.eventContainer}>
 							{eventsData.map((event, index) => {
 								return (

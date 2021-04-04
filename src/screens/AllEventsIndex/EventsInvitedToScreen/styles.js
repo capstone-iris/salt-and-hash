@@ -104,24 +104,23 @@ export default StyleSheet.create({
 		flexWrap: 'wrap',
 		marginTop: 30,
 		backgroundColor: '#ffffff',
+		justifyContent: 'center',
+		alignContent: 'center'
 	},
 
 	singleEventContainer: {
 		margin: 12,
-		backgroundColor: '#fab59e',
-		padding: 20,
-		// marginVertical: 8,
-		// marginHorizontal: 10,
-		height: 150,
+		backgroundColor: '#656565',
+		height: 80,
 		width: 150,
 		borderRadius: 10,
+		justifyContent: 'center'
 	},
 	txt: {
-		fontSize: 20,
+		fontSize: 16,
 		fontWeight: 'bold',
 		textAlign: 'center',
-		color: 'white',
-		marginTop: 20,
+		color: 'white'
 	},
 
 	text: {

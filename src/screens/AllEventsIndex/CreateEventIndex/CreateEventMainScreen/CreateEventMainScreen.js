@@ -89,7 +89,7 @@ class CreateEventMainScreen extends React.Component {
 		} else if (this.state.description === '') {
 			alert('Please add an event description!');
 		} else {
-			Alert.alert('Event successfully created!');
+			Alert.alert('Event successfully added!');
 			this.setState({
 				isLoading: true,
 			});
@@ -127,23 +127,9 @@ class CreateEventMainScreen extends React.Component {
 						isLoading: false,
 					});
 				});
-
-
-
-		firebase.firestore().collection('events').where('docId', '==', documentId).onSnapshot((snapshot)=>{
-			let event
-			snapshot.forEach((doc) => {
-				event = doc.data()
-
-			})
-			console.log('EVENT==>', event)
 			this.props.navigation.navigate('Add Restaurants to Event', {
-				event: event,
+				eventId: documentId,
 			});
-
-		})
-
-
 		}
 	};
 
@@ -181,7 +167,7 @@ class CreateEventMainScreen extends React.Component {
 						<Sae
 							style={{marginLeft: 10, marginRight: 10}}
 							labelStyle={{color: '#656565'}}
-							inputStyle={{ color: '#656565' }}
+							inputStyle={{fontSize: 16, color: 'black'}}
 							label={'Event Description'}
 							iconClass={FontAwesomeIcon}
 							iconName={'pencil'}

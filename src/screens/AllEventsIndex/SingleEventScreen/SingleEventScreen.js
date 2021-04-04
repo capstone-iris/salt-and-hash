@@ -17,6 +17,7 @@ import { firebase } from './../../../firebase/config';
 import AddGuestsToEventScreen from '../CreateEventIndex/AddGuestsToEventScreen/AddGuestsToEventScreen.js'
 import { Alert } from 'react-native';
 import EventsHostedScreen from '../EventsHostedScreen/EventsHostedScreen'
+import EditEventForm from './EditEventForm'
 
 export default function SingleEventScreen({ route }) {
 	const { event } = route.params;
@@ -24,6 +25,7 @@ export default function SingleEventScreen({ route }) {
 
 	const navigation = useNavigation();
 	const [restaurantsData, setRestaurantsData] = useState([]);
+	const [eventsData, setEventsData] = useState(event);
 	const eventsCollection = firebase.firestore().collection('events');
 	const currentUser = firebase.auth().currentUser.uid;
 
@@ -95,8 +97,6 @@ export default function SingleEventScreen({ route }) {
 
 	useEffect(() => {
 
-		// async function fetchData() {
-		console.log('in fetch data')
 			const unsubscribe = firebase
 			.firestore()
 			.collection('eventRestaurants')
@@ -110,6 +110,7 @@ export default function SingleEventScreen({ route }) {
 			setRestaurantsData(result);
 			});
 			return () => unsubscribe();
+
 	}, []);
 
 
@@ -160,10 +161,14 @@ export default function SingleEventScreen({ route }) {
 				</View>
 				<View>
 					{currentUser === event.userId ?
+
 						<View style={{marginTop: 15, marginBottom: 25}}>
 						<AddGuestsToEventScreen eventId={event.docId}/>
+						{/* <EditEventForm event={event} convertDateTime={convertDateTime} /> */}
 						</View>
-						: 
+
+
+						:
 						null
 					}
 				</View>
@@ -173,8 +178,18 @@ export default function SingleEventScreen({ route }) {
 				{currentUser === event.userId ?
 					<Button onPress={deleteAlert} title='Delete Event'>
 					</Button>
+					: null
+				}
+
+				{currentUser === event.userId ?
+
+					<EditEventForm event={event} convertDateTime={convertDateTime}/>
+
 				: null
 				}
+
+
+
 
 				<ScrollView>
 				<View style={styles.restaurantsContainer}>
@@ -201,7 +216,7 @@ export default function SingleEventScreen({ route }) {
 						)})}
 				</View>
 				</ScrollView>
-				
+
 		</SafeAreaView>
 	);
 }

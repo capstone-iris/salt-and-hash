@@ -17,6 +17,7 @@ export default CarouselCards = (props) => {
 
 	const isCarousel = React.useRef(null);
 
+
 	return (
 		<View>
 			<Carousel
@@ -32,8 +33,6 @@ export default CarouselCards = (props) => {
 				onSnapToItem={(index) => setIndex(index)}
 				useScrollView={true}
 			/>
-			<Button title='Submit'
-			onPress={() => navigation.navigate('Single Event')} />
 
 			<Pagination
 				dotsLength={restaurantsData.length}
@@ -50,6 +49,8 @@ export default CarouselCards = (props) => {
 				inactiveDotScale={0.6}
 				tappableDots={true}
 			/>
+				<Button title='Submit'
+				onPress={() => navigation.navigate('Single Event')} />
 
 		</View>
 	);

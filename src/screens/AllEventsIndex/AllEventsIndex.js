@@ -6,6 +6,7 @@ import EventsInvitedToScreen from './EventsInvitedToScreen/EventsInvitedToScreen
 import RestaurantSwipeScreen from '../RestaurantsIndex/RestaurantSwipeScreen/RestaurantSwipeScreen'
 import CreateEventIndex from './CreateEventIndex/CreateEventIndex'
 import SingleEventScreen from './SingleEventScreen/SingleEventScreen';
+import EditEventForm from './SingleEventScreen/EditEventForm'
 
 const EventsBase = createStackNavigator();
 
@@ -20,6 +21,7 @@ export default function AllEventsIndex() {
       			<EventsBase.Screen name='Single Event' component={SingleEventScreen} />
             <EventsBase.Screen name='Restaurant Swipe' component={RestaurantSwipeScreen} />
             <EventsBase.Screen name='Create Event Index' component={CreateEventIndex} />
+            <EventsBase.Screen name='Edit Event Form' component={EditEventForm} />
         </EventsBase.Navigator>
     )
 }
