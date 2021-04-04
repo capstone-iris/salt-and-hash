@@ -173,6 +173,7 @@ export default class ProfileScreen extends Component {
 							<Text style={styles.menuItemText}>Notifications</Text>
 						</View>
 					</TouchableRipple>
+					{/* <TouchableRipple onPress={() => {this.props.navigation.navigate('Update Profile')}}> */}
 					<TouchableRipple onPress={() => {}}>
 						<View style={styles.menuItem}>
 							<MaterialCommunityIcons name='account-box-outline' color='#e95632' size={25} />
