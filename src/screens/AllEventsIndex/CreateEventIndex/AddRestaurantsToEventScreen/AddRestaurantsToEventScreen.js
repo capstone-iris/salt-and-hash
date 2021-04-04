@@ -141,28 +141,28 @@ class AddRestaurantsToEventScreen extends React.Component {
 	};
 
 	storeRestaurant = (eventId, restaurant) => {
-			if(this.state.restaurantCounter === 8) {
-				Alert.alert('You cannot choose more than 8 restaurants!')
-			} else {
-				this.eventRestaurantsRef.doc(eventId).collection('eventRestaurants').doc(restaurant.place_id)
-					.set({
-						name: restaurant.name,
-						photo: restaurant.photos[0].photo_reference,
-						address: restaurant.vicinity,
-						eventId: eventId,
-						votes: 0,
-						id: restaurant.place_id
-						//restaurant website is on the restaurant details page; stretch integration
-					})
-					.then(() =>
-						this.setState(
-							{restaurantCounter: this.state.restaurantCounter + 1}))
-					.then(() => console.log('Restaurant added!'))
-					.catch((e) => {
-						console.error('Error found: ', e)
-					})
-			}
-	}
+		if(this.state.restaurantCounter === 8) {
+			Alert.alert('You cannot choose more than 8 restaurants!')
+		} else {
+			this.eventRestaurantsRef.doc(eventId).collection('eventRestaurants').doc(restaurant.place_id)
+				.set({
+					name: restaurant.name,
+					photo: restaurant.photos[0].photo_reference,
+					address: restaurant.vicinity,
+					eventId: eventId,
+					votes: 0,
+					id: restaurant.place_id
+					//restaurant website is on the restaurant details page; stretch integration
+				})
+				.then(() =>
+					this.setState(
+						{restaurantCounter: this.state.restaurantCounter + 1}))
+				.then(() => console.log('Restaurant added!'))
+				.catch((e) => {
+					console.error('Error found: ', e)
+				})
+		}
+}
 
 
 	deleteRestaurant = (eventId, restaurant) => {
@@ -193,7 +193,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 	};
 
 	render() {
-		const {eventId} = this.props.route.params;
+		const {event} = this.props.route.params;
 		// const {event } = this.props
 		console.log('event from props ==>', this.props)
 		return (
@@ -270,9 +270,9 @@ class AddRestaurantsToEventScreen extends React.Component {
 												this.setState((state) => ({ ...state, items }));
 
 											if(items[currentItemIndex].checked) {
-												this.storeRestaurant(eventId, items[currentItemIndex])
+												this.storeRestaurant(event.docId, items[currentItemIndex])
 											} else {
-												this.deleteRestaurant(eventId, items[currentItemIndex])
+												this.deleteRestaurant(event.docId, items[currentItemIndex])
 											}
 											}}
 									/>

@@ -47,12 +47,29 @@ export default class EditEventForm extends React.Component{
 
   handleSubmit(event){
 
-    const eventsRef = firebase.firestore().collection('events').doc(event.docId).update({
-     name:this.state.name,
-     description: this.state.description
+    const eventsRef = firebase.firestore().collection('events').doc(event.docId)
+    .update({
+      name:this.state.name,
+      description: this.state.description,
+      date: this.state.date,
+      // eventStartTime: this.state.eventStartTime
     })
 
-    this.forceUpdate()
+    const updatedEventRef = firebase
+        .firestore()
+        .collection('events')
+        .doc(event.docId)
+        .get()
+        .then(documentSnapshot => {
+          console.log('documentsnapshot==>', documentSnapshot)
+        })
+        // .onSnapshot((snapshot) => {
+        //   let event;
+        //   snapshot.forEach((doc) => {
+        //     event = doc.data();
+        //   })
+        // })
+
 
     this.setState({
       visibleModal: false
@@ -61,7 +78,7 @@ export default class EditEventForm extends React.Component{
   }
 
   renderModalContent(){
-		const {event, convertDateTime} = this.props
+		const {event} = this.props
     // console.log('this.state.name', this.state.name)
 		return (
 
@@ -83,7 +100,7 @@ export default class EditEventForm extends React.Component{
 								clearButtonMode='always'
 						/>
           	</Item>
-            {/* <Item fixedLabel style={styles.modalInput}>
+            <Item fixedLabel style={styles.modalInput}>
             	<Label>Event Date</Label>
                 <Input
                     style={styles.input}
@@ -94,11 +111,11 @@ export default class EditEventForm extends React.Component{
                     autoCapitalize='none'
                     value={this.state.date}
                     name='name'
-                    maxLength={10}
+                    maxLength={20}
                     clearButtonMode='always'
                 />
 				  	</Item>
-            <Item fixedLabel style={styles.modalInput}>
+            {/* <Item fixedLabel style={styles.modalInput}>
             	<Label>Start Time</Label>
                 <Input
                     style={styles.input}
@@ -151,7 +168,7 @@ export default class EditEventForm extends React.Component{
                     underlineColorAndroid='transparent'
                     autoCapitalize='none'
                     value={this.state.description}
-                    maxLength={10}
+                    maxLength={20}
                     clearButtonMode='always'
                 />
 				  	</Item>

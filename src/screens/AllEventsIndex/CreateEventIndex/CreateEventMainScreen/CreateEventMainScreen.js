@@ -83,13 +83,12 @@ class CreateEventMainScreen extends React.Component {
 
 	storeEvent = () => {
 		const currentUser = firebase.auth().currentUser.uid;
-
 		if (this.state.name === '') {
 			alert('Please add an event name!');
 		} else if (this.state.description === '') {
 			alert('Please add an event description!');
 		} else {
-			Alert.alert('Event successfully added!');
+			Alert.alert('Event successfully created!');
 			this.setState({
 				isLoading: true,
 			});
@@ -128,13 +127,23 @@ class CreateEventMainScreen extends React.Component {
 					});
 				});
 
-			this.props.navigation.navigate('Add Restaurants to Event', {
-				eventId: documentId,
-			});
-
-
+			firebase
+				.firestore()
+				.collection('events')
+				.where('docId', '==', documentId)
+				.onSnapshot((snapshot) => {
+					let event;
+					snapshot.forEach((doc) => {
+						event = doc.data();
+					});
+					console.log('EVENT==>', event);
+					this.props.navigation.navigate('Add Restaurants to Event', {
+						event: event,
+					});
+				});
 		}
 	};
+
 
 	render() {
 		if (this.state.isLoading) {
