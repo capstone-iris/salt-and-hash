@@ -128,7 +128,6 @@ export default class ProfileScreen extends Component {
 						</View>
 					</View>
 				</View>
-
 				<View style={styles.userInfoSection}>
 					<View style={styles.row}>
 						<Entypo name='phone' size={25} color='#ffffff' />
@@ -144,7 +143,6 @@ export default class ProfileScreen extends Component {
 						</View>
 					</View>
 				</View>
-
 				<View style={styles.infoBoxWrapper}>
 						<View style={styles.infoBox}>
 							<TouchableOpacity onPress={()=> navigation.navigate('My Events')}>
@@ -152,7 +150,6 @@ export default class ProfileScreen extends Component {
 									<Text style={{fontSize:14, fontFamily: 'QuicksandBold',color: '#ffffff'}}>Hosted Events</Text>
 							</TouchableOpacity>
 						</View>
-
 						<View style={styles.infoBox}>
 							<TouchableOpacity >
 
@@ -172,11 +169,8 @@ export default class ProfileScreen extends Component {
 							<Text style={{color: '#ffffff'}}>{this.state.eventsData.length}</Text>
 							<Text style={{color: '#ffffff'}}>Events Attending</Text>
 					</View> */}
-
 				</View>
-
 				{/* <View style={styles.hr}></View> */}
-
 				<View style={styles.menuWrapper}>
 					<TouchableRipple style={{marginTop: 15}} onPress={() => {}}>
 						<View style={styles.menuItem}>

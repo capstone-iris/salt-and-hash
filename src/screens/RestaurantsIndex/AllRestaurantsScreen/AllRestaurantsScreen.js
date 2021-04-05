@@ -48,7 +48,7 @@ export default class AllRestaurantsScreen extends React.Component {
 	handleRestaurantSearch = () => {
 		const url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
 		const location = `location=40.6127044,-74.0344876`;
-		//const location = `location=${this.state.latitude},${this.state.longitude}`;
+		// const location = `location=${this.state.latitude},${this.state.longitude}`;
 		const radius = '&radius=1000';
 		const type = '&type=restaurant';
 		const key = `&key=${base.GOOGLE_PLACES_API}`;
