@@ -69,7 +69,7 @@ const slides = [
 		key: 'k2',
 		title: 'Be Host',
 		text: 'Host events, choose restaurants,\n& invite friends to vote',
-		image: require('./assets/introSlider_SelectRestaurants.png'),
+		image: require('./assets/introSlider_SelectRestaurants.jpg'),
 		titleStyle: styles.title,
 		textStyle: styles.text,
 		imageStyle: styles.image,
