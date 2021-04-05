@@ -194,8 +194,6 @@ export default function SingleEventScreen({ route }) {
 
 			<ScrollView>
 				<View style={styles.restaurantsContainer}>
-
-						{restaurantsData.map((restaurant, index) => {
 						{isDeadLine(
 									convertDateTime(event.votingDeadline.seconds, 'date')
 								) ? 								<View>
@@ -221,6 +219,8 @@ export default function SingleEventScreen({ route }) {
 									activeOpacity={0.5}
 									key={index}
 									onPress={() => navigation.navigate('Restaurant Swipe', {restaurantsData: restaurantsData, eventId:event.docId})}
+					
+							
 								>
 									<Image
 										style={styles.image}
