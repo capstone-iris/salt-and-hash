@@ -42,7 +42,7 @@ class CreateEventMainScreen extends React.Component {
 		this.setState({ show: showFlag });
 		this.inputValueUpdate(
 			selectedDate,
-			this.state.mode === 'date' ? 'date' : 'eventStartTime'
+			'date'
 		);
 	};
 

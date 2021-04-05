@@ -196,10 +196,15 @@ export default function SingleEventScreen({ route }) {
 					) : null}
 				</View>
 			</View>
+
 				<View style={{marginTop: -20}}>
-					<Text style={styles.menuItemText}>Restaurant Selections:</Text>
-
-
+						{isDeadLine(convertDateTime(event.votingDeadline.seconds, 'date'))
+						?
+						<View style={{padding: 10}}>
+							<Text style={styles.chosenRestaurantHeader}> Your chosen restaurant:</Text>
+						</View>
+						:	<Text style={styles.menuItemText}>Restaurant Selections:</Text>
+						}
  				</View>
 
 
@@ -207,22 +212,20 @@ export default function SingleEventScreen({ route }) {
 				<View style={styles.restaurantsContainer}>
 						{isDeadLine(
 									convertDateTime(event.votingDeadline.seconds, 'date')
-								) ? 								<View>
-									<Text style={styles.menuItemText}> Your chosen restaurant is:{'\n'}</Text>
-
+								) ?
 								<View style={styles.chosenRestaurantContainer}>
-									<Image
-										style={styles.image}
-										source={{
-											uri: fetchImage(maxVotes.photo),
-										}}
-									/>
-								<View style={styles.textContainer}>
-									<Text style={styles.eventNameText}>{maxVotes.name}</Text>
-									{/* <Text style={styles.voteText}>{restaurant.votes} Votes</Text> */}
-								</View>
-							</View>
-							</View>:
+
+											<ImageBackground
+												style={styles.chosenImage}
+												source={{
+													uri: fetchImage(maxVotes.photo),
+												}}
+											>
+												<Text style={styles.chosenRestaurantText}>{maxVotes.name}</Text>
+											</ImageBackground>
+
+							 	</View>
+							:
 								restaurantsData.map((restaurant, index) => {
 							 return (
 								<View key={index} style={styles.indRestaurantContainer}>
@@ -247,7 +250,8 @@ export default function SingleEventScreen({ route }) {
 							</View>
 						);
 					})}
-					</View>
+						</View>
+
 				</ScrollView>
 
 				{currentUser === event.userId ? (

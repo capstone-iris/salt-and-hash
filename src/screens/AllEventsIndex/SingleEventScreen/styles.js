@@ -34,9 +34,6 @@ export default StyleSheet.create({
 
 
 	},
-	chosenRestaurantContainer: {
-		justifyContent: 'center'
-	},
 	textContainer: {
 		width: 125,
 		marginTop: 5,
@@ -151,5 +148,37 @@ export default StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
 		// marginBottom: 8
+	},
+	chosenRestaurantHeader: {
+		fontFamily: 'QuicksandBold',
+		textAlign:'center',
+		fontSize: 20,
+		backgroundColor: '#e95530',
+		color: 'white'
+	},
+	chosenRestaurantContainer: {
+
+		height: 150,
+		borderWidth: 2,
+		borderRadius: 5,
+		overflow: 'hidden',
+		marginLeft: 30,
+		marginTop: 10,
+		position: 'relative'
+
+	},
+	chosenRestaurantText: {
+		fontFamily: 'QuicksandBold',
+		color: 'white',
+		position: 'absolute',
+    bottom: 0,
+		// padding: 5,
+		fontSize: 16
+	},
+	chosenImage: {
+		width: 300,
+		height: '100%',
+		overflow: 'hidden',
+
 	}
 });
