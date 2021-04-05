@@ -5,6 +5,7 @@ import {
 	TouchableOpacity,
 	View,
 	ScrollView,
+	ImageBackground
 } from 'react-native';
 import styles from './styles';
 // import RestaurantSwipeScreen from '../../RestaurantsIndex/RestaurantSwipeScreen/RestaurantSwipeScreen';
@@ -86,7 +87,7 @@ export default class EventsInvitedToScreen extends React.Component {
 					</View>
 				) : (
 					<View style={styles.secondContainer}>
-						{/* <Text>Events you have been invited too!</Text> */}
+						<Text style={styles.txtHeader}>Events you're attending: </Text>
 						<ScrollView style={styles.innerContainer}>
 							<View style={styles.eventContainer}>
 								{this.state.eventsData.map((event, index) => {
@@ -99,7 +100,9 @@ export default class EventsInvitedToScreen extends React.Component {
 												navigation.navigate('Single Event', { event })
 											}
 										>
-											<Text style={styles.txt}>{event.name}</Text>
+											<ImageBackground source={{uri: 'https://loremflickr.com/320/240/food'}} style={{width: '100%', height: '100%', flex: 1}}>
+										</ImageBackground>
+											<Text style={styles.txt}>{event.name.toUpperCase()}</Text>
 										</TouchableOpacity>
 									);
 								})}

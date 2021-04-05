@@ -9,14 +9,14 @@ export default StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#ffffff',
+		// backgroundColor: '#ffffff',
 	},
 	secondContainer: {
 		flex: 1,
-		backgroundColor: '#ffffff',
+		// backgroundColor: '#ffffff',
 	},
 	innerContainer: {
-		backgroundColor: '#ffffff',
+		// backgroundColor: '#ffffff',
 	},
 	button: {
 		backgroundColor: '#ddb39d',
@@ -35,12 +35,15 @@ export default StyleSheet.create({
 		fontWeight: 'bold',
 	},
 	singleEventContainer: {
-		margin: 12,
-		backgroundColor: '#656565',
-		height: 80,
+		margin: 10,
+		backgroundColor: '#ffffff',
+		height: 160,
 		width: 150,
-		borderRadius: 10,
+		borderRadius: 8,
+		borderColor: '#EBEBEB',
+		borderWidth: 2,
 		justifyContent: 'center',
+		overflow: 'hidden',
 	},
 	eventsContainer: {
 		flexDirection: 'row',
@@ -51,6 +54,8 @@ export default StyleSheet.create({
 	singleEventTextHeader: {
 		fontSize: 16,
 		fontWeight: 'bold',
+		display: 'flex',
+		alignItems: 'center'
 	},
 	buttonContainer: {
 		justifyContent: 'center',
@@ -73,10 +78,13 @@ export default StyleSheet.create({
 		justifyContent: 'center',
 	},
 	txt: {
-		fontSize: 16,
+		fontSize: 18,
 		fontWeight: 'bold',
 		textAlign: 'center',
-		color: 'white',
+		color:  '#E95531',
+		margin: 5,
+		fontFamily: 'QuicksandBold',
+		padding: 3,
 	},
 	addEvent: {
 		textAlign: 'center',
@@ -85,13 +93,13 @@ export default StyleSheet.create({
 		fontWeight: 'bold',
 	},
 	addEventContainer: {
-		backgroundColor: '#e95530',
-		height: 80,
-		width: 150,
-		borderRadius: 10,
+		backgroundColor: '#2a9d8f',
+		height: 60,
+		width: 200,
+		borderRadius: 5,
 		justifyContent: 'center',
 		alignSelf: 'center',
-		marginTop: 20,
+		margin: 15
 	},
 	createEventText: {
 		textAlign: 'center',
@@ -102,31 +110,19 @@ export default StyleSheet.create({
 	eventContainer: {
 		flexDirection: 'row',
 		flexWrap: 'wrap',
-		marginTop: 30,
-		backgroundColor: '#ffffff',
+		marginLeft: 15,
+		marginRight: 15,
+		// backgroundColor: '#f4e3b8',
+		justifyContent: 'space-between',
+		alignContent: 'center'
 	},
-
-	singleEventContainer: {
-		margin: 12,
-		backgroundColor: '#fab59e',
-		padding: 20,
-		// marginVertical: 8,
-		// marginHorizontal: 10,
-		height: 150,
-		width: 150,
-		borderRadius: 10,
-	},
-	txt: {
-		fontSize: 20,
+	txtHeader: {
+		fontSize: 18,
 		fontWeight: 'bold',
 		textAlign: 'center',
-		color: 'white',
-		marginTop: 20,
-	},
-
-	text: {
-		color: '#656565',
-		fontWeight: '600',
-		fontSize: 16
+		color: '#E95531',
+		margin: 10,
+		fontFamily: 'QuicksandBold',
+		padding: 3,
 	},
 });

@@ -74,7 +74,7 @@ export default StyleSheet.create({
 		marginTop: 30,
 	},
 	button: {
-		backgroundColor: '#e95531',
+		backgroundColor: '#2a9d8f',
 		height: 48,
 		borderRadius: 5,
 		alignItems: 'center',
@@ -82,7 +82,7 @@ export default StyleSheet.create({
 		width: 275
 	},
 	buttonText: {
-        color: 'white',
+    color: 'white',
 		fontSize: 16,
 		fontWeight: 'bold'
     },

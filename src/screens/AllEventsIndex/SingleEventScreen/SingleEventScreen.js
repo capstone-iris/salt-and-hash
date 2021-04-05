@@ -7,6 +7,7 @@ import {
 	Button,
 	TouchableOpacity,
 	Image,
+	ImageBackground
 } from 'react-native';
 import { Text, TouchableRipple } from 'react-native-paper';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
@@ -15,13 +16,14 @@ import * as base from '../../../../secrets.js';
 import { firebase } from './../../../firebase/config';
 import AddGuestsToEventScreen from '../CreateEventIndex/AddGuestsToEventScreen/AddGuestsToEventScreen.js';
 import { Alert } from 'react-native';
-import EventsHostedScreen from '../EventsHostedScreen/EventsHostedScreen';
+import EditEventForm from './EditEventForm'
 
 export default function SingleEventScreen({ route }) {
 	const { event } = route.params;
 
 	const navigation = useNavigation();
 	const [restaurantsData, setRestaurantsData] = useState([]);
+	const [eventsData, setEventsData] = useState(event);
 	const eventsCollection = firebase.firestore().collection('events');
 	const currentUser = firebase.auth().currentUser.uid;
 
@@ -115,9 +117,16 @@ export default function SingleEventScreen({ route }) {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<Text style={styles.eventNameText}>{event.name}</Text>
-			<View style={{ marginBottom: 35 }}>
+			<Text style={styles.eventNameText}>{event.name.toUpperCase()}</Text>
+				<View style={styles.imageContainer}>
+						<Image source={{uri: 'https://loremflickr.com/320/240/food'}} style={{width:'100%', height: 220}}/>
+
+				</View>
+			<ScrollView>
+			<View style={{ marginBottom: 35 , marginTop: 20}}>
 				<View>
+
+
 					<View style={styles.menuItem}>
 						<MaterialCommunityIcons
 							name='calendar-range'
@@ -181,12 +190,22 @@ export default function SingleEventScreen({ route }) {
 				</View>
 				<View>
 					{currentUser === event.userId ? (
-						<View style={{ marginTop: 15, marginBottom: 25 }}>
+						<View style={{ marginTop: 15}}>
 							<AddGuestsToEventScreen eventId={event.docId} />
 						</View>
 					) : null}
 				</View>
 			</View>
+				<View style={{marginTop: -20}}>
+					<Text style={styles.menuItemText}>Restaurant Selections:</Text>
+
+//  css-fixes
+// 				</View>
+// 				<View style={styles.restaurantsContainer} >
+// 				<ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
+// 					{restaurantsData.map((restaurant, index) => {
+// 						return (
+// 							<View style={styles.indRestaurantContainer}>
 
 			{currentUser === event.userId ? (
 				<Button onPress={deleteAlert} title='Delete Event'></Button>
@@ -220,21 +239,30 @@ export default function SingleEventScreen({ route }) {
 									key={index}
 									onPress={() => navigation.navigate('Restaurant Swipe', {restaurantsData: restaurantsData, eventId:event.docId})}
 								>
-									<Image
+									<ImageBackground
 										style={styles.image}
 										source={{
 											uri: fetchImage(restaurant.photo),
 										}}
-									/>
+									>
+									<Text style={styles.voteText}>{restaurant.votes} Votes</Text>
+
+									</ImageBackground>
 								</TouchableOpacity>
 								<View style={styles.textContainer}>
 									<Text style={styles.restaurantTitle}>{restaurant.name}</Text>
-									<Text style={styles.voteText}>{restaurant.votes} Votes</Text>
 								</View>
 							</View>
 						);
 					})}
+				</ScrollView>
 				</View>
+				{currentUser === event.userId ? (
+						<View style={{marginTop: -30}}>
+							<EditEventForm event={event} convertDateTime={convertDateTime}/>
+							<Button onPress={deleteAlert} title='Delete Event'></Button>
+						</View>
+					) : null}
 			</ScrollView>
 		</SafeAreaView>
 	);
