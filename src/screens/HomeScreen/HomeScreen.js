@@ -5,11 +5,14 @@ import RestaurantsIndex from '../RestaurantsIndex/RestaurantsIndex';
 import ProfileScreen from '../ProfileScreen/ProfileScreen';
 import AllEventsIndex from '../AllEventsIndex/AllEventsIndex';
 import { firebase } from '../../firebase/config'
+import { useNavigation } from '@react-navigation/native';
+import UpdateProfileScreen from '../ProfileScreen/UpdateProfile';
 
 const Tab = createBottomTabNavigator();
 
 function BottomTabNavigator() {
 	const [hostedEventsData, setHostedEventsData] = useState([]);
+	const navigation = useNavigation();
 
 	const currentUser = firebase.auth().currentUser.uid;
 
@@ -83,7 +86,7 @@ function BottomTabNavigator() {
 			/>
 			<Tab.Screen
 				name='Profile'
-				children={()=><ProfileScreen hostedEventsData={hostedEventsData}/>}
+				children={()=><ProfileScreen hostedEventsData={hostedEventsData} navigation={navigation}/>}
 				options={{
 					tabBarIcon: ({ color }) => (
 						<FontAwesome name='user' size={20} color={color} />
