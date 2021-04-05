@@ -38,7 +38,6 @@ export default class EventsInvitedToScreen extends React.Component {
 				.get();
 			userData.docs.forEach((doc) => {
 				userResult = doc.data();
-				console.log('doc.data', doc.data());
 			});
 
 			firebase
@@ -54,7 +53,6 @@ export default class EventsInvitedToScreen extends React.Component {
 						guestsResult.push(doc.data());
 					});
 					let eventsResult = [];
-					console.log('====result', guestsResult);
 
 					for (let i = 0; i < guestsResult.length; i++) {
 						const event = guestsResult[i];
@@ -67,7 +65,6 @@ export default class EventsInvitedToScreen extends React.Component {
 							eventsResult.push(doc.data());
 						});
 						this.setState({ eventsData: eventsResult });
-						console.log('eventsResult2', eventsResult);
 					}
 				});
 		} catch (error) {

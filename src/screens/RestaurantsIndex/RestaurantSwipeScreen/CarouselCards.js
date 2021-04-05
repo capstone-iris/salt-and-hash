@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
 	buttonContainer: {
         alignItems: 'center',
 		justifyContent: 'center',
-        alignSelf: 'center'
+		alignSelf: 'center',
     },
     button: {
 		backgroundColor: '#e95531',
