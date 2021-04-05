@@ -128,18 +128,20 @@ export default class CarouselCardItem extends React.Component {
               )}
             </TouchableOpacity>
           </Col>
+          <TouchableRipple onPress={() => this.handleWebsiteUrl(this.state.activeRestaurantWebsite)}>
           <Col size={80}>
             <Text style={styles.header}>{item.name}</Text>
           </Col>
+          </TouchableRipple>
           </Grid>
           </View>
-          <View style={styles.activeRestaurantDetailsContainer}>
+          {/* <View style={styles.activeRestaurantDetailsContainer}>
 										<TouchableRipple onPress={() => this.handleWebsiteUrl(this.state.activeRestaurantWebsite)}>
 										<Text style={styles.indRestaurantHyperlink}>
-											<MaterialCommunityIcons name='search-web' size={16} /> see restaurant website
+											<MaterialCommunityIcons name='search-web' size={16} /> visit website
 										</Text>
 										</TouchableRipple>
-          </View>
+          </View> */}
       </View>
     );
   }
@@ -191,5 +193,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     margin: 15,
     marginBottom: -10
+  },
+  indRestaurantHyperlink: {
+    paddingTop:20,
+    paddingLeft: 26,
   }
 });
