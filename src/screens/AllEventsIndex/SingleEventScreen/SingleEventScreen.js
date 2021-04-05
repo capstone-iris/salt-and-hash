@@ -115,157 +115,138 @@ export default function SingleEventScreen({ route }) {
 		  )
 		: {};
 
-	return (
-		<SafeAreaView style={styles.container}>
-			<Text style={styles.eventNameText}>{event.name.toUpperCase()}</Text>
-				<View style={styles.imageContainer}>
-						<Image source={{uri: 'https://loremflickr.com/320/240/food'}} style={{width:'100%', height: 220}}/>
-
-				</View>
-			<ScrollView>
-			<View style={{ marginBottom: 35 , marginTop: 20}}>
-				<View>
-
-
-					<View style={styles.menuItem}>
-						<MaterialCommunityIcons
-							name='calendar-range'
-							color='#FF6347'
-							size={25}
-						/>
-						<Text style={styles.menuItemText}>
-							{convertDateTime(event.date.seconds, 'date')}
-						</Text>
+		return (
+			<SafeAreaView style={styles.container}>
+				<Text style={styles.eventNameText}>{event.name.toUpperCase()}</Text>
+					<View style={styles.imageContainer}>
+							<Image source={{uri: 'https://loremflickr.com/320/240/food'}} style={{width:'100%', height: 220}}/>
 					</View>
-				</View>
-				<View>
-					<View style={styles.menuItem}>
-						<MaterialCommunityIcons
-							name='clock-outline'
-							color='#FF6347'
-							size={25}
-						/>
-						<Text style={styles.menuItemText}>
-							{convertDateTime(event.eventStartTime.seconds, 'time')} -{' '}
-							{convertDateTime(event.eventEndTime.seconds, 'time')}
-						</Text>
-					</View>
-				</View>
-				<View>
-					<View style={styles.menuItem}>
-						<MaterialCommunityIcons
-							name='timer-sand'
-							color='#FF6347'
-							size={25}
-						/>
-						<Text style={styles.menuItemText}>
-							Voting Deadline:{' '}
-							{convertDateTime(event.votingDeadline.seconds, 'date')}
-						</Text>
-					</View>
-				</View>
-				<View>
-					<View style={styles.menuItem}>
-						<Ionicons name='information-outline' color='#FF6347' size={25} />
-						<Text style={styles.menuItemText}>{event.description}</Text>
-					</View>
-				</View>
-				<View>
-					<TouchableRipple onPress={() => {}}>
+				<ScrollView>
+				<View style={{ marginBottom: 35 , marginTop: 20}}>
+					<View>
 						<View style={styles.menuItem}>
 							<MaterialCommunityIcons
-								name='map-marker-radius'
+								name='calendar-range'
 								color='#FF6347'
 								size={25}
 							/>
 							<Text style={styles.menuItemText}>
-								{isDeadLine(
-									convertDateTime(event.votingDeadline.seconds, 'date')
-								)
-									? maxVotes.name
-									: 'Event location is Pending...'}
+								{convertDateTime(event.date.seconds, 'date')}
 							</Text>
 						</View>
-					</TouchableRipple>
-				</View>
-				<View>
-					{currentUser === event.userId ? (
-						<View style={{ marginTop: 15}}>
-							<AddGuestsToEventScreen eventId={event.docId} />
+					</View>
+					<View>
+						<View style={styles.menuItem}>
+							<MaterialCommunityIcons
+								name='clock-outline'
+								color='#FF6347'
+								size={25}
+							/>
+							<Text style={styles.menuItemText}>
+								{convertDateTime(event.eventStartTime.seconds, 'time')} -{' '}
+								{convertDateTime(event.eventEndTime.seconds, 'time')}
+							</Text>
 						</View>
-					) : null}
-				</View>
-			</View>
-				<View style={{marginTop: -20}}>
-					<Text style={styles.menuItemText}>Restaurant Selections:</Text>
-
-//  css-fixes
-// 				</View>
-// 				<View style={styles.restaurantsContainer} >
-// 				<ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-// 					{restaurantsData.map((restaurant, index) => {
-// 						return (
-// 							<View style={styles.indRestaurantContainer}>
-
-			{currentUser === event.userId ? (
-				<Button onPress={deleteAlert} title='Delete Event'></Button>
-			) : null}
-
-			<ScrollView>
-				<View style={styles.restaurantsContainer}>
-						{isDeadLine(
-									convertDateTime(event.votingDeadline.seconds, 'date')
-								) ? 								<View>
-									<Text style={styles.menuItemText}> Your chosen restaurant is:{'\n'}</Text>
-
-								<View style={styles.chosenRestaurantContainer}>
-									<Image
-										style={styles.image}
-										source={{
-											uri: fetchImage(maxVotes.photo),
-										}}
-									/>
-								<View style={styles.textContainer}>
-									<Text style={styles.eventNameText}>{maxVotes.name}</Text>
-									{/* <Text style={styles.voteText}>{restaurant.votes} Votes</Text> */}
-								</View>
-							</View> 
-							</View>:
-								restaurantsData.map((restaurant, index) => {
-							 return (
-								<View key={index} style={styles.indRestaurantContainer}>
-								<TouchableOpacity
-									activeOpacity={0.5}
-									key={index}
-									onPress={() => navigation.navigate('Restaurant Swipe', {restaurantsData: restaurantsData, eventId:event.docId})}
-					
-							
-								>
-									<ImageBackground
-										style={styles.image}
-										source={{
-											uri: fetchImage(restaurant.photo),
-										}}
-									>
-									<Text style={styles.voteText}>{restaurant.votes} Votes</Text>
-
-									</ImageBackground>
-								</TouchableOpacity>
-								<View style={styles.textContainer}>
-									<Text style={styles.restaurantTitle}>{restaurant.name}</Text>
-								</View>
+					</View>
+					<View>
+						<View style={styles.menuItem}>
+							<MaterialCommunityIcons
+								name='timer-sand'
+								color='#FF6347'
+								size={25}
+							/>
+							<Text style={styles.menuItemText}>
+								Voting Deadline:{' '}
+								{convertDateTime(event.votingDeadline.seconds, 'date')}
+							</Text>
+						</View>
+					</View>
+					<View>
+						<View style={styles.menuItem}>
+							<Ionicons name='information-outline' color='#FF6347' size={25} />
+							<Text style={styles.menuItemText}>{event.description}</Text>
+						</View>
+					</View>
+					<View>
+						<TouchableRipple onPress={() => {}}>
+							<View style={styles.menuItem}>
+								<MaterialCommunityIcons
+									name='map-marker-radius'
+									color='#FF6347'
+									size={25}
+								/>
+								<Text style={styles.menuItemText}>
+									{isDeadLine(
+										convertDateTime(event.votingDeadline.seconds, 'date')
+									)
+										? maxVotes.name
+										: 'Event location is Pending...'}
+								</Text>
 							</View>
-						);
-					})}
-				</ScrollView>
+						</TouchableRipple>
+					</View>
+					<View>
+						{currentUser === event.userId ? (
+							<View style={{ marginTop: 15}}>
+								<AddGuestsToEventScreen eventId={event.docId} />
+							</View>
+						) : null}
+					</View>
 				</View>
-				{currentUser === event.userId ? (
-						<View style={{marginTop: -30}}>
-							<EditEventForm event={event} convertDateTime={convertDateTime}/>
-							<Button onPress={deleteAlert} title='Delete Event'></Button>
+					<View style={{marginTop: -20}}>
+						<Text style={styles.menuItemText}>Restaurant Selections:</Text>
+					 </View>
+				<ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+					<View style={styles.restaurantsContainer}>
+							{isDeadLine(
+										convertDateTime(event.votingDeadline.seconds, 'date')
+									) ? 								<View>
+										<Text style={styles.menuItemText}> Your chosen restaurant is:{'\n'}</Text>
+									<View style={styles.chosenRestaurantContainer}>
+										<Image
+											style={styles.image}
+											source={{
+												uri: fetchImage(maxVotes.photo),
+											}}
+										/>
+									<View style={styles.textContainer}>
+										<Text style={styles.eventNameText}>{maxVotes.name}</Text>
+										{/* <Text style={styles.voteText}>{restaurant.votes} Votes</Text> */}
+									</View>
+								</View>
+								</View>:
+									restaurantsData.map((restaurant, index) => {
+								 return (
+									<View key={index} style={styles.indRestaurantContainer}>
+									<TouchableOpacity
+										activeOpacity={0.5}
+										key={index}
+										onPress={() => navigation.navigate('Restaurant Swipe', {restaurantsData: restaurantsData, eventId:event.docId})}
+									>
+										<ImageBackground
+											style={styles.image}
+											source={{
+												uri: fetchImage(restaurant.photo),
+											}}
+										>
+										<Text style={styles.voteText}>{restaurant.votes} Votes</Text>
+										</ImageBackground>
+									</TouchableOpacity>
+									<View style={styles.textContainer}>
+										<Text style={styles.restaurantTitle}>{restaurant.name}</Text>
+									</View>
+								</View>
+							);
+						})}
 						</View>
-					) : null}
-			</ScrollView>
-		</SafeAreaView>
-	);
+					</ScrollView>
+					{currentUser === event.userId ? (
+							<View style={{marginTop: -30}}>
+								<EditEventForm event={event} convertDateTime={convertDateTime}/>
+								<Button onPress={deleteAlert} title='Delete Event'></Button>
+							</View>
+						) : null}
+				</ScrollView>
+			</SafeAreaView>
+		);
 }
