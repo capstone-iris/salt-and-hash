@@ -199,19 +199,11 @@ export default function SingleEventScreen({ route }) {
 				<View style={{marginTop: -20}}>
 					<Text style={styles.menuItemText}>Restaurant Selections:</Text>
 
-//  css-fixes
-// 				</View>
-// 				<View style={styles.restaurantsContainer} >
-// 				<ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-// 					{restaurantsData.map((restaurant, index) => {
-// 						return (
-// 							<View style={styles.indRestaurantContainer}>
 
-			{currentUser === event.userId ? (
-				<Button onPress={deleteAlert} title='Delete Event'></Button>
-			) : null}
+ 				</View>
 
-			<ScrollView>
+
+			<ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
 				<View style={styles.restaurantsContainer}>
 						{isDeadLine(
 									convertDateTime(event.votingDeadline.seconds, 'date')
@@ -229,7 +221,7 @@ export default function SingleEventScreen({ route }) {
 									<Text style={styles.eventNameText}>{maxVotes.name}</Text>
 									{/* <Text style={styles.voteText}>{restaurant.votes} Votes</Text> */}
 								</View>
-							</View> 
+							</View>
 							</View>:
 								restaurantsData.map((restaurant, index) => {
 							 return (
@@ -255,8 +247,9 @@ export default function SingleEventScreen({ route }) {
 							</View>
 						);
 					})}
+					</View>
 				</ScrollView>
-				</View>
+
 				{currentUser === event.userId ? (
 						<View style={{marginTop: -30}}>
 							<EditEventForm event={event} convertDateTime={convertDateTime}/>
