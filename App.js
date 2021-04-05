@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
 		resizeMode: 'contain',
 		borderRadius: 50,
 	},
+
 });
 
 const slides = [
@@ -114,7 +115,7 @@ export default class App extends React.Component {
 		let isLoaded = await Font.loadAsync({
 			// Bangers: require("./assets/fonts/Bangers-Regular.ttf"),
 			// LondrinaShadow: require("./assets/fonts/LondrinaShadow-Regular.ttf")
-			PurplePurse: require("./assets/fonts/PurplePurse-Regular.ttf")
+			QuicksandBold: require("./assets/fonts/Quicksand-Bold.ttf")
 		});
 		this.setState({ fontsLoaded: isLoaded });
 	};

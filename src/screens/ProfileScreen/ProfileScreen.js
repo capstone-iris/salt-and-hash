@@ -10,6 +10,7 @@ import {
 	TouchableRipple,
 } from 'react-native-paper';
 import { AntDesign, MaterialCommunityIcons, Entypo, MaterialIcons } from '@expo/vector-icons';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class ProfileScreen extends Component {
 	constructor(props) {
@@ -98,7 +99,9 @@ export default class ProfileScreen extends Component {
 
 	render() {
 		const user = this.state.users;
+
 		const { hostedEventsData } = this.props
+
 		return (
 			<SafeAreaView style={styles.container}>
 				<View style={styles.userInfoContainer}>
@@ -110,8 +113,18 @@ export default class ProfileScreen extends Component {
 							alignItems: 'center',
 						}}
 					>
-						<MaterialCommunityIcons name='account-circle-outline' color='#ffffff' size={60} />
-					
+
+						{/* <MaterialCommunityIcons name='account-circle-outline' color='#ffffff' size={60} /> */}
+						<Avatar.Image
+							source={{
+								uri:
+								'https://loremflickr.com/320/240/person'
+							}}
+							size={80}
+						/>
+
+// 						<MaterialCommunityIcons name='account-circle-outline' color='#ffffff' size={60} />
+
 						<View style={{ marginLeft: 20 }}>
 							<Title style={styles.title}>{user.fullName}</Title>
 						</View>
@@ -120,14 +133,14 @@ export default class ProfileScreen extends Component {
 
 				<View style={styles.userInfoSection}>
 					<View style={styles.row}>
-						<Entypo name='phone' size={20} color='#ffffff' />
-						<Text style={{ color: '#ffffff', marginLeft: 20 }}>
+						<Entypo name='phone' size={25} color='#ffffff' />
+						<Text style={{ color: '#ffffff', marginLeft: 20, fontSize:16 }}>
 							{user.phoneNumber}
 						</Text>
 					</View>
 					<View style={styles.row}>
-						<MaterialIcons name='email' size={20} color='#ffffff' />
-						<Text style={{ color: '#ffffff', marginLeft: 20 }}>
+						<MaterialIcons name='email' size={25} color='#ffffff' />
+						<Text style={{ color: '#ffffff', marginLeft: 20, fontSize:16  }}>
 							{user.email}
 						</Text>
 					</View>
@@ -135,20 +148,39 @@ export default class ProfileScreen extends Component {
 				</View>
 
 				<View style={styles.infoBoxWrapper}>
-					<View style={styles.infoBox}>
-						<Title style={{color: '#ffffff'}}>{hostedEventsData.length}</Title>
-						<Caption style={{color: '#ffffff'}}>Hosted Events</Caption>
-					</View>
-					<View style={styles.infoBox}>
-						<Title style={{color: '#ffffff'}}>{this.state.eventsData.length}</Title>
-						<Caption style={{color: '#ffffff'}}>Events Attending</Caption>
-					</View>
+						<View style={styles.infoBox}>
+					<TouchableOpacity onPress={()=> navigation.navigate('My Events')}>
+							<Text style={{textAlign:'center',fontSize:20,fontFamily: 'QuicksandBold',color: '#ffffff', }}>{hostedEventsData.length}</Text>
+							<Caption style={{fontSize:14, fontFamily: 'QuicksandBold',color: '#ffffff'}}>Hosted Events</Caption>
+					</TouchableOpacity>
+						</View>
+
+						<View style={styles.infoBox}>
+					<TouchableOpacity >
+							{/* <Title style={{color: '#ffffff'}}>{invitedEventsData.length}</Title> */}
+							<Text style={{textAlign:'center',fontSize:20, color: '#ffffff', fontFamily: 'QuicksandBold'}}>{invitedEventsData.length}</Text>
+							<Caption style={{fontSize:14 ,color: '#ffffff', fontFamily: 'QuicksandBold'}}>Events Attending</Caption>
+
+					</TouchableOpacity>
+						</View>
+
+
+
+// 					<View style={styles.infoBox}>
+// 						<Title style={{color: '#ffffff'}}>{hostedEventsData.length}</Title>
+// 						<Caption style={{color: '#ffffff'}}>Hosted Events</Caption>
+// 					</View>
+// 					<View style={styles.infoBox}>
+// 						<Title style={{color: '#ffffff'}}>{this.state.eventsData.length}</Title>
+// 						<Caption style={{color: '#ffffff'}}>Events Attending</Caption>
+// 					</View>
+
 				</View>
 
-				<View style={styles.hr}></View>
+				{/* <View style={styles.hr}></View> */}
 
 				<View style={styles.menuWrapper}>
-					<TouchableRipple onPress={() => {}}>
+					<TouchableRipple style={{marginTop: 15}} onPress={() => {}}>
 						<View style={styles.menuItem}>
 							<AntDesign name='hearto' color='#e95632' size={25} />
 							<Text style={styles.menuItemText}>Your Favorites</Text>

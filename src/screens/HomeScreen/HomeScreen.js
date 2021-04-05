@@ -11,6 +11,7 @@ import UpdateProfileScreen from '../ProfileScreen/UpdateProfile';
 const Tab = createBottomTabNavigator();
 
 function BottomTabNavigator() {
+
 	const [hostedEventsData, setHostedEventsData] = useState([]);
 	const navigation = useNavigation();
 
@@ -45,12 +46,7 @@ function BottomTabNavigator() {
 		// Add currentUser to useEffect dependency array, so useEffect runs when it changes
 	}, [firebase.auth().currentUser]);
 
-	
 
-
-	// console.log('hostedEvents', hostedEventsData)
-
-	
 	return (
 		<Tab.Navigator
 			tabBarOptions={{
@@ -86,7 +82,9 @@ function BottomTabNavigator() {
 			/>
 			<Tab.Screen
 				name='Profile'
-				children={()=><ProfileScreen hostedEventsData={hostedEventsData} navigation={navigation}/>}
+
+				children={()=><ProfileScreen hostedEventsData={hostedEventsData}  navigation={navigation}/>}
+        
 				options={{
 					tabBarIcon: ({ color }) => (
 						<FontAwesome name='user' size={20} color={color} />

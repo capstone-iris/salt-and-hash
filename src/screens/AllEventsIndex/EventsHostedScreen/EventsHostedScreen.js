@@ -6,10 +6,13 @@ import {
 	ScrollView,
 	TouchableOpacity,
 	Button,
+	// Image,
+	ImageBackground
 } from 'react-native';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { firebase } from './../../../firebase/config';
+import { EventSubscriptionVendor } from 'react-native';
 
 let result;
 
@@ -47,9 +50,10 @@ export default function EventsHostedScreen() {
 
 	return (
 		<SafeAreaView style={styles.mainContainer}>
-			
-			{eventsData < 1 ? 
-						
+
+
+			{eventsData < 1 ?
+
 					(
 						<View style={styles.firstContainer}>
 							<View styles={styles.buttonContainer}>
@@ -60,19 +64,18 @@ export default function EventsHostedScreen() {
 								</TouchableOpacity>
 							</View>
 						</View>
-					) 
-					
-					: 
-					
+					)
+
+					:
+
 					(
 						<View style={styles.secondContainer}>
-						<ScrollView style={styles.innerContainer}>
-
+							<Text style={styles.txtHeader}>Events you're hosting: </Text>
 						<TouchableOpacity style={styles.addEventContainer} onPress={() => navigation.navigate('Create Event Index')}>
-							<Text style={styles.addEvent}>+</Text>
-							<Text style={styles.createEventText}>Add An Event</Text>
+							<Text style={styles.createBtnTxt}>Create An Event</Text>
 						</TouchableOpacity>
-						
+
+						<ScrollView style={styles.innerContainer}>
 						<View style={styles.eventContainer}>
 							{eventsData.map((event, index) => {
 								return (
@@ -83,7 +86,9 @@ export default function EventsHostedScreen() {
 											navigation.navigate('Single Event', { event })
 										}
 									>
-										<Text style={styles.txt}>{event.name}</Text>
+										<ImageBackground source={{uri: 'https://loremflickr.com/320/240/food'}} style={{width: '100%', height: '100%', flex: 1}}>
+										</ImageBackground>
+										<Text style={styles.txt}>{event.name.toUpperCase()}</Text>
 									</TouchableOpacity>
 								);
 							})}

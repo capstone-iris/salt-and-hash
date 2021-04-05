@@ -116,13 +116,13 @@ export default class CarouselCardItem extends React.Component {
             {this.state.voted ? (
                 <MaterialCommunityIcons
                   name='check-circle'
-                  color='#e6a80c'
+                  color='#2a9d8f'
                   size={40}
                 />
               ) : (
                 <MaterialCommunityIcons
                   name='circle-outline'
-                  color='#e6a80c'
+                  color='#DADADA'
                   size={40}
                 />
               )}
@@ -161,19 +161,23 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
-    elevation: 7
+    elevation: 7,
+    marginBottom: 5,
+
   },
   image: {
     width: ITEM_WIDTH,
-    height: 300,
+    height: 330,
   },
   header: {
     marginTop: 8,
     marginLeft: 5,
-		fontSize: 24,
+    marginRight: -5,
+		fontSize: 20,
 		fontWeight: 'bold',
 		color: '#e95530',
-		fontFamily: 'PurplePurse'
+		fontFamily: 'QuicksandBold',
+    flex: 1,
   },
   body: {
     color: '#222',
@@ -185,12 +189,7 @@ const styles = StyleSheet.create({
   voteContainer: {
     display: 'flex',
     flexDirection: 'row',
-    margin: 10
-  },
-  indRestaurantHyperlink: {
-    fontSize: 15,
-    color: '#df817f',
-    paddingLeft: 20,
-},
-
+    margin: 15,
+    marginBottom: -10
+  }
 });

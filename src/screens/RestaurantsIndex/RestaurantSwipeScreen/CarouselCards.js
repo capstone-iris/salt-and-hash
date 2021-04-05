@@ -13,8 +13,10 @@ export default CarouselCards = (props) => {
 
 	const isCarousel = React.useRef(null);
 
+
 	return (
 		<SafeAreaView style={{backgroundColor: '#ffffff'}}>
+				<Text style={styles.textHeader}>Cast your votes</Text>
 		<View style={{height: 425, marginTop: 25}}>
 		<Carousel
 				layout={'stack'}
@@ -49,7 +51,7 @@ export default CarouselCards = (props) => {
 				inactiveDotScale={0.6}
 				tappableDots={true}
 			/>
-			
+
 			<TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Single Event')}>
 				<Text style={styles.buttonText}>Finish Voting</Text>
 			</TouchableOpacity>
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
 		alignSelf: 'center',
     },
     button: {
-		backgroundColor: '#e95531',
+		backgroundColor: '#2a9d8f',
 		height: 48,
 		borderRadius: 5,
 		alignItems: 'center',
@@ -83,5 +85,13 @@ const styles = StyleSheet.create({
         color: 'white',
 		fontSize: 16,
 		fontWeight: 'bold'
-    }
+    },
+		textHeader: {
+			fontFamily: 'QuicksandBold',
+			fontSize: 20,
+			textAlign: 'center',
+			marginTop: -40,
+			marginBottom: 10,
+			color: '#e95531'
+		}
 })

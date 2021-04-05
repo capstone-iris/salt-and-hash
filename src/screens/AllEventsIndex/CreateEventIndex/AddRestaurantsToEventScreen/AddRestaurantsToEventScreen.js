@@ -141,6 +141,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 	};
 
 	storeRestaurant = (eventId, restaurant) => {
+
 			if(this.state.restaurantCounter === 8) {
 				Alert.alert('You cannot choose more than 8 restaurants!')
 			} else {

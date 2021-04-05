@@ -16,17 +16,23 @@ export default StyleSheet.create({
 		fontWeight: '600',
 		fontSize: 16,
 		lineHeight: 26,
+		fontFamily:'QuicksandBold'
 	},
 	restaurantsContainer: {
 		flex: 1,
 		flexDirection: 'row',
-		flexWrap: 'wrap',
+		// flexWrap: 'wrap',
 		justifyContent: 'space-around',
-		margin: 10,
-		marginTop: 20
+		margin: 5,
+		height: 200,
+		// marginBottom: 5
 	},
 	indRestaurantContainer: {
-		marginBottom: 20
+		margin: 10,
+		marginTop:20,
+		// borderWidth:1,
+
+
 	},
 	chosenRestaurantContainer: {
 		justifyContent: 'center'
@@ -39,23 +45,111 @@ export default StyleSheet.create({
 	image: {
 		height: 100,
 		width: 150,
-		borderRadius: 15,
+		borderRadius: 5,
+		overflow: 'hidden',
 	},
 	eventNameText: {
 		fontSize: 24,
 		fontWeight: 'bold',
 		color: '#e95530',
-		fontFamily: 'PurplePurse',
-		margin: 10
+		fontFamily: 'QuicksandBold',
+		textAlign: 'center',
+		margin: 10,
 	},
 	voteText: {
-		color: '#656565',
+		fontFamily: 'QuicksandBold',
+		color: '#FFF',
 		fontWeight: '600',
 		fontSize: 14,
+		position: 'absolute',
+    bottom: 0,
+		padding: 5
 	},
 	restaurantTitle: {
 		color: '#e6a80c',
 		fontWeight: '600',
 		fontSize: 14,
+		fontFamily: 'QuicksandBold',
+		// borderColor: 'black',
+		// borderWidth: 1,
+		marginBottom: -10
 	},
+	modalContainer:{
+		flex:1,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	modalView: {
+		marginTop: 150,
+		marginLeft:20,
+		marginRight:20,
+		height: 200,
+		backgroundColor: "white",
+		borderRadius: 10,
+		padding: 10,
+		alignItems: "center",
+		shadowColor: "#000",
+		shadowOffset: {
+		width: 0,
+		height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+	},
+	centeredView: {
+		flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 20,
+	backgroundColor: '#ffffff'
+	},
+	modalForm:{
+		// flex: 1,
+    // justifyContent: "center",
+    // alignItems: "center",
+    marginTop: 20
+
+	},
+	modalButton: {
+		flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+		width:250,
+		height:50,
+		// marginLeft: 30,
+		marginTop: 10,
+		padding: 5,
+		backgroundColor: '#eb5634'
+	},
+	modalInput: {
+		flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+		width: 300
+
+	},
+	input: {
+		padding: 5,
+		textAlign: 'center'
+	},
+	modalButtonText: {
+		fontSize: 16,
+		fontWeight: 'bold',
+		color: 'white'
+	},
+		dateTimePicker: {
+		marginTop: 15
+	},
+	imageContainer:{
+		shadowColor: "#000",
+		shadowOffset: {
+		width: 0,
+		height: 4
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+		// marginBottom: 8
+	}
 });
