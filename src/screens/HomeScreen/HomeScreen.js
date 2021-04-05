@@ -6,7 +6,6 @@ import ProfileScreen from '../ProfileScreen/ProfileScreen';
 import AllEventsIndex from '../AllEventsIndex/AllEventsIndex';
 import { firebase } from '../../firebase/config'
 import { useNavigation } from '@react-navigation/native';
-import UpdateProfileScreen from '../ProfileScreen/UpdateProfile';
 
 const Tab = createBottomTabNavigator();
 
@@ -47,7 +46,7 @@ function BottomTabNavigator() {
 	}, [firebase.auth().currentUser]);
 
 
-	return (
+	return (		
 		<Tab.Navigator
 			tabBarOptions={{
 				showIcon: true,

@@ -12,6 +12,8 @@ import {
 import { AntDesign, MaterialCommunityIcons, Entypo, MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+
+
 export default class ProfileScreen extends Component {
 	constructor(props) {
 		super(props);
@@ -21,8 +23,8 @@ export default class ProfileScreen extends Component {
 		};
 	}
 
-	async componentDidMount() {
-		await this.fetchData()
+	componentDidMount() {
+		this.fetchData()
 		this.getUsers();
 	}
 
@@ -123,8 +125,6 @@ export default class ProfileScreen extends Component {
 							size={80}
 						/>
 
-// 						<MaterialCommunityIcons name='account-circle-outline' color='#ffffff' size={60} />
-
 						<View style={{ marginLeft: 20 }}>
 							<Title style={styles.title}>{user.fullName}</Title>
 						</View>
@@ -150,7 +150,7 @@ export default class ProfileScreen extends Component {
 				<View style={styles.infoBoxWrapper}>
 						<View style={styles.infoBox}>
 					<TouchableOpacity onPress={()=> navigation.navigate('My Events')}>
-							<Text style={{textAlign:'center',fontSize:20,fontFamily: 'QuicksandBold',color: '#ffffff', }}>{hostedEventsData.length}</Text>
+							<Text style={{textAlign:'center',fontSize:20,fontFamily: 'QuicksandBold',color: '#ffffff' }}>{hostedEventsData.length}</Text>
 							<Caption style={{fontSize:14, fontFamily: 'QuicksandBold',color: '#ffffff'}}>Hosted Events</Caption>
 					</TouchableOpacity>
 						</View>
@@ -158,22 +158,13 @@ export default class ProfileScreen extends Component {
 						<View style={styles.infoBox}>
 					<TouchableOpacity >
 							{/* <Title style={{color: '#ffffff'}}>{invitedEventsData.length}</Title> */}
-							<Text style={{textAlign:'center',fontSize:20, color: '#ffffff', fontFamily: 'QuicksandBold'}}>{invitedEventsData.length}</Text>
+							<Text style={{textAlign:'center',fontSize:20, color: '#ffffff', fontFamily: 'QuicksandBold'}}>{this.state.eventsData.length}</Text>
 							<Caption style={{fontSize:14 ,color: '#ffffff', fontFamily: 'QuicksandBold'}}>Events Attending</Caption>
 
 					</TouchableOpacity>
 						</View>
 
 
-
-// 					<View style={styles.infoBox}>
-// 						<Title style={{color: '#ffffff'}}>{hostedEventsData.length}</Title>
-// 						<Caption style={{color: '#ffffff'}}>Hosted Events</Caption>
-// 					</View>
-// 					<View style={styles.infoBox}>
-// 						<Title style={{color: '#ffffff'}}>{this.state.eventsData.length}</Title>
-// 						<Caption style={{color: '#ffffff'}}>Events Attending</Caption>
-// 					</View>
 
 				</View>
 
@@ -198,6 +189,7 @@ export default class ProfileScreen extends Component {
 							<Text style={styles.menuItemText}>Notifications</Text>
 						</View>
 					</TouchableRipple>
+					{/* <TouchableRipple onPress={() => {this.props.navigation.navigate('Update Profile')}}> */}
 					<TouchableRipple onPress={() => {}}>
 						<View style={styles.menuItem}>
 							<MaterialCommunityIcons name='account-box-outline' color='#e95632' size={25} />
