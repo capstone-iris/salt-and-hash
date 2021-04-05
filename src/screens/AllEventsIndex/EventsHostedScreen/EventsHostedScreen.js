@@ -70,13 +70,12 @@ export default function EventsHostedScreen() {
 
 					(
 						<View style={styles.secondContainer}>
-						<ScrollView style={styles.innerContainer}>
-
+							<Text style={styles.txtHeader}>Events you're hosting: </Text>
 						<TouchableOpacity style={styles.addEventContainer} onPress={() => navigation.navigate('Create Event Index')}>
-							<Text style={styles.addEvent}>+</Text>
-							<Text style={styles.createEventText}>Add An Event</Text>
+							<Text style={styles.createBtnTxt}>Create An Event</Text>
 						</TouchableOpacity>
 
+						<ScrollView style={styles.innerContainer}>
 						<View style={styles.eventContainer}>
 							{eventsData.map((event, index) => {
 								return (
@@ -88,10 +87,8 @@ export default function EventsHostedScreen() {
 										}
 									>
 										<ImageBackground source={{uri: 'https://loremflickr.com/320/240/food'}} style={{width: '100%', height: '100%', flex: 1}}>
-
-
 										</ImageBackground>
-										<Text style={styles.txt}>{event.name}</Text>
+										<Text style={styles.txt}>{event.name.toUpperCase()}</Text>
 									</TouchableOpacity>
 								);
 							})}

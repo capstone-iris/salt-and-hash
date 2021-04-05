@@ -16,6 +16,7 @@ export default StyleSheet.create({
 		fontWeight: '600',
 		fontSize: 16,
 		lineHeight: 26,
+		fontFamily:'QuicksandBold'
 	},
 	restaurantsContainer: {
 		flex: 1,
@@ -23,11 +24,15 @@ export default StyleSheet.create({
 		// flexWrap: 'wrap',
 		justifyContent: 'space-around',
 		margin: 5,
-		height: 200
-		// marginTop: -20
+		height: 200,
+		// marginBottom: 5
 	},
 	indRestaurantContainer: {
 		margin: 10,
+		marginTop:20,
+		// borderWidth:1,
+
+
 	},
 	textContainer: {
 		width: 125,
@@ -44,10 +49,12 @@ export default StyleSheet.create({
 		fontSize: 24,
 		fontWeight: 'bold',
 		color: '#e95530',
-		fontFamily: 'Georgia',
+		fontFamily: 'QuicksandBold',
+		textAlign: 'center',
 		margin: 10,
 	},
 	voteText: {
+		fontFamily: 'QuicksandBold',
 		color: '#FFF',
 		fontWeight: '600',
 		fontSize: 14,
@@ -59,6 +66,10 @@ export default StyleSheet.create({
 		color: '#e6a80c',
 		fontWeight: '600',
 		fontSize: 14,
+		fontFamily: 'QuicksandBold',
+		// borderColor: 'black',
+		// borderWidth: 1,
+		marginBottom: -10
 	},
 	modalContainer:{
 		flex:1,

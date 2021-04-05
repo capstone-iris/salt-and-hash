@@ -149,13 +149,13 @@ export default class AllRestaurantsScreen extends React.Component {
 
 
 							<Text style={styles.indRestaurantTextBody}>
-								<AntDesign name='star' size={16} color='#e6a80c'/> {item.rating} |{' '}
+								<AntDesign name='star' size={16} color='#2a9d8f'/> {item.rating} |{' '}
 								{item.user_ratings_total} ratings
 							</Text>
 
 							<TouchableRipple onPress={() => {}}>
 								<Text style={styles.indRestaurantTextBody}>
-								<AntDesign name='heart' size={16} color='#e6a80c'/> Add to Favorites
+								<AntDesign name='heart' size={16} color='#2a9d8f'/> Add to Favorites
 								</Text>
 							</TouchableRipple>
 

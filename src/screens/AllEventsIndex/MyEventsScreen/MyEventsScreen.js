@@ -54,7 +54,7 @@ export default function MyEventsScreen({ navigation }) {
 
 	return (
 		<TabView
-			style={{ marginTop: 20 }}
+			// style={{ marginTop: 20 , backgroundColor: '#e76f51'}}
 			navigationState={{ index, routes }}
 			renderScene={renderScene}
 			onIndexChange={setIndex}
@@ -62,9 +62,9 @@ export default function MyEventsScreen({ navigation }) {
 			renderTabBar={(props) => (
 				<TabBar
 					{...props}
-					style={{ backgroundColor: '#e6a80c', color: '#e95531' }}
-					indicatorStyle={{ backgroundColor: '#e95531' }}
-					labelStyle={{fontWeight: 'bold'}}
+					style={{ backgroundColor: '#e95531', color: '#FFFFF', paddingTop:40 }}
+					indicatorStyle={{ backgroundColor: '#FBF2A0', height:4, borderBottomColor:'#e76f51', borderBottomWidth: 1 }}
+					labelStyle={{fontFamily: 'QuicksandBold', fontSize: 16}}
 				/>
 			)}
 		/>

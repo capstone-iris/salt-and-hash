@@ -38,7 +38,7 @@ export default StyleSheet.create({
         fontSize: 24,
 		fontWeight: 'bold',
 		color: '#e95530',
-		fontFamily: 'PurplePurse'
+		fontFamily: 'QuicksandBold'
     },
     indRestaurantContainer: {
         justifyContent: 'center',
@@ -46,7 +46,7 @@ export default StyleSheet.create({
         margin: 10
     },
     image: {
-        width: 340, 
+        width: 340,
         height: 175
     },
     indRestaurantTextBody: {
@@ -57,7 +57,7 @@ export default StyleSheet.create({
         fontSize: 20,
 		fontWeight: 'bold',
 		color: '#e95530',
-		fontFamily: 'PurplePurse'
+		fontFamily: 'QuicksandBold'
     },
     indRestaurantHyperlink: {
         fontSize: 15,

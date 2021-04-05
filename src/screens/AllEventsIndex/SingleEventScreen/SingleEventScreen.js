@@ -120,7 +120,7 @@ export default function SingleEventScreen({ route }) {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<Text style={styles.eventNameText}>{event.name}</Text>
+			<Text style={styles.eventNameText}>{event.name.toUpperCase()}</Text>
 				<View style={styles.imageContainer}>
 						<Image source={{uri: 'https://loremflickr.com/320/240/food'}} style={{width:'100%', height: 220}}/>
 
@@ -195,8 +195,6 @@ export default function SingleEventScreen({ route }) {
 					{currentUser === event.userId ? (
 						<View style={{ marginTop: 15}}>
 							<AddGuestsToEventScreen eventId={event.docId} />
-							<Button onPress={deleteAlert} title='Delete Event'></Button>
-							<EditEventForm event={event} convertDateTime={convertDateTime}/>
 						</View>
 					) : null}
 				</View>
@@ -239,6 +237,12 @@ export default function SingleEventScreen({ route }) {
 					})}
 				</ScrollView>
 				</View>
+				{currentUser === event.userId ? (
+						<View style={{marginTop: -30}}>
+							<EditEventForm event={event} convertDateTime={convertDateTime}/>
+							<Button onPress={deleteAlert} title='Delete Event'></Button>
+						</View>
+					) : null}
 			</ScrollView>
 		</SafeAreaView>
 	);

@@ -8,6 +8,7 @@ import CreateEventIndex from './CreateEventIndex/CreateEventIndex'
 import SingleEventScreen from './SingleEventScreen/SingleEventScreen';
 import EditEventForm from './SingleEventScreen/EditEventForm'
 import AddRestaurantsToEventScreen from './CreateEventIndex/AddRestaurantsToEventScreen/AddRestaurantsToEventScreen'
+import styles from './EventsHostedScreen/styles';
 
 const EventsBase = createStackNavigator();
 
@@ -27,3 +28,5 @@ export default function AllEventsIndex() {
         </EventsBase.Navigator>
     )
 }
+
+

@@ -10,7 +10,7 @@ import { firebase } from '../../firebase/config'
 const Tab = createBottomTabNavigator();
 
 function BottomTabNavigator() {
-	// const navigation = useNavigation();
+	const navigation = useNavigation();
 	const [hostedEventsData, setHostedEventsData] = useState([]);
 	const [invitedEventsData, setInvitedEventsData] = useState([]);
 
@@ -42,7 +42,7 @@ function BottomTabNavigator() {
 		// Add currentUser to useEffect dependency array, so useEffect runs when it changes
 	}, [firebase.auth().currentUser]);
 
-	
+
 	return (
 		<Tab.Navigator
 			tabBarOptions={{
@@ -79,7 +79,7 @@ function BottomTabNavigator() {
 			<Tab.Screen
 				name='Profile'
 				// children={()=><ProfileScreen hostedEventsData={hostedEventsData} invitedEventsData={invitedEventsData}/>}
-				children={()=><ProfileScreen hostedEventsData={hostedEventsData}/>}
+				children={()=><ProfileScreen hostedEventsData={hostedEventsData} invitedEventsData={invitedEventsData} navigation={navigation}/>}
 
 				// component={ProfileScreen}
 				options={{
