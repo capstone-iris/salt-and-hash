@@ -26,7 +26,6 @@ export default function SingleEventScreen({ route }) {
 	const currentUser = firebase.auth().currentUser.uid;
 
 	function convertDateTime(ss, type) {
-		console.log('ss +++', ss);
 		let date_ob = new Date(ss * 1000);
 		let date = ('0' + date_ob.getDate()).slice(-2);
 		let year = date_ob.getFullYear();
@@ -93,8 +92,6 @@ export default function SingleEventScreen({ route }) {
 	}
 
 	useEffect(() => {
-		// async function fetchData() {
-		console.log('in fetch data');
 		const unsubscribe = firebase
 			.firestore()
 			.collection('eventRestaurants')
@@ -197,29 +194,33 @@ export default function SingleEventScreen({ route }) {
 
 			<ScrollView>
 				<View style={styles.restaurantsContainer}>
-<<<<<<< HEAD
+
 						{restaurantsData.map((restaurant, index) => {
+						{isDeadLine(
+									convertDateTime(event.votingDeadline.seconds, 'date')
+								) ? 								<View>
+									<Text style={styles.menuItemText}> Your chosen restaurant is:{'\n'}</Text>
+
+								<View style={styles.chosenRestaurantContainer}>
+									<Image
+										style={styles.image}
+										source={{
+											uri: fetchImage(maxVotes.photo),
+										}}
+									/>
+								<View style={styles.textContainer}>
+									<Text style={styles.eventNameText}>{maxVotes.name}</Text>
+									{/* <Text style={styles.voteText}>{restaurant.votes} Votes</Text> */}
+								</View>
+							</View> 
+							</View>:
+								restaurantsData.map((restaurant, index) => {
 							 return (
 								<View key={index} style={styles.indRestaurantContainer}>
 								<TouchableOpacity
 									activeOpacity={0.5}
 									key={index}
 									onPress={() => navigation.navigate('Restaurant Swipe', {restaurantsData: restaurantsData, eventId:event.docId})}
-=======
-					{restaurantsData.map((restaurant, index) => {
-						return (
-							<View style={styles.indRestaurantContainer}>
-								<TouchableOpacity
-									activeOpacity={0.5}
-									key={index}
-									onPress={() =>
-										navigation.navigate('Restaurant Swipe', {
-											restaurantsData: restaurantsData,
-											eventId: event.docId,
-											navigation: navigation,
-										})
-									}
->>>>>>> 4dd8127fd619fd9263c781d33242f9b2d86f6bdc
 								>
 									<Image
 										style={styles.image}

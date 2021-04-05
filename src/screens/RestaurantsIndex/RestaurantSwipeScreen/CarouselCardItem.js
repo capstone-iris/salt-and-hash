@@ -5,12 +5,15 @@ import {
   StyleSheet,
   Dimensions,
   Image,
-  TouchableOpacity
+  TouchableOpacity, 
+  Linking
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { TouchableRipple } from 'react-native-paper';
 import { Col, Grid } from "react-native-easy-grid";
 import * as base from "../../../../secrets.js";
 import { firebase } from '../../../firebase/config';
+
 
 export const SLIDER_WIDTH = Dimensions.get('window').width + 80;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
@@ -19,14 +22,54 @@ export default class CarouselCardItem extends React.Component {
   constructor(props) {
     super(props),
     this.state = {
-      voted: false
+      voted: false,
+      activeRestaurantId: null,
+      itemId: props.item.id
     }
-    const {item, eventId} = this.props;
     this.eventRestaurantsRef = firebase.firestore().collection('eventRestaurants');
     this.vote = this.vote.bind(this);
     this.handleVote = this.handleVote.bind(this);
     this.handleUnvote = this.handleUnvote.bind(this);
   }
+
+  componentDidMount() {
+    this.handleActiveRestaurantDetails(this.state.itemId)   
+  }
+
+  handleActiveRestaurantDetails = (placeId) => {
+		const url = 'https://maps.googleapis.com/maps/api/place/details/json?';
+		const place_id = `&place_id=${placeId}`;
+		const key = `&key=${base.GOOGLE_PLACES_API}`;
+		const activeRestaurantDetailsUrl = url + place_id + key;
+
+			fetch(activeRestaurantDetailsUrl, {
+				mode: 'no-cors',
+				cache: 'no-cache',
+			})
+				.then((response) => {
+					return response.json();
+				})
+				.then((result) => {
+					return this.setState({
+						activeRestaurantWebsite: result.result.website,
+						activeRestaurantId: placeId,
+					});
+				})
+        .catch((e) => console.log(e));
+		
+		// if (
+    //   this.state.activeRestaurantId === placeId
+    //   ) {
+		// 	return this.setState({
+		// 		activeRestaurantDetails: null,
+		// 		activeRestaurantId: null,
+		// 	});
+		// }
+	};
+
+	handleWebsiteUrl = (placeSite) => {
+		Linking.openURL(placeSite);
+	};
 
   vote = async (eventId, item) => {
     await this.setState({voted: !this.state.voted})
@@ -89,8 +132,14 @@ export default class CarouselCardItem extends React.Component {
             <Text style={styles.header}>{item.name}</Text>
           </Col>
           </Grid>
-        <Text style={styles.body}>{item.body}</Text>
-        </View>
+          </View>
+          <View style={styles.activeRestaurantDetailsContainer}>
+										<TouchableRipple onPress={() => this.handleWebsiteUrl(this.state.activeRestaurantWebsite)}>
+										<Text style={styles.indRestaurantHyperlink}>
+											<MaterialCommunityIcons name='search-web' size={16} /> see restaurant website
+										</Text>
+										</TouchableRipple>
+          </View>
       </View>
     );
   }
@@ -137,5 +186,11 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     margin: 10
-  }
+  },
+  indRestaurantHyperlink: {
+    fontSize: 15,
+    color: '#df817f',
+    paddingLeft: 20,
+},
+
 });
