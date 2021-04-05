@@ -7,7 +7,7 @@ import {
 	View,
 	TouchableOpacity,
 	ActivityIndicator,
-	Alert
+	Alert,
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { firebase } from '../../../../firebase/config';
@@ -15,7 +15,7 @@ import styles from './styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Sae } from 'react-native-textinput-effects';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import { FontAwesome } from '@expo/vector-icons'
+import { FontAwesome } from '@expo/vector-icons';
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -40,10 +40,15 @@ class CreateEventMainScreen extends React.Component {
 		const currentDate = selectedDate || date;
 		const showFlag = Platform.OS === 'ios';
 		this.setState({ show: showFlag });
-		this.inputValueUpdate(
-			selectedDate,
-			this.state.mode === 'date' ? 'date' : 'eventStartTime'
-		);
+		this.inputValueUpdate(selectedDate, 'date');
+	};
+
+	onChangeEventStartTime = (event, selectedDate) => {
+		console.log('event endTimeChange +++', selectedDate);
+		const currentDate = selectedDate || date;
+		const showFlag = Platform.OS === 'ios';
+		this.setState({ show: showFlag });
+		this.inputValueUpdate(selectedDate, 'eventStartTime');
 	};
 
 	onChangeEventEndTime = (event, selectedDate) => {
@@ -144,7 +149,6 @@ class CreateEventMainScreen extends React.Component {
 		}
 	};
 
-
 	render() {
 		if (this.state.isLoading) {
 			return (
@@ -162,8 +166,8 @@ class CreateEventMainScreen extends React.Component {
 							<Text style={styles.title}>Create An Event</Text>
 						</View>
 						<Sae
-							style={{marginLeft: 10, marginRight: 10, marginBottom: 10}}
-							labelStyle={{color: '#656565'}}
+							style={{ marginLeft: 10, marginRight: 10, marginBottom: 10 }}
+							labelStyle={{ color: '#656565' }}
 							inputStyle={{ color: '#656565' }}
 							label={'Event Name'}
 							iconClass={FontAwesomeIcon}
@@ -177,9 +181,9 @@ class CreateEventMainScreen extends React.Component {
 							onChangeText={(val) => this.inputValueUpdate(val, 'name')}
 						/>
 						<Sae
-							style={{marginLeft: 10, marginRight: 10}}
-							labelStyle={{color: '#656565'}}
-							inputStyle={{fontSize: 16, color: 'black'}}
+							style={{ marginLeft: 10, marginRight: 10 }}
+							labelStyle={{ color: '#656565' }}
+							inputStyle={{ fontSize: 16, color: 'black' }}
 							label={'Event Description'}
 							iconClass={FontAwesomeIcon}
 							iconName={'pencil'}
@@ -193,70 +197,72 @@ class CreateEventMainScreen extends React.Component {
 						/>
 
 						<View style={styles.break1}></View>
-						<View style={styles.break2}><FontAwesome name='circle' color='#e6a80c'/></View>
+						<View style={styles.break2}>
+							<FontAwesome name='circle' color='#e6a80c' />
+						</View>
 						<View style={styles.break3}></View>
 
 						<View style={styles.indInputContainer}>
 							<Text style={styles.text}>Event Date: </Text>
 							<View style={styles.dateTimePicker}>
-							<DateTimePicker
-								testID='datePicker'
-								value={this.state.date}
-								mode='date'
-								is24Hour={true}
-								display='default'
-								onChange={this.onChange}
-								placeholder='Select a date'
-								style={{ marginHorizontal: 10 }}
-							/>
+								<DateTimePicker
+									testID='datePicker'
+									value={this.state.date}
+									mode='date'
+									is24Hour={true}
+									display='default'
+									onChange={this.onChange}
+									placeholder='Select a date'
+									style={{ marginHorizontal: 10 }}
+								/>
 							</View>
 						</View>
 
 						<View style={styles.indInputContainer}>
 							<Text style={styles.text}>Event Start Time: </Text>
 							<View style={styles.dateTimePicker}>
-							<DateTimePicker
-								testID='timePicker'
-								value={this.state.eventStartTime}
-								mode='time'
-								is24Hour={true}
-								display='default'
-								onChange={this.onChange}
-								placeholder='Start time'
-								style={{ marginHorizontal: 10 }}
-							/>
+								<DateTimePicker
+									testID='timePicker'
+									value={this.state.eventStartTime}
+									mode='time'
+									is24Hour={true}
+									display='default'
+									onChange={this.onChangeEventStartTime}
+									placeholder='Start time'
+									style={{ marginHorizontal: 10 }}
+								/>
 							</View>
 						</View>
 
 						<View style={styles.indInputContainer}>
 							<Text style={styles.text}>Event End Time: </Text>
 							<View style={styles.dateTimePicker}>
-							<DateTimePicker
-								testID='timePicker'
-								value={this.state.eventEndTime}
-								mode='time'
-								is24Hour={true}
-								display='default'
-								onChange={this.onChangeEventEndTime}
-								placeholder='End time'
-								style={{ marginHorizontal: 10 }}
-							/>
+								<DateTimePicker
+									testID='timePicker'
+									value={this.state.eventEndTime}
+									mode='time'
+									is24Hour={true}
+									display='default'
+									onChange={this.onChangeEventEndTime}
+									placeholder='End time'
+									style={{ marginHorizontal: 10 }}
+								/>
 							</View>
 						</View>
 
 						<View style={styles.indInputContainerLast}>
 							<Text style={styles.text}>Guests' Votes Due By: </Text>
 							<View style={styles.dateTimePicker}>
-							<DateTimePicker
-								testID='datePicker'
-								value={this.state.votingDeadline}
-								mode='date'
-								is24Hour={true}
-								display='default'
-								onChange={this.onChangeVotingDeadline}
-								placeholder='Votes Due By'
-								style={{ marginHorizontal: 10 }}
-							/>
+								<DateTimePicker
+									testID='datePicker'
+									value={this.state.votingDeadline}
+									mode='date'
+									is24Hour={true}
+									display='default'
+									onChange={this.onChangeVotingDeadline}
+									placeholder='Votes Due By'
+									style={{ marginHorizontal: 10 }}
+								/>
 							</View>
 						</View>
 					</View>
@@ -275,4 +281,3 @@ class CreateEventMainScreen extends React.Component {
 }
 
 export default withNavigation(CreateEventMainScreen);
-
