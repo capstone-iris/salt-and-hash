@@ -4,7 +4,6 @@ import CarouselCards from './CarouselCards';
 
 export default function RestaurantSwipeScreen({route}) {
 	const { restaurantsData, eventId } = route.params
-	console.log('route params', route.params)
 		return (
 		<SafeAreaView style={styles.container}>
 			<CarouselCards restaurantsData={restaurantsData} eventId={eventId}/>

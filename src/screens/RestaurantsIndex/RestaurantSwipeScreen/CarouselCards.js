@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
 	buttonContainer: {
         alignItems: 'center',
 		justifyContent: 'center',
-        alignSelf: 'center'
+		alignSelf: 'center',
     },
     button: {
 		backgroundColor: '#2a9d8f',

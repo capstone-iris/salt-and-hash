@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { SafeAreaView, View, Linking } from 'react-native';
 import styles from './styles';
 import { firebase } from '../../firebase/config';
 import {
@@ -17,10 +17,12 @@ export default class ProfileScreen extends Component {
 		super(props);
 		this.state = {
 			users: [],
+			eventsData: []
 		};
 	}
 
-	componentDidMount() {
+	async componentDidMount() {
+		await this.fetchData()
 		this.getUsers();
 	}
 
@@ -34,6 +36,54 @@ export default class ProfileScreen extends Component {
 			});
 		});
 	};
+
+	async fetchData() {
+		try {
+			if (!firebase.auth().currentUser) {
+				return;
+			}
+			const currentUser = await firebase.auth().currentUser.uid;
+			let userResult;
+			const userData = await firebase
+				.firestore()
+				.collection('users')
+				.where('id', '==', currentUser)
+				.get();
+			userData.docs.forEach((doc) => {
+				userResult = doc.data();
+			});
+
+			await firebase
+				.firestore()
+				.collection('eventGuests')
+				.doc(userResult.phoneNumber)
+				.collection('eventsInvitedTo')
+				.onSnapshot(async (guestsData) => {
+					// reset guestResult on each snapshot to void duplication
+					// only need the snapshot on the guestData to see if new numbers where add
+					let guestsResult = [];
+					guestsData.docs.forEach((doc) => {
+						guestsResult.push(doc.data());
+					});
+					let eventsResult = [];
+
+					for (let i = 0; i < guestsResult.length; i++) {
+						const event = guestsResult[i];
+						const eventsInvitedTo = await firebase
+							.firestore()
+							.collection('events')
+							.where('docId', '==', event.eventId)
+							.get();
+						eventsInvitedTo.docs.forEach((doc) => {
+							eventsResult.push(doc.data());
+						});
+						this.setState({ eventsData: eventsResult });
+					}
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	}
 
 	onSignOut = () => {
 		firebase
@@ -49,7 +99,8 @@ export default class ProfileScreen extends Component {
 
 	render() {
 		const user = this.state.users;
-		const { hostedEventsData, invitedEventsData, navigation } = this.props
+
+		const { hostedEventsData } = this.props
 
 		return (
 			<SafeAreaView style={styles.container}>
@@ -62,6 +113,7 @@ export default class ProfileScreen extends Component {
 							alignItems: 'center',
 						}}
 					>
+
 						{/* <MaterialCommunityIcons name='account-circle-outline' color='#ffffff' size={60} /> */}
 						<Avatar.Image
 							source={{
@@ -70,6 +122,9 @@ export default class ProfileScreen extends Component {
 							}}
 							size={80}
 						/>
+
+// 						<MaterialCommunityIcons name='account-circle-outline' color='#ffffff' size={60} />
+
 						<View style={{ marginLeft: 20 }}>
 							<Title style={styles.title}>{user.fullName}</Title>
 						</View>
@@ -111,6 +166,15 @@ export default class ProfileScreen extends Component {
 
 
 
+// 					<View style={styles.infoBox}>
+// 						<Title style={{color: '#ffffff'}}>{hostedEventsData.length}</Title>
+// 						<Caption style={{color: '#ffffff'}}>Hosted Events</Caption>
+// 					</View>
+// 					<View style={styles.infoBox}>
+// 						<Title style={{color: '#ffffff'}}>{this.state.eventsData.length}</Title>
+// 						<Caption style={{color: '#ffffff'}}>Events Attending</Caption>
+// 					</View>
+
 				</View>
 
 				{/* <View style={styles.hr}></View> */}
@@ -122,7 +186,7 @@ export default class ProfileScreen extends Component {
 							<Text style={styles.menuItemText}>Your Favorites</Text>
 						</View>
 					</TouchableRipple>
-					<TouchableRipple onPress={() => {}}>
+					<TouchableRipple onPress={() => {Linking.openURL('https://venmo.com/')}}>
 						<View style={styles.menuItem}>
 							<AntDesign name='creditcard' color='#e95632' size={25} />
 							<Text style={styles.menuItemText}>Payment</Text>
@@ -134,6 +198,7 @@ export default class ProfileScreen extends Component {
 							<Text style={styles.menuItemText}>Notifications</Text>
 						</View>
 					</TouchableRipple>
+					{/* <TouchableRipple onPress={() => {this.props.navigation.navigate('Update Profile')}}> */}
 					<TouchableRipple onPress={() => {}}>
 						<View style={styles.menuItem}>
 							<MaterialCommunityIcons name='account-box-outline' color='#e95632' size={25} />

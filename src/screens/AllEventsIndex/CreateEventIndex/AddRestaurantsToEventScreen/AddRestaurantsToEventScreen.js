@@ -141,28 +141,30 @@ class AddRestaurantsToEventScreen extends React.Component {
 	};
 
 	storeRestaurant = (eventId, restaurant) => {
-		if(this.state.restaurantCounter === 8) {
-			Alert.alert('You cannot choose more than 8 restaurants!')
-		} else {
-			this.eventRestaurantsRef.doc(eventId).collection('eventRestaurants').doc(restaurant.place_id)
-				.set({
-					name: restaurant.name,
-					photo: restaurant.photos[0].photo_reference,
-					address: restaurant.vicinity,
-					eventId: eventId,
-					votes: 0,
-					id: restaurant.place_id
-					//restaurant website is on the restaurant details page; stretch integration
-				})
-				.then(() =>
-					this.setState(
-						{restaurantCounter: this.state.restaurantCounter + 1}))
-				.then(() => console.log('Restaurant added!'))
-				.catch((e) => {
-					console.error('Error found: ', e)
-				})
-		}
-}
+
+			if(this.state.restaurantCounter === 8) {
+				Alert.alert('You cannot choose more than 8 restaurants!')
+			} else {
+				this.eventRestaurantsRef.doc(eventId).collection('eventRestaurants').doc(restaurant.place_id)
+					.set({
+						name: restaurant.name,
+						photo: restaurant.photos[0].photo_reference,
+						address: restaurant.vicinity,
+						eventId: eventId,
+						votes: 0,
+						id: restaurant.place_id,
+						rating: restaurant.rating
+						//restaurant website is on the restaurant details page; stretch integration
+					})
+					.then(() =>
+						this.setState(
+							{restaurantCounter: this.state.restaurantCounter + 1}))
+					.then(() => console.log('Restaurant added!'))
+					.catch((e) => {
+						console.error('Error found: ', e)
+					})
+			}
+	}
 
 
 	deleteRestaurant = (eventId, restaurant) => {

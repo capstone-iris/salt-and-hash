@@ -34,6 +34,9 @@ export default StyleSheet.create({
 
 
 	},
+	chosenRestaurantContainer: {
+		justifyContent: 'center'
+	},
 	textContainer: {
 		width: 125,
 		marginTop: 5,

@@ -39,7 +39,6 @@ export default class EventsInvitedToScreen extends React.Component {
 				.get();
 			userData.docs.forEach((doc) => {
 				userResult = doc.data();
-				console.log('doc.data', doc.data());
 			});
 
 			firebase
@@ -55,7 +54,6 @@ export default class EventsInvitedToScreen extends React.Component {
 						guestsResult.push(doc.data());
 					});
 					let eventsResult = [];
-					console.log('====result', guestsResult);
 
 					for (let i = 0; i < guestsResult.length; i++) {
 						const event = guestsResult[i];
