@@ -168,7 +168,7 @@ export default function SingleEventScreen({ route }) {
 						</View>
 					</View>
 					<View>
-						<TouchableOpacity onPress={() => {}}>
+						<TouchableRipple onPress={() => {}}>
 							<View style={styles.menuItem}>
 								<MaterialCommunityIcons
 									name='map-marker-radius'
@@ -180,10 +180,10 @@ export default function SingleEventScreen({ route }) {
 										convertDateTime(event.votingDeadline.seconds, 'date')
 									)
 										? maxVotes.name
-										: 'Event location pending votes'}
+										: 'Event location is Pending...'}
 								</Text>
 							</View>
-						</TouchableOpacity>
+						</TouchableRipple>
 					</View>
 					<View>
 						{currentUser === event.userId ? (
@@ -193,26 +193,33 @@ export default function SingleEventScreen({ route }) {
 						) : null}
 					</View>
 				</View>
-					<View style={{marginTop: -20}}>
+				{isDeadLine(convertDateTime(event.votingDeadline.seconds, 'date'))
+				? <View style={styles.chosenRestContainer}>
+						<Text style={styles.chosenRestText}> Your chosen restaurant</Text>
+					</View>
+				:	<View style={{marginTop: -20}}>
 						<Text style={styles.menuItemText}>Restaurant Selections:</Text>
 					 </View>
+				}
 				<ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
 					<View style={styles.restaurantsContainer}>
 							{isDeadLine(
 										convertDateTime(event.votingDeadline.seconds, 'date')
-									) ? 								<View>
-										<Text style={styles.menuItemText}> Your chosen restaurant is:{'\n'}</Text>
+									) ?
+									<View style={styles.chosenContainer}>
+
 									<View style={styles.chosenRestaurantContainer}>
-										<Image
-											style={styles.image}
+										<ImageBackground
+											style={styles.chosenImage}
 											source={{
 												uri: fetchImage(maxVotes.photo),
 											}}
-										/>
-									<View style={styles.textContainer}>
-										<Text style={styles.eventNameText}>{maxVotes.name}</Text>
-										{/* <Text style={styles.voteText}>{restaurant.votes} Votes</Text> */}
-									</View>
+										>
+											<View style={styles.textContainer}>
+												<Text style={styles.restNameText}>{maxVotes.name}</Text>
+											</View>
+
+										</ImageBackground>
 								</View>
 								</View>:
 									restaurantsData.map((restaurant, index) => {

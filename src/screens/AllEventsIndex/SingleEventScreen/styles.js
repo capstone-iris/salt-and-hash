@@ -35,9 +35,9 @@ export default StyleSheet.create({
 
 	},
 	textContainer: {
-		width: 125,
+		width: 200,
 		// marginTop: 5,
-		// marginLeft: 10,
+		marginLeft: 10,
 		// borderWidth: 2,
 		flex: 1,
 		justifyContent: 'flex-end'
@@ -45,13 +45,25 @@ export default StyleSheet.create({
 	restNameText: {
 		fontFamily: 'QuicksandBold',
 		color: '#ffffff',
-		fontSize: 25
+		fontSize: 20
 	},
 	image: {
 		height: '100%',
 		width: '100%',
 		borderRadius: 5,
 		overflow: 'hidden',
+
+	},
+	chosenContainer: {
+		shadowColor: "grey",
+		shadowOffset: {
+		width: 4,
+		height: 8
+    },
+    shadowOpacity: 0.8,
+    shadowRadius: 5,
+    elevation: 5,
+
 	},
 	eventNameText: {
 		fontSize: 24,
