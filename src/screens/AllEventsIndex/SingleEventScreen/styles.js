@@ -112,7 +112,7 @@ export default StyleSheet.create({
 		justifyContent: 'center',
 	},
 	modalView: {
-		marginTop: 150,
+		marginTop: 300,
 		marginLeft:20,
 		marginRight:20,
 		height: 200,
