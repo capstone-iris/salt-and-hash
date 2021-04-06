@@ -7,7 +7,7 @@ import {
 	View,
 	TouchableOpacity,
 	ActivityIndicator,
-	Alert
+	Alert,
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { firebase } from '../../../../firebase/config';
@@ -15,7 +15,7 @@ import styles from './styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Sae } from 'react-native-textinput-effects';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import { FontAwesome } from '@expo/vector-icons'
+import { FontAwesome } from '@expo/vector-icons';
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -40,10 +40,17 @@ class CreateEventMainScreen extends React.Component {
 		const currentDate = selectedDate || date;
 		const showFlag = Platform.OS === 'ios';
 		this.setState({ show: showFlag });
-		this.inputValueUpdate(
-			selectedDate,
-			'date'
-		);
+
+		this.inputValueUpdate(selectedDate, 'date');
+	};
+
+	onChangeEventStartTime = (event, selectedDate) => {
+		console.log('event endTimeChange +++', selectedDate);
+		const currentDate = selectedDate || date;
+		const showFlag = Platform.OS === 'ios';
+		this.setState({ show: showFlag });
+		this.inputValueUpdate(selectedDate, 'eventStartTime');
+
 	};
 
 	onChangeEventEndTime = (event, selectedDate) => {
@@ -144,7 +151,6 @@ class CreateEventMainScreen extends React.Component {
 		}
 	};
 
-
 	render() {
 		if (this.state.isLoading) {
 			return (
@@ -162,9 +168,12 @@ class CreateEventMainScreen extends React.Component {
 				<ScrollView>
 					<View style={styles.inputContainer}>
 						<Sae
+
 							style={{marginLeft: 10, marginRight: 30, marginBottom: 5}}
 							labelStyle={{color:  '#e95530'}}
 							inputStyle={{ fontSize: 20,color: '#656565' }}
+
+
 							label={'Event Name'}
 							iconClass={FontAwesomeIcon}
 							iconName={'calendar-check-o'}
@@ -177,6 +186,7 @@ class CreateEventMainScreen extends React.Component {
 							onChangeText={(val) => this.inputValueUpdate(val, 'name')}
 						/>
 						<Sae
+
 							style={{marginLeft: 10, marginRight: 30}}
 							labelStyle={{color:  '#e95530'}}
 							inputStyle={{fontSize: 20, color: '#656565'}}
@@ -192,10 +202,15 @@ class CreateEventMainScreen extends React.Component {
 							onChangeText={(val) => this.inputValueUpdate(val, 'description')}
 						/>
 
-						{/* <View style={styles.break1}></View> */}
-						{/* <View style={styles.break2}><FontAwesome name='circle' color='#e6a80c'/></View> */}
-						{/* <View style={styles.break3}></View> */}
+
 					<View style={{marginTop: 20, marginBottom: 20}}>
+
+						<View style={styles.break1}></View>
+						<View style={styles.break2}>
+							<FontAwesome name='circle' color='#e6a80c' />
+						</View>
+						<View style={styles.break3}></View>
+
 						<View style={styles.indInputContainer}>
 							<Text style={styles.text}>Event Date: </Text>
 							<View style={styles.dateTimePicker}>
@@ -207,6 +222,8 @@ class CreateEventMainScreen extends React.Component {
 									display='default'
 									onChange={this.onChange}
 									placeholder='Select a date'
+									style={{ marginHorizontal: 10 }}
+
 								/>
 							</View>
 						</View>
@@ -214,6 +231,7 @@ class CreateEventMainScreen extends React.Component {
 						<View style={styles.indInputContainer}>
 							<Text style={styles.text}>Event Start Time: </Text>
 							<View style={styles.dateTimePicker}>
+
 							<DateTimePicker
 								testID='timePicker'
 								value={this.state.eventStartTime}
@@ -275,4 +293,3 @@ class CreateEventMainScreen extends React.Component {
 }
 
 export default withNavigation(CreateEventMainScreen);
-
