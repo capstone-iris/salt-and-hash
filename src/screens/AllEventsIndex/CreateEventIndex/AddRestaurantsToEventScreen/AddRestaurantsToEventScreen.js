@@ -210,7 +210,6 @@ class AddRestaurantsToEventScreen extends React.Component {
 								<Text style={styles.buttonText}>Add Selected Restaurants to Event</Text>
 							</TouchableOpacity>
 						</View>
-					<ScrollView>
 					<View style={{backgroundColor: '#ffffff'}}>
 						<View style={styles.restaurantContainer}>
 							<FlatList
@@ -299,7 +298,6 @@ class AddRestaurantsToEventScreen extends React.Component {
 						/>
 					</View>
 					</View>
-					</ScrollView>
 					</View>
 				)}
 				<StatusBar style='auto' />
