@@ -36,12 +36,20 @@ export default StyleSheet.create({
 	},
 	textContainer: {
 		width: 125,
-		marginTop: 5,
-		marginLeft: 10
+		// marginTop: 5,
+		// marginLeft: 10,
+		// borderWidth: 2,
+		flex: 1,
+		justifyContent: 'flex-end'
+	},
+	restNameText: {
+		fontFamily: 'QuicksandBold',
+		color: '#ffffff',
+		fontSize: 25
 	},
 	image: {
-		height: 100,
-		width: 150,
+		height: '100%',
+		width: '100%',
 		borderRadius: 5,
 		overflow: 'hidden',
 	},
@@ -158,13 +166,14 @@ export default StyleSheet.create({
 	},
 	chosenRestaurantContainer: {
 
-		height: 150,
-		borderWidth: 2,
+		height: 130,
+		width: 250,
 		borderRadius: 5,
 		overflow: 'hidden',
-		marginLeft: 30,
+		marginLeft: 60,
 		marginTop: 10,
-		position: 'relative'
+		// position: 'relative'
+
 
 	},
 	chosenRestaurantText: {
@@ -180,5 +189,17 @@ export default StyleSheet.create({
 		height: '100%',
 		overflow: 'hidden',
 
-	}
+	},
+	chosenRestContainer: {
+		backgroundColor: '#e95531',
+		height: 40,
+		flex: 1,
+		justifyContent: 'center'
+	},
+	chosenRestText:{
+		fontFamily: 'QuicksandBold',
+		color: '#ffffff',
+		textAlign: 'center',
+		fontSize: 18
+	},
 });
