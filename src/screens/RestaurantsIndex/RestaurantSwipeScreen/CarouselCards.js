@@ -15,10 +15,11 @@ export default CarouselCards = (props) => {
 
 
 	return (
-		<SafeAreaView style={{backgroundColor: '#ffffff'}}>
-				<Text style={styles.textHeader}>Cast your votes</Text>
-		<View style={{height: 425, marginTop: 25}}>
+		<SafeAreaView style={styles.carouselContainer}>
+				<Text style={styles.textHeader}>SELECT RESTAURANTS</Text>
+		<View style={{height: 440, marginTop: 25}}>
 		<Carousel
+				inactiveSlideOpacity={1}
 				layout={'stack'}
 				layoutCardOffset={25}
 				ref={isCarousel}
@@ -36,21 +37,24 @@ export default CarouselCards = (props) => {
 			/>
 		</View>
 		<View style={styles.buttonContainer}>
-		<Pagination
-				dotsLength={restaurantsData.length}
-				activeDotIndex={index}
-				carouselRef={isCarousel}
-				dotStyle={{
-					width: 10,
-					height: 10,
-					borderRadius: 5,
-					marginHorizontal: 0,
-					backgroundColor: '#e6a80c'
-				}}
-				inactiveDotOpacity={0.4}
-				inactiveDotScale={0.6}
-				tappableDots={true}
-			/>
+
+
+			<Pagination
+					dotsLength={restaurantsData.length}
+					activeDotIndex={index}
+					carouselRef={isCarousel}
+					dotStyle={{
+						width: 10,
+						height: 10,
+						borderRadius: 5,
+						marginHorizontal: 0,
+						backgroundColor: '#fbf2a0',
+					}}
+					inactiveDotOpacity={0.4}
+					inactiveDotScale={0.6}
+					tappableDots={true}
+				/>
+
 
 			<TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Single Event')}>
 				<Text style={styles.buttonText}>Finish Voting</Text>
@@ -90,8 +94,16 @@ const styles = StyleSheet.create({
 			fontFamily: 'QuicksandBold',
 			fontSize: 20,
 			textAlign: 'center',
-			marginTop: -40,
+			marginTop: -10,
 			marginBottom: 10,
-			color: '#e95531'
+			color: '#e76f51',
+			backgroundColor: '#ffffff',
+			padding: 10,
+			borderWidth: 2,
+			borderColor: '#fbf2a0'
+
+		},
+		carouselContainer: {
+			backgroundColor: '#e95531',
 		}
 })

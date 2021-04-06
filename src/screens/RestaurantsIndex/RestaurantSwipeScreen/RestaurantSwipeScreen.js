@@ -12,10 +12,11 @@ export default function RestaurantSwipeScreen({route}) {
 }
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: '#fff',
+		backgroundColor: '#e95531',
 		flex: 1,
 		flexDirection: 'row',
 		alignItems: 'center',
-		justifyContent: 'center'
+		justifyContent: 'center',
+
 	},
 });

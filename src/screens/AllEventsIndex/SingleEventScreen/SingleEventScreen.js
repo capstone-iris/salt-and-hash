@@ -168,7 +168,7 @@ export default function SingleEventScreen({ route }) {
 						</View>
 					</View>
 					<View>
-						<TouchableRipple onPress={() => {}}>
+						<TouchableOpacity onPress={() => {}}>
 							<View style={styles.menuItem}>
 								<MaterialCommunityIcons
 									name='map-marker-radius'
@@ -180,10 +180,10 @@ export default function SingleEventScreen({ route }) {
 										convertDateTime(event.votingDeadline.seconds, 'date')
 									)
 										? maxVotes.name
-										: 'Event location is Pending...'}
+										: 'Event location pending votes'}
 								</Text>
 							</View>
-						</TouchableRipple>
+						</TouchableOpacity>
 					</View>
 					<View>
 						{currentUser === event.userId ? (
