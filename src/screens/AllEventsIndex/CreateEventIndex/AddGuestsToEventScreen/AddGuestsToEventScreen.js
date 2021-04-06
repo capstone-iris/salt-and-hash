@@ -56,7 +56,7 @@ export default class CreateEventForm extends React.Component {
 						console.error('Error found: ', e)
 					})
 		Alert.alert('Friend successfully entered!');
-		Communications.text(phoneNumber,`Hello, friend! I'd love to invite you to join me for an event! Download the ExpoGo app, sign-up, RSVP, and vote for a restaurant! Instructions: https://bit.ly/2Py12XG`);
+		Communications.text(phoneNumber,`Hello, friend! I'd love to invite you to join me for an event! Download the ExpoGo app, sign-up, RSVP, and vote for a restaurant! https://apps.apple.com/us/app/expo-go/id982107779`);
 
 
 	}
