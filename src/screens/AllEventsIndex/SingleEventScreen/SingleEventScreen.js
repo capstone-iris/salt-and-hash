@@ -180,7 +180,7 @@ export default function SingleEventScreen({ route }) {
 										convertDateTime(event.votingDeadline.seconds, 'date')
 									)
 										? maxVotes.name
-										: 'Event location is Pending...'}
+										: 'Event location is pending...'}
 								</Text>
 							</View>
 						</TouchableRipple>
