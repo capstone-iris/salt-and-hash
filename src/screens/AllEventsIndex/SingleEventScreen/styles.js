@@ -36,6 +36,14 @@ export default StyleSheet.create({
 	},
 	textContainer: {
 		width: 200,
+		marginTop: 5,
+		marginLeft: 5,
+		// borderWidth: 2,
+		// flex: 1,
+		// justifyContent: 'flex-end'
+	},
+	chosenTextContainer: {
+		width: 200,
 		// marginTop: 5,
 		marginLeft: 10,
 		// borderWidth: 2,
@@ -48,6 +56,13 @@ export default StyleSheet.create({
 		fontSize: 20
 	},
 	image: {
+		height: 125,
+		width: '100%',
+		borderRadius: 5,
+		overflow: 'hidden',
+
+	},
+	chosenImage: {
 		height: '100%',
 		width: '100%',
 		borderRadius: 5,
@@ -85,11 +100,11 @@ export default StyleSheet.create({
 	restaurantTitle: {
 		color: '#e6a80c',
 		fontWeight: '600',
-		fontSize: 14,
+		fontSize: 16,
 		fontFamily: 'QuicksandBold',
 		// borderColor: 'black',
 		// borderWidth: 1,
-		marginBottom: -10
+		// marginBottom: -10
 	},
 	modalContainer:{
 		flex:1,

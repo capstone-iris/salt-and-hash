@@ -218,14 +218,17 @@ class AddRestaurantsToEventScreen extends React.Component {
 					</View>
 
 				) : (
-					<ScrollView>
+					<View>
 
-					<View style={{backgroundColor: '#ffffff'}}>
 						<View style={styles.secondButtonContainer}>
+
 							<TouchableOpacity style={styles.secondButton} onPress={() => this.submitRestaurantSelection(event)}>
 								<Text style={styles.buttonText}>Add Selected Restaurants to Event</Text>
 							</TouchableOpacity>
 						</View>
+					<ScrollView>
+
+					<View style={{backgroundColor: '#ffffff'}}>
 						<View style={styles.restaurantContainer}>
 							<FlatList
 								data={this.state.restaurantList.results}
@@ -325,6 +328,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 					</View>
 					</View>
 					</ScrollView>
+					</View>
 				)}
 				<StatusBar style='auto' />
 			</SafeAreaView>

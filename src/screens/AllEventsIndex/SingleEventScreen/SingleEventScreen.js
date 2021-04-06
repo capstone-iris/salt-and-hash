@@ -215,7 +215,7 @@ export default function SingleEventScreen({ route }) {
 												uri: fetchImage(maxVotes.photo),
 											}}
 										>
-											<View style={styles.textContainer}>
+											<View style={styles.chosenTextContainer}>
 												<Text style={styles.restNameText}>{maxVotes.name}</Text>
 											</View>
 
