@@ -131,6 +131,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 		Linking.openURL(placeSite);
 	};
 	storeRestaurant = (eventId, restaurant) => {
+
 			if(this.state.restaurantCounter === 8) {
 				Alert.alert('You cannot choose more than 8 restaurants!')
 			} else {
@@ -154,6 +155,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 					})
 			}
 	}
+
 	deleteRestaurant = (eventId, restaurant) => {
 		this.eventRestaurantsRef
 			.doc(eventId)
@@ -185,10 +187,12 @@ class AddRestaurantsToEventScreen extends React.Component {
 		console.log('event from props ==>', this.props)
 		return (
 			<SafeAreaView style={styles.container}>
+
 				<View style={{margin: 10}}>
 				<Text style={styles.headerText}>
 						Select 3-7 Restaurants {"\n"}For Guests to Vote On
 				</Text>
+
 				</View>
 				{this.state.restaurantList.length === 0 ? (
 					<View style={styles.firstButtonContainer}>
@@ -201,6 +205,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 				) : (
 					<View>
 						<View style={styles.secondButtonContainer}>
+
 							<TouchableOpacity style={styles.secondButton} onPress={() => this.submitRestaurantSelection(event)}>
 								<Text style={styles.buttonText}>Add Selected Restaurants to Event</Text>
 							</TouchableOpacity>

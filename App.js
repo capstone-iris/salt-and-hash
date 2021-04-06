@@ -12,7 +12,7 @@ import {
 } from './src/screens';
 import * as Font from 'expo-font';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import { decode, encode } from 'base-64'
+import { decode, encode } from 'base-64';
 
 if (!global.btoa) {
 	global.btoa = encode;
@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
 		resizeMode: 'contain',
 		borderRadius: 50,
 	},
-
 });
 
 const slides = [
@@ -67,7 +66,7 @@ const slides = [
 	},
 	{
 		key: 'k2',
-		title: 'Be Host',
+		title: 'Be A Host',
 		text: 'Host events, choose restaurants,\n& invite friends to vote',
 		image: require('./assets/introSlider_SelectRestaurants.jpg'),
 		titleStyle: styles.title,
@@ -77,7 +76,7 @@ const slides = [
 	},
 	{
 		key: 'k3',
-		title: 'Be Guest',
+		title: 'Be A Guest',
 		text:
 			'Vote for your favorite restaurants & cuisines, & manage your invites',
 		image: {
@@ -107,7 +106,7 @@ export default class App extends React.Component {
 		this.state = {
 			loading: true,
 			showMainApp: false,
-			fontsLoaded: false
+			fontsLoaded: false,
 		};
 	}
 
@@ -115,7 +114,7 @@ export default class App extends React.Component {
 		let isLoaded = await Font.loadAsync({
 			// Bangers: require("./assets/fonts/Bangers-Regular.ttf"),
 			// LondrinaShadow: require("./assets/fonts/LondrinaShadow-Regular.ttf")
-			QuicksandBold: require("./assets/fonts/Quicksand-Bold.ttf")
+			QuicksandBold: require('./assets/fonts/Quicksand-Bold.ttf'),
 		});
 		this.setState({ fontsLoaded: isLoaded });
 	};
@@ -156,7 +155,7 @@ export default class App extends React.Component {
 	render() {
 		if (this.state.loading) return <ActivityIndicatorScreen />;
 
-		if(this.state.user) {
+		if (this.state.user) {
 			return (
 				<NavigationContainer>
 					<StatusBar
