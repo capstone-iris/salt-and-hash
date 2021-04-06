@@ -20,6 +20,7 @@ import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import { firebase } from '../../../../firebase/config';
 import * as base from '../../../../../secrets.js';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -202,7 +203,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 			<SafeAreaView style={styles.container}>
 				<View style={{margin: 10}}>
 				<Text style={styles.headerText}>
-						Select 3-7 Restaurants for Guests to Vote On
+						Select 3-7 Restaurants {"\n"}for guests to vote on
 				</Text>
 				</View>
 
@@ -217,6 +218,8 @@ class AddRestaurantsToEventScreen extends React.Component {
 					</View>
 
 				) : (
+					<ScrollView>
+
 					<View style={{backgroundColor: '#ffffff'}}>
 						<View style={styles.secondButtonContainer}>
 							<TouchableOpacity style={styles.secondButton} onPress={() => this.submitRestaurantSelection(event)}>
@@ -240,13 +243,13 @@ class AddRestaurantsToEventScreen extends React.Component {
 
 
 							<Text style={styles.indRestaurantTextBody}>
-								<AntDesign name='star' size={16} color='#e6a80c'/> {item.rating} |{' '}
+								<AntDesign name='star' size={16} color='#2a9d8f'/> {item.rating} |{' '}
 								{item.user_ratings_total} ratings
 							</Text>
 
 							<TouchableRipple onPress={() => {}}>
 								<Text style={styles.indRestaurantTextBody}>
-								<AntDesign name='heart' size={16} color='#e6a80c'/> Add to Favorites
+								<AntDesign name='heart' size={16} color='#2a9d8f'/> Add to Favorites
 								</Text>
 							</TouchableRipple>
 
@@ -256,8 +259,8 @@ class AddRestaurantsToEventScreen extends React.Component {
 							<Col size={15}>
 									<CheckBox
 											right
-											checkedColor='#e6a80c'
-											uncheckedColor='#e6a80c'
+											checkedColor='#2a9d8f'
+											uncheckedColor='#2a9d8f'
 											containerStyle={{backgroundColor: '#ffffff', width: 30, height: 50}}
 
 											checked={!!item.checked}
@@ -321,6 +324,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 						/>
 					</View>
 					</View>
+					</ScrollView>
 				)}
 				<StatusBar style='auto' />
 			</SafeAreaView>

@@ -10,7 +10,8 @@ export default StyleSheet.create({
 		fontSize: 24,
 		fontWeight: 'bold',
 		color: '#e95530',
-		fontFamily: 'PurplePurse'
+		fontFamily: 'QuicksandBold',
+        textAlign: 'center'
     },
     firstButtonContainer: {
         alignItems: 'center',
@@ -26,7 +27,7 @@ export default StyleSheet.create({
         marginBottom: 15
     },
     firstButton: {
-		backgroundColor: '#e95531',
+		backgroundColor: '#2a9d8f',
 		height: 48,
 		borderRadius: 5,
 		alignItems: 'center',
@@ -34,7 +35,7 @@ export default StyleSheet.create({
 		width: 275
     },
     secondButton: {
-		backgroundColor: '#e95531',
+		backgroundColor: '#2a9d8f',
 		height: 48,
 		borderRadius: 5,
 		alignItems: 'center',
@@ -44,7 +45,7 @@ export default StyleSheet.create({
     buttonText: {
         color: 'white',
 		fontSize: 16,
-		fontWeight: 'bold'
+		fontFamily: 'QuicksandBold'
     },
     restaurantContainer: {
         margin: 10
@@ -58,7 +59,7 @@ export default StyleSheet.create({
         fontSize: 24,
 		fontWeight: 'bold',
 		color: '#e95530',
-		fontFamily: 'PurplePurse'
+		fontFamily: 'QuicksandBold'
     },
     indRestaurantContainer: {
         justifyContent: 'center',
@@ -66,7 +67,7 @@ export default StyleSheet.create({
         margin: 10
     },
     image: {
-        width: 340, 
+        width: 340,
         height: 175
     },
     indRestaurantTextBody: {
@@ -77,7 +78,7 @@ export default StyleSheet.create({
         fontSize: 20,
 		fontWeight: 'bold',
 		color: '#e95530',
-		fontFamily: 'PurplePurse',
+		fontFamily: 'QuicksandBold',
         marginTop: 10
     },
     indRestaurantHyperlink: {

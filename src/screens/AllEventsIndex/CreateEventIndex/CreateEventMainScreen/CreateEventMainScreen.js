@@ -162,9 +162,9 @@ class CreateEventMainScreen extends React.Component {
 				<ScrollView>
 					<View style={styles.inputContainer}>
 						<Sae
-							style={{marginLeft: 10, marginRight: 30, marginBottom: 5, marginTop: -20}}
-							labelStyle={{color: '#656565'}}
-							inputStyle={{ color: '#656565' }}
+							style={{marginLeft: 10, marginRight: 30, marginBottom: 5}}
+							labelStyle={{color:  '#e95530'}}
+							inputStyle={{ fontSize: 20,color: '#656565' }}
 							label={'Event Name'}
 							iconClass={FontAwesomeIcon}
 							iconName={'calendar-check-o'}
@@ -178,8 +178,8 @@ class CreateEventMainScreen extends React.Component {
 						/>
 						<Sae
 							style={{marginLeft: 10, marginRight: 30}}
-							labelStyle={{color: '#656565'}}
-							inputStyle={{fontSize: 16, color: 'black'}}
+							labelStyle={{color:  '#e95530'}}
+							inputStyle={{fontSize: 20, color: '#656565'}}
 							label={'Event Description'}
 							iconClass={FontAwesomeIcon}
 							iconName={'pencil'}
