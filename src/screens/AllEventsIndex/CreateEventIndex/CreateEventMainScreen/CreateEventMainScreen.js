@@ -39,6 +39,15 @@ class CreateEventMainScreen extends React.Component {
 		this.setState({ show: showFlag });
 		this.inputValueUpdate(selectedDate, 'date');
 	};
+
+	onChangeEventStartTime = (event, selectedDate) => {
+		console.log('event endTimeChange +++', selectedDate);
+		const currentDate = selectedDate || date;
+		const showFlag = Platform.OS === 'ios';
+		this.setState({ show: showFlag });
+		this.inputValueUpdate(selectedDate, 'eventStartTime');
+	};
+
 	onChangeEventEndTime = (event, selectedDate) => {
 		console.log('event endTimeChange +++', selectedDate);
 		const currentDate = selectedDate || date;
@@ -201,7 +210,7 @@ class CreateEventMainScreen extends React.Component {
 										mode='time'
 										is24Hour={true}
 										display='default'
-										onChange={this.onChange}
+										onChange={this.onChangeEventStartTime}
 										placeholder='Start time'
 										style={{ width: 100 }}
 									/>
