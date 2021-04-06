@@ -25,9 +25,7 @@ import * as Permissions from 'expo-permissions';
 import { firebase } from '../../../../firebase/config';
 import * as base from '../../../../../secrets.js';
 import { ScrollView } from 'react-native-gesture-handler';
-
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
-
 class AddRestaurantsToEventScreen extends React.Component {
 	constructor(props) {
 		super(props),
@@ -46,11 +44,9 @@ class AddRestaurantsToEventScreen extends React.Component {
 			restaurantCounter: 0,
 		};
 	}
-
 	componentDidMount = () => {
 		this.getLocationAsync();
 	};
-
 	getLocationAsync = async () => {
 		const { status } = await Permissions.askAsync(Permissions.LOCATION).catch(
 			(err) => {
@@ -68,7 +64,6 @@ class AddRestaurantsToEventScreen extends React.Component {
 			alert('Location permission not granted');
 		}
 	};
-
 	handleRestaurantSearch = () => {
 		const url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
 		const location = `location=40.6127044,-74.0344876`;
@@ -89,7 +84,6 @@ class AddRestaurantsToEventScreen extends React.Component {
 			})
 			.catch((e) => console.log(e));
 	};
-
 	fetchImage = (photoRef) => {
 		const ref = photoRef[0].photo_reference;
 		const url = 'https://maps.googleapis.com/maps/api/place/photo?';
@@ -99,11 +93,9 @@ class AddRestaurantsToEventScreen extends React.Component {
 		const fetchImageUrl = url + maxWidth + photoReference + key;
 		return fetchImageUrl;
 	};
-
 	// to add:
 	// onPress function for a user to add a restaurant to his/her favorites
 	// addToFavorites = () => {}
-
 	//logic needs fixing:
 	//user cannot open multiple detail toggles @ once
 	handleActiveRestaurantDetails = (placeId) => {
@@ -111,7 +103,6 @@ class AddRestaurantsToEventScreen extends React.Component {
 		const place_id = `&place_id=${placeId}`;
 		const key = `&key=${base.GOOGLE_PLACES_API}`;
 		const activeRestaurantDetailsUrl = url + place_id + key;
-
 		if (this.state.detailToggleStatus === false) {
 			fetch(activeRestaurantDetailsUrl, {
 				mode: 'no-cors',
@@ -140,11 +131,9 @@ class AddRestaurantsToEventScreen extends React.Component {
 			});
 		}
 	};
-
 	handleWebsiteUrl = (placeSite) => {
 		Linking.openURL(placeSite);
 	};
-
 	storeRestaurant = (eventId, restaurant) => {
 		if (this.state.restaurantCounter === 8) {
 			Alert.alert('You cannot choose more than 8 restaurants!');
@@ -172,7 +161,6 @@ class AddRestaurantsToEventScreen extends React.Component {
 				});
 		}
 	};
-
 	deleteRestaurant = (eventId, restaurant) => {
 		this.eventRestaurantsRef
 			.doc(eventId)
@@ -187,7 +175,6 @@ class AddRestaurantsToEventScreen extends React.Component {
 				console.error('Error found: ', e);
 			});
 	};
-
 	submitRestaurantSelection = (event) => {
 		if (this.state.restaurantCounter < 3) {
 			Alert.alert('Select at least three restaurants!');
@@ -199,21 +186,17 @@ class AddRestaurantsToEventScreen extends React.Component {
 			});
 		}
 	};
-
 	render() {
 		const { event } = this.props.route.params;
 		// const {event } = this.props
 		console.log('event from props ==>', this.props);
 		return (
 			<SafeAreaView style={styles.container}>
-
-				<View style={{margin: 10}}>
-				<Text style={styles.headerText}>
-						Select 3-7 Restaurants {"\n"}for guests to vote on
-				</Text>
-
+				<View style={{ margin: 10 }}>
+					<Text style={styles.headerText}>
+						Select 3-7 Restaurants {'\n'}for guests to vote on
+					</Text>
 				</View>
-
 				{this.state.restaurantList.length === 0 ? (
 					<View style={styles.firstButtonContainer}>
 						<TouchableOpacity
@@ -226,235 +209,209 @@ class AddRestaurantsToEventScreen extends React.Component {
 						</TouchableOpacity>
 					</View>
 				) : (
-
 					<View>
-
 						<View style={styles.secondButtonContainer}>
-
-							<TouchableOpacity style={styles.secondButton} onPress={() => this.submitRestaurantSelection(event)}>
-								<Text style={styles.buttonText}>Add Selected Restaurants to Event</Text>
-
+							<TouchableOpacity
+								style={styles.secondButton}
+								onPress={() => this.submitRestaurantSelection(event)}
+							>
+								<Text style={styles.buttonText}>
+									Add Selected Restaurants to Event
+								</Text>
 							</TouchableOpacity>
 						</View>
-					<ScrollView>
-
-					<View style={{backgroundColor: '#ffffff'}}>
-						<View style={styles.restaurantContainer}>
-							<FlatList
-								data={this.state.restaurantList.results}
-								keyExtractor={(item) => item.place_id}
-								renderItem={({ item }) => (
-									<View style={styles.indRestaurantContainer}>
-
-
-// 									<Image source={{uri: this.fetchImage(item.photos)}} style={styles.image}/>
-// 									<Grid>
-
-// 							<Col size={75}>
-// 							<Text style={styles.indRestaurantHeader}>
-// 								{item.name}
-// 							</Text>
-
-
-// 							<Text style={styles.indRestaurantTextBody}>
-// 								<AntDesign name='star' size={16} color='#2a9d8f'/> {item.rating} |{' '}
-// 								{item.user_ratings_total} ratings
-// 							</Text>
-
-// 							<TouchableRipple onPress={() => {}}>
-// 								<Text style={styles.indRestaurantTextBody}>
-// 								<AntDesign name='heart' size={16} color='#2a9d8f'/> Add to Favorites
-// 								</Text>
-// 							</TouchableRipple>
-
-// 							<Text></Text>
-// 							</Col>
-
-// 							<Col size={15}>
-// 									<CheckBox
-// 											right
-// 											checkedColor='#2a9d8f'
-// 											uncheckedColor='#2a9d8f'
-// 											containerStyle={{backgroundColor: '#ffffff', width: 30, height: 50}}
-
-// 											checked={!!item.checked}
-
-										<Image
-											source={{ uri: this.fetchImage(item.photos) }}
-											style={styles.image}
-										/>
-										<Grid>
-											<Col size={75}>
-												<Text style={styles.indRestaurantHeader}>
-													{item.name}
-												</Text>
-
-												<Text style={styles.indRestaurantTextBody}>
-													<AntDesign name='star' size={16} color='#e6a80c' />{' '}
-													{item.rating} | {item.user_ratings_total} ratings
-												</Text>
-
-												<TouchableRipple onPress={() => {}}>
+						<ScrollView>
+							<View style={{ backgroundColor: '#ffffff' }}>
+								<View style={styles.restaurantContainer}>
+									<FlatList
+										data={this.state.restaurantList.results}
+										keyExtractor={(item) => item.place_id}
+										renderItem={({ item }) => (
+											<View style={styles.indRestaurantContainer}>
+												<Image
+													source={{ uri: this.fetchImage(item.photos) }}
+													style={styles.image}
+												/>
+												<Grid>
+													<Col size={75}>
+														<Text style={styles.indRestaurantHeader}>
+															{item.name}
+														</Text>
+														<Text style={styles.indRestaurantTextBody}>
+															<AntDesign
+																name='star'
+																size={16}
+																color='#2a9d8f'
+															/>{' '}
+															{item.rating} | {item.user_ratings_total} ratings
+														</Text>
+														<TouchableRipple onPress={() => {}}>
+															<Text style={styles.indRestaurantTextBody}>
+																<AntDesign
+																	name='heart'
+																	size={16}
+																	color='#2a9d8f'
+																/>{' '}
+																Add to Favorites
+															</Text>
+														</TouchableRipple>
+														<Text></Text>
+													</Col>
+													<Col size={15}>
+														<CheckBox
+															right
+															checkedColor='#2a9d8f'
+															uncheckedColor='#2a9d8f'
+															containerStyle={{
+																backgroundColor: '#ffffff',
+																width: 30,
+																height: 50,
+															}}
+															checked={!!item.checked}
+															onPress={() => {
+																const items = [
+																	...this.state.restaurantList.results,
+																];
+																const currentItemIndex = items.findIndex(
+																	(v) => v.place_id === item.place_id
+																);
+																items[currentItemIndex].checked = !items[
+																	currentItemIndex
+																].checked;
+																this.setState((state) => ({ ...state, items }));
+																if (items[currentItemIndex].checked) {
+																	this.storeRestaurant(
+																		event.docId,
+																		items[currentItemIndex]
+																	);
+																} else {
+																	this.deleteRestaurant(
+																		event.docId,
+																		items[currentItemIndex]
+																	);
+																}
+															}}
+														/>
+													</Col>
+												</Grid>
+												<TouchableRipple
+													onPress={() => {
+														this.handleActiveRestaurantDetails(item.place_id);
+													}}
+												>
 													<Text style={styles.indRestaurantTextBody}>
-														<AntDesign name='heart' size={16} color='#e6a80c' />{' '}
-														Add to Favorites
+														<MaterialIcons
+															name='subdirectory-arrow-right'
+															size={15}
+														/>{' '}
+														Location Details
 													</Text>
 												</TouchableRipple>
-
-												<Text></Text>
-											</Col>
-
-											<Col size={15}>
-												<CheckBox
-													right
-													checkedColor='#e6a80c'
-													uncheckedColor='#e6a80c'
-													containerStyle={{
-														backgroundColor: '#ffffff',
-														width: 30,
-														height: 50,
-													}}
-													checked={!!item.checked}
-													onPress={() => {
-														const items = [
-															...this.state.restaurantList.results,
-														];
-														const currentItemIndex = items.findIndex(
-															(v) => v.place_id === item.place_id
-														);
-														items[currentItemIndex].checked = !items[
-															currentItemIndex
-														].checked;
-														this.setState((state) => ({ ...state, items }));
-
-														if (items[currentItemIndex].checked) {
-															this.storeRestaurant(
-																event.docId,
-																items[currentItemIndex]
-															);
-														} else {
-															this.deleteRestaurant(
-																event.docId,
-																items[currentItemIndex]
-															);
-														}
-													}}
-												/>
-											</Col>
-										</Grid>
-
-										<TouchableRipple
-
-											onPress={() => {
-												this.handleActiveRestaurantDetails(item.place_id);
-											}}
-										>
-											<Text style={styles.indRestaurantTextBody}>
-												<MaterialIcons
-													name='subdirectory-arrow-right'
-													size={15}
-												/>{' '}
-												Location Details
-											</Text>
-										</TouchableRipple>
-
-										{this.state.activeRestaurantId === item.place_id && (
-											<View style={styles.activeRestaurantDetailsContainer}>
-												<Text>
-													<View>
-														<Text style={styles.indRestaurantTextBody}></Text>
-														<Text style={styles.indRestaurantTextBody}>
-															business status:{' '}
-															{this.state.activeRestaurantDetails.result.business_status.toLowerCase()}
-														</Text>
-														<Text style={styles.indRestaurantTextBody}></Text>
-														<Text style={styles.indRestaurantTextBody}>
-															{
-																this.state.activeRestaurantDetails.result
-																	.formatted_address
-															}
-														</Text>
-														<Text style={styles.indRestaurantTextBody}>
-															{
-																this.state.activeRestaurantDetails.result
-																	.formatted_phone_number
-															}
-														</Text>
-														<Text style={styles.indRestaurantTextBody}></Text>
-														<Text style={styles.indRestaurantTextBody}>
-															{
-																this.state.activeRestaurantDetails.result
-																	.opening_hours.weekday_text[0]
-															}
-														</Text>
-														<Text style={styles.indRestaurantTextBody}>
-															{
-																this.state.activeRestaurantDetails.result
-																	.opening_hours.weekday_text[1]
-															}
-														</Text>
-														<Text style={styles.indRestaurantTextBody}>
-															{
-																this.state.activeRestaurantDetails.result
-																	.opening_hours.weekday_text[2]
-															}
-														</Text>
-														<Text style={styles.indRestaurantTextBody}>
-															{
-																this.state.activeRestaurantDetails.result
-																	.opening_hours.weekday_text[3]
-															}
-														</Text>
-														<Text style={styles.indRestaurantTextBody}>
-															{
-																this.state.activeRestaurantDetails.result
-																	.opening_hours.weekday_text[4]
-															}
-														</Text>
-														<Text style={styles.indRestaurantTextBody}>
-															{
-																this.state.activeRestaurantDetails.result
-																	.opening_hours.weekday_text[5]
-															}
-														</Text>
-														<Text style={styles.indRestaurantTextBody}>
-															{
-																this.state.activeRestaurantDetails.result
-																	.opening_hours.weekday_text[6]
-															}
-														</Text>
-														<Text style={styles.indRestaurantTextBody}></Text>
-														{this.state.activeRestaurantDetails.result
-															.website && (
-															<TouchableRipple
-																onPress={() => {
-																	this.handleWebsiteUrl(
-																		this.state.activeRestaurantDetails.result
-																			.website
-																	);
-																}}
-															>
-																<Text style={styles.indRestaurantHyperlink}>
-																	<MaterialCommunityIcons
-																		name='search-web'
-																		size={16}
-																	/>{' '}
-																	see restaurant website
+												{this.state.activeRestaurantId === item.place_id && (
+													<View style={styles.activeRestaurantDetailsContainer}>
+														<Text>
+															<View>
+																<Text
+																	style={styles.indRestaurantTextBody}
+																></Text>
+																<Text style={styles.indRestaurantTextBody}>
+																	business status:{' '}
+																	{this.state.activeRestaurantDetails.result.business_status.toLowerCase()}
 																</Text>
-															</TouchableRipple>
-														)}
+																<Text
+																	style={styles.indRestaurantTextBody}
+																></Text>
+																<Text style={styles.indRestaurantTextBody}>
+																	{
+																		this.state.activeRestaurantDetails.result
+																			.formatted_address
+																	}
+																</Text>
+																<Text style={styles.indRestaurantTextBody}>
+																	{
+																		this.state.activeRestaurantDetails.result
+																			.formatted_phone_number
+																	}
+																</Text>
+																<Text
+																	style={styles.indRestaurantTextBody}
+																></Text>
+																<Text style={styles.indRestaurantTextBody}>
+																	{
+																		this.state.activeRestaurantDetails.result
+																			.opening_hours.weekday_text[0]
+																	}
+																</Text>
+																<Text style={styles.indRestaurantTextBody}>
+																	{
+																		this.state.activeRestaurantDetails.result
+																			.opening_hours.weekday_text[1]
+																	}
+																</Text>
+																<Text style={styles.indRestaurantTextBody}>
+																	{
+																		this.state.activeRestaurantDetails.result
+																			.opening_hours.weekday_text[2]
+																	}
+																</Text>
+																<Text style={styles.indRestaurantTextBody}>
+																	{
+																		this.state.activeRestaurantDetails.result
+																			.opening_hours.weekday_text[3]
+																	}
+																</Text>
+																<Text style={styles.indRestaurantTextBody}>
+																	{
+																		this.state.activeRestaurantDetails.result
+																			.opening_hours.weekday_text[4]
+																	}
+																</Text>
+																<Text style={styles.indRestaurantTextBody}>
+																	{
+																		this.state.activeRestaurantDetails.result
+																			.opening_hours.weekday_text[5]
+																	}
+																</Text>
+																<Text style={styles.indRestaurantTextBody}>
+																	{
+																		this.state.activeRestaurantDetails.result
+																			.opening_hours.weekday_text[6]
+																	}
+																</Text>
+																<Text
+																	style={styles.indRestaurantTextBody}
+																></Text>
+																{this.state.activeRestaurantDetails.result
+																	.website && (
+																	<TouchableRipple
+																		onPress={() => {
+																			this.handleWebsiteUrl(
+																				this.state.activeRestaurantDetails
+																					.result.website
+																			);
+																		}}
+																	>
+																		<Text style={styles.indRestaurantHyperlink}>
+																			<MaterialCommunityIcons
+																				name='search-web'
+																				size={16}
+																			/>{' '}
+																			see restaurant website
+																		</Text>
+																	</TouchableRipple>
+																)}
+															</View>
+														</Text>
 													</View>
-												</Text>
+												)}
+												<Text></Text>
+												<View style={styles.borderLine}></View>
 											</View>
 										)}
-										<Text></Text>
-										<View style={styles.borderLine}></View>
-									</View>
-								)}
-							/>
-						</View>
-					</View>
-					</ScrollView>
+									/>
+								</View>
+							</View>
+						</ScrollView>
 					</View>
 				)}
 				<StatusBar style='auto' />
@@ -462,8 +419,6 @@ class AddRestaurantsToEventScreen extends React.Component {
 		);
 	}
 }
-
 export default withNavigation(AddRestaurantsToEventScreen);
-
 // TO DO:
 // Move the 'Select 3-7 Restaurants for Your Event' text to the top of the screen [on first view of the screen].
