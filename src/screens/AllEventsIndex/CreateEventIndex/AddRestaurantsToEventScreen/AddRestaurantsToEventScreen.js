@@ -24,6 +24,7 @@ import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import { firebase } from '../../../../firebase/config';
 import * as base from '../../../../../secrets.js';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -205,10 +206,12 @@ class AddRestaurantsToEventScreen extends React.Component {
 		console.log('event from props ==>', this.props);
 		return (
 			<SafeAreaView style={styles.container}>
-				<View style={{ margin: 10 }}>
-					<Text style={styles.headerText}>
-						Select 3-7 Restaurants for Guests to Vote On
-					</Text>
+
+				<View style={{margin: 10}}>
+				<Text style={styles.headerText}>
+						Select 3-7 Restaurants {"\n"}for guests to vote on
+				</Text>
+
 				</View>
 
 				{this.state.restaurantList.length === 0 ? (
@@ -223,23 +226,59 @@ class AddRestaurantsToEventScreen extends React.Component {
 						</TouchableOpacity>
 					</View>
 				) : (
-					<View style={{ backgroundColor: '#ffffff' }}>
+
+					<View>
+
 						<View style={styles.secondButtonContainer}>
-							<TouchableOpacity
-								style={styles.secondButton}
-								onPress={() => this.submitRestaurantSelection(event)}
-							>
-								<Text style={styles.buttonText}>
-									Add Selected Restaurants to Event
-								</Text>
+
+							<TouchableOpacity style={styles.secondButton} onPress={() => this.submitRestaurantSelection(event)}>
+								<Text style={styles.buttonText}>Add Selected Restaurants to Event</Text>
+
 							</TouchableOpacity>
 						</View>
+					<ScrollView>
+
+					<View style={{backgroundColor: '#ffffff'}}>
 						<View style={styles.restaurantContainer}>
 							<FlatList
 								data={this.state.restaurantList.results}
 								keyExtractor={(item) => item.place_id}
 								renderItem={({ item }) => (
 									<View style={styles.indRestaurantContainer}>
+
+
+// 									<Image source={{uri: this.fetchImage(item.photos)}} style={styles.image}/>
+// 									<Grid>
+
+// 							<Col size={75}>
+// 							<Text style={styles.indRestaurantHeader}>
+// 								{item.name}
+// 							</Text>
+
+
+// 							<Text style={styles.indRestaurantTextBody}>
+// 								<AntDesign name='star' size={16} color='#2a9d8f'/> {item.rating} |{' '}
+// 								{item.user_ratings_total} ratings
+// 							</Text>
+
+// 							<TouchableRipple onPress={() => {}}>
+// 								<Text style={styles.indRestaurantTextBody}>
+// 								<AntDesign name='heart' size={16} color='#2a9d8f'/> Add to Favorites
+// 								</Text>
+// 							</TouchableRipple>
+
+// 							<Text></Text>
+// 							</Col>
+
+// 							<Col size={15}>
+// 									<CheckBox
+// 											right
+// 											checkedColor='#2a9d8f'
+// 											uncheckedColor='#2a9d8f'
+// 											containerStyle={{backgroundColor: '#ffffff', width: 30, height: 50}}
+
+// 											checked={!!item.checked}
+
 										<Image
 											source={{ uri: this.fetchImage(item.photos) }}
 											style={styles.image}
@@ -305,6 +344,7 @@ class AddRestaurantsToEventScreen extends React.Component {
 										</Grid>
 
 										<TouchableRipple
+
 											onPress={() => {
 												this.handleActiveRestaurantDetails(item.place_id);
 											}}
@@ -413,6 +453,8 @@ class AddRestaurantsToEventScreen extends React.Component {
 								)}
 							/>
 						</View>
+					</View>
+					</ScrollView>
 					</View>
 				)}
 				<StatusBar style='auto' />

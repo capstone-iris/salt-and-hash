@@ -99,7 +99,9 @@ export default class ProfileScreen extends Component {
 
 	render() {
 		const user = this.state.users;
-		const { hostedEventsData } = this.props
+
+		const { hostedEventsData, navigation } = this.props
+
 		return (
 			<SafeAreaView style={styles.container}>
 				<View style={styles.userInfoContainer}>
@@ -118,7 +120,9 @@ export default class ProfileScreen extends Component {
 							}}
 							size={80}
 						/>
+
 						{/* <MaterialCommunityIcons name='account-circle-outline' color='#ffffff' size={60} /> */}
+
 						<View style={{ marginLeft: 20 }}>
 							<Text style={styles.title}>{user.fullName}</Text>
 						</View>
@@ -148,10 +152,14 @@ export default class ProfileScreen extends Component {
 						</View>
 						<View style={styles.infoBox}>
 							<TouchableOpacity >
+
 									<Text style={{textAlign:'center',fontSize:20, color: '#ffffff', fontFamily: 'QuicksandBold'}}>{this.state.eventsData.length}</Text>
 									<Text style={{fontSize:14 ,color: '#ffffff', fontFamily: 'QuicksandBold'}}>Events Attending</Text>
+
 							</TouchableOpacity>
 						</View>
+
+
 {/*
 					<View style={styles.infoBox}>
 							<Text style={{color: '#ffffff'}}>{hostedEventsData.length}</Text>
@@ -196,6 +204,7 @@ export default class ProfileScreen extends Component {
 						</View>
 					</TouchableRipple>
 				</View>
+
 			</SafeAreaView>
 		);
 	}

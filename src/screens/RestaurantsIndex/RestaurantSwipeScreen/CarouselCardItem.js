@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Dimensions,
   Image,
-  TouchableOpacity, 
+  TouchableOpacity,
   Linking
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -33,7 +33,7 @@ export default class CarouselCardItem extends React.Component {
   }
 
   componentDidMount() {
-    this.handleActiveRestaurantDetails(this.state.itemId)   
+    this.handleActiveRestaurantDetails(this.state.itemId)
   }
 
   handleActiveRestaurantDetails = (placeId) => {
@@ -56,7 +56,7 @@ export default class CarouselCardItem extends React.Component {
 					});
 				})
         .catch((e) => console.log(e));
-		
+
 		// if (
     //   this.state.activeRestaurantId === placeId
     //   ) {
@@ -110,8 +110,8 @@ export default class CarouselCardItem extends React.Component {
           style={styles.image}
         />
         <View style={styles.voteContainer}>
-          <Grid>
-          <Col size={20}>
+          {/* <Grid> */}
+          {/* <Col size={20}> */}
             <TouchableOpacity onPress={() => this.vote(eventId, item)}>
             {this.state.voted ? (
                 <MaterialCommunityIcons
@@ -127,18 +127,18 @@ export default class CarouselCardItem extends React.Component {
                 />
               )}
             </TouchableOpacity>
-          </Col>
-          <Col size={80}>
+          {/* </Col> */}
+          {/* <Col size={80}> */}
             <Text style={styles.header}>{item.name}</Text>
-          </Col>
-          </Grid>
+          {/* </Col> */}
+          {/* </Grid> */}
           </View>
           <View style={styles.activeRestaurantDetailsContainer}>
-										<TouchableRipple onPress={() => this.handleWebsiteUrl(this.state.activeRestaurantWebsite)}>
+										<TouchableOpacity onPress={() => this.handleWebsiteUrl(this.state.activeRestaurantWebsite)}>
 										<Text style={styles.indRestaurantHyperlink}>
-											<MaterialCommunityIcons name='search-web' size={16} /> see restaurant website
+											<MaterialCommunityIcons name='search-web' size={16} /> Visit Site
 										</Text>
-										</TouchableRipple>
+										</TouchableOpacity>
           </View>
       </View>
     );
@@ -151,27 +151,32 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'column',
     backgroundColor: 'white',
-    borderRadius: 8,
+    borderRadius: 20,
     width: ITEM_WIDTH,
-    paddingBottom: 40,
+    paddingBottom: 25,
     shadowColor: '#df8280',
     shadowOffset: {
       width: 0,
       height: 3,
-    },
+    }
+    ,
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
     elevation: 7,
-    marginBottom: 5,
-
+    marginBottom: 10,
+    overflow: 'hidden',
+    borderBottomWidth: 1,
+    borderBottomColor: '#B3B3B3',
+    borderRightWidth: 1,
+    borderRightColor: '#B3B3B3',
   },
   image: {
     width: ITEM_WIDTH,
     height: 330,
   },
   header: {
-    marginTop: 8,
-    marginLeft: 5,
+    marginTop: 5,
+    marginLeft: 10,
     marginRight: -5,
 		fontSize: 20,
 		fontWeight: 'bold',
@@ -190,6 +195,13 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     margin: 15,
-    marginBottom: -10
+    marginBottom: -10,
+  },
+  indRestaurantHyperlink: {
+    // borderWidth: 2,
+    marginTop: 10,
+    marginLeft: 60,
+    // textDecorationLine: 'underline'
+    color: 'grey'
   }
 });

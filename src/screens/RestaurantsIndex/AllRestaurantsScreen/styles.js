@@ -14,7 +14,7 @@ export default StyleSheet.create({
         alignSelf: 'center'
     },
     button: {
-		backgroundColor: '#e95531',
+		backgroundColor: '#2a9d8f',
 		height: 48,
 		borderRadius: 5,
 		alignItems: 'center',

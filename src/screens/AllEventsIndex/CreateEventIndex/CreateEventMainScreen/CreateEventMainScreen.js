@@ -40,6 +40,7 @@ class CreateEventMainScreen extends React.Component {
 		const currentDate = selectedDate || date;
 		const showFlag = Platform.OS === 'ios';
 		this.setState({ show: showFlag });
+
 		this.inputValueUpdate(selectedDate, 'date');
 	};
 
@@ -49,6 +50,7 @@ class CreateEventMainScreen extends React.Component {
 		const showFlag = Platform.OS === 'ios';
 		this.setState({ show: showFlag });
 		this.inputValueUpdate(selectedDate, 'eventStartTime');
+
 	};
 
 	onChangeEventEndTime = (event, selectedDate) => {
@@ -160,15 +162,18 @@ class CreateEventMainScreen extends React.Component {
 
 		return (
 			<SafeAreaView style={styles.container}>
+						<View style={styles.createEventHeader}>
+							<Text style={styles.title}>CREATE AN EVENT</Text>
+						</View>
 				<ScrollView>
 					<View style={styles.inputContainer}>
-						<View>
-							<Text style={styles.title}>Create An Event</Text>
-						</View>
 						<Sae
-							style={{ marginLeft: 10, marginRight: 10, marginBottom: 10 }}
-							labelStyle={{ color: '#656565' }}
-							inputStyle={{ color: '#656565' }}
+
+							style={{marginLeft: 10, marginRight: 30, marginBottom: 5}}
+							labelStyle={{color:  '#e95530'}}
+							inputStyle={{ fontSize: 20,color: '#656565' }}
+
+
 							label={'Event Name'}
 							iconClass={FontAwesomeIcon}
 							iconName={'calendar-check-o'}
@@ -181,9 +186,10 @@ class CreateEventMainScreen extends React.Component {
 							onChangeText={(val) => this.inputValueUpdate(val, 'name')}
 						/>
 						<Sae
-							style={{ marginLeft: 10, marginRight: 10 }}
-							labelStyle={{ color: '#656565' }}
-							inputStyle={{ fontSize: 16, color: 'black' }}
+
+							style={{marginLeft: 10, marginRight: 30}}
+							labelStyle={{color:  '#e95530'}}
+							inputStyle={{fontSize: 20, color: '#656565'}}
 							label={'Event Description'}
 							iconClass={FontAwesomeIcon}
 							iconName={'pencil'}
@@ -195,6 +201,9 @@ class CreateEventMainScreen extends React.Component {
 							autoCorrect={false}
 							onChangeText={(val) => this.inputValueUpdate(val, 'description')}
 						/>
+
+
+					<View style={{marginTop: 20, marginBottom: 20}}>
 
 						<View style={styles.break1}></View>
 						<View style={styles.break2}>
@@ -214,6 +223,7 @@ class CreateEventMainScreen extends React.Component {
 									onChange={this.onChange}
 									placeholder='Select a date'
 									style={{ marginHorizontal: 10 }}
+
 								/>
 							</View>
 						</View>
@@ -221,57 +231,59 @@ class CreateEventMainScreen extends React.Component {
 						<View style={styles.indInputContainer}>
 							<Text style={styles.text}>Event Start Time: </Text>
 							<View style={styles.dateTimePicker}>
-								<DateTimePicker
-									testID='timePicker'
-									value={this.state.eventStartTime}
-									mode='time'
-									is24Hour={true}
-									display='default'
-									onChange={this.onChangeEventStartTime}
-									placeholder='Start time'
-									style={{ marginHorizontal: 10 }}
-								/>
+
+							<DateTimePicker
+								testID='timePicker'
+								value={this.state.eventStartTime}
+								mode='time'
+								is24Hour={true}
+								display='default'
+								onChange={this.onChange}
+								placeholder='Start time'
+								style={{ width: 100 }}
+							/>
 							</View>
 						</View>
 
 						<View style={styles.indInputContainer}>
 							<Text style={styles.text}>Event End Time: </Text>
 							<View style={styles.dateTimePicker}>
-								<DateTimePicker
-									testID='timePicker'
-									value={this.state.eventEndTime}
-									mode='time'
-									is24Hour={true}
-									display='default'
-									onChange={this.onChangeEventEndTime}
-									placeholder='End time'
-									style={{ marginHorizontal: 10 }}
-								/>
+							<DateTimePicker
+								testID='timePicker'
+								value={this.state.eventEndTime}
+								mode='time'
+								is24Hour={true}
+								display='default'
+								onChange={this.onChangeEventEndTime}
+								placeholder='End time'
+								// style={{ marginHorizontal: 10 }}
+							/>
 							</View>
 						</View>
 
-						<View style={styles.indInputContainerLast}>
-							<Text style={styles.text}>Guests' Votes Due By: </Text>
+						<View style={styles.indInputContainer}>
+							<Text style={styles.text}>Votes Due By: </Text>
 							<View style={styles.dateTimePicker}>
-								<DateTimePicker
-									testID='datePicker'
-									value={this.state.votingDeadline}
-									mode='date'
-									is24Hour={true}
-									display='default'
-									onChange={this.onChangeVotingDeadline}
-									placeholder='Votes Due By'
-									style={{ marginHorizontal: 10 }}
-								/>
+							<DateTimePicker
+								testID='datePicker'
+								value={this.state.votingDeadline}
+								mode='date'
+								is24Hour={true}
+								display='default'
+								onChange={this.onChangeVotingDeadline}
+								placeholder='Votes Due By'
+								// style={{ marginHorizontal: 10 }}
+							/>
 							</View>
 						</View>
+					</View>
 					</View>
 					<View style={styles.buttonContainer}>
 						<TouchableOpacity
 							style={styles.button}
 							onPress={() => this.storeEvent()}
 						>
-							<Text style={styles.Btn}>Create Event</Text>
+							<Text style={styles.createBtn}>Create Event</Text>
 						</TouchableOpacity>
 					</View>
 				</ScrollView>
