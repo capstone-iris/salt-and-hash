@@ -16,9 +16,7 @@ Hosts create an event, select restaurants in their nearby location, and invite f
 
 ## Installation
 
-To clone and use the repo, establish a Firebase project, introducing your database info into a src/firebase/config.js file, and a Google Places API, introducing the API into a secrets.js file.
-
-An Expo download link is forthcoming.
+After you fork and clone the repo, establish a Firebase project, introducing your database info into a src/firebase/config.js file, and a Google Places API, introducing the API into a secrets.js file.
 
 ## Developers
 

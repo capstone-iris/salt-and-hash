@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styles from './styles';
 import {
 	SafeAreaView,
-	View,
 	ScrollView,
+	View,
 	Button,
 	TouchableOpacity,
 	Image,
